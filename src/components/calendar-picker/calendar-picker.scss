@@ -1,0 +1,116 @@
+.calendar-picker {
+  padding: 16px;
+
+  .month-name {
+    width: 100%;
+
+    p {
+      width: 100px;
+      position: relative;
+      bottom: 10px;
+      font-size: 1.8rem;
+      font-weight: bold;
+      text-align: center;
+      text-transform: uppercase;
+      color: $text-secondary;
+    }
+
+    .arrow {
+
+      ion-icon {
+        color: rgba(128, 128, 128, 0.65);
+        font-size: 2rem;
+      }
+    }
+
+    .add {
+      position: relative;
+      float: right;
+      margin-right: 10px;
+
+      button {
+        background: $background-blue;
+      }
+
+      ion-icon {
+        color: #FFF;
+        font-size: 2.1rem;
+      }
+    }
+
+    div {
+      display: block;
+      float: left;
+    }
+
+    ion-icon {
+      color: $text-primary;
+    }
+
+    button {
+      width: 30px;
+      height: 30px;
+      float: right;
+      border-radius: 100%;
+    }
+  }
+
+  .week-name {
+    text-align: center;
+    color: $text-secondary;
+    font-size: 1.4rem;
+  }
+
+  .day {
+    padding-top: 0.6rem;
+    padding-bottom: 0.6rem;
+    font-size: 1em;
+    text-align: center;
+    background: white;
+    cursor: pointer;
+    color: $text-primary;
+
+    & span {
+      display: inline-block;
+      width: 35px;
+      height: 35px;
+      text-align: center;
+      line-height: 35px;
+    }
+
+    &:first-child {
+      border-left:none;
+    }
+
+    &.today span {
+      background: #e4e2e2;
+      border-radius: 100%;
+    }
+
+    &.different-month {
+      color: $text-light;
+    }
+
+    &.selected span {
+      font-weight: bold;
+      background: #6abfd6;
+      border-radius: 100%;
+      color: #FFF;
+    }
+
+    .event-mark {
+      display: inline-block;
+      margin-left: 2px;
+      width: 8px;
+      height: 8px;
+      border-radius: 100%;
+      background: #000;
+    }
+
+    @each $name, $value in $event-colors {
+      .#{$name} {
+        background: $value;
+      }
+    }
+  }
+}

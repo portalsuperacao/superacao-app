@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-navbar color="dark">
+    <ion-title> Criar evento </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="calendar">
+  <div class="new-event">
+    <ion-item class="simple-item">
+      <ion-row (click)="addEvent('Consulta')">
+        <ion-col widht-10> <span class="Consulta"> </span> </ion-col>
+        <ion-col width-90> Consulta </ion-col>
+      </ion-row>
+
+    </ion-item>
+
+    <ion-item class="simple-item">
+      <ion-row (click)="addEvent('Exame')">
+        <ion-col widht-10> <span class="Exame"> </span> </ion-col>
+        <ion-col width-90> Exame </ion-col>
+      </ion-row>
+    </ion-item>
+
+    <ion-item class="simple-item">
+      <ion-row (click)="addEvent('Procedimento')">
+        <ion-col widht-10> <span class="Procedimento"> </span> </ion-col>
+        <ion-col width-90> Procedimento </ion-col>
+      </ion-row>
+    </ion-item>
+
+    <ion-item class="simple-item">
+      <ion-row (click)="addEvent('Internação')">
+        <ion-col widht-10> <span class="Internação"> </span> </ion-col>
+        <ion-col width-90> Internação </ion-col>
+      </ion-row>
+    </ion-item>
+
+    <ion-item class="simple-item">
+      <ion-row (click)="addEvent('Pessoal')">
+        <ion-col widht-10> <span class="Pessoal"> </span> </ion-col>
+        <ion-col width-90> Evento pessoal </ion-col>
+      </ion-row>
+    </ion-item>
+  </div>
+
+</ion-content>
