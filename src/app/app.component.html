@@ -1,0 +1,53 @@
+<ion-menu [content]="content">
+      <ion-toolbar dark>
+        <ion-title>Menu</ion-title>
+      </ion-toolbar>
+
+      <ion-content class="menu">
+        <ion-list>
+          <button ion-item (click)="openPage(mainPage)" menuClose>
+            <ion-row>
+              <ion-col width-10> <ion-icon name="md-arrow-back"></ion-icon> </ion-col>
+              <ion-col width-90> Voltar </ion-col>
+            </ion-row>
+          </button>
+
+          <button ion-item (click)="openPage(profilePage)" menuClose>
+            <ion-row>
+              <ion-col width-10> <ion-icon name="md-person"></ion-icon> </ion-col>
+              <ion-col width-90> Meu perfil </ion-col>
+            </ion-row>
+          </button>
+
+          <button ion-item  menuClose>
+            <ion-row>
+              <ion-col width-10> <ion-icon name="md-settings"></ion-icon> </ion-col>
+              <ion-col width-90> Configurações </ion-col>
+            </ion-row>
+          </button>
+
+          <button ion-item  menuClose>
+            <ion-row>
+              <ion-col width-10> <ion-icon name="ios-heart"></ion-icon> </ion-col>
+              <ion-col width-90> Virar anjo / virar superador </ion-col>
+            </ion-row>
+          </button>
+
+          <button ion-item  menuClose>
+            <ion-row>
+              <ion-col width-10> <ion-icon name="md-alert"></ion-icon> </ion-col>
+              <ion-col width-90> Falar com administrador </ion-col>
+            </ion-row>
+          </button>
+
+          <button ion-item (click)="logout()" menuClose>
+            <ion-row>
+              <ion-col width-10> <ion-icon name="md-close"></ion-icon> </ion-col>
+              <ion-col width-90> Sair </ion-col>
+            </ion-row>
+          </button>
+        </ion-list>
+      </ion-content>
+</ion-menu>
+
+<ion-nav #content [root]="rootPage"> </ion-nav>
