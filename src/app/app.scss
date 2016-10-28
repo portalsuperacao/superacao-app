@@ -1,16 +1,69 @@
-// http://ionicframework.com/docs/v2/theming/
+* {
+  font-family: $font-family;
+}
+
+$event-colors: (
+  Consulta: #64dab8,
+  Exame: #c38cdd,
+  Procedimento: #7894ff,
+  Internação: #f76e8e,
+  Pessoal: #7ae842
+);
+
+.background-dark {
+  background: $background-dark;
+}
 
 
-// App Global Sass
-// --------------------------------------------------
-// Put style rules here that you want to apply globally. These
-// styles are for the entire app and not just one component.
-// Additionally, this file can be also used as an entry point
-// to import other Sass files to be included in the output CSS.
-//
-// Shared Sass variables, which can be used to adjust Ionic's
-// default Sass variables, belong in "theme/variables.scss".
-//
-// To declare rules for a specific mode, create a child rule
-// for the .md, .ios, or .wp mode classes. The mode class is
-// automatically applied to the <body> element in the app.
+ion-footer {
+  &::before {
+    background: none !important;
+  }
+}
+
+.menu {
+  ion-col {
+    color: #696969;
+  }
+}
+
+.simple-item {
+  padding: 0 !important;
+
+  div {
+    padding-left: 8px;
+  }
+}
+
+.ion-ios-agenda, .ion-md-agenda {
+ content: url(../assets/images/agenda.svg);
+ width: 24px;
+ height: 32px;
+ padding: 6px 4px 2px;
+ opacity: 0.9;
+}
+
+.ion-ios-anjos, .ion-md-anjos {
+  content: url(../assets/images/anjos.svg);
+  width: 24px;
+  height: 32px;
+  padding: 6px 4px 2px;
+  opacity: 0.9;
+}
+
+.ion-ios-perfil, .ion-md-perfil {
+  content: url(../assets/images/perfil.svg);
+  width: 24px;
+  height: 32px;
+  padding: 6px 4px 2px;
+  opacity: 0.9;
+}
+
+.error-field {
+  display: block;
+  background: #f2dede;
+  color: #a94442;
+  margin-top: 0.5rem;
+  padding: 0.6em;
+  margin-left: 16px;
+}

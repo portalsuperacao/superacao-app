@@ -4,7 +4,6 @@ import { StatusBar, Splashscreen } from 'ionic-native';
 
 import { UserStorageService } from '../providers/database/user-storage-service';
 import { DateUtil } from '../providers/util/date-util';
-import { AngularFire } from 'angularfire2';
 import * as firebase from 'firebase';
 
 import { ApresentationPage } from '../pages/apresentation/apresentation';
@@ -27,7 +26,6 @@ export class MyApp {
 
   constructor(platform: Platform,
     public menuCtrl: MenuController,
-    public af: AngularFire,
     public userStorageService: UserStorageService,
     public dateUtil: DateUtil) {
 
@@ -84,7 +82,6 @@ export class MyApp {
   }
 
   logout() {
-    this.menuCtrl.enable(false);
     firebase.auth().signOut()
     this.userStorageService.clear();
   }

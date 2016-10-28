@@ -3,7 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { CalendarStorageService } from '../../../providers/database/calendar-storage-service';
 
 @Component({
-    selector: 'page-calendar-public-event',
+    selector: 'page-public-event',
     templateUrl: 'public-event.html',
 })
 
@@ -13,7 +13,7 @@ export class CalendarPublicEventPage {
   isEmpty = true;
 
   constructor(
-    public nav: NavController,
+    public navCtrl: NavController,
     public params: NavParams,
     public calendarStorageService: CalendarStorageService) {
       this.user = this.params.get('user');

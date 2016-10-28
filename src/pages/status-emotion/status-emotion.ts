@@ -1,22 +1,34 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, ViewController } from 'ionic-angular';
 
-/*
-  Generated class for the StatusEmotion page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-status-emotion',
   templateUrl: 'status-emotion.html'
 })
+
 export class StatusEmotionPage {
 
-  constructor(public navCtrl: NavController) {}
+  emojis;
 
-  ionViewDidLoad() {
-    console.log('Hello StatusEmotion Page');
+  constructor(private nav: NavController, private viewCtrl: ViewController) {
+    this.emojis = [{ status: 'Feliz',  img: './assets/images/happy-1.svg'},
+                   { status: 'Apaixonado(a)', img: './assets/images/in-love.svg'},
+                   { status: 'Triste', img: './assets/images/sad.svg'},
+                   { status: 'Raiva', img: './assets/images/angry.svg'},
+                   { status: 'Infeliz', img: './assets/images/unhappy.svg'},
+                   { status: 'Surpreso', img: './assets/images/surprised.svg'}]
   }
+
+
+  setEmotion(emotion) {
+    emotion.is_active = 1;
+    this.viewCtrl.dismiss(emotion);
+  }
+
+  closePage() {
+    this.viewCtrl.dismiss();
+  }
+
+
 
 }

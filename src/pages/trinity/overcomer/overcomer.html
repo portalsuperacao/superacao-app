@@ -1,18 +1,68 @@
-<!--
-  Generated template for the StatusEmotion page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
+  <ion-navbar color="dark">
+    <button ion-button menuToggle>
+     <ion-icon name="menu"></ion-icon>
+    </button>
 
-  <ion-navbar>
-    <ion-title>Anjos</ion-title>
+    <ion-title> Anjos </ion-title>
+
   </ion-navbar>
-
 </ion-header>
 
 
-<ion-content padding>
+<ion-content class="trinity" padding>
+    <!-- ========= STATUS =========== -->
+    <div class="status" (click)="openStatusEmotion()">
+      <p> Diga ao seu anjo como está se sentindo: </p>
+
+      <ion-grid>
+        <ion-row>
+          <div> <img class="emoji" [src]="overcomer?.emotion?.img"> </div>
+          <div *ngIf="overcomer?.emotion?.status  != 'Normal'">
+            Sentindo-se {{ overcomer?.emotion?.status }}
+          </div>
+          <div *ngIf="overcomer?.emotion?.status  == 'Normal'">
+            Escolha algum sentimento
+          </div>
+        </ion-row>
+      </ion-grid>
+    </div>
+
+    <!-- ========= USERS CHAT =========== -->
+    <div class="chat-user">
+      <!-- ==== ANGEL ==== -->
+      <ion-grid>
+        <ion-row [ngClass]="{'text-notification' : notifications}">
+          <ion-col width-40 (click)="openChat(overcomer, angel)">
+            <div class="avatar angel">
+              <img [src]="angel?.avatar" />
+            </div>
+          </ion-col>
+
+          <ion-col width-40 (click)="openChat(overcomer, angel)">
+            <h4> {{ angel?.name }} </h4>
+            <div class="message">
+              <p *ngIf="!lastMessages?.msg"> Não há nenhum mensagem disponivel </p>
+              <p> {{ lastMessages?.msg }} </p>
+              <p *ngIf="lastMessages?.created_at" class="hour"> {{ lastMessages?.created_at | customDate:"c" }} </p>
+            </div>
+          </ion-col>
+
+          <ion-col width-20>
+            <ion-icon name="md-calendar" (click)="openPublicEvents(angel)"> </ion-icon>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <span width-80 (click)="openChat(overcomer, archangel)" [ngClass]="{'second-notification' : notifications2}"> Arcanjo: {{ archangel?.name }} </span>
+          </ion-col>
+
+          <ion-col width-20>
+            <span (click)="openHelpSystem()"> Ajuda </span>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
 
 </ion-content>

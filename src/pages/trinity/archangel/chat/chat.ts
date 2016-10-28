@@ -1,61 +1,49 @@
 import { Component } from '@angular/core';
-import { NavController, LoadingController } from 'ionic-angular';
-import { UserStorageService } from '../../../providers/database/user-storage-service';
-import { ChatStorageService } from '../../../providers/database/chat-storage-service';
-import { Utils } from '../../../providers/util/utils';
+import { NavController } from 'ionic-angular';
+import { ChatPage } from '../../../chat/chat';
+import { CalendarPublicEventPage } from '../../../calendar/public-event/public-event';
 
-import { CalendarPublicEventPage } from '../../calendar/public-event/public-event';
-import { ChatPage } from '../../chat/chat';
-
-
+import { UserStorageService } from '../../../../providers/database/user-storage-service';
+import { ChatStorageService } from '../../../../providers/database/chat-storage-service';
 
 @Component({
-  selector: 'page-angel',
-  templateUrl: 'angel.html',
+  selector: 'page-archangel-chat',
+  templateUrl: 'archangel-chat.html',
 })
-export class AngelPage {
 
-  //==== Trinity =====
+
+export class ArchangelChatPage {
+
   trinitys;
   overcomer = [];
-  angel;
-  archangel = [];
+  angel = [];
+  archangel;
   space = 'close';
 
-  lastMessages = [];
-  notifications = [];
   countMessages = [];
+  notifications = [];
+  lastMessages = [];
 
   countMessages2 = [];
   notifications2 = [];
 
   constructor(
-    public nav: NavController,
-    public userStorageService: UserStorageService,
+    public navCtrl: NavController,
     public chatStorageService: ChatStorageService,
-    public utils: Utils,
-    public loadingCtrl: LoadingController) {
-      this.utils.generatePush().then((datas) => {
-        console.log("remover o push!");
-      }).catch((error) => {
+    public userStorageService: UserStorageService) {
 
-      });
-    }
+  }
 
   ionViewWillEnter() {
     this._updateDatas();
   }
 
-  openHelpSystem() {
-    //this.nav.push(OvercomerHelpSystemPage);
-  }
-
   openPublicEvents(user) {
-    this.nav.push(CalendarPublicEventPage, {'user' : user});
+    this.navCtrl.push(CalendarPublicEventPage, {'user' : user});
   }
 
   openChat(user1, user2, index) {
-    this.nav.push(ChatPage, {'user1' : user1, 'user2': user2, 'chat' : user2.chatUid, 'status': 1});
+    this.navCtrl.push(ChatPage, {'user1' : user1, 'user2': user2, 'chat' : user2.chatUid, 'status': 1});
 
     // === clean notifications ===
     this.chatStorageService.setLocalNotification(user2.$key, false);
@@ -72,7 +60,6 @@ export class AngelPage {
       this.space = 'open';
     }
   }
-
 
   _generateNotification(chatUid, userUid, index) {
     this.countMessages[index] = 0;
@@ -101,7 +88,6 @@ export class AngelPage {
     });
 
     this.chatStorageService.getLastMessage(chatUid, userUid).subscribe((messages : any) => {
-
        if(this.countMessages2[index] > 0) {
           this.notifications2[index] = true;
           this.chatStorageService.setLocalNotification(userUid, true);
@@ -116,9 +102,9 @@ export class AngelPage {
       this.overcomer[index] = overcomer;
 
       // ====== CHAT OVERCOMER ======
-      this.chatStorageService.getChat(trinity.overcomer, trinity.angel).then((chatDatas : any) => {
+      this.chatStorageService.getChat(trinity.overcomer, trinity.archangel).then((chatDatas : any) => {
         if(!chatDatas) {
-          this.overcomer[index].chatUid = this.chatStorageService.createChat(this.overcomer[index], this.angel);
+          this.overcomer[index].chatUid = this.chatStorageService.createChat(this.overcomer[index], this.archangel);
           return;
         }
 
@@ -128,46 +114,47 @@ export class AngelPage {
     });
   }
 
-  _findArchangel(trinity, index) {
-    this.userStorageService.findUser(trinity.archangel).then((snapshot) => {
-      this.archangel[index] = snapshot;
+  _findAngel(trinity, index) {
+    // ====== FIND USER =======
+    this.userStorageService.findUser(trinity.angel).then((snapshot) => {
+      this.angel[index] = snapshot;
 
-      // ====== CHAT ARCHANGEL ======
+      // ====== CHAT OVERCOMER ======
       this.chatStorageService.getChat(trinity.angel, trinity.archangel).then((chatDatas : any) => {
         if(!chatDatas) {
-          this.archangel[index].chatUid = this.chatStorageService.createChat(this.angel, this.archangel[index]);
+          this.angel[index].chatUid = this.chatStorageService.createChat(this.angel[index], this.archangel);
           return;
         }
 
-        this.archangel[index].chatUid = chatDatas.chatUid;
-        this._generateNotification2(this.archangel[index].chatUid, trinity.archangel, index);
+        this.angel[index].chatUid = chatDatas.chatUid;
+        this._generateNotification2(this.angel[index].chatUid, trinity.angel, index);
       });
     });
+
   }
 
 
   _updateDatas() {
     this.userStorageService.getUser().then((user : any) => {
-      this.angel = user;
+      this.archangel = user;
 
       this.trinitys = [{
-        angel : user.$key,
-        overcomer: "HyAqq0wlb2QxF7uqKlLhPAiEVPE3",
-        archangel: "NePUY0RoAfPSgAnCTn42IOHSBE72"
+        archangel : user.$key,
+        angel: "c9Em4kqXqQY6Rx0OHgnTsRpvrQi1",
+        overcomer: "HyAqq0wlb2QxF7uqKlLhPAiEVPE3"
       },
       {
-        angel : user.$key,
+        archangel : user.$key,
+        angel: "c9Em4kqXqQY6Rx0OHgnTsRpvrQi1",
         overcomer: "zua3bsHHBkTPUhbyRC5k5xHam8V2",
-        archangel: "NePUY0RoAfPSgAnCTn42IOHSBE72"
       }];
 
       this.trinitys.forEach((trinity, index) => {
         this._findOvercomer(trinity, index);
-        this._findArchangel(trinity, index);
+        this._findAngel(trinity, index);
       });
     });
   }
-
 
 
 }

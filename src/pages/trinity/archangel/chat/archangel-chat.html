@@ -1,0 +1,78 @@
+
+
+<ion-header>
+  <ion-navbar color="dark">
+    <button ion-button menuToggle>
+     <ion-icon name="menu"></ion-icon>
+    </button>
+
+    <ion-title> Anjos </ion-title>
+
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding class="trinity">
+
+  <!-- ========= USERS CHAT =========== -->
+  <div class="chat-user" *ngFor="let trinity of trinitys; let i = index">
+    <!-- ==== ANGEL ==== -->
+    <ion-grid>
+      <ion-row [ngClass]="{'text-notification' : notifications[i]}">
+        <ion-col width-40 (click)="openChat(archangel, overcomer[i])">
+          <div class="avatar overcomer">
+            <img src="{{ overcomer[i]?.avatar }}" />
+            <div class="emotion">
+              <img [src]="overcomer[i]?.emotion?.img">
+            </div>
+          </div>
+        </ion-col>
+
+        <ion-col width-40 (click)="openChat(archangel, overcomer[i], i)">
+          <h4> {{ overcomer[i]?.name }} </h4>
+          <div class="message">
+            <p *ngIf="!lastMessages[i]?.msg"> Não há nenhum mensagem disponivel </p>
+            <p> {{ lastMessages[i]?.msg }} </p>
+            <p *ngIf="lastMessages[i]?.created_at" class="hour"> {{ lastMessages[i]?.created_at | customDate:"c" }} </p>
+          </div>
+        </ion-col>
+
+        <ion-col width-20>
+          <ion-icon name="md-calendar" (click)="openPublicEvents(overcomer[i])"> </ion-icon>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col width-80>
+          <span (click)="openChat(archangel, angel[i], i)"  [ngClass]="{'second-notification' : notifications2[i]}"> Anjo: {{ angel[i]?.name }} </span>
+        </ion-col>
+
+        <ion-col width-20>
+          <span (click)="openHelpSystem()"> Ajuda </span>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  <!-- ========= SPACE USER =========== -->
+  <div class="space-user">
+    <ion-grid>
+      <ion-row>
+        <ion-col width-43 (click)="toggleSpace()">
+          <div class="avatar" [ngClass]="space">
+            <ion-icon name="ios-heart"> </ion-icon>
+          </div>
+        </ion-col>
+
+        <ion-col width-67 (click)="toggleSpace()">
+          <h4 *ngIf="space == 'open'"> Aguardando superador </h4>
+          <h4 *ngIf="space == 'close'"> Vaga fechada </h4>
+
+          <p *ngIf="space == 'open'"> <ion-icon name="md-remove-circle"> </ion-icon> Fechar vaga </p>
+          <p *ngIf="space == 'close'"> <ion-icon name="md-add-circle"> </ion-icon> Abrir vaga </p>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+</ion-content>

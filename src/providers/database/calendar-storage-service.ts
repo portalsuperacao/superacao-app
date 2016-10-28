@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { AngularFire, FirebaseListObservable } from 'angularfire2';
+import { AngularFire } from 'angularfire2';
 import { Calendar } from 'ionic-native';
-import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import * as localforage from "localforage";
 import 'rxjs/Observable';
@@ -104,7 +103,7 @@ export class CalendarStorageService {
       });
   }
 
-  getPublicEvents(uidUser) {
+  getPublicEvents(uidUser) : any {
     return this.af.database.list('/calendar/' + uidUser, {
       query: {
         orderByChild: 'share',

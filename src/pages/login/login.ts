@@ -6,9 +6,6 @@ import { DateUtil } from '../../providers/util/date-util';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Facebook } from 'ionic-native';
 
-import { ApresentationPage } from '../apresentation/apresentation';
-import { TabsPage } from '../tabs/tabs';
-
 
 @Component({
   selector: 'page-login',
@@ -114,6 +111,74 @@ export class LoginPage {
         return;
       }
     }, 5000);
+  }
+
+  // ===================================== LOGIN ===================================
+  login(credentials) {
+    this._showLoading();
+
+    if(!credentials.email || !credentials.pass) {
+      this._showError("Digite todos os campos");
+      return;
+    }
+
+    this.auth.login({
+      email: credentials.email,
+      password: credentials.pass
+    }, {
+      provider: AuthProviders.Password,
+      method: AuthMethods.Password
+    }).then((authData) => {
+        this.isConnect = authData;
+        // === Set Storage ===
+        this.userStorageService.findUser(authData.uid).then((datas) => {
+          this.userStorageService.setUserLocal(datas);
+          this.loading.dismiss();
+        });
+
+    }).catch((error : any) => {
+        console.log(error);
+        if(this.messages.email_invalid === error.code) {
+          this._showError("Digite um e-mail valido!");
+        } else if (this.messages.password_wrong === error.code) {
+          this._showError("Senha incorreta!");
+        } else if (this.messages.email_not_found === error.code) {
+          this._showError("Esta conta não está cadastrado!")
+        }
+    });
+
+    setTimeout(() => {
+      if(!this.isConnect) {
+        this._showError("Falha ao tentar se conectar");
+        this.loading.dismiss();
+        return;
+      }
+    }, 30000);
+  }
+
+  // ===================================== LOGIN FACEBOOK ===================================
+  loginFacebook() {
+    this._showLoading();
+    Facebook.login(["public_profile", "user_birthday"]).then((success) => {
+        let creds = (firebase.auth.FacebookAuthProvider as any).credential(success.authResponse.accessToken);
+
+        this.auth.login(creds, {
+          provider: AuthProviders.Facebook,
+          method: AuthMethods.OAuthToken
+        }).then((authData) => {
+          // === Set database ===
+          this._validateLoginSocial(authData);
+        }).catch((error) => {
+          console.log(error);
+          this._showError("Falha ao tentar conectar");
+          this.loading.dismiss();
+        });
+
+    }).catch((error) => {
+      this._showError("Falha ao realizar a conexão!");
+        this.loading.dismiss();
+    })
+
   }
 
   // ===================================== OTHERS METHODS ===================================

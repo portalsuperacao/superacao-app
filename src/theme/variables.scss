@@ -10,8 +10,31 @@
 // To view all the possible Ionic variables, see:
 // http://ionicframework.com/docs/v2/theming/overriding-ionic-variables/
 
-$text-color:        #000;
+
+@font-face {
+  font-family: 'lato';
+  src: url('../assets/fonts/Lato-Regular.woff?ngpcqs') format('woff'),
+       url('../assets/fonts/Lato-Regular.woff2?ngpcqs') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+$font-family : "lato";
+
+$text-color: #000;
 $background-color:  #fff;
+$text-primary : #808080;
+$text-secondary: #666;
+$text-light : #dedede;
+$background-dark: #f5f5f5;
+$background-main: #c099ea;
+$background-blue: #5da0d2;
+$background-light: #e8e6e6;
+$overcomer-color: #f2be38;
+$angel-color: #5da0d2;
+$archangel-color: #228c25;
+
+
 
 
 // Named Color Variables
@@ -27,8 +50,10 @@ $colors: (
   secondary:  #32db64,
   danger:     #f53d3d,
   light:      #f4f4f4,
-  dark:       #222,
-  favorite:   #69BB7B
+  dark:       #c099ea,
+  favorite:   #69BB7B,
+  main:       #e3e0e6,
+  facebook  : #3b5998
 );
 
 
@@ -59,6 +84,9 @@ $colors: (
 // then be future customized. This import comes last
 // so that the above variables are used and Ionic's
 // default are overridden.
+
+// Custom scass
+@import '../pages/trinity/trinity';
 
 @import "ionic.theme.default";
 

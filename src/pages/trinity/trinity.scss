@@ -1,0 +1,208 @@
+.trinity {
+  .overcomer {
+    background: $overcomer-color;
+  }
+
+  .angel {
+    background: $angel-color;
+  }
+
+  .archangel {
+    background: $archangel-color;
+  }
+
+  .status {
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #DDD;
+    font-size: 1.8rem;
+    color: $text-primary;
+
+    ion-row {
+      div {
+        display: inline-block;
+        margin: auto;
+      }
+    }
+
+    p {
+      text-align: center;
+      color: $text-primary;
+    }
+  }
+
+
+  .form-active {
+    text-align: center;
+    margin-top: 3rem;
+
+    button {
+      margin-top: 1rem;
+    }
+
+    ion-input {
+      width: 100%;
+      font-size: 2rem;
+      background: #FFF;
+    }
+  }
+
+
+  .chat-user {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid #DDD;
+
+    h4 {
+      color: $text-secondary;
+    }
+
+    .text-notification {
+      h4 {
+        color: #0f8edf !important;
+      }
+      p {
+        color: #0f8edf !important;
+        font-weight: bold;
+      }
+    }
+
+    .second-notification {
+      color: #0f8edf !important;
+    }
+
+    .message {
+      p {
+        line-height: 20px;
+        color: $text-primary;
+      }
+
+      .hour {
+        position: relative;
+        bottom: 1rem;
+      }
+    }
+
+    ion-icon {
+      font-size: 4.5rem;
+      margin-top: 3rem;
+      color: $background-blue;
+    }
+
+    span {
+      color: #b34d71;
+      font-weight: bold;
+      margin-top: 1rem;
+    }
+
+
+    ion-col[width-20] {
+      text-align: center;
+    }
+
+    .avatar {
+      width: 10rem;
+      height: 10rem;
+      border-radius: 100%;
+      padding: 0.4rem;
+
+      .emotion {
+        position: relative;
+        bottom: 40px;
+        right: 15px;
+        width: 50px;
+        height: 50px;
+      }
+
+      img {
+        border-radius: 100%;
+      }
+    }
+  }
+
+  .missions {
+
+    .avatar {
+      width: 6.5rem;
+      height: 6.5rem;
+      margin: auto;
+      border-radius: 100%;
+      padding: 0.4rem;
+
+      .emotion {
+        position: relative;
+        bottom: 30px;
+        right: 15px;
+        width: 35px;
+        height: 35px;
+      }
+
+      img {
+        border-radius: 100%;
+      }
+
+    }
+
+    .name {
+      text-align: center;
+      margin-top: 5px;
+    }
+  }
+
+  .space-user {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid #DDD;
+
+    .close {
+      background: $text-primary;
+    }
+
+    .open {
+      background: $overcomer-color;
+    }
+
+    .avatar {
+      width: 10rem;
+      height: 10rem;
+      border-radius: 100%;
+      padding: 0.4rem;
+
+      ion-icon {
+        font-size: 3.6rem;
+        margin-top: 3rem;
+        margin-left: 3rem;
+        color: #FFF;
+      }
+    }
+
+    ion-col[width-67] {
+      padding-left: 30px;
+
+      h4 {
+        color: $text-secondary;
+      }
+
+      p {
+        color: $background-blue;
+
+        ion-icon {
+          position: relative;
+          top: 5px;
+          padding-right: 1rem;
+          font-size: 3rem;
+        }
+      }
+    }
+
+  }
+
+  .help {
+    button {
+      text-transform: none;
+      background: #919192;
+      color: #FFF;
+      letter-spacing: 0.07rem;
+    }
+  }
+
+}

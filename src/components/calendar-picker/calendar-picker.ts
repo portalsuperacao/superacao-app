@@ -1,4 +1,3 @@
-
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { CalendarNewEventPage } from '../../pages/calendar/new-event/new-event';
@@ -134,8 +133,7 @@ export class CalendarPicker {
 
       this.setEvents.forEach((event) => {
         if(date.valueOf() >= this.dateUtil.removeTime(event.start_at) &&
-           date.valueOf() <= this.dateUtil.removeTime(event.end_at) && count == 0) {
-          console.log("evento!");
+           date.valueOf() <= event.end_at && count == 0) {
 
           days.push({
             name: date.format("dd").substring(0, 1),
@@ -149,9 +147,8 @@ export class CalendarPicker {
           controller = false;
           count++;
         } else if (date.valueOf() >= this.dateUtil.removeTime(event.start_at) &&
-                   date.valueOf() <= this.dateUtil.removeTime(event.end_at) && count > 0) {
+                   date.valueOf() <= event.end_at && count > 0) {
           days[index].event.push(event.type);
-          console.log("evento2!");
         }
       });
 

@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { AngularFire, FirebaseListObservable } from 'angularfire2';
+import { AngularFire } from 'angularfire2';
 import { Observable } from 'rxjs/Observable';
-import { Push } from 'ionic-native';
 import { Utils } from '../util/utils';
 import * as firebase from 'firebase';
 import * as localforage from "localforage";
@@ -123,8 +122,8 @@ export class UserStorageService {
     });
   }
 
-  findUserObs(uid) {
-    //return this.af.database.object('/users/' + uid);
+  findUserObs(uid) : any {
+    return this.af.database.object('/users/' + uid);
   }
 
   setEmotion(emotion, uidUser) {

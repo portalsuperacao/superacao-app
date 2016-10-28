@@ -10,11 +10,11 @@ import { CalendarEventEditPage } from './edit-event/edit-event';
 export class CalendarNewEventPage {
 
   constructor(
-    public nav: NavController,
+    public navCtrl: NavController,
     public params: NavParams) {
   }
 
   addEvent(typeEvent) {
-    this.nav.push(CalendarEventEditPage, {type: typeEvent});
+    this.navCtrl.push(CalendarEventEditPage, {type: typeEvent});
   }
 }

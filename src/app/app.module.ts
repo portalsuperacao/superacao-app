@@ -1,9 +1,17 @@
 import { NgModule } from '@angular/core';
 import { IonicApp, IonicModule } from 'ionic-angular';
 
+// COMPONENTS / PIPES
+import { CalendarPicker } from '../components/calendar-picker/calendar-picker';
+import { DateCustomPipe } from '../pipes/date-custom-pipe';
+import { TruncatePipe } from '../pipes/truncate-pipe';
+
+
 // PROVIDERS
 import { AngularFireModule } from 'angularfire2';
 import { UserStorageService } from '../providers/database/user-storage-service';
+import { CalendarStorageService } from '../providers/database/calendar-storage-service';
+import { ChatStorageService } from '../providers/database/chat-storage-service';
 import { DateUtil } from '../providers/util/date-util';
 import { Utils } from '../providers/util/utils';
 
@@ -11,6 +19,10 @@ import { Utils } from '../providers/util/utils';
 import { MyApp } from './app.component';
 import { ApresentationPage } from '../pages/apresentation/apresentation';
 import { CalendarPage } from '../pages/calendar/calendar';
+import { CalendarNewEventPage } from '../pages/calendar/new-event/new-event'
+import { CalendarEventEditPage } from '../pages/calendar/new-event/edit-event/edit-event';
+import { CalendarEventQuestionsPage } from '../pages/calendar/new-event/edit-event/questions/questions';
+import { CalendarPublicEventPage } from '../pages/calendar/public-event/public-event';
 import { ChatPage } from '../pages/chat/chat';
 import { LoginPage } from '../pages/login/login';
 import { MySpacePage } from '../pages/my-space/my-space';
@@ -20,6 +32,9 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { OvercomerPage } from '../pages/trinity/overcomer/overcomer';
 import { AngelPage } from '../pages/trinity/angel/angel';
 import { ArchangelPage } from '../pages/trinity/archangel/archangel';
+import { ArchangelMissionsPage } from '../pages/trinity/archangel/missions/missions';
+import { ArchangelChatPage } from '../pages/trinity/archangel/chat/chat';
+import { NormalPage } from '../pages/trinity/normal/normal';
 import * as firebase from 'firebase';
 
 
@@ -39,6 +54,10 @@ firebase.initializeApp(firebaseConfig);
     MyApp,
     ApresentationPage,
     CalendarPage,
+    CalendarNewEventPage,
+    CalendarEventEditPage,
+    CalendarEventQuestionsPage,
+    CalendarPublicEventPage,
     ChatPage,
     LoginPage,
     MySpacePage,
@@ -47,10 +66,16 @@ firebase.initializeApp(firebaseConfig);
     TabsPage,
     OvercomerPage,
     AngelPage,
-    ArchangelPage
+    ArchangelPage,
+    ArchangelMissionsPage,
+    ArchangelChatPage,
+    NormalPage,
+    CalendarPicker,
+    DateCustomPipe,
+    TruncatePipe
   ],
   imports: [
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp, {tabsHideOnSubPages:"true"}),
     AngularFireModule.initializeApp(firebaseConfig)
   ],
   bootstrap: [IonicApp],
@@ -58,6 +83,10 @@ firebase.initializeApp(firebaseConfig);
     MyApp,
     ApresentationPage,
     CalendarPage,
+    CalendarNewEventPage,
+    CalendarEventEditPage,
+    CalendarEventQuestionsPage,
+    CalendarPublicEventPage,
     ChatPage,
     LoginPage,
     MySpacePage,
@@ -66,10 +95,15 @@ firebase.initializeApp(firebaseConfig);
     TabsPage,
     OvercomerPage,
     AngelPage,
-    ArchangelPage
+    ArchangelPage,
+    ArchangelMissionsPage,
+    ArchangelChatPage,
+    NormalPage
   ],
   providers: [
     UserStorageService,
+    CalendarStorageService,
+    ChatStorageService,
     DateUtil,
     Utils
   ]

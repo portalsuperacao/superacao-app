@@ -1,12 +1,12 @@
 <ion-content padding class="login">
   <div class="parent">
     <div [hidden]="ctrlLogo" class="logo">
-      <!-- <img src="./build/images/logo.jpg"> -->
+      <img src="./assets/images/logo.jpg">
     </div>
 
     <div class="form">
         <div padding>
-          <ion-segment [(ngModel)]="authType" dark>
+          <ion-segment [(ngModel)]="authType" color="dark">
             <ion-segment-button value="login" (click)="ctrlLogo = false" checked>
               Login
             </ion-segment-button>
@@ -32,7 +32,7 @@
             <div class="error-field" *ngIf="formLogin.controls.email.errors && formLogin.controls.pass.touched"> Este campo é necessário e deve conter 6 digitos </div>
 
             <div padding>
-              <button full dark [disabled]="!formLogin.valid"> Login </button>
+              <button ion-button full color="dark" [disabled]="!formLogin.valid"> Login </button>
             </div>
           </form>
 
@@ -63,17 +63,13 @@
             <div class="error-field" *ngIf="formSignup.controls.passConfirm.erros && formSignup.controls.passConfirm.touched"> Este campo é necessário e deve conter 6 digitos </div>
 
             <div padding>
-              <button full dark [disabled]="!formSignup.valid"> Cadastre-se </button>
+              <button ion-button full color="dark" [disabled]="!formSignup.valid"> Cadastre-se </button>
             </div>
           </form>
         </div>
 
         <div padding>
-          <button (click)="loginFacebook()" full facebook> <ion-icon name="logo-facebook"></ion-icon> Facebook </button>
-        </div>
-
-        <div padding>
-           <p *ngIf="error" class="error">{{ error._body }}</p>
+          <button ion-button  full color="facebook" (click)="loginFacebook()"> <ion-icon name="logo-facebook"></ion-icon> Facebook </button>
         </div>
     </div>
   </div>

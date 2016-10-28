@@ -1,18 +1,49 @@
-<!--
-  Generated template for the Chat page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>Chat</ion-title>
+  <ion-navbar color="dark">
+    <ion-title> {{ user2.name }} </ion-title>
   </ion-navbar>
-
 </ion-header>
 
 
-<ion-content padding>
+<ion-content padding class="chat">
+  <div class="message" *ngFor="let item of listMessages">
+    <div class="thumb" *ngIf="item.img && !item.is_status" [ngClass]="getClassMsg(item.uid_user)">
+      <img src="{{ item.img }}" />
+    </div>
 
+    <p *ngIf="!item.img && !item.is_status" [ngClass]="getClassMsg(item.uid_user)"> {{ item.msg }} </p>
+
+    <div *ngIf="item.is_status == 1" [ngClass]="getClassMsg(item.uid_user)">
+      <ion-grid>
+        <ion-row>
+          <ion-col width-20> <img src="{{ item.img}}"> </ion-col>
+          <ion-col width-80> {{ item.msg }} </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+
+    <div class="clear"></div>
+  </div>
 </ion-content>
+
+
+<!-- ==== ION FOOTER ==== -->
+<ion-footer class="chat">
+  <form (ngSubmit)="sendMessage()">
+    <ion-grid>
+      <ion-row class="footer">
+        <ion-col width-75>
+          <ion-input type="text" [(ngModel)]="message" [ngModelOptions]="{standalone: true}" placeholder="Digite alguma coisa..."> </ion-input>
+        </ion-col>
+
+        <ion-col width-15>
+          <ion-icon name="md-image" (click)="openGallery()"> </ion-icon>
+        </ion-col>
+
+        <ion-col width-15>
+          <button ion-button round icon-only> <ion-icon name="md-arrow-dropright"> </ion-icon> </button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-footer>

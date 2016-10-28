@@ -1,3 +1,253 @@
-page-calendar {
+.calendar {
+  @each $name, $value in $event-colors {
+    .#{$name} {
+      display: block;
+      width: 1.5rem;
+      height: 1.5rem;
+      border-radius: 100%;
+      background: $value;
+    }
+  }
 
+  .event-title {
+    display: inline-block;
+    margin-left: 1rem;
+
+    span {
+      width: 12px;
+      height: 12px;
+    }
+  }
+
+  .new-event {
+    ion-item {
+      color: $text-primary;
+      font-size: 1.7rem;
+    }
+  }
+
+  .schedule {
+    background: $background-dark;
+
+    ion-item {
+      text-align: center;
+      color: $text-primary;
+      font-size: 1.6rem;
+      background: $background-dark;
+    }
+  }
+
+  .public-event {
+    .mark {
+      width: 15px;
+      height: 15px;
+      margin-top: 15px;
+    }
+
+    h3 {
+      font-weight: bold;
+      color: $text-primary;
+      text-align: center;
+    }
+
+    .item {
+      background: #FFF;
+      border-bottom: solid 1px #ddd;
+    }
+
+    .title {
+      margin: 0;
+      font-size: 2.2rem;
+      text-align: center;
+      color: $text-primary;
+    }
+
+    .subtitle {
+      margin: 0;
+      font-size: 1.6rem;
+      text-align: center;
+      color: $text-secondary;
+    }
+
+    .empty {
+      padding-top: 10px;
+      font-size: 1.6rem;
+      text-align: center;
+      color: $text-secondary;
+    }
+
+  }
+
+}
+
+.event {
+  background: $background-dark;
+  color: $text-primary;
+  font-size: 1.2em;
+
+  .datas-main {
+    margin-top: 2rem;
+    background: #FFF;
+
+    ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+      color: #ccc;
+    }
+
+    :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+       color: #ccc;
+       opacity:  1;
+    }
+    ::-moz-placeholder { /* Mozilla Firefox 19+ */
+       color:  #ccc;
+       opacity:  1;
+    }
+    :-ms-input-placeholder { /* Internet Explorer 10-11 */
+       color:  #ccc;
+    }
+  }
+
+  .datas-date {
+    margin-top: 2rem;
+    background: #FFF;
+
+    .item .item-inner {
+      border: none;
+      color: #9e9e9e;
+    }
+
+    label {
+      display: block;
+      margin-top: 1.5rem;
+      margin-left: 0.5rem;
+    }
+  }
+
+  .datas-others {
+    margin-top: 2rem;
+    background: #FFF;
+
+    ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+      color: $text-primary;
+    }
+
+    :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+       color: $text-primary;
+       opacity:  1;
+    }
+
+    ::-moz-placeholder { /* Mozilla Firefox 19+ */
+       color:  $text-primary;
+       opacity:  1;
+    }
+
+    :-ms-input-placeholder { /* Internet Explorer 10-11 */
+       color:  $text-primary;
+    }
+
+    .items-list {
+      padding-left: 0.5rem;
+
+      ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+        color: #ccc;
+      }
+
+      :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+         color: #ccc;
+         opacity:  1;
+      }
+
+      ::-moz-placeholder { /* Mozilla Firefox 19+ */
+         color: #ccc;
+         opacity:  1;
+      }
+
+      :-ms-input-placeholder { /* Internet Explorer 10-11 */
+         color: #ccc;
+      }
+
+      ion-col {
+        margin-top: 0.7rem;
+        margin-bottom: 0.7rem;
+
+        input {
+          width: 100%;
+          border: none;
+        }
+
+        ion-icon {
+          float: right;
+          margin-right: 1.6rem;
+          font-size: 1.6rem;
+        }
+      }
+
+    }
+
+    .items {
+      min-height: 42px;
+      padding-left: 0.5rem;
+
+      p {
+        color: $text-primary;
+      }
+
+      ion-toggle {
+        float: right;
+        margin-top: 1.7rem;
+      }
+
+      ion-icon {
+        float: right;
+        margin-right: 1rem;
+        margin-top: 1.7rem;
+        font-size: 2.5rem;
+        color: $text-primary;
+      }
+    }
+  }
+
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: #DDD;
+  }
+
+  textarea {
+    width: 100%;
+    min-height: 8rem;
+    padding-top: 1rem;
+    padding-left: 1rem;
+    resize: none;
+    border: none;
+    color: #333;
+  }
+
+  button {
+    margin-top: 2rem;
+  }
+
+  .consult {
+    color: $text-primary;
+
+    .title-question {
+      text-align: center;
+      background: $background-dark;
+    }
+
+    .question {
+      padding-left: 8px;
+      background: #FFF;
+      border-bottom: 1px solid #dedede;
+
+      p {
+        color: $text-primary;
+      }
+    }
+
+    ion-icon {
+      float: right;
+      margin-right: 1rem;
+      margin-top: 2rem;
+    }
+  }
 }

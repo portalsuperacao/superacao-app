@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-navbar color="dark">
+    <button ion-button menuToggle>
+     <ion-icon name="menu"></ion-icon>
+    </button>
+
+    <ion-title> Minhas missões </ion-title>
+
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding class="trinity">
+  <ion-grid>
+    <ion-row *ngFor="let trinity of trinitys; let i = index" class="missions">
+      <ion-col width-50>
+        <h4> Missão </h4>
+        <p> <span> </span> SUMIÇO </p>
+        <p> Prazo: 16/11/2016 </p>
+      </ion-col>
+
+      <ion-col width-25>
+        <div class="avatar overcomer">
+          <img [src]="overcomer[i]?.avatar" />
+          <div class="emotion">
+            <img [src]="overcomer[i]?.emotion?.img">
+          </div>
+        </div>
+        <div class="name">  {{ overcomer[i]?.name }} </div>
+      </ion-col>
+
+      <ion-col width-25>
+        <div class="avatar angel">
+          <img [src]="angel[i]?.avatar" />
+        </div>
+        <div class="name"> {{ angel[i]?.name }} </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

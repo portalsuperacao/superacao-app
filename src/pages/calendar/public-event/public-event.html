@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-navbar color="dark">
+    <ion-title> Agenda compartilhada </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="calendar background-dark">
+  <div class="public-event">
+    <h3> Proximos eventos de {{ user.name }} </h3>
+
+    <ion-list>
+      <div class="item" *ngIf="isEmpty">
+        <p class="empty"> Nenhum evento disponivel no momento  </p>
+      </div>
+
+      <div class="item" *ngFor="let event of events | async">
+        <ion-grid>
+          <ion-row>
+            <ion-col width-10>
+                <div class="{{event.type}} mark" > </div>
+            </ion-col>
+
+            <ion-col>
+              <p class="title"> {{ event.start_at | date:"dd" }} </p>
+              <p class="subtitle"> {{ event.start_at | customDate: 'm' }} </p>
+            </ion-col>
+
+            <ion-col width-30>
+               <p class="title"> {{ event.type }} </p>
+               <p *ngIf="event.type == 'Consulta'" class="subtitle"> {{ event.other_datas.type_of_medic }} </p>
+               <p *ngIf="event.type == 'Internação'" class="subtitle"> {{ event.address }} </p>
+               <p *ngIf="event.type == ('Exame' || 'Procedimento' || 'Pessoal')" class="subtitle"> {{ event.title }} </p>
+            </ion-col>
+
+            <ion-col width-30>
+              <p class="title"> {{ event.start_at | date:"H:mm" }} </p>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+    </ion-list>
+  </div>
+
+</ion-content>
