@@ -33,8 +33,7 @@ export class ArchangelChatPage {
     public userStorageService: UserStorageService) {
 
   }
-
-  ionViewWillEnter() {
+  ionViewDidLoad() {
     this._updateDatas();
   }
 
@@ -104,6 +103,9 @@ export class ArchangelChatPage {
       // ====== CHAT OVERCOMER ======
       this.chatStorageService.getChat(trinity.overcomer, trinity.archangel).then((chatDatas : any) => {
         if(!chatDatas) {
+          console.log("superador!");
+          console.log(chatDatas);
+
           this.overcomer[index].chatUid = this.chatStorageService.createChat(this.overcomer[index], this.archangel);
           return;
         }
@@ -119,9 +121,11 @@ export class ArchangelChatPage {
     this.userStorageService.findUser(trinity.angel).then((snapshot) => {
       this.angel[index] = snapshot;
 
-      // ====== CHAT OVERCOMER ======
+      // ====== CHAT ANGEL ======
       this.chatStorageService.getChat(trinity.angel, trinity.archangel).then((chatDatas : any) => {
         if(!chatDatas) {
+          console.log("anjo!");
+          console.log(chatDatas);
           this.angel[index].chatUid = this.chatStorageService.createChat(this.angel[index], this.archangel);
           return;
         }

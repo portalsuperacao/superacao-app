@@ -1,18 +1,26 @@
-<!--
-  Generated template for the Apresentation page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
+  <ion-navbar color="dark">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
 
-  <ion-navbar>
-    <ion-title>Apresentation</ion-title>
+    <ion-title> Mensagem do dia </ion-title>
   </ion-navbar>
-
 </ion-header>
 
+<ion-content class="apresentation" padding>
+  <div class="logo">
+    <ion-icon name="md-heart"> </ion-icon>
+  </div>
 
-<ion-content padding>
+  <h1> Olá  {{ (userDatas | async)?.name }} </h1>
+
+  <h3> Seja bem vindo de volta </h3>
+
+  <h5> Mensagem do dia é: </h5>
+
+  <p class="message"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus in libero feugiat, lacinia massa a, porta leo.  </p>
+
+  <button ion-button color="dark" (click)="closePage()"> Continuar </button>
 
 </ion-content>

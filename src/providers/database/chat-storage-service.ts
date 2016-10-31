@@ -25,34 +25,24 @@ export class ChatStorageService {
   }
 
   getChat(userUid1, userUid2) {
-    let subject = new BehaviorSubject(null);
+     let chatDatas = false;
      return new Promise((resolve) => {
-       this.af.database.list('/chat')
-         .subscribe((snapshots: any) => {
-           snapshots.forEach((datas) => {
-             if(datas.users.user1.uid == userUid1 && datas.users.user2.uid == userUid2) {
-                 subject.next(datas);
-             }
-           });
-       });
+       let database = firebase.database().ref('/chat/');
+       database.once('value').then((snapshot) => {
+         snapshot.forEach((snapshotChild) => {
+            let data = snapshotChild.val();
 
-       if(!subject.getValue()) {
-         let chat = false;
-         this.af.database.list('/chat')
-           .subscribe((snapshots: any) => {
-             snapshots.forEach((datas) => {
-               if(datas.users.user1.uid == userUid1 && datas.users.user2.uid == userUid2) {
-                   chat = datas;
-               }
-             });
-             resolve(chat);
+            if(data.users.user1.uid == userUid1 && data.users.user2.uid == userUid2) {
+              chatDatas = data;
+            } else if (data.users.user2.uid == userUid1 && data.users.user1.uid == userUid2) {
+              chatDatas = data;
+            }
+
          });
-         return;
-       }
-
-       resolve(subject.getValue());
-     });
-   }
+         resolve(chatDatas);
+       });
+    });
+  }
 
   createChat(user1, user2) {
     let datas = {
@@ -94,7 +84,11 @@ export class ChatStorageService {
       let database = firebase.database().ref('/messages/' + chatUid);
 
       database.orderByChild("uid_user").equalTo(userUid).limitToLast(1).on("child_added", (snapshot) => {
-        subject.next(snapshot.val());
+        let data;
+        data = snapshot.val();
+        data.$key = snapshot.key;
+
+        subject.next(data);
       })
     });
   }
@@ -135,17 +129,13 @@ export class ChatStorageService {
   }
 
   setLocalNotification(userUid, data) {
-      localforage.setItem('notifications-' + userUid , data);
+    localforage.setItem('notifications-' + userUid , data);
   }
 
   getLocalNotification(userUid) {
     return new Promise((resolve) => {
         localforage.getItem('notifications-' + userUid).then((data) => {
-          if(data === 'true') {
-            resolve(true);
-          } else {
-            resolve(false);
-          }
+          resolve(data);
       });
     });
   }

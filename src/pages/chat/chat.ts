@@ -47,10 +47,6 @@ export class ChatPage {
     this._getMessages();
   }
 
-  ionViewWillLeave() {
-    this.chatStorageService.setLocalNotification(this.user2.$key, false);
-  }
-
   sendMessage() {
     if(!this.message) {
       return;

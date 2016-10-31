@@ -57,11 +57,12 @@ export class MyApp {
                 return;
               }
 
+              // ==== UPDATE DATAS OF LAST ACESSS
               this.userStorageService.updateLastAccess(new Date().getTime(), user.$key);
 
               this.userStorageService.setEmotion({
                 status: "Normal",
-                img: "./build/images/happy.svg",
+                img: "./assets/images/happy.svg",
                 is_active: 0
               }, user.$key);
 

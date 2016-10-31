@@ -32,7 +32,7 @@
     <div class="chat-user">
       <!-- ==== ANGEL ==== -->
       <ion-grid>
-        <ion-row [ngClass]="{'text-notification' : notifications}">
+        <ion-row [ngClass]="{'text-notification' : notifications[0]}">
           <ion-col width-40 (click)="openChat(overcomer, angel)">
             <div class="avatar angel">
               <img [src]="angel?.avatar" />
@@ -55,7 +55,7 @@
 
         <ion-row>
           <ion-col>
-            <span width-80 (click)="openChat(overcomer, archangel)" [ngClass]="{'second-notification' : notifications2}"> Arcanjo: {{ archangel?.name }} </span>
+            <span width-80 (click)="openChat(overcomer, archangel)" [ngClass]="{'second-notification' : notifications[1]}"> Arcanjo: {{ archangel?.name }} </span>
           </ion-col>
 
           <ion-col width-20>

@@ -50,7 +50,7 @@ export class Utils {
     return new Promise((resolve, reject) => {
       if(push.on) {
         push.on('registration', (deviceToken) => {
-          resolve(deviceToken);
+          resolve(deviceToken.registrationId);
         });
       } else {
         reject(false);

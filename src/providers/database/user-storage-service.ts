@@ -56,7 +56,7 @@ export class UserStorageService {
       avatar: result.photoURL || "https://placehold.it/150x150",
       emotion: {
         status: "Normal",
-        img: "./build/images/happy.svg",
+        img: "./assets/images/happy.svg",
         is_active: 0
       },
       type_user: "Normal",
@@ -141,6 +141,13 @@ export class UserStorageService {
     this.db = this.af.database.object('/users/' + userUid);
     this.db.update({"last_access" : date});
 
+    // === Push device token ===
+    this.utils.getPushDeviceToken().then((device) => {
+      this.db.update({"token_device" : device});
+    }).catch((device) => {
+
+    });
+
     this.getUserLocal().then((datas : any) => {
       datas.last_access = date;
       this.setUserLocal(datas);
@@ -151,7 +158,7 @@ export class UserStorageService {
     return new Promise((resolve) => {
       this.af.database.list('/message_of_day').subscribe((snapshots) => {
       });
-    })
+    });
   }
 
 

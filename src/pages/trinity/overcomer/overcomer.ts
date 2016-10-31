@@ -24,11 +24,7 @@ export class OvercomerPage {
   archangel;
 
   lastMessages;
-  countMessages
-  notifications;
-
-  countMessages2;
-  notifications2;
+  notifications = [];
 
   constructor(
     public navCtrl: NavController,
@@ -45,7 +41,7 @@ export class OvercomerPage {
       });
     }
 
-  ionViewWillEnter() {
+  ionViewDidLoad() {
     this._updateDatas();
   }
 
@@ -70,50 +66,25 @@ export class OvercomerPage {
     this.navCtrl.push(ChatPage, {'user1' : user1, 'user2': user2, 'chat' : user2.chatUid});
 
     // === clean notifications ===
-    this.chatStorageService.setLocalNotification(user2.$key, false);
-    this.countMessages = 0;
-    this.countMessages2 = 0;
-    this.notifications = false;
-    this.notifications2 = false;
+    this.chatStorageService.setLocalNotification(user2.$key, this.lastMessages.$key);
   }
 
   openPublicEvents(user) {
     this.navCtrl.push(CalendarPublicEventPage, {'user' : user});
   }
 
-  _generateNotification(chatUid, userUid) {
-    this.countMessages = 0;
-
-    this.chatStorageService.getLocalNotification(userUid).then((data) => {
-      this.notifications = data;
-    });
-
+  _generateNotification(chatUid, userUid, indexTypeUser) {
     this.chatStorageService.getLastMessage(chatUid, userUid).subscribe((messages : any) => {
       this.lastMessages = messages;
 
-       if(this.countMessages > 0) {
-          this.notifications = true;
-          this.chatStorageService.setLocalNotification(userUid, true);
-        }
+       this.chatStorageService.getLocalNotification(userUid).then((data) => {
+          console.log(data);
+          if(messages.$key != data) {
+            this.notifications[indexTypeUser] = true;
+            return;
+          }
 
-       this.countMessages++;
-    });
-  }
-
-  _generateNotification2(chatUid, userUid) {
-    this.countMessages2 = 0;
-
-    this.chatStorageService.getLocalNotification(userUid).then((data) => {
-      this.notifications2 = data;
-    });
-
-    this.chatStorageService.getLastMessage(chatUid, userUid).subscribe((messages : any) => {
-       if(this.countMessages2 > 0) {
-          this.notifications2 = true;
-          this.chatStorageService.setLocalNotification(userUid, true);
-        }
-
-       this.countMessages2++;
+       });
     });
   }
 
@@ -122,14 +93,15 @@ export class OvercomerPage {
       this.angel = snapshots;
 
       // ====== CHAT ANGEL ======
-      this.chatStorageService.getChat(this.trinity.overcomer, this.trinity.angel).then((snapshot : any) => {
-        if(!snapshot) {
+      this.chatStorageService.getChat(this.trinity.overcomer, this.trinity.angel).then((chatDatas : any) => {
+        if(!chatDatas) {
+          console.log("superador - anjo!");
           this.angel.chatUid = this.chatStorageService.createChat(this.overcomer, this.angel);
           return;
         }
 
-        this.angel.chatUid = snapshot.chatUid;
-        this._generateNotification(this.angel.chatUid, this.trinity.angel);
+        this.angel.chatUid = chatDatas.chatUid;
+        this._generateNotification(this.angel.chatUid, this.trinity.angel, 0);
 
       });
     });
@@ -140,23 +112,26 @@ export class OvercomerPage {
       this.archangel = snapshots;
 
       // ====== CHAT ARCHANGEL ======
-      this.chatStorageService.getChat(this.trinity.overcomer, this.trinity.archangel).then((snapshot : any) => {
-        if(!snapshot) {
+      this.chatStorageService.getChat(this.trinity.overcomer, this.trinity.archangel).then((chatDatas : any) => {
+        if(!chatDatas) {
+          console.log("superador - arcanjo!");
           this.archangel.chatUid = this.chatStorageService.createChat(this.overcomer, this.archangel);
           return;
         }
 
-        this.archangel.chatUid = snapshot.chatUid;
-        this._generateNotification2(this.archangel.chatUid, this.trinity.archangel);
+        this.archangel.chatUid = chatDatas.chatUid;
+        this._generateNotification(this.archangel.chatUid, this.trinity.archangel, 1);
       });
     });
   }
 
 
   _updateDatas() {
-    this.userStorageService.getUserObs().subscribe((user : any) => {
+    this.userStorageService.getUserObs().subscribe((user) => {
       this.overcomer = user;
+    });
 
+    this.userStorageService.getUser().then((user : any) => {
       this.trinity = {
         overcomer : user.$key,
         angel: "c9Em4kqXqQY6Rx0OHgnTsRpvrQi1",

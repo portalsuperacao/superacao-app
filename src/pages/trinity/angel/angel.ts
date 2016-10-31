@@ -42,7 +42,7 @@ export class AngelPage {
       });
     }
 
-  ionViewWillEnter() {
+  ionViewDidLoad() {
     this._updateDatas();
   }
 
@@ -118,6 +118,7 @@ export class AngelPage {
       // ====== CHAT OVERCOMER ======
       this.chatStorageService.getChat(trinity.overcomer, trinity.angel).then((chatDatas : any) => {
         if(!chatDatas) {
+          console.log("anjo - superador!");
           this.overcomer[index].chatUid = this.chatStorageService.createChat(this.overcomer[index], this.angel);
           return;
         }
@@ -135,6 +136,7 @@ export class AngelPage {
       // ====== CHAT ARCHANGEL ======
       this.chatStorageService.getChat(trinity.angel, trinity.archangel).then((chatDatas : any) => {
         if(!chatDatas) {
+          console.log("anjo - arcanjo!");
           this.archangel[index].chatUid = this.chatStorageService.createChat(this.angel, this.archangel[index]);
           return;
         }
