@@ -24,10 +24,6 @@ export class AngelPage {
 
   lastMessages = [];
   notifications = [];
-  countMessages = [];
-
-  countMessages2 = [];
-  notifications2 = [];
 
   constructor(
     public nav: NavController,
@@ -42,7 +38,7 @@ export class AngelPage {
       });
     }
 
-  ionViewDidLoad() {
+  ionViewWillEnter() {
     this._updateDatas();
   }
 
@@ -58,11 +54,7 @@ export class AngelPage {
     this.nav.push(ChatPage, {'user1' : user1, 'user2': user2, 'chat' : user2.chatUid, 'status': 1});
 
     // === clean notifications ===
-    this.chatStorageService.setLocalNotification(user2.$key, false);
-    this.countMessages[index] = 0;
-    this.countMessages2[index] = 0;
-    this.notifications[index] = false;
-    this.notifications2[index] = false;
+    this.chatStorageService.setLocalNotification(user2.$key, this.lastMessages[index].$key);
   }
 
   toggleSpace() {
@@ -74,42 +66,45 @@ export class AngelPage {
   }
 
 
-  _generateNotification(chatUid, userUid, index) {
-    this.countMessages[index] = 0;
-
-    this.chatStorageService.getLocalNotification(userUid).then((data) => {
-      this.notifications[index] = data;
-    });
-
+  _generateNotification(chatUid, userUid, index, indexTypeUser) {
     this.chatStorageService.getLastMessage(chatUid, userUid).subscribe((messages : any) => {
-      this.lastMessages[index] = messages;
+      if(indexTypeUser == 0) {
+        this.lastMessages[index] = messages;
+      }
 
-       if(this.countMessages[index] > 0) {
-          this.notifications[index] = true;
-          this.chatStorageService.setLocalNotification(userUid, true);
-        }
+       this.chatStorageService.getLocalNotification(userUid).then((data) => {
+         console.log(data);
+         console.log(indexTypeUser + " " + messages.$key);
+         if(data === null) {
+           if(indexTypeUser == 0) {
+             this.notifications[index] = { overcomer : false }
+           } else if (indexTypeUser == 1) {
+             this.notifications[index] = { archangel : false }
+           }
 
-       this.countMessages[index]++;
+           //this.chatStorageService.setLocalNotification(userUid, this.lastMessages[index].$key);
+
+          } else if(messages.$key != data) {
+            console.log("entrou!");
+            if(indexTypeUser == 0) {
+              this.notifications[index] = { overcomer : true }
+            } else if (indexTypeUser == 1) {
+              this.notifications[index] = { archangel : true }
+            }
+            console.log(this.notifications[index]);
+
+          } else {
+            if(indexTypeUser == 0) {
+              this.notifications[index] = { overcomer : false }
+            } else if (indexTypeUser == 1) {
+              this.notifications[index] = { archangel : false }
+            }
+          }
+
+       });
     });
   }
 
-  _generateNotification2(chatUid, userUid, index) {
-    this.countMessages2[index] = 0;
-
-    this.chatStorageService.getLocalNotification(userUid).then((data) => {
-      this.notifications2[index] = data;
-    });
-
-    this.chatStorageService.getLastMessage(chatUid, userUid).subscribe((messages : any) => {
-
-       if(this.countMessages2[index] > 0) {
-          this.notifications2[index] = true;
-          this.chatStorageService.setLocalNotification(userUid, true);
-        }
-
-       this.countMessages2[index]++;
-    });
-  }
 
   _findOvercomer(trinity, index) {
     this.userStorageService.findUserObs(trinity.overcomer).subscribe((overcomer) => {
@@ -124,7 +119,7 @@ export class AngelPage {
         }
 
         this.overcomer[index].chatUid = chatDatas.chatUid;
-        this._generateNotification(this.overcomer[index].chatUid, trinity.overcomer, index);
+        this._generateNotification(this.overcomer[index].chatUid, trinity.overcomer, index, 0);
       });
     });
   }
@@ -142,7 +137,7 @@ export class AngelPage {
         }
 
         this.archangel[index].chatUid = chatDatas.chatUid;
-        this._generateNotification2(this.archangel[index].chatUid, trinity.archangel, index);
+        this._generateNotification(this.archangel[index].chatUid, trinity.archangel, index, 1);
       });
     });
   }

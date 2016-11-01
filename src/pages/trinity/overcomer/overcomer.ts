@@ -41,7 +41,7 @@ export class OvercomerPage {
       });
     }
 
-  ionViewDidLoad() {
+  ionViewWillEnter() {
     this._updateDatas();
   }
 
@@ -75,15 +75,19 @@ export class OvercomerPage {
 
   _generateNotification(chatUid, userUid, indexTypeUser) {
     this.chatStorageService.getLastMessage(chatUid, userUid).subscribe((messages : any) => {
-      this.lastMessages = messages;
+      if(indexTypeUser == 0) {
+        this.lastMessages = messages;
+      }
 
        this.chatStorageService.getLocalNotification(userUid).then((data) => {
-          console.log(data);
-          if(messages.$key != data) {
+        if (data === null) {
+            this.notifications[indexTypeUser] = false;
+            this.chatStorageService.setLocalNotification(userUid, this.lastMessages.$key);
+          } else if(messages.$key != data) {
             this.notifications[indexTypeUser] = true;
-            return;
+          } else {
+            this.notifications[indexTypeUser] = false;
           }
-
        });
     });
   }

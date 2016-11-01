@@ -18,8 +18,8 @@
   <div class="chat-user" *ngFor="let trinity of trinitys; let i = index">
     <!-- ==== ANGEL ==== -->
     <ion-grid>
-      <ion-row [ngClass]="{'text-notification' : notifications[i]}">
-        <ion-col width-40 (click)="openChat(archangel, overcomer[i])">
+      <ion-row [ngClass]="{'text-notification' : notifications[i]?.overcomer}">
+        <ion-col width-40 (click)="openChat(archangel, overcomer[i], i)">
           <div class="avatar overcomer">
             <img src="{{ overcomer[i]?.avatar }}" />
             <div class="emotion">
@@ -44,7 +44,7 @@
 
       <ion-row>
         <ion-col width-80>
-          <span (click)="openChat(archangel, angel[i], i)"  [ngClass]="{'second-notification' : notifications2[i]}"> Anjo: {{ angel[i]?.name }} </span>
+          <span (click)="openChat(archangel, angel[i], i)"  [ngClass]="{'second-notification' : notifications[i]?.angel}"> Anjo: {{ angel[i]?.name }} </span>
         </ion-col>
 
         <ion-col width-20>

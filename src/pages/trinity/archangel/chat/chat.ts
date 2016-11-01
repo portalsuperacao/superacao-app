@@ -33,7 +33,7 @@ export class ArchangelChatPage {
     public userStorageService: UserStorageService) {
 
   }
-  ionViewDidLoad() {
+  ionViewWillEnter() {
     this._updateDatas();
   }
 
@@ -45,11 +45,7 @@ export class ArchangelChatPage {
     this.navCtrl.push(ChatPage, {'user1' : user1, 'user2': user2, 'chat' : user2.chatUid, 'status': 1});
 
     // === clean notifications ===
-    this.chatStorageService.setLocalNotification(user2.$key, false);
-    this.countMessages[index] = 0;
-    this.countMessages2[index] = 0;
-    this.notifications[index] = false;
-    this.notifications2[index] = false;
+    this.chatStorageService.setLocalNotification(user2.$key, this.lastMessages[index].$key);
   }
 
   toggleSpace() {
@@ -60,41 +56,40 @@ export class ArchangelChatPage {
     }
   }
 
-  _generateNotification(chatUid, userUid, index) {
-    this.countMessages[index] = 0;
-
-    this.chatStorageService.getLocalNotification(userUid).then((data) => {
-      this.notifications[index] = data;
-    });
-
+  _generateNotification(chatUid, userUid, index, indexTypeUser) {
     this.chatStorageService.getLastMessage(chatUid, userUid).subscribe((messages : any) => {
-      this.lastMessages[index] = messages;
+      if(indexTypeUser == 0) {
+        this.lastMessages[index] = messages;
+      }
 
-       if(this.countMessages[index] > 0) {
-          this.notifications[index] = true;
-          this.chatStorageService.setLocalNotification(userUid, true);
-        }
+       this.chatStorageService.getLocalNotification(userUid).then((data) => {
+         if(data === null) {
+           if(indexTypeUser == 0) {
+             this.notifications[index] = { overcomer : false }
+           } else {
+             this.notifications[index] = { angel : false }
+           }
 
-       this.countMessages[index]++;
+           this.chatStorageService.setLocalNotification(userUid, this.lastMessages[index].$key);
+
+          } else if(messages.$key != data) {
+            if(indexTypeUser == 0) {
+              this.notifications[index] = { overcomer : true }
+            } else {
+              this.notifications[index] = { angel : true }
+            }
+
+          } else {
+            if(indexTypeUser == 0) {
+              this.notifications[index] = { overcomer : false }
+            } else {
+              this.notifications[index] = { angel : false }
+            }
+          }
+       });
     });
   }
 
-  _generateNotification2(chatUid, userUid, index) {
-    this.countMessages2[index] = 0;
-
-    this.chatStorageService.getLocalNotification(userUid).then((data) => {
-      this.notifications2[index] = data;
-    });
-
-    this.chatStorageService.getLastMessage(chatUid, userUid).subscribe((messages : any) => {
-       if(this.countMessages2[index] > 0) {
-          this.notifications2[index] = true;
-          this.chatStorageService.setLocalNotification(userUid, true);
-        }
-
-       this.countMessages2[index]++;
-    });
-  }
 
   _findOvercomer(trinity, index) {
     this.userStorageService.findUserObs(trinity.overcomer).subscribe((overcomer) => {
@@ -111,7 +106,7 @@ export class ArchangelChatPage {
         }
 
         this.overcomer[index].chatUid = chatDatas.chatUid;
-        this._generateNotification(this.overcomer[index].chatUid, trinity.overcomer, index);
+        this._generateNotification(this.overcomer[index].chatUid, trinity.overcomer, index, 0);
       });
     });
   }
@@ -131,7 +126,7 @@ export class ArchangelChatPage {
         }
 
         this.angel[index].chatUid = chatDatas.chatUid;
-        this._generateNotification2(this.angel[index].chatUid, trinity.angel, index);
+        this._generateNotification(this.angel[index].chatUid, trinity.angel, index, 1);
       });
     });
 
