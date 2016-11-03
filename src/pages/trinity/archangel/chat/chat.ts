@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, LoadingController } from 'ionic-angular';
 import { ChatPage } from '../../../chat/chat';
 import { CalendarPublicEventPage } from '../../../calendar/public-event/public-event';
 
 import { UserStorageService } from '../../../../providers/database/user-storage-service';
 import { ChatStorageService } from '../../../../providers/database/chat-storage-service';
+import { Utils } from '../../../../providers/util/utils';
 
 @Component({
   selector: 'page-archangel-chat',
@@ -21,19 +22,35 @@ export class ArchangelChatPage {
   space = 'close';
 
   countMessages = [];
-  notifications = [];
-  lastMessages = [];
+  notifications = [[]];
+  lastMessages = [[]];
 
-  countMessages2 = [];
-  notifications2 = [];
+  loading;
 
   constructor(
     public navCtrl: NavController,
+    public loadingCtrl: LoadingController,
     public chatStorageService: ChatStorageService,
-    public userStorageService: UserStorageService) {
+    public userStorageService: UserStorageService,
+    public utils: Utils) {
+      this.loading = this.loadingCtrl.create({
+        content: "Aguarde...",
+      });
 
+      for(let i = 0; i < 2; i++) {
+        this.lastMessages[i] = [];
+        this.notifications[i] = [];
+      }
+
+      this.utils.generatePush().then((datas) => {
+        console.log("remover o push!");
+      }).catch((error) => {
+
+      });
   }
+
   ionViewWillEnter() {
+    this.loading.present();
     this._updateDatas();
   }
 
@@ -41,11 +58,13 @@ export class ArchangelChatPage {
     this.navCtrl.push(CalendarPublicEventPage, {'user' : user});
   }
 
-  openChat(user1, user2, index) {
+  openChat(user1, user2, index, indexTypeUser) {
     this.navCtrl.push(ChatPage, {'user1' : user1, 'user2': user2, 'chat' : user2.chatUid, 'status': 1});
 
     // === clean notifications ===
-    this.chatStorageService.setLocalNotification(user2.$key, this.lastMessages[index].$key);
+    if(this.lastMessages[indexTypeUser][index]) {
+      this.chatStorageService.setLocalNotification(user2.$key, this.lastMessages[indexTypeUser][index].$key);
+    }
   }
 
   toggleSpace() {
@@ -58,35 +77,26 @@ export class ArchangelChatPage {
 
   _generateNotification(chatUid, userUid, index, indexTypeUser) {
     this.chatStorageService.getLastMessage(chatUid, userUid).subscribe((messages : any) => {
-      if(indexTypeUser == 0) {
-        this.lastMessages[index] = messages;
-      }
+      this.lastMessages[indexTypeUser][index] = messages;
+      this.notifications[indexTypeUser][index] = false;
 
-       this.chatStorageService.getLocalNotification(userUid).then((data) => {
-         if(data === null) {
-           if(indexTypeUser == 0) {
-             this.notifications[index] = { overcomer : false }
-           } else {
-             this.notifications[index] = { angel : false }
-           }
+      this.chatStorageService.getLocalNotification(userUid).then((data) => {
+          this.chatStorageService.getLocalNotification(userUid).then((data) => {
+            if(data === null) {
+             this.notifications[indexTypeUser][index] = false;
 
-           this.chatStorageService.setLocalNotification(userUid, this.lastMessages[index].$key);
-
-          } else if(messages.$key != data) {
-            if(indexTypeUser == 0) {
-              this.notifications[index] = { overcomer : true }
+              if(this.lastMessages[indexTypeUser][index]) {
+                this.chatStorageService.setLocalNotification(userUid, this.lastMessages[indexTypeUser][index].$key);
+              }
+            } else if(messages.$key != data) {
+              this.notifications[indexTypeUser][index] = true;
             } else {
-              this.notifications[index] = { angel : true }
+              this.notifications[indexTypeUser][index] = false;
             }
 
-          } else {
-            if(indexTypeUser == 0) {
-              this.notifications[index] = { overcomer : false }
-            } else {
-              this.notifications[index] = { angel : false }
-            }
-          }
-       });
+            this.loading.dismiss();
+          });
+      });
     });
   }
 

@@ -33,18 +33,18 @@
       <!-- ==== ANGEL ==== -->
       <ion-grid>
         <ion-row [ngClass]="{'text-notification' : notifications[0]}">
-          <ion-col width-40 (click)="openChat(overcomer, angel)">
+          <ion-col width-40 (click)="openChat(overcomer, angel, 0)">
             <div class="avatar angel">
               <img [src]="angel?.avatar" />
             </div>
           </ion-col>
 
-          <ion-col width-40 (click)="openChat(overcomer, angel)">
+          <ion-col width-40 (click)="openChat(overcomer, angel, 0)">
             <h4> {{ angel?.name }} </h4>
             <div class="message">
-              <p *ngIf="!lastMessages?.msg"> Não há nenhum mensagem disponivel </p>
-              <p> {{ lastMessages?.msg }} </p>
-              <p *ngIf="lastMessages?.created_at" class="hour"> {{ lastMessages?.created_at | customDate:"c" }} </p>
+              <p *ngIf="!lastMessages[0]?.msg"> Não há nenhum mensagem disponivel </p>
+              <p> {{ lastMessages[0]?.msg }} </p>
+              <p *ngIf="lastMessages[0]?.created_at" class="hour"> {{ lastMessages[0]?.created_at | customDate:"c" }} </p>
             </div>
           </ion-col>
 
@@ -55,7 +55,7 @@
 
         <ion-row>
           <ion-col>
-            <span width-80 (click)="openChat(overcomer, archangel)" [ngClass]="{'second-notification' : notifications[1]}"> Arcanjo: {{ archangel?.name }} </span>
+            <span width-80 (click)="openChat(overcomer, archangel, 1)" [ngClass]="{'second-notification' : notifications[1]}"> Arcanjo: {{ archangel?.name }} </span>
           </ion-col>
 
           <ion-col width-20>

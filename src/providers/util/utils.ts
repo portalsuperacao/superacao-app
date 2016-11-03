@@ -58,9 +58,6 @@ export class Utils {
     });
   }
 
-
-
-
   openGallery() {
     return new Promise((resolve, reject) => {
       let options = {

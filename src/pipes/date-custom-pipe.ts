@@ -23,6 +23,11 @@ export class DateCustomPipe implements PipeTransform {
       return moment(date).format('dddd');
     } else if (exponent === 'c') {
       return moment(date).fromNow();
+    } else if (exponent === 't') {
+      let h = date.getHours();
+      let m = date.getMinutes();
+
+      return h + " : " + m;
     } else {
       return 'Exponent invalid';
     }

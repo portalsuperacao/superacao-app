@@ -22,8 +22,10 @@ export class AngelPage {
   archangel = [];
   space = 'close';
 
-  lastMessages = [];
-  notifications = [];
+  lastMessages = [[]];
+  notifications = [[]];
+
+  loading;
 
   constructor(
     public nav: NavController,
@@ -31,6 +33,15 @@ export class AngelPage {
     public chatStorageService: ChatStorageService,
     public utils: Utils,
     public loadingCtrl: LoadingController) {
+      this.loading = this.loadingCtrl.create({
+        content: "Aguarde...",
+      });
+
+      for(let i = 0; i < 2; i++) {
+        this.lastMessages[i] = [];
+        this.notifications[i] = [];
+      }
+
       this.utils.generatePush().then((datas) => {
         console.log("remover o push!");
       }).catch((error) => {
@@ -39,6 +50,7 @@ export class AngelPage {
     }
 
   ionViewWillEnter() {
+    this.loading.present();
     this._updateDatas();
   }
 
@@ -50,11 +62,14 @@ export class AngelPage {
     this.nav.push(CalendarPublicEventPage, {'user' : user});
   }
 
-  openChat(user1, user2, index) {
+  openChat(user1, user2, index, indexTypeUser) {
     this.nav.push(ChatPage, {'user1' : user1, 'user2': user2, 'chat' : user2.chatUid, 'status': 1});
 
     // === clean notifications ===
-    this.chatStorageService.setLocalNotification(user2.$key, this.lastMessages[index].$key);
+    if(this.lastMessages[indexTypeUser][index]) {
+      this.chatStorageService.setLocalNotification(user2.$key, this.lastMessages[indexTypeUser][index].$key);
+    }
+
   }
 
   toggleSpace() {
@@ -68,41 +83,26 @@ export class AngelPage {
 
   _generateNotification(chatUid, userUid, index, indexTypeUser) {
     this.chatStorageService.getLastMessage(chatUid, userUid).subscribe((messages : any) => {
-      if(indexTypeUser == 0) {
-        this.lastMessages[index] = messages;
-      }
+       this.lastMessages[indexTypeUser][index] = messages;
+       this.notifications[indexTypeUser][index] = false;
 
        this.chatStorageService.getLocalNotification(userUid).then((data) => {
-         console.log(data);
-         console.log(indexTypeUser + " " + messages.$key);
          if(data === null) {
-           if(indexTypeUser == 0) {
-             this.notifications[index] = { overcomer : false }
-           } else if (indexTypeUser == 1) {
-             this.notifications[index] = { archangel : false }
+           this.notifications[indexTypeUser][index] = false;
+
+           if(this.lastMessages[indexTypeUser][index]) {
+             this.chatStorageService.setLocalNotification(userUid, this.lastMessages[indexTypeUser][index].$key);
            }
+         } else if(messages.$key != data) {
+           this.notifications[indexTypeUser][index] = true;
+         } else {
+           this.notifications[indexTypeUser][index] = false;
+         }
 
-           //this.chatStorageService.setLocalNotification(userUid, this.lastMessages[index].$key);
-
-          } else if(messages.$key != data) {
-            console.log("entrou!");
-            if(indexTypeUser == 0) {
-              this.notifications[index] = { overcomer : true }
-            } else if (indexTypeUser == 1) {
-              this.notifications[index] = { archangel : true }
-            }
-            console.log(this.notifications[index]);
-
-          } else {
-            if(indexTypeUser == 0) {
-              this.notifications[index] = { overcomer : false }
-            } else if (indexTypeUser == 1) {
-              this.notifications[index] = { archangel : false }
-            }
-          }
-
+         this.loading.dismiss();
        });
     });
+
   }
 
 

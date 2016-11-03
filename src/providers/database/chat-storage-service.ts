@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
 import * as localforage from "localforage";
 import * as firebase from 'firebase';

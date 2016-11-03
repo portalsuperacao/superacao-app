@@ -23,8 +23,10 @@ export class OvercomerPage {
   angel;
   archangel;
 
-  lastMessages;
+  lastMessages = [];
   notifications = [];
+
+  loading;
 
   constructor(
     public navCtrl: NavController,
@@ -33,6 +35,9 @@ export class OvercomerPage {
     public loadingCtrl: LoadingController,
     public modalCtrl: ModalController,
     public utils: Utils) {
+      this.loading = this.loadingCtrl.create({
+        content: "Aguarde...",
+      });
 
       this.utils.generatePush().then((datas) => {
         console.log("remover o push!");
@@ -62,11 +67,13 @@ export class OvercomerPage {
     //this.nav.push(OvercomerHelpSystemPage);
   }
 
-  openChat(user1, user2) {
+  openChat(user1, user2, indexTypeUser) {
     this.navCtrl.push(ChatPage, {'user1' : user1, 'user2': user2, 'chat' : user2.chatUid});
 
     // === clean notifications ===
-    this.chatStorageService.setLocalNotification(user2.$key, this.lastMessages.$key);
+    if(this.lastMessages[indexTypeUser]) {
+      this.chatStorageService.setLocalNotification(user2.$key, this.lastMessages[indexTypeUser].$key);
+    }
   }
 
   openPublicEvents(user) {
@@ -75,19 +82,20 @@ export class OvercomerPage {
 
   _generateNotification(chatUid, userUid, indexTypeUser) {
     this.chatStorageService.getLastMessage(chatUid, userUid).subscribe((messages : any) => {
-      if(indexTypeUser == 0) {
-        this.lastMessages = messages;
-      }
+      this.lastMessages[indexTypeUser] = messages;
 
        this.chatStorageService.getLocalNotification(userUid).then((data) => {
-        if (data === null) {
+          if(data === null) {
             this.notifications[indexTypeUser] = false;
-            this.chatStorageService.setLocalNotification(userUid, this.lastMessages.$key);
+            this.chatStorageService.setLocalNotification(userUid, this.lastMessages[indexTypeUser].$key);
           } else if(messages.$key != data) {
             this.notifications[indexTypeUser] = true;
           } else {
             this.notifications[indexTypeUser] = false;
           }
+
+          this.loading.dismiss();
+
        });
     });
   }
@@ -99,12 +107,11 @@ export class OvercomerPage {
       // ====== CHAT ANGEL ======
       this.chatStorageService.getChat(this.trinity.overcomer, this.trinity.angel).then((chatDatas : any) => {
         if(!chatDatas) {
-          console.log("superador - anjo!");
           this.angel.chatUid = this.chatStorageService.createChat(this.overcomer, this.angel);
-          return;
+        } else {
+          this.angel.chatUid = chatDatas.chatUid;
         }
 
-        this.angel.chatUid = chatDatas.chatUid;
         this._generateNotification(this.angel.chatUid, this.trinity.angel, 0);
 
       });
@@ -118,12 +125,11 @@ export class OvercomerPage {
       // ====== CHAT ARCHANGEL ======
       this.chatStorageService.getChat(this.trinity.overcomer, this.trinity.archangel).then((chatDatas : any) => {
         if(!chatDatas) {
-          console.log("superador - arcanjo!");
           this.archangel.chatUid = this.chatStorageService.createChat(this.overcomer, this.archangel);
-          return;
+        } else {
+          this.archangel.chatUid = chatDatas.chatUid;
         }
 
-        this.archangel.chatUid = chatDatas.chatUid;
         this._generateNotification(this.archangel.chatUid, this.trinity.archangel, 1);
       });
     });
@@ -131,6 +137,8 @@ export class OvercomerPage {
 
 
   _updateDatas() {
+    this.loading.present();
+
     this.userStorageService.getUserObs().subscribe((user) => {
       this.overcomer = user;
     });

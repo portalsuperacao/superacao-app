@@ -19,6 +19,8 @@ export class CalendarPage {
    allSechedule;
    showCalendar;
 
+   loading
+
   constructor(
     public navCtrl: NavController,
     public loadingCtrl: LoadingController,
@@ -26,10 +28,13 @@ export class CalendarPage {
     public userStorageService : UserStorageService,
     public dateUtil: DateUtil,
     public alertCtrl: AlertController) {
-
+      this.loading =  this.loadingCtrl.create({
+        content: "Aguarde..."
+      });
   }
 
   ionViewWillEnter() {
+    this.loading.present();
     this._generateAllSchedule();
   }
 
@@ -65,16 +70,12 @@ export class CalendarPage {
 
   _generateAllSchedule() {
     this.showCalendar = false;
-    let loading = this.loadingCtrl.create({
-      content: "Aguarde..."
-    });
 
-    loading.present();
     this.userStorageService.getUser().then((user : any) => {
       this.calendarStorageService.getEvents(user.$key).then((event) => {
         this.allSechedule = event;
         this.showCalendar = true;
-        loading.dismiss();
+        this.loading.dismiss();
       });
     });
   }
