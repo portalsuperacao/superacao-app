@@ -2,14 +2,6 @@
   font-family: $font-family;
 }
 
-$event-colors: (
-  Consulta: #64dab8,
-  Exame: #c38cdd,
-  Procedimento: #7894ff,
-  Internação: #f76e8e,
-  Pessoal: #7ae842
-);
-
 .background-dark {
   background: $background-dark;
 }

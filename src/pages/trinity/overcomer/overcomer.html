@@ -42,8 +42,9 @@
           <ion-col width-40 (click)="openChat(overcomer, angel, 0)">
             <h4> {{ angel?.name }} </h4>
             <div class="message">
-              <p *ngIf="!lastMessages[0]?.msg"> Não há nenhum mensagem disponivel </p>
-              <p> {{ lastMessages[0]?.msg }} </p>
+              <p *ngIf="!lastMessages[0]"> Não há nenhum mensagem disponivel </p>
+              <p *ngIf="lastMessages[0] && !lastMessages[0]?.msg"> O {{ overcomer?.name }} enviou uma imagem </p>
+              <p *ngIf="lastMessages[0]?.msg"> {{ lastMessages[0]?.msg | truncate:20 }} </p>
               <p *ngIf="lastMessages[0]?.created_at" class="hour"> {{ lastMessages[0]?.created_at | customDate:"c" }} </p>
             </div>
           </ion-col>

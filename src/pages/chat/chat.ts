@@ -12,7 +12,7 @@ import { Utils } from '../../providers/util/utils';
 export class ChatPage {
   @ViewChild(Content) content: Content;
 
-  message: Object;
+  message;
   listMessages = [];
   lengthMessages = 0;
   lengthCtrl = false;
@@ -48,7 +48,7 @@ export class ChatPage {
   }
 
   sendMessage() {
-    if(!this.message) {
+    if(this.message.trim() == "") {
       return;
     }
 
@@ -138,7 +138,7 @@ export class ChatPage {
 
            if(this.status) {
              console.log(this.status);
-             //this._generateMessageStaus(this.user2.name, this.user2.emotion.img, this.user2.emotion.status);
+             this._generateMessageStaus(this.user2.name, this.user2.emotion.img, this.user2.emotion.status);
              setTimeout(() => {
                this.content.scrollToBottom(0);
              }, 500);

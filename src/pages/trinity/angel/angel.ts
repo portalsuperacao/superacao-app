@@ -33,9 +33,6 @@ export class AngelPage {
     public chatStorageService: ChatStorageService,
     public utils: Utils,
     public loadingCtrl: LoadingController) {
-      this.loading = this.loadingCtrl.create({
-        content: "Aguarde...",
-      });
 
       for(let i = 0; i < 2; i++) {
         this.lastMessages[i] = [];
@@ -49,8 +46,15 @@ export class AngelPage {
       });
     }
 
-  ionViewWillEnter() {
+  ionViewDidLoad() {
+    this.loading = this.loadingCtrl.create({
+      content: "Aguarde..."
+    });
+
     this.loading.present();
+  }
+
+  ionViewWillEnter() {
     this._updateDatas();
   }
 
@@ -98,13 +102,10 @@ export class AngelPage {
          } else {
            this.notifications[indexTypeUser][index] = false;
          }
-
-         this.loading.dismiss();
        });
     });
 
   }
-
 
   _findOvercomer(trinity, index) {
     this.userStorageService.findUserObs(trinity.overcomer).subscribe((overcomer) => {
@@ -122,6 +123,8 @@ export class AngelPage {
         this._generateNotification(this.overcomer[index].chatUid, trinity.overcomer, index, 0);
       });
     });
+
+    this.loading.dismiss();
   }
 
   _findArchangel(trinity, index) {
@@ -130,8 +133,8 @@ export class AngelPage {
 
       // ====== CHAT ARCHANGEL ======
       this.chatStorageService.getChat(trinity.angel, trinity.archangel).then((chatDatas : any) => {
-        if(!chatDatas) {
-          console.log("anjo - arcanjo!");
+
+        if(!this._verifySameArchangel(index) && !chatDatas) {
           this.archangel[index].chatUid = this.chatStorageService.createChat(this.angel, this.archangel[index]);
           return;
         }
@@ -140,6 +143,21 @@ export class AngelPage {
         this._generateNotification(this.archangel[index].chatUid, trinity.archangel, index, 1);
       });
     });
+  }
+
+  _verifySameArchangel(index) {
+    let indexOf = 0;
+    for(let i = 0; i < this.trinitys.length; i++) {
+      if(this.trinitys[i].archangel == this.trinitys[index].archangel) {
+        indexOf += 1;
+      }
+    }
+
+    if(indexOf >= 2 && index > 0) {
+      return true;
+    }
+
+    return false;
   }
 
 
@@ -157,6 +175,7 @@ export class AngelPage {
         overcomer: "zua3bsHHBkTPUhbyRC5k5xHam8V2",
         archangel: "NePUY0RoAfPSgAnCTn42IOHSBE72"
       }];
+
 
       this.trinitys.forEach((trinity, index) => {
         this._findOvercomer(trinity, index);

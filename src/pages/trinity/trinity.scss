@@ -205,4 +205,36 @@
     }
   }
 
+  .missions {
+    color: $text-primary !important;
+
+    ion-row {
+      margin-top: 10px;
+      border-bottom: solid 1px #ddd;
+    }
+
+    .title {
+      font-size: 2rem;
+      margin: 0;
+      padding: 0;
+    }
+
+    .alert {
+      margin: 5px;
+      padding: 0;
+
+      span {
+        display: inline-block;
+        width: 15px;
+        height: 15px;
+        background: #FF0000;
+        border-radius: 100%;
+      }
+    }
+
+    .time {
+      font-size: 1.6rem;
+    }
+  }
+
 }

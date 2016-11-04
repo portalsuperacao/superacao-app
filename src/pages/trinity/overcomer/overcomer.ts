@@ -35,16 +35,20 @@ export class OvercomerPage {
     public loadingCtrl: LoadingController,
     public modalCtrl: ModalController,
     public utils: Utils) {
-      this.loading = this.loadingCtrl.create({
-        content: "Aguarde...",
-      });
-
       this.utils.generatePush().then((datas) => {
         console.log("remover o push!");
       }).catch((error) => {
 
       });
     }
+
+  ionViewDidLoad() {
+    this.loading = this.loadingCtrl.create({
+      content: "Aguarde..."
+    });
+
+    this.loading.present();
+  }
 
   ionViewWillEnter() {
     this._updateDatas();
@@ -93,9 +97,6 @@ export class OvercomerPage {
           } else {
             this.notifications[indexTypeUser] = false;
           }
-
-          this.loading.dismiss();
-
        });
     });
   }
@@ -113,8 +114,9 @@ export class OvercomerPage {
         }
 
         this._generateNotification(this.angel.chatUid, this.trinity.angel, 0);
-
       });
+
+      this.loading.dismiss();
     });
   }
 
@@ -137,8 +139,6 @@ export class OvercomerPage {
 
 
   _updateDatas() {
-    this.loading.present();
-
     this.userStorageService.getUserObs().subscribe((user) => {
       this.overcomer = user;
     });

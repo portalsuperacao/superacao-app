@@ -33,9 +33,6 @@ export class ArchangelChatPage {
     public chatStorageService: ChatStorageService,
     public userStorageService: UserStorageService,
     public utils: Utils) {
-      this.loading = this.loadingCtrl.create({
-        content: "Aguarde...",
-      });
 
       for(let i = 0; i < 2; i++) {
         this.lastMessages[i] = [];
@@ -49,8 +46,15 @@ export class ArchangelChatPage {
       });
   }
 
-  ionViewWillEnter() {
+  ionViewDidLoad() {
+    this.loading = this.loadingCtrl.create({
+      content: "Aguarde..."
+    });
+
     this.loading.present();
+  }
+
+  ionViewWillEnter() {
     this._updateDatas();
   }
 
@@ -93,8 +97,6 @@ export class ArchangelChatPage {
             } else {
               this.notifications[indexTypeUser][index] = false;
             }
-
-            this.loading.dismiss();
           });
       });
     });
@@ -108,9 +110,6 @@ export class ArchangelChatPage {
       // ====== CHAT OVERCOMER ======
       this.chatStorageService.getChat(trinity.overcomer, trinity.archangel).then((chatDatas : any) => {
         if(!chatDatas) {
-          console.log("superador!");
-          console.log(chatDatas);
-
           this.overcomer[index].chatUid = this.chatStorageService.createChat(this.overcomer[index], this.archangel);
           return;
         }
@@ -118,6 +117,8 @@ export class ArchangelChatPage {
         this.overcomer[index].chatUid = chatDatas.chatUid;
         this._generateNotification(this.overcomer[index].chatUid, trinity.overcomer, index, 0);
       });
+
+      this.loading.dismiss();
     });
   }
 
@@ -128,9 +129,7 @@ export class ArchangelChatPage {
 
       // ====== CHAT ANGEL ======
       this.chatStorageService.getChat(trinity.angel, trinity.archangel).then((chatDatas : any) => {
-        if(!chatDatas) {
-          console.log("anjo!");
-          console.log(chatDatas);
+        if(!this._verifySameAngel(index) && !chatDatas) {
           this.angel[index].chatUid = this.chatStorageService.createChat(this.angel[index], this.archangel);
           return;
         }
@@ -140,6 +139,21 @@ export class ArchangelChatPage {
       });
     });
 
+  }
+
+  _verifySameAngel(index) {
+    let indexOf = 0;
+    for(let i = 0; i < this.trinitys.length; i++) {
+      if(this.trinitys[i].archangel == this.trinitys[index].archangel) {
+        indexOf += 1;
+      }
+    }
+
+    if(indexOf >= 2 && index > 0) {
+      return true;
+    }
+
+    return false;
   }
 
 
