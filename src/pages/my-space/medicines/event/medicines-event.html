@@ -1,0 +1,78 @@
+<ion-header>
+  <ion-navbar color="dark">
+    <ion-buttons end>
+      <button ion-button (click)="closePage()">
+        <ion-icon name="close"> </ion-icon>
+      </button>
+    </ion-buttons>
+
+    <ion-title> Lembrete do remedio </ion-title>
+
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="event">
+  <form [formGroup]="formEvent" (ngSubmit)="insertEvent(formEvent.value)">
+    <div class="datas-main">
+      <div>
+          <ion-input placeholder="Nome do medicamento" type="text" formControlName="title"></ion-input>
+      </div>
+
+      <div class="divider"> </div>
+
+      <div>
+        <ion-input placeholder="Dosagem" type="text" formControlName="dosage"></ion-input>
+      </div>
+    </div>
+
+    <div class="datas-date">
+      <ion-grid>
+        <ion-row>
+          <ion-col width-25>
+            <label> Inicio </label>
+          </ion-col>
+
+          <ion-col width-45>
+            <ion-item>
+                <ion-datetime displayFormat="DD MMM YYYY" pickerFormat="DD MMM YYYY" formControlName="startDate"> </ion-datetime>
+            </ion-item>
+          </ion-col>
+
+          <ion-col width-30>
+            <ion-item>
+                <ion-datetime displayFormat="H:mm" pickerFormat="H:mm" formControlName="startTime"> </ion-datetime>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <div class="divider"> </div>
+
+      <ion-item>
+        <ion-label> Intervalos </ion-label>
+        <ion-select cancelText="cancelar" formControlName="interval">
+          <ion-option *ngFor="let option of intervalOptions" value="{{ option }}">
+            {{ option }}h
+          </ion-option>
+        </ion-select>
+      </ion-item>
+
+      <div class="divider"> </div>
+
+      <ion-item>
+        <ion-label> Quantidade de dias </ion-label>
+        <ion-select cancelText="cancelar" [(ngModel)]="isEndDate" [ngModelOptions]="{standalone: true}">
+          <ion-option value="false"> Indefinido </ion-option>
+          <ion-option value="true"> Digitar quantidade </ion-option>
+        </ion-select>
+      </ion-item>
+
+      <div *ngIf="isEndDate === 'true'" class="datas-main">
+        <ion-input type="number" placeholder="Digite a quantidade de dias necessarias" formControlName="endDays"> </ion-input>
+      </div>
+    </div>
+
+    <button ion-button full [disabled]="!formEvent.valid" color="dark"> Enviar </button>
+  </form>
+
+</ion-content>

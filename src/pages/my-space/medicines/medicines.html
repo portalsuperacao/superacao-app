@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-navbar color="dark">
+    <button ion-button menuToggle>
+       <ion-icon name="menu"></ion-icon>
+    </button>
+
+    <ion-title> Aviso de medicamentos  </ion-title>
+
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <!--<div class="item" *ngIf="isEmpty">
+      <p class="empty"> Nenhum evento disponivel no momento  </p>
+    </div>-->
+      <ion-grid>
+        <ion-row>
+          <ion-col width-25>
+            <p> Nome do remedio </p>
+          </ion-col>
+
+          <ion-col width-25>
+            <p> Inicio do remedio </p>
+          </ion-col>
+
+          <ion-col width-25>
+            <p> Dosagem <p>
+          </ion-col>
+
+          <ion-col width-25>
+            <p class="title time"> 8h </p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+  </ion-list>
+
+  <ion-fab bottom right>
+    <button ion-fab mini (click)="newEvent()"> <ion-icon name="add"> </ion-icon> </button>
+  </ion-fab>
+
+</ion-content>

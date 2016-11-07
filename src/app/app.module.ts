@@ -26,6 +26,10 @@ import { CalendarPublicEventPage } from '../pages/calendar/public-event/public-e
 import { ChatPage } from '../pages/chat/chat';
 import { LoginPage } from '../pages/login/login';
 import { MySpacePage } from '../pages/my-space/my-space';
+import { MySpaceDoctorsPage } from '../pages/my-space/doctors/doctors';
+import { MySpaceMedicinesPage } from '../pages/my-space/medicines/medicines';
+import { MySpaceMedicinesEventPage } from '../pages/my-space/medicines/event/medicines-event';
+import { MySpaceNotesPage } from '../pages/my-space/notes/notes';
 import { ProfilePage } from '../pages/profile/profile';
 import { StatusEmotionPage } from '../pages/status-emotion/status-emotion';
 import { TabsPage } from '../pages/tabs/tabs';
@@ -61,6 +65,10 @@ firebase.initializeApp(firebaseConfig);
     ChatPage,
     LoginPage,
     MySpacePage,
+    MySpaceDoctorsPage,
+    MySpaceMedicinesPage,
+    MySpaceMedicinesEventPage,
+    MySpaceNotesPage,
     ProfilePage,
     StatusEmotionPage,
     TabsPage,
@@ -90,6 +98,10 @@ firebase.initializeApp(firebaseConfig);
     ChatPage,
     LoginPage,
     MySpacePage,
+    MySpaceDoctorsPage,
+    MySpaceMedicinesPage,
+    MySpaceMedicinesEventPage,
+    MySpaceNotesPage,
     ProfilePage,
     StatusEmotionPage,
     TabsPage,

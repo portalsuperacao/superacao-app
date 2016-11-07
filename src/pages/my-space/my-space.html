@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar color="dark">
     <button ion-button menuToggle>
-     <ion-icon  name="menu"></ion-icon>
+     <ion-icon name="menu"></ion-icon>
     </button>
 
     <ion-title> Meu espaço </ion-title>
@@ -11,5 +11,43 @@
 
 
 <ion-content>
-  <h1> Meu Espaço </h1>
+  <div class="avatar trinity">
+    <div class="thumb overcomer">
+      <img [src]="(user | async)?.avatar" />
+      <div [hidden]="(user | async)?.type_user != 'Superador'" class="emotion">
+        <img [src]="(user | async)?.emotion?.img">
+      </div>
+    </div>
+
+    <div class="name"> {{ (user | async)?.name }}</div>
+  </div>
+
+
+  <div class="content">
+    <ion-grid>
+      <ion-row>
+        <ion-col width-50 (click)="openPage(medicinesPage)">
+          <div class="icon">
+            <ion-icon name="md-flag"> </ion-icon>
+           </div>
+           <p> Aviso de medicamentos </p>
+        </ion-col>
+
+        <ion-col width-50 (click)="openPage(notesPage)">
+          <div class="icon">
+            <ion-icon name="md-flag"> </ion-icon>
+           </div>
+           <p> Minhas anotações de tratamento </p>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <div class="center" (click)="openPage(doctorsPage)">
+      <div class="icon">
+        <ion-icon name="md-flag"> </ion-icon>
+       </div>
+       <p> Meus contatos médicos </p>
+    </div>
+  </div>
+
 </ion-content>

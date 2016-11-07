@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import { UserStorageService } from '../../providers/database/user-storage-service';
+import { MySpaceMedicinesPage } from './medicines/medicines';
+import { MySpaceNotesPage } from './notes/notes';
+import { MySpaceDoctorsPage } from './doctors/doctors';
+
 
 
 @Component({
@@ -7,11 +12,21 @@ import { NavController } from 'ionic-angular';
   templateUrl: 'my-space.html'
 })
 export class MySpacePage {
+  user
+  medicinesPage =  MySpaceMedicinesPage;
+  notesPage = MySpaceNotesPage;
+  doctorsPage = MySpaceDoctorsPage;
 
-  constructor(public navCtrl: NavController) {}
+  constructor(public navCtrl: NavController, public userStorageService : UserStorageService) {
+
+  }
 
   ionViewDidLoad() {
+    this.user = this.userStorageService.getUserObs();
+  }
 
+  openPage(page) {
+    this.navCtrl.push(page);
   }
 
 }
