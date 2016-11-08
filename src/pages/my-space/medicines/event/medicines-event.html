@@ -59,7 +59,7 @@
 
       <div class="divider"> </div>
 
-      <ion-item>
+      <!--<ion-item>
         <ion-label> Quantidade de dias </ion-label>
         <ion-select cancelText="cancelar" [(ngModel)]="isEndDate" [ngModelOptions]="{standalone: true}">
           <ion-option value="false"> Indefinido </ion-option>
@@ -69,7 +69,7 @@
 
       <div *ngIf="isEndDate === 'true'" class="datas-main">
         <ion-input type="number" placeholder="Digite a quantidade de dias necessarias" formControlName="endDays"> </ion-input>
-      </div>
+      </div>-->
     </div>
 
     <button ion-button full [disabled]="!formEvent.valid" color="dark"> Enviar </button>

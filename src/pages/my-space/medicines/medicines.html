@@ -14,25 +14,35 @@
     <!--<div class="item" *ngIf="isEmpty">
       <p class="empty"> Nenhum evento disponivel no momento  </p>
     </div>-->
-      <ion-grid>
-        <ion-row>
-          <ion-col width-25>
-            <p> Nome do remedio </p>
-          </ion-col>
+    <ion-item-sliding *ngFor="let medicine of medicines | async">
+      <ion-item>
+        <ion-grid>
+          <ion-row>
+            <ion-col width-25>
+              <p> {{ medicine.title | truncate:"10" }} </p>
+            </ion-col>
 
-          <ion-col width-25>
-            <p> Inicio do remedio </p>
-          </ion-col>
+            <ion-col width-25>
+              <p> {{ medicine.start_at }} </p>
+            </ion-col>
 
-          <ion-col width-25>
-            <p> Dosagem <p>
-          </ion-col>
+            <ion-col width-25>
+              <p> {{ medicine.dosage | truncate:"5" }} <p>
+            </ion-col>
 
-          <ion-col width-25>
-            <p class="title time"> 8h </p>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
+            <ion-col width-25>
+              <p class="title time"> {{ medicine.interval }}h </p>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+
+      <ion-item-options side="right">
+        <button ion-button color="danger" icon-only (click)="removeEvent(medicine)">
+          <ion-icon name="trash"> </ion-icon>
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
   </ion-list>
 
   <ion-fab bottom right>

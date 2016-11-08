@@ -30,13 +30,8 @@ export class MySpaceMedicinesEventPage {
         startDate: [this.dateUtil.formatDate(today.getTime()), Validators.required],
         startTime: [this.dateUtil.formatTime(today.getTime()), Validators.required],
         dosage: ["", Validators.required],
-        interval: [1, Validators.required],
-        endDays: [false]
+        interval: [1, Validators.required]
       });
-
-  }
-
-  ionViewDidLoad() {
 
   }
 
@@ -48,7 +43,6 @@ export class MySpaceMedicinesEventPage {
     let wrapper = {
       title: datas.title,
       start_at:  this.dateUtil.parseDate(datas.startDate, datas.startTime),
-      end_days: !datas.endDays ? false : datas.endDays,
       dosage: datas.dosage,
       interval: datas.interval
     }

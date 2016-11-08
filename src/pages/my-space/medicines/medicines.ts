@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController, ModalController } from 'ionic-angular';
+import { NavController, ModalController, AlertController } from 'ionic-angular';
 import { UserStorageService } from '../../../providers/database/user-storage-service';
+import { CalendarStorageService } from '../../../providers/database/calendar-storage-service';
 import { MySpaceMedicinesEventPage } from './event/medicines-event';
 import { LocalNotifications } from 'ionic-native';
 
@@ -10,35 +11,73 @@ import { LocalNotifications } from 'ionic-native';
   templateUrl: 'medicines.html'
 })
 export class MySpaceMedicinesPage {
-  user
+  user;
+  medicines;
 
   constructor(
     public navCtrl: NavController,
+    public alertCtrl: AlertController,
     public userStorageService : UserStorageService,
+    public calendarStorageService: CalendarStorageService,
     public modalCtrl : ModalController) {
 
   }
 
   ionViewDidLoad() {
     this.user = this.userStorageService.getUserObs();
+
+    this.user.subscribe((user) => {
+      this.medicines = this.calendarStorageService.getMedicinesEvents(user.$key);
+    });
   }
 
   newEvent() {
-    let now = new Date().getTime();
+    let _3_sec = new Date();
+    _3_sec.setSeconds(3)
+
     let modal = this.modalCtrl.create(MySpaceMedicinesEventPage);
     modal.present();
 
     modal.onDidDismiss((data) => {
-      console.log(data);
-
       LocalNotifications.schedule({
-        id: 1,
+        id: data.start_at,
         title: 'Medicamento!',
         text: 'Notificação!!!',
-        led: 'FF0000',
-        at: new Date()
-      })
+        every: '5second',
+        firstAt: data.start_at
+      });
+
+      this.user.subscribe((user) => {
+        this.calendarStorageService.insertMedicineEvent(user.$key, data);
+      });
     });
+  }
+
+  removeEvent(medicine) {
+    let alert = this.alertCtrl.create({
+      title: "Deseja remover",
+      message: "Você deseja mesmo remover o evento " + medicine.title,
+      buttons: [
+        {
+          text: 'Sim',
+          handler: data => {
+            LocalNotifications.clearAll();
+            this.user.subscribe((user) => {
+              this.calendarStorageService.removeMedicineEvent(user.$key, medicine);
+            });
+          }
+        },
+        {
+          text: 'Não'
+        }
+      ]
+    });
+
+    alert.present();
+  }
+
+  editEvent(medicine) {
+
   }
 
 }
