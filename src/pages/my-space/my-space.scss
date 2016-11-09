@@ -1,8 +1,4 @@
 page-my-space {
-  ion-content {
-    background: #f7f7f7 !important;
-  }
-
   .avatar {
     text-align: center;
     margin-top: 30px;
@@ -52,5 +48,48 @@ page-my-space {
       font-size: 2rem;
       color: $text-primary;
     }
+  }
+}
+
+page-my-space-medicines {
+  p {
+    font-size: 1.8rem;
+    text-align: center;
+  }
+
+  ion-item {
+    p {
+      font-size: 1.8rem !important;
+    }
+  }
+  .title {
+    .dosage {
+      text-align: none;
+    }
+  }
+
+  ion-grid {
+    padding: 0;
+  }
+
+  .add {
+    width: 150px;
+    margin: auto;
+    text-align: center;
+    color: $background-blue;
+    font-size: 1.8rem;
+
+    ion-icon {
+      position: relative;
+      top: 5px;
+      left: 5px;
+      font-size: 26px;
+    }
+  }
+
+  .arrow {
+    color: $text-primary;
+    display: block;
+    float: right;
   }
 }

@@ -27,6 +27,10 @@ export class DateCustomPipe implements PipeTransform {
       let h = date.getHours();
       let m = date.getMinutes();
 
+      if(date.getMinutes() < 10) {
+        return h + " : 0" + m;
+      }
+
       return h + " : " + m;
     } else {
       return 'Exponent invalid';

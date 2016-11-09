@@ -21,7 +21,13 @@
       <div class="divider"> </div>
 
       <div>
-        <ion-input placeholder="Dosagem" type="text" formControlName="dosage"></ion-input>
+        <ion-input placeholder="Dosagem" type="number" formControlName="dosage"></ion-input>
+      </div>
+
+      <div class="divider"> </div>
+
+      <div>
+        <ion-input placeholder="Concentração" type="text" formControlName="conc"></ion-input>
       </div>
     </div>
 
@@ -57,19 +63,6 @@
         </ion-select>
       </ion-item>
 
-      <div class="divider"> </div>
-
-      <!--<ion-item>
-        <ion-label> Quantidade de dias </ion-label>
-        <ion-select cancelText="cancelar" [(ngModel)]="isEndDate" [ngModelOptions]="{standalone: true}">
-          <ion-option value="false"> Indefinido </ion-option>
-          <ion-option value="true"> Digitar quantidade </ion-option>
-        </ion-select>
-      </ion-item>
-
-      <div *ngIf="isEndDate === 'true'" class="datas-main">
-        <ion-input type="number" placeholder="Digite a quantidade de dias necessarias" formControlName="endDays"> </ion-input>
-      </div>-->
     </div>
 
     <button ion-button full [disabled]="!formEvent.valid" color="dark"> Enviar </button>

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, ViewController } from 'ionic-angular';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { DateUtil } from '../../../../providers/util/date-util';
 
 
@@ -30,6 +30,7 @@ export class MySpaceMedicinesEventPage {
         startDate: [this.dateUtil.formatDate(today.getTime()), Validators.required],
         startTime: [this.dateUtil.formatTime(today.getTime()), Validators.required],
         dosage: ["", Validators.required],
+        conc: ["", Validators.required],
         interval: [1, Validators.required]
       });
 
@@ -43,6 +44,7 @@ export class MySpaceMedicinesEventPage {
     let wrapper = {
       title: datas.title,
       start_at:  this.dateUtil.parseDate(datas.startDate, datas.startTime),
+      conc: datas.conc,
       dosage: datas.dosage,
       interval: datas.interval
     }

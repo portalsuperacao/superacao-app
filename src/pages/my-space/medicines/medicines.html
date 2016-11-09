@@ -9,29 +9,46 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="background-dark">
+  <ion-grid class="title">
+    <ion-row>
+      <ion-col width-25>
+        <p> Hora </p>
+      </ion-col>
+
+      <ion-col width-50>
+        <p> Medicamento </p>
+      </ion-col>
+
+      <ion-col width-25>
+        <p class="dosage"> Dosage </p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
   <ion-list>
     <!--<div class="item" *ngIf="isEmpty">
       <p class="empty"> Nenhum evento disponivel no momento  </p>
     </div>-->
     <ion-item-sliding *ngFor="let medicine of medicines | async">
-      <ion-item>
+      <ion-item class="simple-item">
         <ion-grid>
           <ion-row>
-            <ion-col width-25>
-              <p> {{ medicine.title | truncate:"10" }} </p>
+            <ion-col width-20>
+              <p> {{ medicine.start_at | customDate:"t" }}h </p>
             </ion-col>
 
-            <ion-col width-25>
-              <p> {{ medicine.start_at }} </p>
+            <ion-col width-50>
+
+              <p> {{ medicine.title | truncate:"15" }} </p>
             </ion-col>
 
-            <ion-col width-25>
-              <p> {{ medicine.dosage | truncate:"5" }} <p>
+            <ion-col width-20>
+              <p> {{ medicine.dosage }} {{ medicine.conc | truncate:"5" }} <p>
             </ion-col>
 
-            <ion-col width-25>
-              <p class="title time"> {{ medicine.interval }}h </p>
+            <ion-col width-10>
+              <ion-icon name="ios-arrow-forward" class="arrow"> </ion-icon>
             </ion-col>
           </ion-row>
         </ion-grid>
@@ -45,8 +62,6 @@
     </ion-item-sliding>
   </ion-list>
 
-  <ion-fab bottom right>
-    <button ion-fab mini (click)="newEvent()"> <ion-icon name="add"> </ion-icon> </button>
-  </ion-fab>
+  <div class="add" (click)="newEvent()"> Adicionar novo <ion-icon name="md-add-circle"> </ion-icon> </div>
 
 </ion-content>

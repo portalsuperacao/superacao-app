@@ -32,8 +32,7 @@ export class MySpaceMedicinesPage {
   }
 
   newEvent() {
-    let _3_sec = new Date();
-    _3_sec.setSeconds(3)
+    let now = new Date();
 
     let modal = this.modalCtrl.create(MySpaceMedicinesEventPage);
     modal.present();
@@ -43,8 +42,7 @@ export class MySpaceMedicinesPage {
         id: data.start_at,
         title: 'Medicamento!',
         text: 'Notificação!!!',
-        every: '5second',
-        firstAt: data.start_at
+        at: now,
       });
 
       this.user.subscribe((user) => {
