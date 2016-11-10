@@ -60,12 +60,11 @@ page-my-space-medicines {
   ion-item {
     p {
       font-size: 1.8rem !important;
+      color: $text-primary !important;
     }
   }
   .title {
-    .dosage {
-      text-align: none;
-    }
+    color: $text-secondary;
   }
 
   ion-grid {

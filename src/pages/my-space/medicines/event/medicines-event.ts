@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ViewController } from 'ionic-angular';
+import { NavController, NavParams, ViewController } from 'ionic-angular';
 import { FormBuilder, Validators } from '@angular/forms';
 import { DateUtil } from '../../../../providers/util/date-util';
 
@@ -12,10 +12,12 @@ export class MySpaceMedicinesEventPage {
   formEvent;
   isEndDate;
   intervalOptions = [];
+  params
 
   constructor(
     public navCtrl: NavController,
     public viewCtrl: ViewController,
+    public navParams: NavParams,
     public fb: FormBuilder,
     public dateUtil : DateUtil) {
       let today = new Date();
@@ -25,14 +27,29 @@ export class MySpaceMedicinesEventPage {
         this.intervalOptions.push(i + 1);
       }
 
-      this.formEvent = this.fb.group({
-        title: ["", Validators.required],
-        startDate: [this.dateUtil.formatDate(today.getTime()), Validators.required],
-        startTime: [this.dateUtil.formatTime(today.getTime()), Validators.required],
-        dosage: ["", Validators.required],
-        conc: ["", Validators.required],
-        interval: [1, Validators.required]
-      });
+      this.params = this.navParams.get('medicine');
+
+      if(this.params) {
+        this.formEvent = this.fb.group({
+          title: [this.params.title, Validators.required],
+          startDate: [this.dateUtil.formatDate(this.params.start_at), Validators.required],
+          startTime: [this.dateUtil.formatTime(this.params.start_at), Validators.required],
+          dosage: [this.params.dosage, Validators.required],
+          conc: [this.params.conc, Validators.required],
+          interval: [this.params.interval, Validators.required],
+          obs: [this.params.obs]
+        });
+      } else {
+        this.formEvent = this.fb.group({
+          title: ["", Validators.required],
+          startDate: [this.dateUtil.formatDate(today.getTime()), Validators.required],
+          startTime: [this.dateUtil.formatTime(today.getTime()), Validators.required],
+          dosage: ["", Validators.required],
+          conc: ["", Validators.required],
+          interval: [1, Validators.required],
+          obs: [""]
+        });
+      }
 
   }
 
@@ -41,12 +58,17 @@ export class MySpaceMedicinesEventPage {
   }
 
   insertEvent(datas) {
-    let wrapper = {
+    let wrapper : any = {
       title: datas.title,
       start_at:  this.dateUtil.parseDate(datas.startDate, datas.startTime),
       conc: datas.conc,
       dosage: datas.dosage,
-      interval: datas.interval
+      interval: datas.interval,
+      obs: datas.obs
+    }
+
+    if(this.params) {
+      wrapper.$key = this.params.$key;
     }
 
     this.viewCtrl.dismiss(wrapper);

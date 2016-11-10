@@ -13,6 +13,7 @@ import { LocalNotifications } from 'ionic-native';
 export class MySpaceMedicinesPage {
   user;
   medicines;
+  date;
 
   constructor(
     public navCtrl: NavController,
@@ -29,21 +30,31 @@ export class MySpaceMedicinesPage {
     this.user.subscribe((user) => {
       this.medicines = this.calendarStorageService.getMedicinesEvents(user.$key);
     });
+
+    this.date = new Date().getTime();
   }
 
   newEvent() {
-    let now = new Date();
+    let now = new Date().getTime();
+    let _5_sec_from_now = new Date(now + 5 * 1000);
 
     let modal = this.modalCtrl.create(MySpaceMedicinesEventPage);
     modal.present();
 
     modal.onDidDismiss((data) => {
-      LocalNotifications.schedule({
+
+      if(!data) {
+        return;
+      }
+
+      /*LocalNotifications.schedule({
         id: data.start_at,
         title: 'Medicamento!',
         text: 'Notificação!!!',
-        at: now,
-      });
+        every: 'minute',
+        at: _5_sec_from_now,
+        firstAt: now,
+      });*/
 
       this.user.subscribe((user) => {
         this.calendarStorageService.insertMedicineEvent(user.$key, data);
@@ -75,6 +86,18 @@ export class MySpaceMedicinesPage {
   }
 
   editEvent(medicine) {
+    let modal = this.modalCtrl.create(MySpaceMedicinesEventPage, {"medicine" : medicine});
+    modal.present();
+
+    modal.onDidDismiss((data) => {
+      if(!data) {
+        return;
+      }
+
+      this.user.subscribe((user) => {
+        this.calendarStorageService.updateMedicineEvent(user.$key, data);
+      });
+    });
 
   }
 

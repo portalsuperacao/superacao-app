@@ -37,7 +37,7 @@ export class CalendarEventEditPage {
 
     let today = new Date();
     let tomorrow = new Date();
-    tomorrow.setDate(today.getDate() + 1);
+    tomorrow.setHours(today.getHours() + 1);
 
 
 
@@ -54,7 +54,7 @@ export class CalendarEventEditPage {
         endDate: [this.dateUtil.formatDate(this.eventDatas.end_at), Validators.required],
         endTime: [this.dateUtil.formatTime(this.eventDatas.end_at), Validators.required],
         typeOfMedic: [this.eventDatas.other_datas.type_of_medic || ""],
-        share: [this.eventDatas.share || false],
+        share: [this.eventDatas.share || true],
         comments: [this.eventDatas.comments || ""]
       });
 
@@ -85,7 +85,7 @@ export class CalendarEventEditPage {
       endDate: [this.dateUtil.formatDate(tomorrow.getTime()), Validators.required],
       endTime: [this.dateUtil.formatTime(tomorrow.getTime()), Validators.required],
       typeOfMedic: [""],
-      share: [false],
+      share: [true],
       comments: [""]
     });
   }

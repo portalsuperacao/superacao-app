@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import { UserStorageService } from '../../../../providers/database/user-storage-service';
 
 @Component({
@@ -8,10 +8,10 @@ import { UserStorageService } from '../../../../providers/database/user-storage-
 })
 
 export class ArchangelMissionsDetailsPage {
+  mission;
 
-  constructor(public navCtrl: NavController) {
-
-
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.mission = this.navParams.get('mission');
   }
 
 

@@ -98,6 +98,8 @@ export class OvercomerPage {
             this.notifications[indexTypeUser] = false;
           }
        });
+
+       this.loading.dismiss();
     });
   }
 
@@ -115,8 +117,6 @@ export class OvercomerPage {
 
         this._generateNotification(this.angel.chatUid, this.trinity.angel, 0);
       });
-
-      this.loading.dismiss();
     });
   }
 

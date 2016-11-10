@@ -12,28 +12,28 @@
 
 <ion-content padding class="trinity">
   <ion-grid class="missions">
-    <ion-row *ngFor="let trinity of trinitys; let i = index" class="missions">
+    <ion-row *ngFor="let mission of (missions | async)?.missions" class="missions" (click)="openDetails(mission)">
       <ion-col width-50>
         <p class="title"> Missão </p>
-        <h3 class="alert"> <span> </span> SUMIÇO </h3>
-        <p class="time"> Prazo: 16/11/2016 </p>
+        <h3 class="alert"> <span> </span> {{ mission.details.categoria }} </h3>
+        <p class="time"> {{ mission.details.prazo | date:"dd/MM/yyyy"}} </p>
       </ion-col>
 
       <ion-col width-25>
         <div class="avatar overcomer">
-          <img [src]="overcomer[i]?.avatar" />
+          <img [src]="mission.users.overcomer.avatar" />
           <div class="emotion">
-            <img [src]="overcomer[i]?.emotion?.img">
+            <img [src]="mission.users.overcomer.emotion?.img">
           </div>
         </div>
-        <div class="name">  {{ overcomer[i]?.name }} </div>
+        <div class="name">  {{ mission.users.overcomer.name }} </div>
       </ion-col>
 
       <ion-col width-25>
         <div class="avatar angel">
-          <img [src]="angel[i]?.avatar" />
+          <img [src]="mission.users.angel.avatar"/>
         </div>
-        <div class="name"> {{ angel[i]?.name }} </div>
+        <div class="name"> {{ mission.users.angel.name }} </div>
       </ion-col>
     </ion-row>
   </ion-grid>

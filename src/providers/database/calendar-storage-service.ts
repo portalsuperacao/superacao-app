@@ -117,6 +117,14 @@ export class CalendarStorageService {
     database.push(datas);
   }
 
+  updateMedicineEvent(uidUser, datas) {
+    let database = this.af.database.list('/medicines/' + uidUser);
+    let key = datas.$key;
+    delete datas.$key;
+
+    database.update(key, datas);
+  }
+
   removeMedicineEvent(uidUser, datas) {
     let database = this.af.database.list('/medicines/' + uidUser);
     database.remove(datas.$key);

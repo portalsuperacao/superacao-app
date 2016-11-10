@@ -63,6 +63,14 @@
         </ion-select>
       </ion-item>
 
+      <div class="divider"> </div>
+
+      <ion-grid>
+        <ion-row>
+          <textarea placeholder="Observações" formControlName="obs"></textarea>
+        </ion-row>
+      </ion-grid>
+
     </div>
 
     <button ion-button full [disabled]="!formEvent.valid" color="dark"> Enviar </button>

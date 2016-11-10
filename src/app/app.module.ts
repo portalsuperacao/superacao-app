@@ -39,6 +39,8 @@ import { OvercomerPage } from '../pages/trinity/overcomer/overcomer';
 import { AngelPage } from '../pages/trinity/angel/angel';
 import { ArchangelPage } from '../pages/trinity/archangel/archangel';
 import { ArchangelMissionsPage } from '../pages/trinity/archangel/missions/missions';
+import { ArchangelMissionsDetailsPage } from '../pages/trinity/archangel/missions/details/details';
+import { ArchangelMissionsHistoricalPage } from '../pages/trinity/archangel/missions/historical/historical';
 import { ArchangelChatPage } from '../pages/trinity/archangel/chat/chat';
 import { NormalPage } from '../pages/trinity/normal/normal';
 import * as firebase from 'firebase';
@@ -80,6 +82,8 @@ firebase.initializeApp(firebaseConfig);
     AngelPage,
     ArchangelPage,
     ArchangelMissionsPage,
+    ArchangelMissionsDetailsPage,
+    ArchangelMissionsHistoricalPage,
     ArchangelChatPage,
     NormalPage,
     CalendarPicker,
@@ -115,6 +119,8 @@ firebase.initializeApp(firebaseConfig);
     AngelPage,
     ArchangelPage,
     ArchangelMissionsPage,
+    ArchangelMissionsDetailsPage,
+    ArchangelMissionsHistoricalPage,
     ArchangelChatPage,
     NormalPage
   ],

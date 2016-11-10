@@ -12,7 +12,7 @@
 <ion-content class="background-dark">
   <ion-grid class="title">
     <ion-row>
-      <ion-col width-25>
+      <ion-col width-20>
         <p> Hora </p>
       </ion-col>
 
@@ -20,9 +20,11 @@
         <p> Medicamento </p>
       </ion-col>
 
-      <ion-col width-25>
-        <p class="dosage"> Dosage </p>
+      <ion-col width-20>
+        <p> Dosage </p>
       </ion-col>
+
+      <ion-col width-10> </ion-col>
     </ion-row>
   </ion-grid>
 
@@ -31,11 +33,11 @@
       <p class="empty"> Nenhum evento disponivel no momento  </p>
     </div>-->
     <ion-item-sliding *ngFor="let medicine of medicines | async">
-      <ion-item class="simple-item">
+      <ion-item class="simple-item" (click)="editEvent(medicine)">
         <ion-grid>
           <ion-row>
             <ion-col width-20>
-              <p> {{ medicine.start_at | customDate:"t" }}h </p>
+              <p> {{ date + (medicine.interval * 60 * 60 * 1000) | customDate:"t" }}h </p>
             </ion-col>
 
             <ion-col width-50>
