@@ -10,30 +10,73 @@
 </ion-header>
 
 
-<ion-content padding>
-  <h1> Novos participantes precisam de orientações </h1>
+<ion-content>
+  <h4 class="title"> Novos participantes, precisam de orientações </h4>
 
-  <ion-grid>
+  <div class="divider"> </div>
+
+  <ion-grid class="match">
     <ion-row>
       <ion-col width-50>
-        {{ mission.users.overcomer.name }}
+        <div class="avatar overcomer">
+          <img [src]="mission.users.overcomer.avatar" />
+          <div class="emotion">
+            <img [src]="mission.users.overcomer.emotion?.img">
+          </div>
+        </div>
+        <div class="name">  {{ mission.users.overcomer.name | truncate:"10" }} </div>
       </ion-col>
 
       <ion-col width-50>
-        {{ mission.users.angel.name }}
+        <div class="avatar angel">
+          <img [src]="mission.users.angel.avatar"/>
+        </div>
+        <div class="name"> {{ mission.users.angel.name | truncate:"10" }} </div>
       </ion-col>
     </ion-row>
   </ion-grid>
 
-  <div>
-    Orientações
+  <div class="divider"> </div>
+
+  <div class="item" (click)="guidelines = !guidelines">
+    <p> Orientações <ion-icon name="ios-add"></ion-icon> </p>
+
+    <p [hidden]="!guidelines" class="text"> Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        Vivamus luctus, arcu vel luctus aliquam, orci ante congue libero, eget pretium sapien
+        ligula ut justo. Mauris tempus nunc in dolor elementum tempor.
+        Vivamus ligula lacus, mattis vehicula maximus pharetra,
+        pulvinar id arcu. Ut vitae nunc non leo luctus ullamcorper.
+    </p>
   </div>
 
-  <div>
-    Prazos {{ mission.details.prazo }}
+  <div class="divider"> </div>
+
+  <div class="item">
+    <p> Prazo: {{ mission.details.prazo | customDate:"b" }} <ion-icon name="ios-add"></ion-icon> </p>
   </div>
 
-  <div>
-    Ver historico
+  <div class="divider"> </div>
+
+  <div class="item" (click)="openHistorical()">
+    <p> Ver historico <ion-icon name="md-clipboard"></ion-icon> </p>
+  </div>
+
+  <div class="divider"> </div>
+
+  <div class="action">
+      <h4 (click)="action = !action"> Resolver missão </h4>
+      <p *ngIf="action == false"> Acompanha a dupla por 1 mês para resolver essa missão </p>
+
+      <ion-grid *ngIf="action == true">
+        <ion-row>
+          <ion-col width-50>
+            <button ion-button round color="dark"> resolvido </button>
+          </ion-col>
+
+          <ion-col width-50>
+            <button ion-button round color="dark"> acompanhar <br /> dupla </button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
   </div>
 </ion-content>

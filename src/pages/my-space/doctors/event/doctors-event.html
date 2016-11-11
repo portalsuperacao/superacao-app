@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-navbar color="dark">
+    <ion-buttons end>
+      <button ion-button (click)="closePage()">
+        <ion-icon name="close"> </ion-icon>
+      </button>
+    </ion-buttons>
+
+    <ion-title> Novo contato </ion-title>
+
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="event">
+  <form [formGroup]="formEvent" (ngSubmit)="insertEvent(formEvent.value)">
+    <div class="datas-main">
+      <div>
+          <ion-input placeholder="Nome" type="text" formControlName="name"></ion-input>
+      </div>
+
+      <div class="divider"> </div>
+
+      <div>
+        <ion-input placeholder="Sobrenome" type="text" formControlName="lastName"></ion-input>
+      </div>
+
+      <div class="divider"> </div>
+
+      <div>
+        <ion-input placeholder="Especialidade" type="text" formControlName="speciality"></ion-input>
+      </div>
+
+
+      <div class="divider"> </div>
+
+      <div>
+        <ion-input placeholder="Endereço" type="text" formControlName="address"></ion-input>
+      </div>
+
+      <div class="divider"> </div>
+
+      <div>
+        <ion-input placeholder="E-mail" type="text" formControlName="email"></ion-input>
+      </div>
+    </div>
+
+    <ion-row>
+      <ion-col width-50>
+
+          <ion-select>
+            <ion-option> Consultorio </ion-option>
+            <ion-option> Residêncial </ion-option>
+            <ion-option> Celular </ion-option>
+          </ion-select>
+
+      </ion-col>
+
+      <ion-col width-50>
+        <ion-input placeholder="Telefone" type="number"></ion-input>
+      </ion-col>
+    </ion-row>
+
+
+    <button ion-button full [disabled]="!formEvent.valid" color="dark"> Enviar </button>
+  </form>
+
+</ion-content>

@@ -32,6 +32,26 @@ export class DateCustomPipe implements PipeTransform {
       }
 
       return h + " : " + m;
+
+    } else if (exponent === 'b'){
+      let d = date.getDate();
+      let m = date.getMonth() + 1;
+      let y = date.getFullYear();
+
+      if ((d < 10) && (m < 10)) {
+        return "0" + d + "/0" + m + "/" +  y;
+      }
+
+      if(d < 10) {
+        return "0" + d + "/" + m + "/" +  y;
+      }
+
+      if (m < 10) {
+        return "0" + d + "/0" + m + "/" +  y;
+      }
+
+      return  d + "/" + m + "/" +  y;
+
     } else {
       return 'Exponent invalid';
     }

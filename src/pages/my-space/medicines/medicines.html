@@ -29,9 +29,6 @@
   </ion-grid>
 
   <ion-list>
-    <!--<div class="item" *ngIf="isEmpty">
-      <p class="empty"> Nenhum evento disponivel no momento  </p>
-    </div>-->
     <ion-item-sliding *ngFor="let medicine of medicines | async">
       <ion-item class="simple-item" (click)="editEvent(medicine)">
         <ion-grid>

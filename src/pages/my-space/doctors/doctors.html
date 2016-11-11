@@ -11,5 +11,27 @@
 
 
 <ion-content>
+  <ion-list>
+    <ion-item-sliding>
+      <ion-item class="simple-item" (click)="editEvent(medicine)">
+        <h4> Dr Paulo Azevedo </h4>
+        <h5> Oncologista </h5>
 
+        <ul>
+          <li> Consultorio: </li>
+          <li> Celular: </li>
+          <li> E-mail: </li>
+          <li> Rua </li>
+        </ul>
+      </ion-item>
+
+      <ion-item-options side="right">
+        <button ion-button color="danger" icon-only (click)="removeEvent(medicine)">
+          <ion-icon name="trash"> </ion-icon>
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
+  <div class="add" (click)="newEvent()"> Adicionar novo <ion-icon name="md-add-circle"> </ion-icon> </div>
 </ion-content>

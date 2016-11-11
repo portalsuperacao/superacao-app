@@ -31,9 +31,9 @@ export class MySpaceMedicinesEventPage {
 
       if(this.params) {
         this.formEvent = this.fb.group({
-          title: [this.params.title, Validators.required],
-          startDate: [this.dateUtil.formatDate(this.params.start_at), Validators.required],
-          startTime: [this.dateUtil.formatTime(this.params.start_at), Validators.required],
+          name: [this.params.title, Validators.required],
+          lastName: [this.dateUtil.formatDate(this.params.start_at), Validators.required],
+          speciality: [this.dateUtil.formatTime(this.params.start_at), Validators.required],
           dosage: [this.params.dosage, Validators.required],
           conc: [this.params.conc, Validators.required],
           interval: [this.params.interval, Validators.required],

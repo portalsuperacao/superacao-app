@@ -29,6 +29,7 @@ import { HelpSystemOvercomerPage } from '../pages/help-system/overcomer/help-sys
 import { LoginPage } from '../pages/login/login';
 import { MySpacePage } from '../pages/my-space/my-space';
 import { MySpaceDoctorsPage } from '../pages/my-space/doctors/doctors';
+import { MySpaceDoctorsEventPage } from '../pages/my-space/doctors/event/doctors-event';
 import { MySpaceMedicinesPage } from '../pages/my-space/medicines/medicines';
 import { MySpaceMedicinesEventPage } from '../pages/my-space/medicines/event/medicines-event';
 import { MySpaceNotesPage } from '../pages/my-space/notes/notes';
@@ -72,6 +73,7 @@ firebase.initializeApp(firebaseConfig);
     LoginPage,
     MySpacePage,
     MySpaceDoctorsPage,
+    MySpaceDoctorsEventPage,
     MySpaceMedicinesPage,
     MySpaceMedicinesEventPage,
     MySpaceNotesPage,
@@ -109,6 +111,7 @@ firebase.initializeApp(firebaseConfig);
     LoginPage,
     MySpacePage,
     MySpaceDoctorsPage,
+    MySpaceDoctorsEventPage,
     MySpaceMedicinesPage,
     MySpaceMedicinesEventPage,
     MySpaceNotesPage,

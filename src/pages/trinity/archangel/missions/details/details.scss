@@ -1,0 +1,83 @@
+page-archangel-missions-details {
+  .overcomer {
+    background: $overcomer-color;
+  }
+
+  .angel {
+    background: $angel-color;
+  }
+
+  .archangel {
+    background: $archangel-color;
+  }
+
+  .title {
+    padding-bottom: 10px;
+  }
+
+  h4 {
+    text-align: center;
+    color: $text-primary;
+  }
+
+  .match {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+
+    .avatar {
+      display: inline-block;
+      width: 4.6rem;
+      height: 4.6rem;
+      border-radius: 100%;
+      padding: 0.2rem;
+
+      .emotion {
+        float: left;
+        position: relative;
+        bottom: 20px;
+        right: 10px;
+        width: 2.3rem;
+        height: 2.3rem;
+      }
+
+      img {
+        border-radius: 100%;
+      }
+    }
+
+    .name {
+      display: inline-block;
+      position: relative;
+      bottom: 15px;
+      margin-left: 10px;
+      text-align: center;
+      font-weight: bold;
+      color: $text-primary;
+    }
+  }
+
+  .item {
+    padding: 16px;
+    font-size: 1.6rem;
+    color: $background-blue;
+
+    .text {
+      color: $text-secondary;
+      line-height: 2.7rem;
+    }
+  }
+
+  .action {
+    button {
+      width: 100%;
+    }
+
+    p {
+      text-align: center;
+      color: $text-primary;
+    }
+
+  }
+}

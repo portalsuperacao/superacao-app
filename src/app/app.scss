@@ -27,6 +27,12 @@ ion-footer {
   }
 }
 
+.divider {
+  width: 100%;
+  height: 1px;
+  background: #DDD;
+}
+
 .ion-ios-agenda, .ion-md-agenda {
  content: url(../assets/images/agenda.svg);
  width: 24px;

@@ -92,3 +92,20 @@ page-my-space-medicines {
     float: right;
   }
 }
+
+page-my-space-doctors {
+  .add {
+    width: 150px;
+    margin: auto;
+    text-align: center;
+    color: $background-blue;
+    font-size: 1.8rem;
+
+    ion-icon {
+      position: relative;
+      top: 5px;
+      left: 5px;
+      font-size: 26px;
+    }
+  }
+}
