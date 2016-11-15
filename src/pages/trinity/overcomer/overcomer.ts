@@ -156,4 +156,10 @@ export class OvercomerPage {
 
     }
 
+  updateDatas() {
+    return new Promise((resolve) => {
+      Promise.resolve()
+      .then()
+    })
+  }
 }

@@ -10,6 +10,8 @@ import { FormBuilder, Validators } from '@angular/forms';
 export class MySpaceDoctorsEventPage {
   params;
   formEvent;
+  phones = [];
+  showClosePhones = [];
 
   constructor(
     public navCtrl: NavController,
@@ -17,6 +19,8 @@ export class MySpaceDoctorsEventPage {
     public viewCtrl: ViewController,
     public fb: FormBuilder) {
       this.params = this.navParams.get('doctor');
+
+      this.phones.push("1");
 
       if(this.params) {
         this.formEvent = this.fb.group({
@@ -63,6 +67,17 @@ export class MySpaceDoctorsEventPage {
     this.viewCtrl.dismiss(wrapper);
   }
 
+  addPhone() {
+    this.phones.push("");
+  }
 
+  removePhone(index) {
+    if(this.phones.length == 1) {
+      return;
+    }
+
+    this.phones.splice(index, 1);
+    console.log(index);
+  }
 
 }

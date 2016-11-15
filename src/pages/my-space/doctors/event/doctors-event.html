@@ -44,21 +44,25 @@
       </div>
     </div>
 
-    <ion-row>
-      <ion-col width-50>
-
-          <ion-select>
-            <ion-option> Consultorio </ion-option>
-            <ion-option> Residêncial </ion-option>
-            <ion-option> Celular </ion-option>
-          </ion-select>
-
+    <ion-row *ngFor="let phone of phones; let i = index">
+      <ion-col width-40>
+          <select>
+            <option> Consultorio </option>
+            <option> Residêncial </option>
+            <option> Celular </option>
+          </select>
       </ion-col>
 
       <ion-col width-50>
-        <ion-input placeholder="Telefone" type="number"></ion-input>
+        <ion-input placeholder="Telefone" type="number" (focus)="showClosePhones[i] = true"> </ion-input>
+      </ion-col>
+
+      <ion-col width-10>
+        <ion-icon name="close" [hidden]="!showClosePhones[i]" (click)="removePhone(i)"> </ion-icon>
       </ion-col>
     </ion-row>
+
+    <div class="add" (click)="addPhone()"> Adicionar telefone <ion-icon name="md-add-circle"> </ion-icon> </div>
 
 
     <button ion-button full [disabled]="!formEvent.valid" color="dark"> Enviar </button>
