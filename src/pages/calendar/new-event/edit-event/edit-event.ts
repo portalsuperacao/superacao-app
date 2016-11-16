@@ -118,12 +118,11 @@ export class CalendarEventEditPage {
     }
 
     if(this.eventDatas) {
-
       this.userStorageService.getUserLocal().then((user: any) => {
         this.calendarStorageService.updateEvent(newDatas, this.eventDatas, user.$key);
       });
 
-      this.navCtrl.setRoot(CalendarPage);
+      this.navCtrl.pop();
       return;
     }
 
@@ -131,7 +130,9 @@ export class CalendarEventEditPage {
         this.calendarStorageService.insertEvent(newDatas, user.$key)
     });
 
-    this.navCtrl.setRoot(CalendarPage);
+    this.navCtrl.pop().then(() => {
+        this.navCtrl.pop();
+    });
   }
 
 

@@ -83,6 +83,21 @@ export class CalendarPicker {
     this.dateSelected.emit(this.selected);
   }
 
+  ngOnChanges($changes) {
+    console.log($changes);
+
+    this.selected = moment();
+    this.month = this.selected.clone();
+
+    let start = this.selected.clone();
+    start.date(1);
+
+    this._resetWeek(start.date(0));
+    this._buildMonth(start, this.month);
+
+    //this.dateSelected.emit(this.selected);
+  }
+
   nextMonth() {
     let next = this.month.clone();
     this._resetWeek(next.month(next.month()+1).date(1));
@@ -175,7 +190,6 @@ export class CalendarPicker {
   _verifyEventMark(date) {
     return new Promise((resolve) => {
       this.setEvents.forEach((event) => {
-        console.log(date.valueOf());
         if(date.valueOf() >= this.dateUtil.removeTime(event.start_at) &&
            date.valueOf() <= this.dateUtil.removeTime(event.end_at)) {
             resolve(event.type);

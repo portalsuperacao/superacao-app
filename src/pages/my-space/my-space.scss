@@ -1,7 +1,12 @@
 page-my-space {
+  height: 100%;
+  padding: 0;
+  flex-wrap: wrap;
+
   .avatar {
+    height: 45%;
+    padding-top: 20px;
     text-align: center;
-    margin-top: 30px;
 
     .thumb {
       display: inline-block;
@@ -27,28 +32,57 @@ page-my-space {
     }
 
     .name {
-      font-size: 2rem;
-      color: $text-primary;
-    }
-
-  }
-
-  .content {
-    margin-top: 20px;
-    padding-bottom: 20px;
-    background: #FFF;
-    text-align: center;
-
-    .icon {
-      font-size: 4rem;
+      font-weight: bold;
+      font-size: 2.3rem;
       color: $text-secondary;
     }
 
-    p {
-      font-size: 2rem;
+    .type {
+      font-size: 1.6rem;
       color: $text-primary;
     }
+
   }
+
+  .grid-full {
+    height: 55%;
+    text-align: center;
+
+    ion-row {
+      height: 50%;
+      color: #FFF;
+
+      ion-col {
+        padding-top: 2%;
+        padding-bottom: 2%;
+      }
+
+      ion-icon {
+        font-size: 4rem;
+      }
+
+      p {
+        font-size: 1.6rem;
+      }
+    }
+
+    .calendar {
+      background: $my-space-red;
+    }
+
+    .doctors {
+      background: $my-space-blue
+    }
+
+    .medicines {
+      background: $my-space-yellow;
+    }
+
+    .notes {
+      background: $my-space-green;
+    }
+  }
+
 }
 
 page-my-space-medicines {

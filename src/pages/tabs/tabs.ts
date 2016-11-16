@@ -4,7 +4,6 @@ import { UserStorageService } from '../../providers/database/user-storage-servic
 import { OvercomerPage } from '../trinity/overcomer/overcomer';
 import { AngelPage } from '../trinity/angel/angel';
 import { NormalPage } from '../trinity/normal/normal';
-import { CalendarPage } from '../calendar/calendar';
 import { MySpacePage } from '../my-space/my-space';
 
 @Component({
@@ -14,7 +13,6 @@ export class TabsPage {
 
   mySpacePage = MySpacePage;
   trinityPage;
-  calendarPage = CalendarPage;
 
   constructor(public userStorageService: UserStorageService) {
     this._verifyTypeOfUserPage();

@@ -9,7 +9,6 @@
       position: relative;
       bottom: 10px;
       font-size: 1.8rem;
-      font-weight: bold;
       text-align: center;
       text-transform: uppercase;
       color: $text-secondary;
@@ -30,11 +29,12 @@
 
       button {
         background: $background-blue;
+        box-shadow: none;
       }
 
       ion-icon {
         color: #FFF;
-        font-size: 2.1rem;
+        font-size: 1.9rem;
       }
     }
 
@@ -56,6 +56,8 @@
   }
 
   .week-name {
+    position: relative;
+    bottom: 10px;
     text-align: center;
     color: $text-secondary;
     font-size: 1.4rem;

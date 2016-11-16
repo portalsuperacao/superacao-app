@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, LoadingController, AlertController } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 import { UserStorageService } from '../../providers/database/user-storage-service';
 import { DateUtil } from '../../providers/util/date-util';
 import { CalendarEventEditPage } from './new-event/edit-event/edit-event';
@@ -23,18 +23,21 @@ export class CalendarPage {
 
   constructor(
     public navCtrl: NavController,
+    public navParams: NavParams,
     public loadingCtrl: LoadingController,
     public calendarStorageService: CalendarStorageService,
     public userStorageService : UserStorageService,
     public dateUtil: DateUtil,
     public alertCtrl: AlertController) {
-      this.loading =  this.loadingCtrl.create({
+      /*this.loading =  this.loadingCtrl.create({
         content: "Aguarde..."
-      });
+      });*/
+
+
   }
 
   ionViewWillEnter() {
-    this.loading.present();
+    //this.loading.present();
     this._generateAllSchedule();
   }
 
@@ -47,7 +50,6 @@ export class CalendarPage {
           text: 'Sim',
           handler: data => {
             this.calendarStorageService.removeEvent(event);
-            this.navCtrl.setRoot(CalendarPage);
           }
         },
         {
@@ -75,7 +77,7 @@ export class CalendarPage {
       this.calendarStorageService.getEvents(user.$key).then((event) => {
         this.allSechedule = event;
         this.showCalendar = true;
-        this.loading.dismiss();
+        //this.loading.dismiss();
       });
     });
   }

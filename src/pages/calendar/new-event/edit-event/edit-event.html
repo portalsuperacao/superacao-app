@@ -46,110 +46,93 @@
     </div>
 
     <div class="datas-date">
-      <ion-grid>
-        <ion-row>
-          <ion-col width-25>
-            <label> Começa </label>
-          </ion-col>
+      <ion-row>
+        <ion-col width-35>
+          <label> Começa </label>
+        </ion-col>
 
-          <ion-col width-45>
-            <ion-item>
-                <ion-datetime displayFormat="DD MMM YYYY" pickerFormat="DD MMM YYYY" formControlName="startDate"> </ion-datetime>
-            </ion-item>
-          </ion-col>
+        <ion-col width-35>
+          <ion-item>
+              <ion-datetime displayFormat="DD MMM YYYY" pickerFormat="DD MMM YYYY" formControlName="startDate"> </ion-datetime>
+          </ion-item>
+        </ion-col>
 
-          <ion-col width-30>
-            <ion-item>
-                <ion-datetime displayFormat="H:mm" pickerFormat="H:mm" formControlName="startTime"> </ion-datetime>
-            </ion-item>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
+        <ion-col width-30>
+          <ion-item>
+              <ion-datetime displayFormat="H:mm" pickerFormat="H:mm" formControlName="startTime"> </ion-datetime>
+          </ion-item>
+        </ion-col>
+      </ion-row>
 
       <div class="divider"> </div>
 
-      <ion-grid>
-        <ion-row>
-          <ion-col width-25>
-            <label> Termina </label>
-          </ion-col>
 
-          <ion-col width-45>
-            <ion-item>
-                <ion-datetime displayFormat="DD MMM YYYY" pickerFormat="DD MMM YYYY" formControlName="endDate"> </ion-datetime>
-            </ion-item>
-          </ion-col>
+      <ion-row>
+        <ion-col width-35>
+          <label> Termina </label>
+        </ion-col>
 
-          <ion-col width-30>
-            <ion-item>
-                <ion-datetime displayFormat="H:mm" pickerFormat="H:mm" formControlName="endTime"> </ion-datetime>
-            </ion-item>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
+        <ion-col width-35>
+          <ion-item>
+              <ion-datetime displayFormat="DD MMM YYYY" pickerFormat="DD MMM YYYY" formControlName="endDate"> </ion-datetime>
+          </ion-item>
+        </ion-col>
+
+        <ion-col width-30>
+          <ion-item>
+              <ion-datetime displayFormat="H:mm" pickerFormat="H:mm" formControlName="endTime"> </ion-datetime>
+          </ion-item>
+        </ion-col>
+      </ion-row>
     </div>
 
     <div class="datas-others">
-
-      <ion-grid>
-        <ion-row class="items" (click)="addNeedBring()">
-          <ion-col width-30> <p> O que preciso levar </p> </ion-col>
-          <ion-col width-70> <ion-icon name="md-add-circle">  </ion-icon> </ion-col>
-        </ion-row>
-      </ion-grid>
+      <ion-row class="items" (click)="addNeedBring()">
+        <ion-col width-30> <p> O que preciso levar </p> </ion-col>
+        <ion-col width-70> <ion-icon name="md-add-circle">  </ion-icon> </ion-col>
+      </ion-row>
 
       <div class="items-list">
-        <ion-grid>
-          <ion-row *ngFor="let item of countItems; let i = index;" (click)="clickItem(i)">
-            <ion-col width-80>
-              <input placeholder="Digite o seu item" [(ngModel)]="needBrings[i]" [ngModelOptions]="{standalone: true}" type="text">
-            </ion-col>
-            <ion-col width-20>
-              <ion-icon *ngIf="i == showCloseItem" name="close"  (click)="closeItem(i)"> </ion-icon>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
+        <ion-row *ngFor="let item of countItems; let i = index;" (click)="clickItem(i)">
+          <ion-col width-80>
+            <input placeholder="Digite o seu item" [(ngModel)]="needBrings[i]" [ngModelOptions]="{standalone: true}" type="text">
+          </ion-col>
+          <ion-col width-20>
+            <ion-icon *ngIf="i == showCloseItem" name="close"  (click)="closeItem(i)"> </ion-icon>
+          </ion-col>
+        </ion-row>
       </div>
 
       <div *ngIf="typeEvent == 'Consulta'" class="divider"> </div>
 
-      <ion-grid>
         <ion-row class="items" *ngIf="typeEvent == 'Consulta'">
           <ion-col width-80 (click)="addQuestions()"> <p> Perguntas a fazer </p> </ion-col>
           <ion-col width-10 (click)="openQuestions()"> <ion-icon name="md-search">  </ion-icon> </ion-col>
           <ion-col width-10 (click)="addQuestions()"> <ion-icon name="md-add-circle">  </ion-icon> </ion-col>
         </ion-row>
-      </ion-grid>
 
       <div *ngIf="typeEvent == 'Consulta'" class="items-list">
-        <ion-grid>
-          <ion-row *ngFor="let item of countItemsQuestions; let i = index;" (click)="clickItemQuestion(i)">
-            <ion-col width-80>
-              <input placeholder="Digite o seu item" [(ngModel)]="questions[i]" [ngModelOptions]="{standalone: true}" type="text">
-            </ion-col>
-            <ion-col width-20>
-              <ion-icon *ngIf="i == showCloseQuestionItem" name="close" (click)="closeItemQuestion(i)"> </ion-icon>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
+        <ion-row *ngFor="let item of countItemsQuestions; let i = index;" (click)="clickItemQuestion(i)">
+          <ion-col width-80>
+            <input placeholder="Digite o seu item" [(ngModel)]="questions[i]" [ngModelOptions]="{standalone: true}" type="text">
+          </ion-col>
+          <ion-col width-20>
+            <ion-icon *ngIf="i == showCloseQuestionItem" name="close" (click)="closeItemQuestion(i)"> </ion-icon>
+          </ion-col>
+        </ion-row>
       </div>
 
       <div class="divider"> </div>
 
-      <ion-grid>
-        <ion-row>
-          <textarea placeholder="Observações" formControlName="comments"></textarea>
-        </ion-row>
-      </ion-grid>
+      <ion-row>
+        <textarea placeholder="Observações" formControlName="comments"></textarea>
+      </ion-row>
 
       <div class="divider"> </div>
-
-      <ion-grid>
-        <ion-row class="items">
-           <ion-col width-30> <p> Compartilhado </p> </ion-col>
-           <ion-col width-70> <ion-toggle formControlName="share"></ion-toggle> </ion-col>
-        </ion-row>
-      </ion-grid>
+      <ion-row class="items">
+          <ion-col width-30> <p> Compartilhado </p> </ion-col>
+          <ion-col width-70> <ion-toggle formControlName="share"></ion-toggle> </ion-col>
+      </ion-row>
 
     </div>
 

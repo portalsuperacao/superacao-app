@@ -19,27 +19,34 @@
       </div>
     </div>
 
-    <div class="name"> {{ (user | async)?.name }}</div>
+
+    <div class="name"> {{ (user | async)?.name }} </div>
+    <div class="type"> {{ (user | async)?.type_user }} </div>
   </div>
 
+  <div class="grid-full">
+    <ion-row>
+      <ion-col width-50 class="calendar" (click)="openPage(calendarPage)">
+        <ion-icon name="md-flag"> </ion-icon>
+        <p> Agenda de <br /> tratamento </p>
+      </ion-col>
 
-  <div class="content">
-    <ion-grid>
-      <ion-row>
-        <ion-col width-50 (click)="openPage(medicinesPage)">
-          <div class="icon">
-            <ion-icon name="md-flag"> </ion-icon>
-           </div>
-           <p> Aviso de medicamentos </p>
-        </ion-col>
+      <ion-col width-50 class="medicines" (click)="openPage(medicinesPage)">
+        <ion-icon name="md-flag"> </ion-icon>
+        <p> Lembrete de <br />  medicamento </p>
+      </ion-col>
+    </ion-row>
 
-        <ion-col width-50 (click)="openPage(doctorsPage)">
-          <div class="icon">
-            <ion-icon name="md-flag"> </ion-icon>
-           </div>
-          <p> Meus contatos <br /> médicos </p>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+    <ion-row>
+      <ion-col width-50 class="doctors" (click)="openPage(doctorsPage)">
+        <ion-icon name="md-flag"> </ion-icon>
+        <p> Meus <br /> médicos </p>
+      </ion-col>
+
+      <ion-col width-50 class="notes" (click)="openPage(notesPage)">
+        <ion-icon name="md-flag"> </ion-icon>
+        <p> Minhas <br /> anotações </p>
+      </ion-col>
+    </ion-row>
   </div>
 </ion-content>

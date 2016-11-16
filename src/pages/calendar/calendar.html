@@ -15,17 +15,14 @@
   <ion-list>
     <ion-item-sliding *ngFor="let schedule of listSchedule | async" class="schedule">
       <ion-item class="simple-item" (click)="editEvent(schedule)">
-        <ion-grid>
           <ion-row>
             <ion-col width-10> <span [ngClass]="schedule.type"> </span> </ion-col>
             <ion-col width-20> {{ schedule.start_at | customDate:"t" }} </ion-col>
             <ion-col width-30> {{ schedule.type }} </ion-col>
-            <ion-col width-30> {{ schedule.title | truncate:10 }} </ion-col>
+            <ion-col width-30 class="test"> {{ schedule.title | truncate:10 }} </ion-col>
             <ion-col width-10> <ion-icon name="ios-arrow-forward"> </ion-icon> </ion-col>
           </ion-row>
-        </ion-grid>
       </ion-item>
-
       <ion-item-options side="right">
         <button ion-button color="danger" icon-only (click)="removeEvent(schedule)">
           <ion-icon name="trash"> </ion-icon>

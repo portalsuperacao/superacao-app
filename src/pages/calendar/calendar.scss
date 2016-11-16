@@ -2,8 +2,9 @@
   @each $name, $value in $event-colors {
     .#{$name} {
       display: block;
-      width: 1.5rem;
-      height: 1.5rem;
+      width: 1.3rem;
+      height: 1.3rem;
+      margin-top: 5px;
       border-radius: 100%;
       background: $value;
     }
@@ -27,10 +28,8 @@
   }
 
   .schedule {
-    background: $background-dark;
-
     ion-item {
-      text-align: center;
+      text-align: left;
       color: $text-primary;
       font-size: 1.6rem;
       background: $background-dark;
@@ -87,29 +86,29 @@
 .event {
   background: $background-dark;
   color: $text-primary;
-  font-size: 1.2em;
+  font-size: 1.7rem;
 
   .datas-main {
     margin-top: 2rem;
     background: #FFF;
 
-    ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    input {
       padding-left: 10px;
+    }
+
+    ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
       color: #ccc;
     }
 
     :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-      padding-left: 10px;
        color: #ccc;
        opacity:  1;
     }
     ::-moz-placeholder { /* Mozilla Firefox 19+ */
-      padding-left: 10px;
        color:  #ccc;
        opacity:  1;
     }
     :-ms-input-placeholder { /* Internet Explorer 10-11 */
-        padding-left: 10px;
        color:  #ccc;
     }
   }
