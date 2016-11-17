@@ -6,7 +6,7 @@
       </button>
     </ion-buttons>
 
-    <ion-title> Lembrete do remedio </ion-title>
+    <ion-title> Lembrete do medicamento </ion-title>
 
   </ion-navbar>
 </ion-header>
@@ -65,15 +65,13 @@
 
       <div class="divider"> </div>
 
-      <ion-grid>
-        <ion-row>
-          <textarea placeholder="Observações" formControlName="obs"></textarea>
-        </ion-row>
-      </ion-grid>
+      <ion-row>
+        <textarea placeholder="Observações" formControlName="obs"></textarea>
+      </ion-row>
 
     </div>
 
-    <button ion-button full [disabled]="!formEvent.valid" color="dark"> Enviar </button>
+    <button ion-button full [disabled]="!formEvent.valid" color="dark"> Salvar </button>
   </form>
 
 </ion-content>

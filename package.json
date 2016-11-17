@@ -25,6 +25,7 @@
     "@ionic/app-scripts": "0.0.37-2",
     "@ionic/storage": "1.0.3",
     "@types/localforage": "0.0.32",
+    "angular2-text-mask": "^2.1.0",
     "angularfire2": "2.0.0-beta.5",
     "firebase": "3.5.2",
     "ionic-angular": "2.0.0-rc.1",

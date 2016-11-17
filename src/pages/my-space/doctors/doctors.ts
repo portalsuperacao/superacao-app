@@ -33,14 +33,15 @@ export class MySpaceDoctorsPage {
     modal.present();
 
     modal.onDidDismiss((data) => {
+      console.log(data);
 
-      if(!data) {
+      /*if(!data) {
         return;
       }
 
       this.user.subscribe((user) => {
         this.calendarStorageService.insertMedicineEvent(user.$key, data);
-      });
+      });*/
     });
   }
 

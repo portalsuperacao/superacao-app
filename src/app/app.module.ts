@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { IonicApp, IonicModule } from 'ionic-angular';
 
-// COMPONENTS / PIPES
+// COMPONENTS / PIPES / DIRECTIVES
 import { CalendarPicker } from '../components/calendar-picker/calendar-picker';
 import { DateCustomPipe } from '../pipes/date-custom-pipe';
 import { TruncatePipe } from '../pipes/truncate-pipe';
+import { TextMaskModule } from 'angular2-text-mask';
 
 
 // PROVIDERS
@@ -93,8 +94,9 @@ firebase.initializeApp(firebaseConfig);
     TruncatePipe
   ],
   imports: [
-    IonicModule.forRoot(MyApp, {tabsHideOnSubPages:"true"}),
-    AngularFireModule.initializeApp(firebaseConfig)
+    IonicModule.forRoot(MyApp),
+    AngularFireModule.initializeApp(firebaseConfig),
+    TextMaskModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

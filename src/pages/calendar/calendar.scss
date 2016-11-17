@@ -222,19 +222,16 @@
     }
   }
 
-
-  textarea {
-    width: 100%;
-    min-height: 8rem;
-    padding-top: 1rem;
-    padding-left: 1rem;
-    resize: none;
-    border: none;
-    color: #333;
-  }
-
-  button {
-    margin-top: 2rem;
+  .datas-date, .datas-others, .datas-main {
+    textarea {
+      width: 100%;
+      min-height: 8rem;
+      padding-top: 1rem;
+      padding-left: 1rem;
+      resize: none;
+      border: none;
+      color: $text-primary;
+    }
   }
 
   .consult {
@@ -261,4 +258,9 @@
       margin-top: 2rem;
     }
   }
+
+  button {
+    margin-top: 2rem;
+  }
+
 }

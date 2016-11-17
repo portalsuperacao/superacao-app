@@ -1,3 +1,94 @@
+.my-space-add-button {
+  float: right;
+  margin-bottom: 5px;
+  font-size: 1.8rem;
+
+  button {
+    width: 25px;
+    height: 25px;
+    box-shadow: none;
+
+    ion-icon {
+      font-size: 1.8rem;
+    }
+  }
+}
+
+.my-space-list {
+  overflow: hidden;
+  width: 100%;
+  margin-top: 10px;
+  border-radius: 10px;
+  border: solid 1px #DDD;
+  font-size: 1.7rem;
+
+  .header {
+    display: inline-flex;
+    width: 100%;
+    padding-top: 3px;
+    padding-left: 3px;
+    color: #FFF;
+    font-weight: bold;
+
+    .title {
+      padding-left: 5px;
+    }
+
+    .subtitle {
+      padding-left: 5px;
+      padding-bottom: 5px;
+      font-size: 1.4rem;
+    }
+  }
+
+  .content {
+    display: inline-flex;
+    width: 100%;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 3px;
+    color: $text-primary;
+
+    ul {
+      margin: 0;
+      padding: 25px;
+    }
+
+    .highlight {
+      color: $background-blue;
+    }
+  }
+
+  .container {
+    width: 100%;
+    text-align: left;
+  }
+
+  .obs {
+    margin-left: 5px;
+    margin-bottom: 10px;
+    font-size: 1.4rem;
+    color: #888;
+  }
+
+  .icon {
+    text-align: right;
+    position: relative;
+    right: 10px;
+    top: 5px;
+    font-size: 1.3rem;
+  }
+
+  .medicines {
+    background: $my-space-yellow;
+  }
+
+  .doctors {
+    background: $my-space-blue;
+  }
+}
+
+
 page-my-space {
   height: 100%;
   padding: 0;
@@ -82,64 +173,21 @@ page-my-space {
       background: $my-space-green;
     }
   }
-
 }
 
-page-my-space-medicines {
-  p {
-    font-size: 1.8rem;
-    text-align: center;
-  }
-
-  ion-item {
-    p {
-      font-size: 1.8rem !important;
-      color: $text-primary !important;
-    }
-  }
-  .title {
-    color: $text-secondary;
-  }
-
-  ion-grid {
-    padding: 0;
-  }
-
+page-my-space-doctors-event {
   .add {
-    width: 150px;
-    margin: auto;
+    margin-top: 10px;
     text-align: center;
     color: $background-blue;
-    font-size: 1.8rem;
-
-    ion-icon {
-      position: relative;
-      top: 5px;
-      left: 5px;
-      font-size: 26px;
-    }
   }
 
-  .arrow {
-    color: $text-primary;
-    display: block;
-    float: right;
+  select {
+    margin-top: 10px;
   }
-}
 
-page-my-space-doctors, page-my-space-doctors-event {
-  .add {
-    width: 150px;
-    margin: auto;
-    text-align: center;
-    color: $background-blue;
-    font-size: 1.8rem;
-
-    ion-icon {
-      position: relative;
-      top: 5px;
-      left: 5px;
-      font-size: 26px;
-    }
+  ion-icon[name="close"] {
+    margin-top: 7px;
+    font-size: 2.5rem;
   }
 }

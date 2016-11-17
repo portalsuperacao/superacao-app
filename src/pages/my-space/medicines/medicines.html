@@ -4,63 +4,38 @@
        <ion-icon name="menu"></ion-icon>
     </button>
 
-    <ion-title> Aviso de medicamentos  </ion-title>
+    <ion-title> Aviso de medicamentos </ion-title>
 
   </ion-navbar>
 </ion-header>
 
-<ion-content class="background-dark">
-  <ion-grid class="title">
-    <ion-row>
-      <ion-col width-20>
-        <p> Hora </p>
-      </ion-col>
+<ion-content class="background-dark" padding>
+  <div class="my-space-add-button">
+    <button ion-button icon-only round (click)="newEvent()">
+      <ion-icon name="add"> </ion-icon>
+    </button>
+   </div>
 
-      <ion-col width-50>
-        <p> Medicamento </p>
-      </ion-col>
+  <div class="my-space-list" *ngFor="let medicine of medicines | async">
+    <div class="header medicines">
+      <ion-row (click)="editEvent(medicine)" class="container">
+        <ion-col width-33> {{ medicine.title | truncate:"8" }} </ion-col>
+        <ion-col width-33> {{ medicine.dosage }}mg </ion-col>
+        <ion-col width-33> {{ medicine.conc | truncate:"8"  }}</ion-col>
+      </ion-row>
+      <div class="icon" (click)="removeEvent(medicine)"> <ion-icon name="md-close"> </ion-icon> </div>
+    </div>
 
-      <ion-col width-20>
-        <p> Dosage </p>
-      </ion-col>
+    <div class="content" (click)="editEvent(medicine)">
+      <ion-row class="container">
+        <ion-col width-25> 0:00h </ion-col>
+        <ion-col width-25 class="highlight"> 6:00h </ion-col>
+        <ion-col width-25> 12:00h </ion-col>
+        <ion-col width-25> 16:00h </ion-col>
+      </ion-row>
+      <div class="icon"> <ion-icon name="ios-arrow-forward"> </ion-icon> </div>
+    </div>
 
-      <ion-col width-10> </ion-col>
-    </ion-row>
-  </ion-grid>
-
-  <ion-list>
-    <ion-item-sliding *ngFor="let medicine of medicines | async">
-      <ion-item class="simple-item" (click)="editEvent(medicine)">
-        <ion-grid>
-          <ion-row>
-            <ion-col width-20>
-              <p> {{ date + (medicine.interval * 60 * 60 * 1000) | customDate:"t" }}h </p>
-            </ion-col>
-
-            <ion-col width-50>
-
-              <p> {{ medicine.title | truncate:"15" }} </p>
-            </ion-col>
-
-            <ion-col width-20>
-              <p> {{ medicine.dosage }} {{ medicine.conc | truncate:"5" }} <p>
-            </ion-col>
-
-            <ion-col width-10>
-              <ion-icon name="ios-arrow-forward" class="arrow"> </ion-icon>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-item>
-
-      <ion-item-options side="right">
-        <button ion-button color="danger" icon-only (click)="removeEvent(medicine)">
-          <ion-icon name="trash"> </ion-icon>
-        </button>
-      </ion-item-options>
-    </ion-item-sliding>
-  </ion-list>
-
-  <div class="add" (click)="newEvent()"> Adicionar novo <ion-icon name="md-add-circle"> </ion-icon> </div>
-
+    <div *ngIf="medicine.obs" class="obs"> Obs: {{ medicine.obs }} </div>
+  </div>
 </ion-content>

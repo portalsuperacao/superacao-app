@@ -44,28 +44,34 @@
       </div>
     </div>
 
-    <ion-row *ngFor="let phone of phones; let i = index">
-      <ion-col width-40>
-          <select>
-            <option> Consultorio </option>
-            <option> Residêncial </option>
-            <option> Celular </option>
-          </select>
-      </ion-col>
+    <div class="datas-others">
+      <ion-row *ngFor="let phone of phones; let i = index">
+        <ion-col width-40>
+            <select [(ngModel)]="phone.type" [ngModelOptions]="{standalone: true}">
+              <option> Consultorio </option>
+              <option> Residêncial </option>
+              <option> Celular </option>
+            </select>
+        </ion-col>
 
-      <ion-col width-50>
-        <ion-input placeholder="Telefone" type="number" (focus)="showClosePhones[i] = true"> </ion-input>
-      </ion-col>
+        <ion-col width-50>
+          <ion-input placeholder="Telefone" type="text"
+          [textMask]="{mask: mask}"
+          [(ngModel)]="phone.number"
+          [ngModelOptions]="{standalone: true}"
+          (click)="clickPhone(i)"> </ion-input>
+        </ion-col>
 
-      <ion-col width-10>
-        <ion-icon name="close" [hidden]="!showClosePhones[i]" (click)="removePhone(i)"> </ion-icon>
-      </ion-col>
-    </ion-row>
+        <ion-col width-10>
+          <ion-icon name="close" [hidden]="showClosePhone != i" (click)="removePhone(i)"> </ion-icon>
+        </ion-col>
+      </ion-row>
+    </div>
 
     <div class="add" (click)="addPhone()"> Adicionar telefone <ion-icon name="md-add-circle"> </ion-icon> </div>
 
 
-    <button ion-button full [disabled]="!formEvent.valid" color="dark"> Enviar </button>
+    <button ion-button full [disabled]="!formEvent.valid || !validePhones()" color="dark"> Enviar </button>
   </form>
 
 </ion-content>

@@ -10,6 +10,9 @@ import { FormBuilder, Validators } from '@angular/forms';
 export class MySpaceDoctorsEventPage {
   params;
   formEvent;
+  showClosePhone;
+  phones = [];
+  mask = ['(', /[1-9]/, /[1-9]/, ')', ' ', /[1-9]/, /[1-9]/, /[1-9]/, /[1-9]/, '-', /[1-9]/, /[1-9]/, /[1-9]/, /[1-9]/];
 
   constructor(
     public navCtrl: NavController,
@@ -17,6 +20,7 @@ export class MySpaceDoctorsEventPage {
     public viewCtrl: ViewController,
     public fb: FormBuilder) {
       this.params = this.navParams.get('doctor');
+      this.phones.push({type: 'Consultorio', number: ''});
 
       if(this.params) {
         this.formEvent = this.fb.group({
@@ -43,6 +47,10 @@ export class MySpaceDoctorsEventPage {
 
   }
 
+  clickPhone(index) {
+    this.showClosePhone = index;
+  }
+
   closePage() {
     this.viewCtrl.dismiss();
   }
@@ -53,14 +61,37 @@ export class MySpaceDoctorsEventPage {
       last_name: datas.lastName,
       email: datas.email,
       speciality: datas.speciality,
-      address: datas.address
+      address: datas.address,
+      phones: this.phones
     }
 
     if(this.params) {
       wrapper.$key = this.params.$key;
     }
-
+    
     this.viewCtrl.dismiss(wrapper);
+  }
+
+  addPhone() {
+    this.phones.push({type: 'Consultorio', number: ''});
+  }
+
+  removePhone(index) {
+    if(this.phones.length <= 1) {
+      return;
+    }
+
+    this.phones.splice(index, 1);
+  }
+
+  validePhones() {
+    for(let i = 0; i < this.phones.length; i++) {
+      if(this.phones[i].number.length <= 8) {
+        return false;
+      }
+    }
+
+    return true;
   }
 
 
