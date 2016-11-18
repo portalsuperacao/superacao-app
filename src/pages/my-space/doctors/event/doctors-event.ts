@@ -20,7 +20,6 @@ export class MySpaceDoctorsEventPage {
     public viewCtrl: ViewController,
     public fb: FormBuilder) {
       this.params = this.navParams.get('doctor');
-      this.phones.push({type: 'Consultorio', number: ''});
 
       if(this.params) {
         this.formEvent = this.fb.group({
@@ -31,7 +30,11 @@ export class MySpaceDoctorsEventPage {
           address: [this.params.address]
         });
 
+        this.phones = this.params.phones;
+
       } else {
+        this.phones.push({type: 'Consultorio', number: ''});
+
         this.formEvent = this.fb.group({
           name: ["", Validators.required],
           lastName: [""],
@@ -42,10 +45,6 @@ export class MySpaceDoctorsEventPage {
       }
     }
 
-
-  ionViewDidLoad() {
-
-  }
 
   clickPhone(index) {
     this.showClosePhone = index;
@@ -68,7 +67,7 @@ export class MySpaceDoctorsEventPage {
     if(this.params) {
       wrapper.$key = this.params.$key;
     }
-    
+
     this.viewCtrl.dismiss(wrapper);
   }
 

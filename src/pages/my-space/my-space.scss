@@ -30,6 +30,11 @@
     color: #FFF;
     font-weight: bold;
 
+    h5 {
+      margin-left: 5px;
+      margin-top: 5px;
+    }
+
     .title {
       padding-left: 5px;
     }
@@ -51,7 +56,16 @@
 
     ul {
       margin: 0;
-      padding: 25px;
+      padding-left: 25px;
+      padding-bottom: 10px;
+
+      li {
+        padding-top: 6px;
+      }
+    }
+
+    p {
+      margin-left: 5px;
     }
 
     .highlight {
@@ -72,10 +86,12 @@
   }
 
   .icon {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     text-align: right;
     position: relative;
     right: 10px;
-    top: 5px;
     font-size: 1.3rem;
   }
 
@@ -85,6 +101,10 @@
 
   .doctors {
     background: $my-space-blue;
+  }
+
+  .notes {
+    background: $my-space-green;
   }
 }
 
@@ -184,10 +204,50 @@ page-my-space-doctors-event {
 
   select {
     margin-top: 10px;
+    border: none;
+    background: none;
+    box-shadow: none;
   }
 
   ion-icon[name="close"] {
     margin-top: 7px;
     font-size: 2.5rem;
+  }
+}
+
+page-my-space-notes-event {
+  .input {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-top: 1px #DDD solid;
+    border-bottom: 1px #DDD solid;
+    font-size: 1.6rem;
+    background: #FFF;
+    color: $text-primary;
+
+    span {
+      display: block;
+      width: 100%;
+      margin-bottom: 5px;
+      color: $text-primary;
+      text-align: center;
+    }
+  }
+
+  input {
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 5px;
+    border: none;
+  }
+
+  textarea {
+    resize: none;
+    width: 100%;
+    padding-top: 10px;
+    padding-left: 5px;
+    height: 300px;
+    border: none;
   }
 }

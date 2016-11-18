@@ -10,6 +10,31 @@
 </ion-header>
 
 
-<ion-content>
+<ion-content class="background-dark" padding>
+  <div class="my-space-add-button">
+    <button ion-button icon-only round (click)="newEvent()">
+      <ion-icon name="add"> </ion-icon>
+    </button>
+   </div>
+
+  <div class="my-space-list" *ngFor="let note of notes | async">
+    <div class="header notes">
+      <div class="container" (click)="editEvent(note)">
+        <h5> {{ note.title }} </h5>
+      </div>
+      <div class="icon" (click)="removeEvent(note)"> <ion-icon name="md-close"> </ion-icon> </div>
+    </div>
+
+    <div class="content" (click)="editEvent(note)">
+      <div class="container">
+        <ul *ngIf="note.list">
+          <li *ngFor="let item of note.list">  {{ item.value }} </li>
+        </ul>
+
+        <p *ngIf="note.text"> {{ note.text }} </p>
+      </div>
+      <div class="icon"> <ion-icon name="ios-arrow-forward"> </ion-icon> </div>
+    </div>
+  </div>
 
 </ion-content>

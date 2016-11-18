@@ -111,28 +111,4 @@ export class CalendarStorageService {
       }
     })
   }
-
-  insertMedicineEvent(uidUser, datas) {
-    let database = this.af.database.list('/medicines/' + uidUser);
-    database.push(datas);
-  }
-
-  updateMedicineEvent(uidUser, datas) {
-    let database = this.af.database.list('/medicines/' + uidUser);
-    let key = datas.$key;
-    delete datas.$key;
-
-    database.update(key, datas);
-  }
-
-  removeMedicineEvent(uidUser, datas) {
-    let database = this.af.database.list('/medicines/' + uidUser);
-    database.remove(datas.$key);
-  }
-
-  getMedicinesEvents(uidUser) : any {
-    return this.af.database.list('/medicines/' + uidUser);
-  }
-
-
 }

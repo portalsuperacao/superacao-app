@@ -1,3 +1,30 @@
 page-profile {
+  .avatar {
+    height: 45%;
+    padding-top: 20px;
+    text-align: center;
 
+    .thumb {
+      display: inline-block;
+      width: 10rem;
+      height: 10rem;
+      margin-bottom: 20px;
+      padding: 0.4rem;
+      border-radius: 100%;
+
+      .emotion {
+        float: left;
+        position: relative;
+        width: 50px;
+        height: 50px;
+        bottom: 40px;
+        right: 10px;
+
+      }
+
+      img {
+        border-radius: 100%;
+      }
+    }
+  }
 }

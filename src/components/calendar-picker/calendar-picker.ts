@@ -84,8 +84,6 @@ export class CalendarPicker {
   }
 
   ngOnChanges($changes) {
-    console.log($changes);
-
     this.selected = moment();
     this.month = this.selected.clone();
 
@@ -95,7 +93,7 @@ export class CalendarPicker {
     this._resetWeek(start.date(0));
     this._buildMonth(start, this.month);
 
-    //this.dateSelected.emit(this.selected);
+    this.dateSelected.emit(this.selected);
   }
 
   nextMonth() {

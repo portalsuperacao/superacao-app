@@ -17,22 +17,22 @@
     </button>
    </div>
 
-  <div class="my-space-list">
+  <div class="my-space-list" *ngFor="let doctor of doctors | async">
     <div class="header doctors">
-      <div class="container">
-        <div class="title"> Nome do medico </div>
-        <div class="subtitle"> Oncologista </div>
+      <div class="container" (click)="editEvent(doctor)">
+        <div class="title"> {{ doctor.name }} </div>
+        <div class="subtitle"> {{ doctor.speciality }} </div>
       </div>
-      <div class="icon"> <ion-icon name="md-close"> </ion-icon> </div>
+      <div class="icon" (click)="removeEvent(doctor)"> <ion-icon name="md-close"> </ion-icon> </div>
     </div>
 
-    <div class="content">
+    <div class="content" (click)="editEvent(doctor)">
       <div class="container">
         <ul>
-          <li> consultório : 3330-5566 </li>
+          <li *ngFor="let phone of doctor.phones"> {{ phone.type }} : {{ phone.number }} </li>
           <li> celular : 3330-5566 </li>
-          <li> e-mail : diego@gmail.com </li>
-          <li> Rua sem nome </li>
+          <li> E-mail : {{ doctor.email }}</li>
+          <li> Endereço: {{ doctor.address }} </li>
         </ul>
       </div>
       <div class="icon"> <ion-icon name="ios-arrow-forward"> </ion-icon> </div>

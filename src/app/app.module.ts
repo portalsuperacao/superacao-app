@@ -13,6 +13,7 @@ import { AngularFireModule } from 'angularfire2';
 import { UserStorageService } from '../providers/database/user-storage-service';
 import { CalendarStorageService } from '../providers/database/calendar-storage-service';
 import { ChatStorageService } from '../providers/database/chat-storage-service';
+import { MySpaceStorageService } from '../providers/database/my-space-storage-service';
 import { DateUtil } from '../providers/util/date-util';
 import { Utils } from '../providers/util/utils';
 
@@ -34,6 +35,7 @@ import { MySpaceDoctorsEventPage } from '../pages/my-space/doctors/event/doctors
 import { MySpaceMedicinesPage } from '../pages/my-space/medicines/medicines';
 import { MySpaceMedicinesEventPage } from '../pages/my-space/medicines/event/medicines-event';
 import { MySpaceNotesPage } from '../pages/my-space/notes/notes';
+import { MySpaceNotesEventPage } from '../pages/my-space/notes/event/notes-event';
 import { ProfilePage } from '../pages/profile/profile';
 import { StatusEmotionPage } from '../pages/status-emotion/status-emotion';
 import { TabsPage } from '../pages/tabs/tabs';
@@ -78,6 +80,7 @@ firebase.initializeApp(firebaseConfig);
     MySpaceMedicinesPage,
     MySpaceMedicinesEventPage,
     MySpaceNotesPage,
+    MySpaceNotesEventPage,
     ProfilePage,
     StatusEmotionPage,
     TabsPage,
@@ -117,6 +120,7 @@ firebase.initializeApp(firebaseConfig);
     MySpaceMedicinesPage,
     MySpaceMedicinesEventPage,
     MySpaceNotesPage,
+    MySpaceNotesEventPage,
     ProfilePage,
     StatusEmotionPage,
     TabsPage,
@@ -133,6 +137,7 @@ firebase.initializeApp(firebaseConfig);
     UserStorageService,
     CalendarStorageService,
     ChatStorageService,
+    MySpaceStorageService,
     DateUtil,
     Utils
   ]

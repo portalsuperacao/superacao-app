@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, ModalController, AlertController } from 'ionic-angular';
 import { UserStorageService } from '../../../providers/database/user-storage-service';
-import { CalendarStorageService } from '../../../providers/database/calendar-storage-service';
+import { MySpaceStorageService } from '../../../providers/database/my-space-storage-service';
 import { MySpaceMedicinesEventPage } from './event/medicines-event';
 import { LocalNotifications } from 'ionic-native';
 
@@ -19,7 +19,7 @@ export class MySpaceMedicinesPage {
     public navCtrl: NavController,
     public alertCtrl: AlertController,
     public userStorageService : UserStorageService,
-    public calendarStorageService: CalendarStorageService,
+    public mySpaceStorageService: MySpaceStorageService,
     public modalCtrl : ModalController) {
 
   }
@@ -28,7 +28,7 @@ export class MySpaceMedicinesPage {
     this.user = this.userStorageService.getUserObs();
 
     this.user.subscribe((user) => {
-      this.medicines = this.calendarStorageService.getMedicinesEvents(user.$key);
+      this.medicines = this.mySpaceStorageService.getMedicinesEvents(user.$key);
     });
 
     this.date = new Date().getTime();
@@ -57,22 +57,22 @@ export class MySpaceMedicinesPage {
       });*/
 
       this.user.subscribe((user) => {
-        this.calendarStorageService.insertMedicineEvent(user.$key, data);
+        this.mySpaceStorageService.insertMedicineEvent(user.$key, data);
       });
     });
   }
 
   removeEvent(medicine) {
     let alert = this.alertCtrl.create({
-      title: "Deseja remover",
-      message: "Você deseja mesmo remover o evento " + medicine.title,
+      title: "Deseja remover?",
+      message: "Você deseja mesmo remover o evento " + medicine.title + " ?",
       buttons: [
         {
           text: 'Sim',
           handler: data => {
             LocalNotifications.clearAll();
             this.user.subscribe((user) => {
-              this.calendarStorageService.removeMedicineEvent(user.$key, medicine);
+              this.mySpaceStorageService.removeMedicineEvent(user.$key, medicine);
             });
           }
         },
@@ -95,7 +95,7 @@ export class MySpaceMedicinesPage {
       }
 
       this.user.subscribe((user) => {
-        this.calendarStorageService.updateMedicineEvent(user.$key, data);
+        this.mySpaceStorageService.updateMedicineEvent(user.$key, data);
       });
     });
 

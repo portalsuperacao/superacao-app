@@ -50,6 +50,8 @@ export class CalendarPage {
           text: 'Sim',
           handler: data => {
             this.calendarStorageService.removeEvent(event);
+            this._generateAllSchedule();
+            this.updateDate(new Date());
           }
         },
         {

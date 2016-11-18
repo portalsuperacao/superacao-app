@@ -65,3 +65,23 @@ ion-footer {
   padding: 0.6em;
   margin-left: 16px;
 }
+
+.custom-segment {
+  ion-segment-button {
+    height: 4rem !important;
+    line-height: 4.5rem !important;
+    border: none !important;
+    color: $background-blue !important;
+    background: none !important;
+  }
+
+  span {
+    position: relative;
+    left: 5px;
+    bottom: 5px;
+  }
+
+  .segment-activated {
+    background: #e7e7e7 !important;
+  }
+}

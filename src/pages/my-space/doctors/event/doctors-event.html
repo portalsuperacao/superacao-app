@@ -71,7 +71,7 @@
     <div class="add" (click)="addPhone()"> Adicionar telefone <ion-icon name="md-add-circle"> </ion-icon> </div>
 
 
-    <button ion-button full [disabled]="!formEvent.valid || !validePhones()" color="dark"> Enviar </button>
+    <button ion-button clear full [disabled]="!formEvent.valid || !validePhones()"> Enviar </button>
   </form>
 
 </ion-content>
