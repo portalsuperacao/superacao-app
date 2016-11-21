@@ -71,29 +71,12 @@ export class CalendarPicker {
   }
 
   ngOnInit() {
-    this.selected = moment();
-    this.month = this.selected.clone();
-
-    let start = this.selected.clone();
-    start.date(1);
-
-    this._resetWeek(start.date(0));
-    this._buildMonth(start, this.month);
-
+    this._initCalendar();
     this.dateSelected.emit(this.selected);
   }
 
   ngOnChanges($changes) {
-    this.selected = moment();
-    this.month = this.selected.clone();
-
-    let start = this.selected.clone();
-    start.date(1);
-
-    this._resetWeek(start.date(0));
-    this._buildMonth(start, this.month);
-
-    this.dateSelected.emit(this.selected);
+    this._initCalendar();
   }
 
   nextMonth() {
@@ -119,6 +102,17 @@ export class CalendarPicker {
 
   addEvent() {
     this.nav.push(CalendarNewEventPage);
+  }
+
+  _initCalendar() {
+    this.selected = moment();
+    this.month = this.selected.clone();
+
+    let start = this.selected.clone();
+    start.date(1);
+
+    this._resetWeek(start.date(0));
+    this._buildMonth(start, this.month);
   }
 
   _buildMonth(start, month) {

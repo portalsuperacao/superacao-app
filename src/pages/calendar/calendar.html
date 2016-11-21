@@ -13,7 +13,7 @@
   <calendar-picker [setEvents]="allSechedule" (dateSelected)="updateDate($event)" *ngIf="showCalendar"> </calendar-picker>
 
   <ion-list>
-    <ion-item-sliding *ngFor="let schedule of listSchedule | async" class="schedule">
+    <ion-item-sliding *ngFor="let schedule of (listSchedule | async)?.eventsSelected" class="schedule">
       <ion-item class="simple-item" (click)="editEvent(schedule)">
           <ion-row>
             <ion-col width-10> <span [ngClass]="schedule.type"> </span> </ion-col>

@@ -27,4 +27,37 @@ page-profile {
       }
     }
   }
+
+  .profile-datas {
+    padding-left: 20px;
+    padding-right: 20px;
+    background: #FFF;
+    font-size: 1.9rem;
+
+    .title {
+      font-weight: bold;
+      color: $text-secondary;
+    }
+
+    .text {
+      color: $text-light;
+    }
+
+    .datas {
+      margin-top: 10px;
+      margin-bottom: 10px;
+
+      .left {
+        float: left;
+      }
+
+      .right {
+        float: right;
+      }
+    }
+
+    .clear {
+      clear: both;
+    }
+  }
 }

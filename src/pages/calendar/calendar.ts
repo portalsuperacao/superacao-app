@@ -14,7 +14,6 @@ import { CalendarStorageService } from '../../providers/database/calendar-storag
 
 export class CalendarPage {
    events;
-   dateSelected;
    listSchedule;
    allSechedule;
    showCalendar;
@@ -29,19 +28,19 @@ export class CalendarPage {
     public userStorageService : UserStorageService,
     public dateUtil: DateUtil,
     public alertCtrl: AlertController) {
-      /*this.loading =  this.loadingCtrl.create({
-        content: "Aguarde..."
-      });*/
-
 
   }
 
   ionViewWillEnter() {
-    //this.loading.present();
     this._generateAllSchedule();
   }
 
-  removeEvent(event) {
+  ionViewWillLeave() {
+    this._generateAllSchedule();
+    this.updateDate(new Date());
+  }
+
+  removeEvent(event, userUid) {
     let alert = this.alertCtrl.create({
       title: "Deseja remover",
       message: "Você deseja mesmo remover o evento " + event.message,
@@ -49,9 +48,11 @@ export class CalendarPage {
         {
           text: 'Sim',
           handler: data => {
-            this.calendarStorageService.removeEvent(event);
-            this._generateAllSchedule();
-            this.updateDate(new Date());
+            this.listSchedule.then((schedule) => {
+              this.calendarStorageService.removeEvent(schedule.user.$key, event);
+              this._generateAllSchedule();
+              this.updateDate(new Date());
+            });
           }
         },
         {
@@ -64,8 +65,7 @@ export class CalendarPage {
   }
 
   updateDate($event) {
-    this.dateSelected = $event;
-    this.listSchedule = this._generateListSchedule($event);
+    this.listSchedule = this._generateSchedule($event, this.userStorageService, this.calendarStorageService, this.dateUtil);
   }
 
   editEvent(event) {
@@ -74,34 +74,51 @@ export class CalendarPage {
 
   _generateAllSchedule() {
     this.showCalendar = false;
-
-    this.userStorageService.getUser().then((user : any) => {
-      this.calendarStorageService.getEvents(user.$key).then((event) => {
-        this.allSechedule = event;
-        this.showCalendar = true;
-        //this.loading.dismiss();
-      });
-    });
+     this._generateSchedule(new Date(), this.userStorageService, this.calendarStorageService, this.dateUtil).then((schedule : any) => {
+       this.allSechedule = schedule.events;
+       this.showCalendar = true;
+     });
   }
 
-  _generateListSchedule(dateNow) {
+  _generateSchedule(dateNow, userStorageService, calendarStorageService, dateUtil) {
     return new Promise((resolve) => {
-      let schedules = []
-      this.userStorageService.getUser().then((user : any) => {
-        this.calendarStorageService.getEvents(user.$key).then((events : any) => {
-          events.forEach((event) => {
-            if(this.dateUtil.removeTime(dateNow) >= this.dateUtil.removeTime(event.start_at) &&
-            this.dateUtil.removeTime(dateNow) <= this.dateUtil.removeTime(event.end_at)) {
-              event.userUid = user.$key;
-              schedules.push(event);
-            }
-          });
+      Promise.resolve(dateNow)
+      .then(getUser)
+      .then(getEvents)
+      .then(verifyIfEventSelected)
+      .then(resolvePromise)
 
-          resolve(schedules);
+      function getUser(dateNow) {
+        return userStorageService.getUser().then((user : any) => {
+          let wrapper = { user : user, dateNow: dateNow }
+          return wrapper;
         });
-      });
-    });
+      }
 
+      function getEvents(wrapper) {
+        return calendarStorageService.getEvents(wrapper.user.$key).then((events : any) => {
+          wrapper.events = events;
+          return wrapper;
+        });
+      }
+
+      function verifyIfEventSelected(wrapper) {
+         wrapper.eventsSelected = wrapper.events.filter((event) => {
+          if(dateUtil.removeTime(dateNow) >= dateUtil.removeTime(event.start_at) &&
+          dateUtil.removeTime(dateNow) <= dateUtil.removeTime(event.end_at)) {
+            return true;
+          } else {
+            return false;
+          }
+        });
+
+        return wrapper;
+      }
+
+      function resolvePromise(wrapper) {
+        resolve(wrapper);
+      }
+    })
   }
 
 }

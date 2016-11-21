@@ -37,6 +37,7 @@ import { MySpaceMedicinesEventPage } from '../pages/my-space/medicines/event/med
 import { MySpaceNotesPage } from '../pages/my-space/notes/notes';
 import { MySpaceNotesEventPage } from '../pages/my-space/notes/event/notes-event';
 import { ProfilePage } from '../pages/profile/profile';
+import { ProfileEditPage } from '../pages/profile/edit/edit';
 import { StatusEmotionPage } from '../pages/status-emotion/status-emotion';
 import { TabsPage } from '../pages/tabs/tabs';
 import { OvercomerPage } from '../pages/trinity/overcomer/overcomer';
@@ -82,6 +83,7 @@ firebase.initializeApp(firebaseConfig);
     MySpaceNotesPage,
     MySpaceNotesEventPage,
     ProfilePage,
+    ProfileEditPage,
     StatusEmotionPage,
     TabsPage,
     OvercomerPage,
@@ -122,6 +124,7 @@ firebase.initializeApp(firebaseConfig);
     MySpaceNotesPage,
     MySpaceNotesEventPage,
     ProfilePage,
+    ProfileEditPage,
     StatusEmotionPage,
     TabsPage,
     OvercomerPage,

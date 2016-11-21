@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-navbar color="dark">
+    <ion-title> Perfil de {{ user.name }} </ion-title>
+
+    <ion-buttons end>
+      <button ion-button (click)="closePage()">
+        <ion-icon name="close"> </ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+
+<ion-content class="background-dark">
+    <ion-item>
+      <ion-input type="text" placeholder="Username"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input type="password" placeholder="Password"></ion-input>
+    </ion-item>
+</ion-content>

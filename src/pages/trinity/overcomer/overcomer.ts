@@ -18,13 +18,9 @@ import { StatusEmotionPage } from '../../status-emotion/status-emotion';
 export class OvercomerPage {
 
   //==== Trinity =====
-  trinity;
   overcomer;
   angel;
   archangel;
-
-  lastMessages = [];
-  notifications = [];
 
   loading;
 
@@ -43,15 +39,16 @@ export class OvercomerPage {
     }
 
   ionViewDidLoad() {
-    this.loading = this.loadingCtrl.create({
-      content: "Aguarde..."
+    this.updateDatas(this.userStorageService, this.chatStorageService).then((datas : any) => {
+      console.log(datas);
+      this.overcomer = datas.user;
+      this.angel = datas.trinity.angel;
+      this.archangel = datas.trinity.archangel;
     });
-
-    this.loading.present();
   }
 
   ionViewWillEnter() {
-    this._updateDatas();
+    //this._updateDatas();
   }
 
   openStatusEmotion() {
@@ -59,107 +56,121 @@ export class OvercomerPage {
     modal.present();
 
     modal.onDidDismiss((data) => {
-      if(!data) {
-        return;
-      }
+      if(!data) return;
 
-      this.userStorageService.setEmotion(data, this.overcomer.$key);
-    })
+      this.updateDatas(this.userStorageService, this.chatStorageService).then((datas : any) => {
+        this.userStorageService.setEmotion(data, datas.trinity.overcomer.$key);
+      });
+    });
   }
 
   openHelpSystem() {
     //this.nav.push(OvercomerHelpSystemPage);
   }
 
-  openChat(user1, user2, indexTypeUser) {
+  openChat(user1, user2) {
     this.navCtrl.push(ChatPage, {'user1' : user1, 'user2': user2, 'chat' : user2.chatUid});
-
-    // === clean notifications ===
-    if(this.lastMessages[indexTypeUser]) {
-      this.chatStorageService.setLocalNotification(user2.$key, this.lastMessages[indexTypeUser].$key);
-    }
   }
 
   openPublicEvents(user) {
     this.navCtrl.push(CalendarPublicEventPage, {'user' : user});
   }
 
-  _generateNotification(chatUid, userUid, indexTypeUser) {
-    this.chatStorageService.getLastMessage(chatUid, userUid).subscribe((messages : any) => {
-      this.lastMessages[indexTypeUser] = messages;
-
-       this.chatStorageService.getLocalNotification(userUid).then((data) => {
-          if(data === null) {
-            this.notifications[indexTypeUser] = false;
-            this.chatStorageService.setLocalNotification(userUid, this.lastMessages[indexTypeUser].$key);
-          } else if(messages.$key != data) {
-            this.notifications[indexTypeUser] = true;
-          } else {
-            this.notifications[indexTypeUser] = false;
-          }
-       });
-
-       this.loading.dismiss();
-    });
-  }
-
-  _findAngel() {
-    this.userStorageService.findUser(this.trinity.angel).then((snapshots) => {
-      this.angel = snapshots;
-
-      // ====== CHAT ANGEL ======
-      this.chatStorageService.getChat(this.trinity.overcomer, this.trinity.angel).then((chatDatas : any) => {
-        if(!chatDatas) {
-          this.angel.chatUid = this.chatStorageService.createChat(this.overcomer, this.angel);
-        } else {
-          this.angel.chatUid = chatDatas.chatUid;
-        }
-
-        this._generateNotification(this.angel.chatUid, this.trinity.angel, 0);
-      });
-    });
-  }
-
-  _findArchangel() {
-    this.userStorageService.findUser(this.trinity.archangel).then((snapshots) => {
-      this.archangel = snapshots;
-
-      // ====== CHAT ARCHANGEL ======
-      this.chatStorageService.getChat(this.trinity.overcomer, this.trinity.archangel).then((chatDatas : any) => {
-        if(!chatDatas) {
-          this.archangel.chatUid = this.chatStorageService.createChat(this.overcomer, this.archangel);
-        } else {
-          this.archangel.chatUid = chatDatas.chatUid;
-        }
-
-        this._generateNotification(this.archangel.chatUid, this.trinity.archangel, 1);
-      });
-    });
-  }
-
-
-  _updateDatas() {
-    this.userStorageService.getUserObs().subscribe((user) => {
-      this.overcomer = user;
-    });
-
-    this.userStorageService.getUser().then((user : any) => {
-      this.trinity = {
-        overcomer : user.$key,
-        angel: "c9Em4kqXqQY6Rx0OHgnTsRpvrQi1",
-        archangel: "NePUY0RoAfPSgAnCTn42IOHSBE72"
-      };
-
-      this._findAngel();
-      this._findArchangel();
-    });
-
-    }
-
-  updateDatas() {
+  // Update datas
+  updateDatas(userStorageService, chatStorageService) {
     return new Promise((resolve) => {
       Promise.resolve()
-      .then()
-    })
+      .then(getTrinityService)
+      .then(findOvercomer)
+      .then(findAngel)
+      .then(findArchangel)
+      .then(getChatAngel)
+      .then(getChatArchangel)
+      .then(getLastMessages)
+      .then(getUserObs)
+      .then(resolvePromise)
+
+
+      function getTrinityService() {
+        let trinity = {
+          overcomer : "",
+          angel: "c9Em4kqXqQY6Rx0OHgnTsRpvrQi1",
+          archangel: "NePUY0RoAfPSgAnCTn42IOHSBE72"
+        };
+        return trinity;
+      }
+
+      function findOvercomer(trinity) {
+        return userStorageService.getUser().then((user) => {
+          trinity.overcomer = user;
+          return trinity;
+        });
+      }
+
+      function findAngel(trinity) {
+        return userStorageService.findUser(trinity.archangel).then((user) => {
+          trinity.angel = user;
+          return trinity;
+        });
+      }
+
+      function findArchangel(trinity) {
+        return trinity.archangel = userStorageService.findUser(trinity.archangel).then((user) => {
+          trinity.archangel = user;
+          return trinity;
+        });
+      }
+
+      function getChatAngel(trinity) {
+        return chatStorageService.getChat(trinity.overcomer.$key, trinity.angel.$key).then((chatDatas : any) => {
+          if(!chatDatas) {
+            trinity.angel.chatUid = chatStorageService.createChat(trinity.overcomer, this.angel);
+          } else {
+            trinity.angel.chatUid = chatDatas.chatUid;
+          }
+
+          return trinity;
+        });
+      }
+
+      function getChatArchangel(trinity) {
+        return chatStorageService.getChat(trinity.overcomer.$key, trinity.archangel.$key).then((chatDatas : any) => {
+          if(!chatDatas) {
+            trinity.archangel.chatUid = chatStorageService.createChat(trinity.overcomer, this.angel);
+          } else {
+            trinity.archangel.chatUid = chatDatas.chatUid;
+          }
+
+          return trinity;
+        });
+      }
+
+      function generateNotificationAngel(trinity) {
+
+      }
+
+      function generateNotificationArchangel() {
+
+      }
+
+      function getLastMessages(trinity) {
+        trinity.angel.lastMessages = chatStorageService.getLastMessage(trinity.angel.chatUid, trinity.angel.$key);
+        trinity.archangel.lastMessages = chatStorageService.getLastMessage(trinity.archangel.chatUid, trinity.archangel.$key);
+
+        return trinity;
+      }
+
+      function getUserObs(trinity) {
+        let wrapper : any = {};
+        wrapper.user = userStorageService.getUserObs();
+        wrapper.trinity = trinity;
+        return wrapper;
+      }
+
+      function resolvePromise(trinity) {
+        resolve(trinity);
+      }
+
+    });
   }
 }

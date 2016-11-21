@@ -47,13 +47,13 @@ export class CalendarStorageService {
     this.setEventsLocal(newDatas);
   }
 
-  removeEvent(datas) {
+  removeEvent(userUid, datas) {
     let startDate = new Date(datas.start_at);
     let endDate = new Date(datas.end_at);
 
     Calendar.deleteEvent(datas.title, datas.address, datas.comments, startDate, endDate);
 
-    let database = this.af.database.list('/calendar/' + datas.userUid);
+    let database = this.af.database.list('/calendar/' + userUid);
     database.remove(datas.$key);
     this.setEventsLocal(datas);
   }
