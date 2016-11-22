@@ -163,13 +163,13 @@ export class ArchangelChatPage {
 
       this.trinitys = [{
         archangel : user.$key,
-        angel: "c9Em4kqXqQY6Rx0OHgnTsRpvrQi1",
-        overcomer: "HyAqq0wlb2QxF7uqKlLhPAiEVPE3"
+        angel: "kRdAJiVh3Tb87d63yuQLW3LOVEc2",
+        overcomer: "xxYGRtWTNVP9UaxhNpfMVi03gez1"
       },
       {
         archangel : user.$key,
-        angel: "c9Em4kqXqQY6Rx0OHgnTsRpvrQi1",
-        overcomer: "zua3bsHHBkTPUhbyRC5k5xHam8V2",
+        angel: "kRdAJiVh3Tb87d63yuQLW3LOVEc2",
+        overcomer: "YJIp0pvUuqXXHKVOo2t4InNdjYa2",
       }];
 
       this.trinitys.forEach((trinity, index) => {

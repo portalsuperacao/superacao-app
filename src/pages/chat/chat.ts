@@ -48,27 +48,40 @@ export class ChatPage {
   }
 
   sendMessage() {
-    if(this.message.trim() == "") {
-      return;
+    Promise.resolve()
+    .then(validateInput)
+    .then(msgWrapper)
+    .then(sendMessage)
+    .then(pushNotification)
+
+
+    function validateInput() {
+      if(this.message.trim() == "") {
+        return;
+      }
     }
 
-    let msgWrapper : any = {
-      uid_user : this.user1.$key,
-      msg : this.message,
-      created_at: new Date().getTime(),
+    function msgWrapper() {
+      console.log("entrou!");
     }
 
-    this.chatStorageService.pushMessage(msgWrapper, this.chatUid);
-    this.message = "";
+    function sendMessage(msg) {
+      this.chatStorageService.pushMessage(msg, this.chatUid);
+      this.message = "";
 
-    msgWrapper.token_device = this.user2.token_device;
-    msgWrapper.name_user = this.user1.name;
+      return msg;
+    }
 
-    // === Push notification ===
-    setTimeout(() => {
-        this.chatStorageService.pushNotification(msgWrapper);
-        this.content.scrollToBottom(0);
-    }, 100);
+    function pushNotification(msg) {
+      msg.token_device = this.user2.other_datas.token_device;
+      msg.name_user = this.user1.other_datas.name;
+
+      setTimeout(() => {
+          this.chatStorageService.pushNotification(msg);
+          this.content.scrollToBottom(0);
+      }, 0);
+    }
+
   }
 
   openGallery() {
@@ -106,7 +119,7 @@ export class ChatPage {
 
     this.chatStorageService.pushMessage(msgWrapper, this.chatUid);
 
-    msgWrapper.token_device = this.user2.token_device;
+    msgWrapper.token_device = this.user2.other_datas.token_device;
     msgWrapper.name_user = this.user1.name;
     msgWrapper.msg = "Uma imagem foi enviada!";
 

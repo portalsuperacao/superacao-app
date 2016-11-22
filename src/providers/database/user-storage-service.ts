@@ -60,8 +60,12 @@ export class UserStorageService {
         is_active: 0
       },
       type_user: "Normal",
-      active: "1",
-      last_access: new Date().getTime()
+      other_datas: {
+          token_device: "",
+          active: "1",
+          last_access: new Date().getTime()
+      },
+
     }
 
     this.db = this.af.database.object('/users/' + result.uid);
@@ -139,18 +143,19 @@ export class UserStorageService {
 
   updateLastAccess(date, userUid) {
     this.db = this.af.database.object('/users/' + userUid);
-    this.db.update({"last_access" : date});
-
-    // === Push device token ===
-    this.utils.getPushDeviceToken().then((device) => {
-      this.db.update({"token_device" : device});
-    }).catch((device) => {
-
-    });
+    this.db.update({"other_datas/last_access" : date});
 
     this.getUserLocal().then((datas : any) => {
-      datas.last_access = date;
+      datas.other_datas.last_access = date;
       this.setUserLocal(datas);
+    });
+  }
+
+  updateTokenDevice(userUid) {
+    this.utils.getPushDeviceToken().then((device) => {
+      this.db.update({"other_datas/token_device" : device});
+    }).catch((err) => {
+      console.log(err);
     });
   }
 

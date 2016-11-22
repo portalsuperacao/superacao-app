@@ -30,8 +30,7 @@ export class MyApp {
     public dateUtil: DateUtil) {
 
       platform.ready().then(() => {
-
-        // ====== IF AUTHENTICATION =====
+        // IF AUTHENTICATION
         firebase.auth().onAuthStateChanged((auth) => {
           if(!auth) {
             this.menuCtrl.enable(false);
@@ -39,39 +38,13 @@ export class MyApp {
             return;
           }
 
-          // ========== NAVIGATION PAGES ============
           this.userStorageService.getUser().then((user : any) => {
-            this.menuCtrl.enable(true);
-              let dateNow = this.dateUtil.formatDateBR(new Date());
-              let dateUser = this.dateUtil.formatDateBR(new Date(user.last_access));
-
-              if(dateUser === dateNow) {
-                if(user.type_user == "Arcanjo") {
-                  this.rootPage = ArchangelPage;
-                  this.mainPage = ArchangelPage;
-                  return;
-                }
-
-                this.rootPage = TabsPage;
-                this.mainPage = TabsPage;
-                return;
-              }
-
-              // ==== UPDATE DATAS OF LAST ACESSS
-              this.userStorageService.updateLastAccess(new Date().getTime(), user.$key);
-
-              this.userStorageService.setEmotion({
-                status: "Normal",
-                img: "./assets/images/happy.svg",
-                is_active: 0
-              }, user.$key);
-
-              this.rootPage = ApresentationPage;
-
+              this._navigationPages(user);
+              this._updateLastAccess(user);
+              this._updateEmojiToday(user);
+              //this._updateTokenDevice(user);
             });
           });
-
-
 
       StatusBar.styleDefault();
       Splashscreen.hide();
@@ -86,4 +59,38 @@ export class MyApp {
     firebase.auth().signOut()
     this.userStorageService.clear();
   }
+
+  _navigationPages(user) {
+    this.menuCtrl.enable(true);
+      if(user.type_user == "Arcanjo") {
+        this.rootPage = ArchangelPage;
+        this.mainPage = ArchangelPage;
+      }
+
+      this.rootPage = TabsPage;
+      this.mainPage = TabsPage;
+  }
+
+  _updateLastAccess(user) {
+    this.userStorageService.updateLastAccess(new Date().getTime(), user.$key);
+  }
+
+  _updateTokenDevice(user) {
+    this.userStorageService.updateTokenDevice(user.$key)
+  }
+
+  _updateEmojiToday(user) {
+    let dateNow = this.dateUtil.formatDateBR(new Date());
+    let dateUser = this.dateUtil.formatDateBR(new Date(user.last_access));
+
+    if(dateUser !== dateNow) {
+      this.userStorageService.setEmotion({
+        status: "Normal",
+        img: "./assets/images/happy.svg",
+        is_active: 0
+      }, user.$key);
+    }
+  }
+
+
 }

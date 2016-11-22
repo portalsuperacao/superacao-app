@@ -49,11 +49,13 @@ export class ChatStorageService {
       users: {
         user1: {
           uid: user1.$key,
-          token_device: user1.token_device
+          token_device: user1.other_datas.token_device,
+          view: 0
         },
         user2: {
           uid: user2.$key,
-          token_device: user2.token_device
+          token_device: user2.other_datas.token_device,
+          view: 0
         }
       }
     }
@@ -64,7 +66,10 @@ export class ChatStorageService {
     return {chatUid: datas.chatUid};
   }
 
-
+  setViewChat(chatUid, user, value) {
+    let db = this.af.database.object('/messages/' + chatUid + '/' + user);
+    db.update({view : value});
+  }
 
   getMessages(chatUid) {
     return new Observable((subject) => {
@@ -80,6 +85,7 @@ export class ChatStorageService {
 
   getLastMessage(chatUid, userUid) {
     return new Observable((subject) => {
+      try {
       let database = firebase.database().ref('/messages/' + chatUid);
 
       database.orderByChild("uid_user").equalTo(userUid).limitToLast(1).on("child_added", (snapshot) => {
@@ -89,6 +95,9 @@ export class ChatStorageService {
 
         subject.next(data);
       })
+      } catch(err) {
+         subject.next(null);
+      }
     });
   }
 
