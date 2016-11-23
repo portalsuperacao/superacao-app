@@ -23,17 +23,37 @@ export class ChatStorageService {
 
   }
 
+  createChat(user1, user2) {
+    let datas = {
+      chatUid : this._generateChatToken(),
+      users: []
+    }
+
+    for(let i = 0; i < arguments.length; i++) {
+      datas.users.push({
+        uid: arguments[i].$key,
+        token_device: arguments[i].other_datas.token_device,
+        view: 1
+      });
+    }
+
+    this.db = this.af.database.list('/chat/');
+    this.db.push(datas);
+
+    return {chatUid: datas.chatUid};
+  }
+
   getChat(userUid1, userUid2) {
      let chatDatas = false;
      return new Promise((resolve) => {
        let database = firebase.database().ref('/chat/');
-       database.once('value').then((snapshot) => {
-         snapshot.forEach((snapshotChild) => {
-            let data = snapshotChild.val();
+       database.once('value').then((snapshots) => {
+         snapshots.forEach((snapshot) => {
+            let data = snapshot.val();
 
-            if(data.users.user1.uid == userUid1 && data.users.user2.uid == userUid2) {
+            if(data.users[0].uid == userUid1 && data.users[1].uid == userUid2) {
               chatDatas = data;
-            } else if (data.users.user2.uid == userUid1 && data.users.user1.uid == userUid2) {
+            } else if (data.users[1].uid == userUid1 && data.users[0].uid == userUid2) {
               chatDatas = data;
             }
 
@@ -43,58 +63,47 @@ export class ChatStorageService {
     });
   }
 
-  createChat(user1, user2) {
-    let datas = {
-      chatUid : this._generateChatToken(),
-      users: {
-        user1: {
-          uid: user1.$key,
-          token_device: user1.other_datas.token_device,
-          view: 0
-        },
-        user2: {
-          uid: user2.$key,
-          token_device: user2.other_datas.token_device,
-          view: 0
-        }
-      }
-    }
+  getChatUsers(chatUid) {
+    return new Promise((resolve) => {
+      let database = firebase.database().ref('/chat/');
+      database.once('value').then((snapshots) => {
+        snapshots.forEach((snapshot) => {
+          let data = snapshot.val();
 
-    this.db = this.af.database.list('/chat/');
-    this.db.push(datas);
-
-    return {chatUid: datas.chatUid};
+          if(data.chatUid === chatUid) {
+            data.chatKey = snapshot.key;
+            resolve(data)
+          }
+        });
+      });
+    });
   }
 
-  setViewChat(chatUid, user, value) {
-    let db = this.af.database.object('/messages/' + chatUid + '/' + user);
+  setViewChat(chatKey, user, value) {
+    let db = this.af.database.object('/chat/' + chatKey + '/users/' + user);
     db.update({view : value});
   }
 
-  getMessages(chatUid) {
-    return new Observable((subject) => {
-      let database = firebase.database().ref('/messages/' + chatUid);
-      database.on('child_added', (snapshot) => {
-          let data = snapshot.val();
-          data.$key = snapshot.key;
-          subject.next(data);
-      });
-    })
+  getViewChat(chatKey, user, value) : any {
+    return this.af.database.object('/chat/' + chatKey + '/users/' + user)
   }
 
+  getMessages(chatUid) {
+    return this.af.database.list('/messages/' + chatUid);
+  }
 
   getLastMessage(chatUid, userUid) {
     return new Observable((subject) => {
       try {
-      let database = firebase.database().ref('/messages/' + chatUid);
+        let database = firebase.database().ref('/messages/' + chatUid);
 
-      database.orderByChild("uid_user").equalTo(userUid).limitToLast(1).on("child_added", (snapshot) => {
-        let data;
-        data = snapshot.val();
-        data.$key = snapshot.key;
+        database.orderByChild("uid_user").equalTo(userUid).limitToLast(1).on("child_added", (snapshot) => {
+          let data;
+          data = snapshot.val();
+          data.$key = snapshot.key;
 
-        subject.next(data);
-      })
+          subject.next(data);
+        })
       } catch(err) {
          subject.next(null);
       }

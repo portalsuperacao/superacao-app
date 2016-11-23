@@ -13,12 +13,10 @@ export class ChatPage {
   @ViewChild(Content) content: Content;
 
   message;
-  listMessages = [];
-  lengthMessages = 0;
-  lengthCtrl = false;
+  listMessages;
   user1;
   user2;
-  chatUid;
+  chat;
   ctrlFloat = true;
   status;
 
@@ -32,72 +30,14 @@ export class ChatPage {
     public utils: Utils) {
       this.user1 = this.params.get('user1');
       this.user2 = this.params.get('user2');
-      this.chatUid = this.params.get('chat');
+      this.chat = this.params.get('chat');
       this.status = this.user2.emotion.is_active;
   }
 
   ionViewDidLoad() {
-    this.utils.generatePush().then((datas) => {
-      console.log("remover o push!");
-    }).catch((error) => {
-
-    });
-
-    this._clearStatusEmotion();
-    this._getMessages();
-  }
-
-  sendMessage() {
-    Promise.resolve()
-    .then(validateInput)
-    .then(msgWrapper)
-    .then(sendMessage)
-    .then(pushNotification)
-
-
-    function validateInput() {
-      if(this.message.trim() == "") {
-        return;
-      }
-    }
-
-    function msgWrapper() {
-      console.log("entrou!");
-    }
-
-    function sendMessage(msg) {
-      this.chatStorageService.pushMessage(msg, this.chatUid);
-      this.message = "";
-
-      return msg;
-    }
-
-    function pushNotification(msg) {
-      msg.token_device = this.user2.other_datas.token_device;
-      msg.name_user = this.user1.other_datas.name;
-
-      setTimeout(() => {
-          this.chatStorageService.pushNotification(msg);
-          this.content.scrollToBottom(0);
-      }, 0);
-    }
-
-  }
-
-  openGallery() {
-    let loading = this.loadingCtrl.create({
-      content : "Aguarde..."
-    });
-
-    loading.present();
-
-    this.utils.openGallery().then((image) => {
-      loading.dismiss();
-      this._sendImg(image);
-    }).catch((error) => {
-      loading.dismiss();
-      console.log(error);
-    });
+    this._getMessages(this.chatStorageService, this.chat, this.content, this.user1, this.utils).then((chat : any) => {
+      this.listMessages = chat.messages;
+    })
   }
 
   getClassMsg(uidUser) {
@@ -110,6 +50,132 @@ export class ChatPage {
     }
   }
 
+ sendMessage() {
+   this._validateMessage(this.message, this.content, this.user1, this.user2, this.chatStorageService, this.chat).then((msg) => {
+     this.message = "";
+   })
+ }
+
+ _validateMessage(message, content, user1, user2, chatStorageService, chat) {
+    return new Promise((resolve) => {
+    let i = 0;
+    Promise.resolve(i)
+    .then(validateInput)
+    .then(msgWrapper)
+    .then(sendMessage)
+    .then(pushNotification)
+    .then(setViewMessage)
+    .then(scrollToBottom)
+    .then(resolvePromise)
+
+    function validateInput() {
+      if (message.trim() !== "") return;
+    }
+
+    function msgWrapper() {
+      let msgWrapper : any = {
+        uid_user : user1.$key,
+        msg : message,
+        created_at: new Date().getTime(),
+      }
+
+      return msgWrapper;
+    }
+
+    function sendMessage(msg) {
+      chatStorageService.pushMessage(msg, chat.chatUid);
+      return msg;
+    }
+
+    function pushNotification(msg) {
+      msg.token_device = user2.other_datas.token_device;
+      msg.name_user = user1.other_datas.name;
+
+      return msg;
+    }
+
+    function setViewMessage(msg) {
+      chat.users.forEach((user, index) => {
+        if(user2.$key === user.uid) {
+          chatStorageService.setViewChat(chat.chatKey, index, 0);
+        }
+      });
+
+      return msg;
+    }
+
+    function scrollToBottom(msg) {
+      content.scrollToBottom(0);
+      return msg;
+    }
+
+    function resolvePromise(msg) {
+      resolve(msg);
+    }
+
+  });
+}
+
+_getMessages(chatStorageService, chat, content, user1, utils) {
+  return new Promise((resolve) => {
+    Promise.resolve()
+    .then(getChatDatas)
+    .then(getMessages)
+    .then(setViewMessage)
+    .then(removePushNotification)
+    .then(scrollToBottom)
+    .then(resolvePromise)
+
+    function getChatDatas() {
+      return chat;
+    }
+
+    function getMessages(msg) {
+      msg.messages = chatStorageService.getMessages(chat.chatUid);
+      return msg;
+    }
+
+    function setViewMessage(msg) {
+      msg.users.forEach((user, index) => {
+        if(user1.$key == user.uid) {
+          chatStorageService.setViewChat(msg.chatKey, index, 1);
+        }
+      });
+
+      return msg;
+    }
+
+    function removePushNotification(msg) {
+      utils.generatePush().then((datas) => {
+        console.log("remover o push!");
+      }).catch((error) => {
+
+      });
+
+      return msg;
+    }
+
+    function scrollToBottom(msg) {
+      content.scrollToBottom(0);
+      return msg;
+    }
+
+    function resolvePromise(msg) {
+      resolve(msg)
+    }
+  });
+
+}
+
+
+  openGallery() {
+    this.utils.openGallery().then((image) => {
+      this._sendImg(image);
+    }).catch((error) => {
+      console.log(error);
+    });
+  }
+
   _sendImg(img) {
     let msgWrapper : any = {
       uid_user : this.user1.$key,
@@ -117,7 +183,7 @@ export class ChatPage {
       created_at: new Date().getTime()
     }
 
-    this.chatStorageService.pushMessage(msgWrapper, this.chatUid);
+    this.chatStorageService.pushMessage(msgWrapper, this.chat.chatUid);
 
     msgWrapper.token_device = this.user2.other_datas.token_device;
     msgWrapper.name_user = this.user1.name;
@@ -138,40 +204,6 @@ export class ChatPage {
     }
   }
 
-  _getMessages() {
-    this.chatStorageService.getLastMessageKey(this.chatUid).then((key) => {
-      let length = 0;
-      this.chatStorageService.getMessages(this.chatUid).subscribe((msgs : any) => {
-        this.listMessages.push(msgs);
-        length++;
-
-        if(msgs.$key == key) {
-           this.lengthMessages = length;
-           this.lengthCtrl = true;
-
-           if(this.status) {
-             console.log(this.status);
-             this._generateMessageStaus(this.user2.name, this.user2.emotion.img, this.user2.emotion.status);
-             setTimeout(() => {
-               this.content.scrollToBottom(0);
-             }, 500);
-           } else {
-             setTimeout(() => {
-               this.content.scrollToBottom(0);
-             }, 500);
-           }
-        }
-
-        if(this.lengthCtrl === true && length > this.lengthMessages) {
-          this.lengthMessages = length;
-
-          setTimeout(() => {
-            this.content.scrollToBottom(0);
-          }, 500);
-        }
-      });
-    });
-  }
 
   _generateMessageStaus(name, image, status) {
     this.listMessages.push({

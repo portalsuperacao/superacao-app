@@ -6,20 +6,13 @@
 
 
 <ion-content padding class="chat">
-  <div class="message" *ngFor="let item of listMessages">
-    <div class="thumb" *ngIf="item.img && !item.is_status" [ngClass]="getClassMsg(item.uid_user)">
+  <div class="message" *ngFor="let item of listMessages | async">
+    <!--<div class="thumb" *ngIf="item.img && !item.is_status" [ngClass]="getClassMsg(item.uid_user)">
       <img src="{{ item.img }}" />
-    </div>
+    </div>-->
 
-    <p *ngIf="!item.img && !item.is_status" [ngClass]="getClassMsg(item.uid_user)"> {{ item.msg }} </p>
-
-    <div *ngIf="item.is_status == 1" [ngClass]="getClassMsg(item.uid_user)">
-      <ion-grid>
-        <ion-row>
-          <ion-col width-20> <img src="{{ item.img}}"> </ion-col>
-          <ion-col width-80> {{ item.msg }} </ion-col>
-        </ion-row>
-      </ion-grid>
+    <div [ngClass]="getClassMsg(item.uid_user)">
+      {{ item.msg }}
     </div>
 
     <div class="clear"></div>
