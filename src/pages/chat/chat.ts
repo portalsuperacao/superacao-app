@@ -35,9 +35,18 @@ export class ChatPage {
   }
 
   ionViewDidLoad() {
-    this._getMessages(this.chatStorageService, this.chat, this.content, this.user1, this.utils).then((chat : any) => {
+    this._getMessages(this.chatStorageService, this.chat, this.user1, this.utils).then((chat : any) => {
       this.listMessages = chat.messages;
     })
+  }
+
+  ionViewDidEnter() {
+    this.content.scrollToBottom(0);
+    this._setViewMessage(this.user1, 1);
+  }
+
+  ionViewDidLeave() {
+
   }
 
   getClassMsg(uidUser) {
@@ -50,13 +59,15 @@ export class ChatPage {
     }
   }
 
- sendMessage() {
-   this._validateMessage(this.message, this.content, this.user1, this.user2, this.chatStorageService, this.chat).then((msg) => {
-     this.message = "";
-   })
- }
+  sendMessage() {
+    this._validateMessage(this.message,this.user1, this.user2, this.chatStorageService, this.chat).then((msg) => {
+      this.message = "";
+      this._setViewMessage(this.user2, 0);
+      this.content.scrollToBottom(0);
+    })
+  }
 
- _validateMessage(message, content, user1, user2, chatStorageService, chat) {
+ _validateMessage(message, user1, user2, chatStorageService, chat) {
     return new Promise((resolve) => {
     let i = 0;
     Promise.resolve(i)
@@ -64,8 +75,6 @@ export class ChatPage {
     .then(msgWrapper)
     .then(sendMessage)
     .then(pushNotification)
-    .then(setViewMessage)
-    .then(scrollToBottom)
     .then(resolvePromise)
 
     function validateInput() {
@@ -94,21 +103,6 @@ export class ChatPage {
       return msg;
     }
 
-    function setViewMessage(msg) {
-      chat.users.forEach((user, index) => {
-        if(user2.$key === user.uid) {
-          chatStorageService.setViewChat(chat.chatKey, index, 0);
-        }
-      });
-
-      return msg;
-    }
-
-    function scrollToBottom(msg) {
-      content.scrollToBottom(0);
-      return msg;
-    }
-
     function resolvePromise(msg) {
       resolve(msg);
     }
@@ -116,14 +110,12 @@ export class ChatPage {
   });
 }
 
-_getMessages(chatStorageService, chat, content, user1, utils) {
+_getMessages(chatStorageService, chat, user1, utils) {
   return new Promise((resolve) => {
     Promise.resolve()
     .then(getChatDatas)
     .then(getMessages)
-    .then(setViewMessage)
     .then(removePushNotification)
-    .then(scrollToBottom)
     .then(resolvePromise)
 
     function getChatDatas() {
@@ -135,15 +127,6 @@ _getMessages(chatStorageService, chat, content, user1, utils) {
       return msg;
     }
 
-    function setViewMessage(msg) {
-      msg.users.forEach((user, index) => {
-        if(user1.$key == user.uid) {
-          chatStorageService.setViewChat(msg.chatKey, index, 1);
-        }
-      });
-
-      return msg;
-    }
 
     function removePushNotification(msg) {
       utils.generatePush().then((datas) => {
@@ -155,10 +138,6 @@ _getMessages(chatStorageService, chat, content, user1, utils) {
       return msg;
     }
 
-    function scrollToBottom(msg) {
-      content.scrollToBottom(0);
-      return msg;
-    }
 
     function resolvePromise(msg) {
       resolve(msg)
@@ -167,6 +146,13 @@ _getMessages(chatStorageService, chat, content, user1, utils) {
 
 }
 
+ _setViewMessage(user, valueView) {
+   this.chat.users.forEach((datas, index) => {
+     if(user.$key == datas.uid) {
+       this.chatStorageService.setViewChat(this.chat.chatKey, index, valueView);
+     }
+   });
+ }
 
   openGallery() {
     this.utils.openGallery().then((image) => {
@@ -211,6 +197,24 @@ _getMessages(chatStorageService, chat, content, user1, utils) {
       is_status: 1,
       img: image
     });
+  }
+
+  _hideTabs() {
+    let tabs = document.querySelectorAll('.tabbar');
+     if ( tabs !== null ) {
+       Object.keys(tabs).map((key) => {
+         tabs[ key ].style.transform = 'translateY(56px)';
+       });
+     }
+  }
+
+  _showTabs() {
+    let tabs = document.querySelectorAll('.tabbar');
+     if ( tabs !== null ) {
+       Object.keys(tabs).map((key) => {
+         tabs[ key ].style.transform = 'translateY(0)';
+       });
+     }
   }
 
 }

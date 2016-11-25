@@ -17,6 +17,8 @@ export class AngelPage {
 
   trinitys;
   space = 'close';
+  overcomerNotification = [];
+  archangelNotification = [];
 
   constructor(
     public nav: NavController,
@@ -36,7 +38,12 @@ export class AngelPage {
 
     this.trinitys = this.updateDatas(this.userStorageService, this.chatStorageService, this.utils);
 
-    this.trinitys.then((datas) => {
+    this.trinitys.then((users) => {
+      users.forEach((user, i) => {
+        this.overcomerNotification[i] = user.overcomer.chat.view;
+        this.archangelNotification[i] =  user.archangel.chat.view;
+      });
+
       loading.dismiss();
     });
   }
@@ -50,7 +57,7 @@ export class AngelPage {
   }
 
   openChat(user1, user2) {
-    this.nav.push(ChatPage, {'user1' : user1, 'user2': user2, 'chat' : user2.chatUid, 'status': 1});
+    this.nav.push(ChatPage, {'user1' : user1, 'user2': user2, 'chat' : user2.chat, 'status': 1});
   }
 
   toggleSpace() {
@@ -63,7 +70,6 @@ export class AngelPage {
       Promise.resolve()
       .then(getTrinityService)
       .then(loopThroughTrinitys)
-      .then(resolvePromise)
 
       function getTrinityService() {
         let trinitys = [{
@@ -76,21 +82,29 @@ export class AngelPage {
           angel: "",
           archangel: "RK2xk9yrgjSRgv5Tmm3ThRgdE102"
         }];
+
         return trinitys;
       }
 
       function loopThroughTrinitys(trinitys) {
-        for(let i = 0; i < trinitys.length; i++) {
-          Promise.resolve(trinitys[i])
-          .then(findOvercomer)
-          .then(findAngel)
-          .then(findArchangel)
-          .then(getChatOvercomer)
-          .then(getChatArchangel)
-          .then(getLastMessages)
-        };
-
-        return trinitys;
+          for(let i = 0; i < trinitys.length; i++) {
+            Promise.resolve(trinitys[i])
+            .then(findOvercomer)
+            .then(findAngel)
+            .then(findArchangel)
+            .then(validateChatOvercomer)
+            .then(validateChatArchangel)
+            .then(getChatOvercomer)
+            .then(getChatArchangel)
+            .then(getNotificationChatOvercomer)
+            .then(getNotificationChatArchangel)
+            .then(getLastMessages)
+            .then((trinity) => {
+              if(i === (trinitys.length - 1)) {
+                resolve(trinitys);
+              }
+            });
+          }
       }
 
 
@@ -115,41 +129,70 @@ export class AngelPage {
         });
       }
 
-      function getChatOvercomer(trinity) {
+      function validateChatOvercomer(trinity) {
         return chatStorageService.getChat(trinity.overcomer.$key, trinity.angel.$key).then((chatDatas : any) => {
           if(!chatDatas) {
-            trinity.overcomer.chatUid = chatStorageService.createChat(trinity.overcomer, trinity.angel);
+            trinity.overcomer.chat = chatStorageService.createChat(trinity.overcomer, trinity.angel).chatUid;
           } else {
-            trinity.overcomer.chatUid = chatDatas.chatUid;
+            trinity.overcomer.chat = chatDatas.chatUid;
           }
 
           return trinity;
         });
+      }
+
+      function validateChatArchangel(trinity) {
+        return chatStorageService.getChat(trinity.angel.$key, trinity.archangel.$key).then((chatDatas : any) => {
+          if(!chatDatas) {
+            trinity.archangel.chat = chatStorageService.createChat(trinity.angel, trinity.archangel).chatUid;
+          } else {
+            trinity.archangel.chat = chatDatas.chatUid;
+          }
+
+          return trinity;
+        });
+      }
+
+      function getChatOvercomer(trinity) {
+        return chatStorageService.getChatUsers(trinity.overcomer.chat).then((chat) => {
+          trinity.overcomer.chat = chat;
+          return trinity;
+        })
       }
 
       function getChatArchangel(trinity) {
-        return chatStorageService.getChat(trinity.angel.$key, trinity.archangel.$key).then((chatDatas : any) => {
-          if(!chatDatas) {
-            trinity.archangel.chatUid = chatStorageService.createChat(trinity.angel, trinity.archangel);
-          } else {
-            trinity.archangel.chatUid = chatDatas.chatUid;
-          }
-
+        return chatStorageService.getChatUsers(trinity.archangel.chat).then((chat) => {
+          trinity.archangel.chat = chat;
           return trinity;
-        });
+        })
       }
 
-      function getLastMessages(trinity) {
-        trinity.overcomer.lastMessages = chatStorageService.getLastMessage(trinity.overcomer.chatUid, trinity.overcomer.$key);
-        trinity.archangel.lastMessages = chatStorageService.getLastMessage(trinity.archangel.chatUid, trinity.archangel.$key);
+      function getNotificationChatOvercomer(trinity) {
+        for(let i = 0; i < trinity.overcomer.chat.users.length; i++) {
+          if(trinity.overcomer.chat.users[i].uid == trinity.angel.$key) {
+            trinity.overcomer.chat.view = chatStorageService.getChatDatasObs(trinity.overcomer.chat.chatKey, i);
+          }
+        }
 
         return trinity;
       }
 
-      function resolvePromise(trinitys) {
-        resolve(trinitys);
+      function getNotificationChatArchangel(trinity) {
+        for(let i = 0; i < trinity.archangel.chat.users.length; i++) {
+          if(trinity.archangel.chat.users[i].uid == trinity.angel.$key) {
+            trinity.archangel.chat.view = chatStorageService.getChatDatasObs(trinity.archangel.chat.chatKey, i);
+          }
+        }
+
+        return trinity;
       }
 
+      function getLastMessages(trinity) {
+        trinity.overcomer.lastMessages = chatStorageService.getLastMessage(trinity.overcomer.chat.chatUid, trinity.overcomer.$key);
+        trinity.archangel.lastMessages = chatStorageService.getLastMessage(trinity.archangel.chat.chatUid, trinity.archangel.$key);
+
+        return trinity;
+      }
     });
   }
 

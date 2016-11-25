@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
 import { Observable } from 'rxjs/Observable';
-import * as localforage from "localforage";
 import * as firebase from 'firebase';
 import 'rxjs/Observable';
 
@@ -84,7 +83,7 @@ export class ChatStorageService {
     db.update({view : value});
   }
 
-  getViewChat(chatKey, user, value) : any {
+  getChatDatasObs(chatKey, user) : any {
     return this.af.database.object('/chat/' + chatKey + '/users/' + user)
   }
 
@@ -143,18 +142,6 @@ export class ChatStorageService {
         });
       });
 
-  }
-
-  setLocalNotification(userUid, data) {
-    localforage.setItem('notifications-' + userUid , data);
-  }
-
-  getLocalNotification(userUid) {
-    return new Promise((resolve) => {
-        localforage.getItem('notifications-' + userUid).then((data) => {
-          resolve(data);
-      });
-    });
   }
 
 

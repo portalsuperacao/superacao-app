@@ -6,7 +6,6 @@ import { UserStorageService } from '../providers/database/user-storage-service';
 import { DateUtil } from '../providers/util/date-util';
 import * as firebase from 'firebase';
 
-import { ApresentationPage } from '../pages/apresentation/apresentation';
 import { ArchangelPage } from '../pages/trinity/archangel/archangel';
 import { TabsPage } from '../pages/tabs/tabs';
 import { LoginPage } from '../pages/login/login';
@@ -65,10 +64,10 @@ export class MyApp {
       if(user.type_user == "Arcanjo") {
         this.rootPage = ArchangelPage;
         this.mainPage = ArchangelPage;
+      } else {
+        this.rootPage = TabsPage;
+        this.mainPage = TabsPage;
       }
-
-      this.rootPage = TabsPage;
-      this.mainPage = TabsPage;
   }
 
   _updateLastAccess(user) {

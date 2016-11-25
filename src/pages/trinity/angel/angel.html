@@ -13,10 +13,10 @@
 
 <ion-content padding class="trinity">
     <!-- ========= USERS CHAT =========== -->
-    <div class="chat-user" *ngFor="let trinity of trinitys | async;">
+    <div class="chat-user" *ngFor="let trinity of trinitys | async; let i = index">
       <!-- ==== ANGEL ==== -->
       <ion-grid>
-        <ion-row>
+        <ion-row [ngClass]="{'text-notification': !(overcomerNotification[i] | async)?.view}">
           <ion-col width-40 (click)="openChat(trinity.angel, trinity.overcomer)">
             <div class="avatar overcomer">
               <img src="{{ trinity.overcomer?.avatar }}" />
@@ -44,7 +44,7 @@
 
         <ion-row>
           <ion-col width-80>
-            <span (click)="openChat(trinity.angel, trinity.archangel)"> Arcanjo: {{ trinity.archangel.name }} </span>
+            <span (click)="openChat(trinity.angel, trinity.archangel)" [ngClass]="{'second-notification': !(archangelNotification[i] | async)?.view}"> Arcanjo: {{ trinity.archangel.name }} </span>
           </ion-col>
 
           <ion-col width-20>
