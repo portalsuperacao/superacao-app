@@ -40,13 +40,14 @@ export class ChatPage {
     })
   }
 
-  ionViewDidEnter() {
+  ionViewWillEnter() {
     this.content.scrollToBottom(0);
     this._setViewMessage(this.user1, 1);
+    this._hideTabs();
   }
 
   ionViewDidLeave() {
-
+    this._showTabs();
   }
 
   getClassMsg(uidUser) {
@@ -200,21 +201,17 @@ _getMessages(chatStorageService, chat, user1, utils) {
   }
 
   _hideTabs() {
-    let tabs = document.querySelectorAll('.tabbar');
-     if ( tabs !== null ) {
-       Object.keys(tabs).map((key) => {
-         tabs[ key ].style.transform = 'translateY(56px)';
-       });
-     }
+    let elem = <HTMLElement>document.querySelector(".tabbar");
+    if (elem != null) {
+      elem.style.display = 'none';
+    }
   }
 
   _showTabs() {
-    let tabs = document.querySelectorAll('.tabbar');
-     if ( tabs !== null ) {
-       Object.keys(tabs).map((key) => {
-         tabs[ key ].style.transform = 'translateY(0)';
-       });
-     }
+    let elem = <HTMLElement>document.querySelector(".tabbar");
+    if (elem != null) {
+      elem.style.display = 'flex';
+    }
   }
 
 }

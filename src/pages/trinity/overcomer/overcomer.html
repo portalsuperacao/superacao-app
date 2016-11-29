@@ -15,17 +15,15 @@
     <div class="status" (click)="openStatusEmotion()">
       <p> Diga ao seu anjo como está se sentindo: </p>
 
-      <ion-grid>
         <ion-row>
           <div> <img class="emoji" [src]="(overcomerObs | async)?.emotion?.img"> </div>
           <div *ngIf="(overcomerObs | async)?.emotion?.status != 'Normal'">
-            Sentindo-se {{ (overcomerObs | async)?.emotion?.status }}
+            <b>Sentindo-se {{ (overcomerObs | async)?.emotion?.status }}</b>
           </div>
           <div *ngIf="(overcomerObs | async)?.emotion?.status  == 'Normal'">
-            Escolha algum sentimento
+            <b>Escolha algum sentimento</b>
           </div>
         </ion-row>
-      </ion-grid>
     </div>
 
     <!-- ========= USERS CHAT =========== -->
@@ -54,13 +52,14 @@
         </ion-row>
 
         <ion-row>
-          <ion-col>
-            <span width-80 (click)="openChat(overcomer, archangel)" [ngClass]="{'second-notification': !(archangelNotification | async)?.view}"> Arcanjo: {{ archangel?.name }} </span>
+          <ion-col class="user-archangel">
+            <div class="avatar archangel">
+              <img [src]="archangel?.avatar" />
+            </div>
+            <div class="user" (click)="openChat(overcomer, archangel)" [ngClass]="{'second-notification': !(archangelNotification | async)?.view}"> Arcanjo: {{ archangel?.name }} </div>
+            <div class="help">Ajuda</div>
           </ion-col>
 
-          <ion-col width-20>
-            <span (click)="openHelpSystem()"> Ajuda </span>
-          </ion-col>
         </ion-row>
       </ion-grid>
     </div>

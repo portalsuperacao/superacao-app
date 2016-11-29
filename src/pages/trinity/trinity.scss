@@ -56,6 +56,33 @@
       color: $text-secondary;
     }
 
+    .user-archangel {
+      div {
+        display: inline-block;
+        color: $text-secondary;
+      }
+
+      .avatar {
+        padding: 0.2rem;
+        width: 3rem;
+        height: 3rem;
+      }
+
+      .user {
+        position: relative;
+        bottom: 7px;
+        left: 5px;
+        margin-top: 1rem;
+      }
+
+      .help {
+        display: block;
+        float: right;
+        margin-top: 7px;
+      }
+
+    }
+
     .text-notification {
       h4 {
         color: #0f8edf !important;
@@ -88,13 +115,6 @@
       color: $background-blue;
     }
 
-    span {
-      color: #b34d71;
-      font-weight: bold;
-      margin-top: 1rem;
-    }
-
-
     ion-col[width-20] {
       text-align: center;
     }
@@ -120,7 +140,6 @@
   }
 
   .missions {
-
     .avatar {
       width: 6.5rem;
       height: 6.5rem;
