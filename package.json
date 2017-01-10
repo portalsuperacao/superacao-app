@@ -4,51 +4,44 @@
   "homepage": "http://ionicframework.com/",
   "private": true,
   "scripts": {
+    "clean": "ionic-app-scripts clean",
     "build": "ionic-app-scripts build",
-    "watch": "ionic-app-scripts watch",
-    "serve:before": "watch",
-    "emulate:before": "build",
-    "deploy:before": "build",
-    "build:before": "build",
-    "run:before": "build"
+    "ionic:build": "ionic-app-scripts build",
+    "ionic:serve": "ionic-app-scripts serve"
   },
   "dependencies": {
-    "@angular/common": "2.0.0",
-    "@angular/compiler": "2.0.0",
-    "@angular/compiler-cli": "0.6.2",
-    "@angular/core": "2.0.0",
-    "@angular/forms": "2.0.0",
-    "@angular/http": "2.0.0",
-    "@angular/platform-browser": "2.0.0",
-    "@angular/platform-browser-dynamic": "2.0.0",
-    "@angular/platform-server": "2.0.0",
-    "@ionic/app-scripts": "0.0.37-2",
-    "@ionic/storage": "1.0.3",
-    "@types/localforage": "0.0.32",
+    "@angular/common": "2.2.1",
+    "@angular/compiler": "2.2.1",
+    "@angular/compiler-cli": "2.2.1",
+    "@angular/core": "2.2.1",
+    "@angular/forms": "2.2.1",
+    "@angular/http": "2.2.1",
+    "@angular/platform-browser": "2.2.1",
+    "@angular/platform-browser-dynamic": "2.2.1",
+    "@angular/platform-server": "2.2.1",
+    "@ionic/storage": "1.1.7",
     "angular2-text-mask": "^2.1.0",
-    "angularfire2": "2.0.0-beta.5",
-    "firebase": "3.5.2",
-    "ionic-angular": "2.0.0-rc.1",
-    "ionic-native": "2.2.3",
+    "angularfire2": "^2.0.0-beta.6",
+    "firebase": "^3.6.4",
+    "ionic-angular": "2.0.0-rc.4",
+    "ionic-native": "2.2.11",
     "ionicons": "3.0.0",
-    "localforage": "^1.4.3",
-    "moment": "^2.15.2",
+    "moment": "^2.17.1",
     "rxjs": "5.0.0-beta.12",
-    "zone.js": "0.6.21"
+    "zone.js": "0.6.26"
   },
   "devDependencies": {
-    "@ionic/app-scripts": "^0.0.36",
-    "@types/request": "0.0.30",
-    "typescript": "^2.0.3"
+    "@ionic/app-scripts": "0.0.47",
+    "typescript": "2.0.9"
   },
-  "description": "superacao-app: An Ionic project",
   "cordovaPlugins": [
-    "cordova-plugin-device",
-    "cordova-plugin-console",
     "cordova-plugin-whitelist",
-    "cordova-plugin-splashscreen",
+    "cordova-plugin-console",
     "cordova-plugin-statusbar",
+    "cordova-plugin-device",
+    "cordova-plugin-splashscreen",
     "ionic-plugin-keyboard"
   ],
-  "cordovaPlatforms": []
+  "cordovaPlatforms": [],
+  "description": "superacao-app: An Ionic project"
 }

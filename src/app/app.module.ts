@@ -10,6 +10,7 @@ import { TextMaskModule } from 'angular2-text-mask';
 
 // PROVIDERS
 import { AngularFireModule } from 'angularfire2';
+import { AuthService } from '../providers/database/auth-service';
 import { UserStorageService } from '../providers/database/user-storage-service';
 import { CalendarStorageService } from '../providers/database/calendar-storage-service';
 import { ChatStorageService } from '../providers/database/chat-storage-service';
@@ -19,7 +20,6 @@ import { Utils } from '../providers/util/utils';
 
 // PAGES
 import { MyApp } from './app.component';
-import { ApresentationPage } from '../pages/apresentation/apresentation';
 import { CalendarPage } from '../pages/calendar/calendar';
 import { CalendarNewEventPage } from '../pages/calendar/new-event/new-event'
 import { CalendarEventEditPage } from '../pages/calendar/new-event/edit-event/edit-event';
@@ -65,7 +65,6 @@ firebase.initializeApp(firebaseConfig);
 @NgModule({
   declarations: [
     MyApp,
-    ApresentationPage,
     CalendarPage,
     CalendarNewEventPage,
     CalendarEventEditPage,
@@ -106,7 +105,6 @@ firebase.initializeApp(firebaseConfig);
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    ApresentationPage,
     CalendarPage,
     CalendarNewEventPage,
     CalendarEventEditPage,
@@ -137,6 +135,7 @@ firebase.initializeApp(firebaseConfig);
     NormalPage
   ],
   providers: [
+    AuthService,
     UserStorageService,
     CalendarStorageService,
     ChatStorageService,
