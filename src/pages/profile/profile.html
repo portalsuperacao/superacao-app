@@ -1,15 +1,11 @@
 <ion-header>
-
   <ion-navbar color="dark">
     <button ion-button menuToggle>
       <ion-icon name="menu"> </ion-icon>
     </button>
-
     <ion-title> Meu perfil </ion-title>
   </ion-navbar>
-
 </ion-header>
-
 
 <ion-content class="background-dark">
   <div class="avatar trinity">
@@ -19,8 +15,6 @@
         <img [src]="(user | async)?.emotion?.img">
       </div>
     </div>
-
-
     <div class="name"> {{ (user | async)?.name }} </div>
     <div class="type"> {{ (user | async)?.type_user }} </div>
   </div>
@@ -29,13 +23,11 @@
     <button ion-button clear full color="primary" (click)="openEdit()">
       <ion-icon name="ios-create-outline"> </ion-icon> Editar perfil
      </button>
-
     <div class="datas">
       <div class="right">
         <div class="title"> Professora </div>
         <div class="title"> 38 anos </div>
       </div>
-
       <div class="left">
         <div class="title"> Casada </div>
         <div class="title"> 0 filhos </div>

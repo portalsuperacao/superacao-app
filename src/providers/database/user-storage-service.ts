@@ -41,14 +41,13 @@ export class UserStorageService {
 
   // ================= Firebase ===============
 
-  registerUser(result) {
-    if(result.auth) {
-      result.photoURL = result.auth.photoURL;
-      result.name = result.auth.displayName;
-      result.email = result.auth.email;
-    }
+  registerUser(result, user) {
 
+    result.photoURL = result.auth.photoURL;
+    result.name = result.auth.displayName || user.name;
+    result.email = result.auth.email;
 
+    console.log(result);
     let data = {
       provider : result.provider,
       name : result.name,

@@ -52,12 +52,12 @@ export class AuthService {
   }
 
   signUpWithEmail(credentials) {
+    let user = credentials;
     return this.af.auth.createUser({
       email: credentials.email,
       password: credentials.password
     }).then((credentials) => {
-      console.log(credentials);
-      this.userStorageService.registerUser(credentials);
+      this.userStorageService.registerUser(credentials, user);
     });
   }
 

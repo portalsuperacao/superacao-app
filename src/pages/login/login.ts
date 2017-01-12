@@ -40,35 +40,29 @@ export class LoginPage {
         email: ["", Validators.required],
         password:  ["", [Validators.required, Validators.minLength(6)]]
       });
-
-      this.messagesError = {
-        login: 'Não foi possivel realizar o login, tente novamente mais tarde, ou entre em contato',
-        sigup: 'Não foi possivel realizar o cadastro, tente novamente mais tarde, ou entre em contato'
-      }
-
   }
 
   signup(credentials) {
     this._showLoading();
-
     if(this._validateForm(credentials) === false) {
       return;
     }
 
-    console.log(credentials);
-    // this.authService.signUpWithEmail(credentials).then(() => {
-    //   this.loading.dismiss();
-    // }).catch(() => {
-    //   this._showError(this.messagesError.login)
-    // });
+    this.authService.signUpWithEmail(credentials).then(() => {
+      this.loading.dismiss();
+    }).catch((error : any) => {
+      console.log(error);
+      this._showError(this._validateMessagesError(error.code));
+    });
   }
 
   login(credentials) {
     this._showLoading();
     this.authService.signInWithEmail(credentials).then(() => {
       this.loading.dismiss();
-    }).catch(() => {
-      this._showError(this.messagesError.login)
+    }).catch((error : any) => {
+      console.log(error);
+      this._showError(this._validateMessagesError(error.code));
     });
   }
 
@@ -76,8 +70,9 @@ export class LoginPage {
     this._showLoading();
     this.authService.signWithFacebook().then(() => {
       this.loading.dismiss();
-    }).catch((err) => {
-      this._showError(err);
+    }).catch((error : any) => {
+      console.log(error);
+      this._showError(this._validateMessagesError(error.code));
     });
   }
 
@@ -101,16 +96,36 @@ export class LoginPage {
   }
 
   _validateForm(credentials) : any {
-    if(!credentials.email || !credentials.pass || !credentials.passConfirm) {
+    if(!credentials.name || !credentials.email || !credentials.password || !credentials.passConfirm) {
       this._showError('Preencha todos os campos');
       return false;
     }
-    if(!(credentials.pass === credentials.passConfirm)) {
+    if(!(credentials.password === credentials.passConfirm)) {
        this._showError('As senhas digitadas não são iguais');
        return false;
     }
 
     return true;
+  }
+
+  _validateMessagesError(message) {
+    let errorMessages = {
+      userNotFind : 'Não foi possivel realizar o cadastro, este usuário não existe',
+      userEquals : 'Não foi possivel realizar o cadastro, este usuário já existe',
+      offline: 'Não foi possivel realizar a conexão com os nossos servidores',
+      undefined: 'Ocorreu algum problema desconhecido, entre em contato conosco para resolver este problema'
+    }
+
+    switch(message) {
+      case "auth/email-already-in-use":
+        return errorMessages.userEquals
+      case "auth/user-not-found":
+        return errorMessages.userNotFind
+      case "auth/network-request-failed":
+        return errorMessages.offline
+      default:
+        return errorMessages.undefined;
+    }
   }
 
 }

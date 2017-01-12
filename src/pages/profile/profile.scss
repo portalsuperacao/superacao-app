@@ -3,7 +3,6 @@ page-profile {
     height: 45%;
     padding-top: 20px;
     text-align: center;
-
     .thumb {
       display: inline-block;
       width: 10rem;
@@ -11,7 +10,6 @@ page-profile {
       margin-bottom: 20px;
       padding: 0.4rem;
       border-radius: 100%;
-
       .emotion {
         float: left;
         position: relative;
@@ -19,45 +17,44 @@ page-profile {
         height: 50px;
         bottom: 40px;
         right: 10px;
-
       }
-
       img {
         border-radius: 100%;
       }
     }
   }
-
   .profile-datas {
     padding-left: 20px;
     padding-right: 20px;
     background: #FFF;
-    font-size: 1.9rem;
-
+    font-size: $font-size;
     .title {
       font-weight: bold;
       color: $text-secondary;
     }
-
     .text {
       color: $text-light;
     }
-
     .datas {
       margin-top: 10px;
       margin-bottom: 10px;
-
       .left {
         float: left;
       }
-
       .right {
         float: right;
       }
     }
-
     .clear {
       clear: both;
+    }
+  }
+}
+
+edit-profile {
+  .input-field {
+    input {
+      padding: $spacing-elements;
     }
   }
 }

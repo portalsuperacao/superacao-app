@@ -2,35 +2,28 @@
   .overcomer {
     background: $overcomer-color;
   }
-
   .angel {
     background: $angel-color;
   }
-
   .archangel {
     background: $archangel-color;
   }
-
   .status {
     padding-bottom: 1rem;
     border-bottom: 1px solid #DDD;
     font-size: 1.8rem;
     color: $text-primary;
-
     ion-row {
       div {
         display: inline-block;
         margin: auto;
       }
     }
-
     p {
       text-align: center;
       color: $text-primary;
     }
   }
-
-
   .form-active {
     text-align: center;
     margin-top: 3rem;
@@ -45,44 +38,35 @@
       background: #FFF;
     }
   }
-
-
   .chat-user {
     padding-top: 2rem;
     padding-bottom: 2rem;
     border-bottom: 1px solid #DDD;
-
     h4 {
       color: $text-secondary;
     }
-
     .user-archangel {
       div {
         display: inline-block;
         color: $text-secondary;
       }
-
       .avatar {
         padding: 0.2rem;
         width: 3rem;
         height: 3rem;
       }
-
       .user {
         position: relative;
         bottom: 7px;
         left: 5px;
         margin-top: 1rem;
       }
-
       .help {
         display: block;
         float: right;
         margin-top: 7px;
       }
-
     }
-
     .text-notification {
       h4 {
         color: #0f8edf !important;
@@ -92,39 +76,32 @@
         font-weight: bold;
       }
     }
-
     .second-notification {
       color: #0f8edf !important;
     }
-
     .message {
       p {
         line-height: 20px;
         color: $text-primary;
       }
-
       .hour {
         position: relative;
         bottom: 1rem;
       }
     }
-
     ion-icon {
       font-size: 4.5rem;
       margin-top: 3rem;
       color: $background-blue;
     }
-
     ion-col[width-20] {
       text-align: center;
     }
-
     .avatar {
       width: 10rem;
       height: 10rem;
       border-radius: 100%;
       padding: 0.4rem;
-
       .emotion {
         position: relative;
         bottom: 40px;
@@ -132,13 +109,11 @@
         width: 50px;
         height: 50px;
       }
-
       img {
         border-radius: 100%;
       }
     }
   }
-
   .missions {
     .avatar {
       width: 6.5rem;
@@ -146,7 +121,6 @@
       margin: auto;
       border-radius: 100%;
       padding: 0.4rem;
-
       .emotion {
         position: relative;
         bottom: 30px;
@@ -154,38 +128,30 @@
         width: 35px;
         height: 35px;
       }
-
       img {
         border-radius: 100%;
       }
-
     }
-
     .name {
       text-align: center;
       margin-top: 5px;
     }
   }
-
   .space-user {
     padding-top: 2rem;
     padding-bottom: 2rem;
     border-bottom: 1px solid #DDD;
-
     .close {
       background: $text-primary;
     }
-
     .open {
       background: $overcomer-color;
     }
-
     .avatar {
       width: 10rem;
       height: 10rem;
       border-radius: 100%;
       padding: 0.4rem;
-
       ion-icon {
         font-size: 3.6rem;
         margin-top: 3rem;
@@ -193,17 +159,13 @@
         color: #FFF;
       }
     }
-
     ion-col[width-67] {
       padding-left: 30px;
-
       h4 {
         color: $text-secondary;
       }
-
       p {
         color: $background-blue;
-
         ion-icon {
           position: relative;
           top: 5px;
@@ -212,9 +174,7 @@
         }
       }
     }
-
   }
-
   .help {
     button {
       text-transform: none;
@@ -223,25 +183,20 @@
       letter-spacing: 0.07rem;
     }
   }
-
   .missions {
     color: $text-primary !important;
-
     ion-row {
       margin-top: 10px;
       border-bottom: solid 1px #ddd;
     }
-
     .title {
       font-size: 2rem;
       margin: 0;
       padding: 0;
     }
-
     .alert {
       margin: 5px;
       padding: 0;
-
       span {
         display: inline-block;
         width: 15px;
@@ -250,10 +205,26 @@
         border-radius: 100%;
       }
     }
-
     .time {
       font-size: 1.6rem;
     }
   }
+}
 
+page-visitor {
+  ion-content {
+    background-color: rgb(227, 224, 230) !important;
+  }
+  input {
+    display: block;
+    width: 100%;
+    min-height: 50px;
+    padding: 10px;
+    border: none;
+    font-style: 22px;
+  }
+  p {
+    font-size: $font-size;
+    line-height: 20px;
+  }
 }

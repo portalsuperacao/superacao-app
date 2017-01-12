@@ -47,7 +47,7 @@ import { ArchangelMissionsPage } from '../pages/trinity/archangel/missions/missi
 import { ArchangelMissionsDetailsPage } from '../pages/trinity/archangel/missions/details/details';
 import { ArchangelMissionsHistoricalPage } from '../pages/trinity/archangel/missions/historical/historical';
 import { ArchangelChatPage } from '../pages/trinity/archangel/chat/chat';
-import { NormalPage } from '../pages/trinity/normal/normal';
+import { VisitorPage } from '../pages/trinity/visitor/visitor';
 import * as firebase from 'firebase';
 
 
@@ -92,7 +92,7 @@ firebase.initializeApp(firebaseConfig);
     ArchangelMissionsDetailsPage,
     ArchangelMissionsHistoricalPage,
     ArchangelChatPage,
-    NormalPage,
+    VisitorPage,
     CalendarPicker,
     DateCustomPipe,
     TruncatePipe
@@ -132,7 +132,7 @@ firebase.initializeApp(firebaseConfig);
     ArchangelMissionsDetailsPage,
     ArchangelMissionsHistoricalPage,
     ArchangelChatPage,
-    NormalPage
+    VisitorPage
   ],
   providers: [
     AuthService,

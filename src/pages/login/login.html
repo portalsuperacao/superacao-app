@@ -29,7 +29,7 @@
               <ion-label stacked> Senha </ion-label>
               <ion-input type="password"  formControlName="password"></ion-input>
             </ion-item>
-            <div class="error-field" *ngIf="formLogin.controls.email.errors && formLogin.controls.password.touched"> Este campo é necessário e deve conter 6 digitos </div>
+            <div class="error-field" *ngIf="formLogin.controls.password.errors && formLogin.controls.password.touched"> Este campo é necessário e deve conter 6 digitos </div>
 
             <div padding>
               <button ion-button full color="dark" [disabled]="!formLogin.valid"> Login </button>
@@ -42,25 +42,25 @@
               <ion-label stacked> Nome </ion-label>
               <ion-input type="text" formControlName="name"></ion-input>
             </ion-item>
-            <div class="error-field"> Este campo é necessário </div>
+            <div class="error-field" *ngIf="formSignup.controls.name.errors && formSignup.controls.name.touched"> Este campo é necessário </div>
 
             <ion-item>
               <ion-label stacked> E-mail </ion-label>
               <ion-input type="email" formControlName="email"></ion-input>
             </ion-item>
-            <div class="error-field" *ngIf="formSignup.controls.email.erros && formSignup.controls.email.touched"> Este campo é necessário </div>
+            <div class="error-field" *ngIf="formSignup.controls.email.errors && formSignup.controls.email.touched"> Este campo é necessário </div>
 
             <ion-item>
               <ion-label stacked> Senha </ion-label>
               <ion-input type="password" formControlName="password"></ion-input>
             </ion-item>
-            <div class="error-field" *ngIf="formSignup.controls.password.erros && formSignup.controls.password.touched"> Este campo é necessário e deve conter 6 digitos </div>
+            <div class="error-field" *ngIf="formSignup.controls.password.errors && formSignup.controls.password.touched"> Este campo é necessário e deve conter 6 digitos </div>
 
             <ion-item>
               <ion-label stacked> Confirmar senha </ion-label>
               <ion-input type="password" formControlName="passConfirm"></ion-input>
             </ion-item>
-            <div class="error-field" *ngIf="formSignup.controls.passConfirm.erros && formSignup.controls.passConfirm.touched"> Este campo é necessário e deve conter 6 digitos </div>
+            <div class="error-field" *ngIf="formSignup.controls.passConfirm.errors && formSignup.controls.passConfirm.touched"> Este campo é necessário e deve conter 6 digitos </div>
 
             <div padding>
               <button ion-button full color="dark" [disabled]="!formSignup.valid"> Cadastre-se </button>
@@ -69,7 +69,10 @@
         </div>
 
         <div padding>
-          <button ion-button  full color="facebook" (click)="loginFacebook()"> <ion-icon name="logo-facebook"></ion-icon> Facebook </button>
+          <button ion-button item-right icon-left full color="facebook" (click)="loginFacebook()">
+            <ion-icon name="logo-facebook"></ion-icon>
+            Facebook
+          </button>
         </div>
     </div>
   </div>

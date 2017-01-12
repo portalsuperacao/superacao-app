@@ -8,6 +8,7 @@ import { UserStorageService } from '../../providers/database/user-storage-servic
   selector: 'page-profile',
   templateUrl: 'profile.html'
 })
+
 export class ProfilePage {
   user;
 

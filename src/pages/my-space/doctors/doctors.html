@@ -3,12 +3,9 @@
     <button ion-button menuToggle>
      <ion-icon  name="menu"></ion-icon>
     </button>
-
     <ion-title> Meu contatos médicos </ion-title>
-
   </ion-navbar>
 </ion-header>
-
 
 <ion-content class="background-dark" padding>
   <div class="my-space-add-button">
@@ -16,7 +13,6 @@
       <ion-icon name="add"> </ion-icon>
     </button>
    </div>
-
   <div class="my-space-list" *ngFor="let doctor of doctors | async">
     <div class="header doctors">
       <div class="container" (click)="editEvent(doctor)">
@@ -25,7 +21,6 @@
       </div>
       <div class="icon" (click)="removeEvent(doctor)"> <ion-icon name="md-close"> </ion-icon> </div>
     </div>
-
     <div class="content" (click)="editEvent(doctor)">
       <div class="container">
         <ul>
@@ -38,5 +33,4 @@
       <div class="icon"> <ion-icon name="ios-arrow-forward"> </ion-icon> </div>
     </div>
   </div>
-
 </ion-content>

@@ -3,7 +3,7 @@ import { UserStorageService } from '../../providers/database/user-storage-servic
 
 import { OvercomerPage } from '../trinity/overcomer/overcomer';
 import { AngelPage } from '../trinity/angel/angel';
-import { NormalPage } from '../trinity/normal/normal';
+import { VisitorPage } from '../trinity/visitor/visitor';
 import { MySpacePage } from '../my-space/my-space';
 
 @Component({
@@ -25,7 +25,7 @@ export class TabsPage {
       } else if (user.type_user === "Anjo") {
         this.trinityPage = AngelPage;
       } else {
-        this.trinityPage = NormalPage;
+        this.trinityPage = VisitorPage;
       }
     });
   }
