@@ -32,7 +32,7 @@
       text-align: left;
       color: $text-primary;
       font-size: 1.6rem;
-      background: $background-dark;
+      background: $background-color-dark;
     }
   }
 
@@ -84,7 +84,7 @@
 }
 
 .event {
-  background: $background-dark;
+  background: $background-color-dark;
   color: $text-primary;
   font-size: 1.7rem;
 
@@ -239,7 +239,7 @@
 
     .title-question {
       text-align: center;
-      background: $background-dark;
+      background: $background-color-dark;
     }
 
     .question {

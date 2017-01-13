@@ -2,8 +2,8 @@
   font-family: $font-family;
 }
 
-.background-dark {
-  background: $background-dark;
+.background-color-dark {
+  background: $background-color-dark;
 }
 
 ion-footer {
@@ -20,7 +20,6 @@ ion-footer {
 
 .simple-item {
   padding: 0 !important;
-
   div {
     padding-left: 8px;
   }
@@ -70,7 +69,7 @@ ion-footer {
     height: 4rem !important;
     line-height: 4.5rem !important;
     border: none !important;
-    color: $background-blue !important;
+    color: $background-color-blue !important;
     background: none !important;
   }
 
@@ -82,5 +81,41 @@ ion-footer {
 
   .segment-activated {
     background: #e7e7e7 !important;
+  }
+}
+
+.input-field {
+  margin: ($spacing-elements * 3) 0;
+  .item-inner {
+    border-bottom: none !important;
+    padding: none !important;
+  }
+  > * {
+    background-color: #FFF;
+    padding: $spacing-elements / 2;
+    border-bottom: solid 1px #DDD;
+    font-size: $font-size !important;
+    &:last-child {
+      border: none;
+    }
+  }
+  .datetime {
+    color: $text-light;
+    > * {
+      display: inline-block;
+    }
+  }
+  ion-select, ion-label, select {
+    color: $text-light;
+  }
+  select {
+    margin-top: 10px;
+    border: none;
+    background: none;
+    box-shadow: none;
+  }
+  span {
+    display: block;
+    text-align: center;
   }
 }

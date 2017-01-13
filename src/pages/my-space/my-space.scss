@@ -2,7 +2,6 @@
   float: right;
   margin-bottom: 5px;
   font-size: 1.8rem;
-
   button {
     width: 25px;
     height: 25px;
@@ -21,7 +20,6 @@
   border-radius: 10px;
   border: solid 1px #DDD;
   font-size: 1.7rem;
-
   .header {
     display: inline-flex;
     width: 100%;
@@ -29,23 +27,19 @@
     padding-left: 3px;
     color: #FFF;
     font-weight: bold;
-
     h5 {
       margin-left: 5px;
       margin-top: 5px;
     }
-
     .title {
       padding-left: 5px;
     }
-
     .subtitle {
       padding-left: 5px;
       padding-bottom: 5px;
       font-size: 1.4rem;
     }
   }
-
   .content {
     display: inline-flex;
     width: 100%;
@@ -53,38 +47,31 @@
     padding-bottom: 3px;
     padding-left: 3px;
     color: $text-primary;
-
     ul {
       margin: 0;
       padding-left: 25px;
       padding-bottom: 10px;
-
       li {
         padding-top: 6px;
       }
     }
-
     p {
       margin-left: 5px;
     }
-
     .highlight {
-      color: $background-blue;
+      color: $background-color-blue;
     }
   }
-
   .container {
     width: 100%;
     text-align: left;
   }
-
   .obs {
     margin-left: 5px;
     margin-bottom: 10px;
     font-size: 1.4rem;
     color: #888;
   }
-
   .icon {
     display: flex;
     flex-direction: column;
@@ -94,31 +81,25 @@
     right: 10px;
     font-size: 1.3rem;
   }
-
   .medicines {
     background: $my-space-yellow;
   }
-
   .doctors {
     background: $my-space-blue;
   }
-
   .notes {
     background: $my-space-green;
   }
 }
 
-
 page-my-space {
   height: 100%;
   padding: 0;
   flex-wrap: wrap;
-
   .avatar {
     height: 45%;
     padding-top: 20px;
     text-align: center;
-
     .thumb {
       display: inline-block;
       width: 10rem;
@@ -126,7 +107,6 @@ page-my-space {
       margin-bottom: 20px;
       padding: 0.4rem;
       border-radius: 100%;
-
       .emotion {
         float: left;
         position: relative;
@@ -134,120 +114,50 @@ page-my-space {
         height: 50px;
         bottom: 40px;
         right: 10px;
-
       }
-
       img {
         border-radius: 100%;
       }
     }
-
     .name {
       font-weight: bold;
       font-size: 2.3rem;
       color: $text-secondary;
     }
-
     .type {
       font-size: 1.6rem;
       color: $text-primary;
     }
 
   }
-
   .grid-full {
     height: 55%;
     text-align: center;
-
     ion-row {
       height: 50%;
       color: #FFF;
-
       ion-col {
         padding-top: 2%;
         padding-bottom: 2%;
       }
-
       ion-icon {
         font-size: 4rem;
       }
-
       p {
         font-size: 1.6rem;
       }
     }
-
     .calendar {
       background: $my-space-red;
     }
-
     .doctors {
       background: $my-space-blue
     }
-
     .medicines {
       background: $my-space-yellow;
     }
-
     .notes {
       background: $my-space-green;
     }
-  }
-}
-
-page-my-space-doctors-event {
-  .add {
-    margin-top: 10px;
-    text-align: center;
-    color: $background-blue;
-  }
-
-  select {
-    margin-top: 10px;
-    border: none;
-    background: none;
-    box-shadow: none;
-  }
-
-  ion-icon[name="close"] {
-    margin-top: 7px;
-    font-size: 2.5rem;
-  }
-}
-
-page-my-space-notes-event {
-  .input {
-    margin-top: 5px;
-    margin-bottom: 5px;
-    border-top: 1px #DDD solid;
-    border-bottom: 1px #DDD solid;
-    font-size: 1.6rem;
-    background: #FFF;
-    color: $text-primary;
-
-    span {
-      display: block;
-      width: 100%;
-      margin-bottom: 5px;
-      color: $text-primary;
-      text-align: center;
-    }
-  }
-
-  input {
-    width: 100%;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-left: 5px;
-    border: none;
-  }
-
-  textarea {
-    resize: none;
-    width: 100%;
-    padding-top: 10px;
-    padding-left: 5px;
-    height: 300px;
-    border: none;
   }
 }

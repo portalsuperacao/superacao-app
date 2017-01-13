@@ -5,55 +5,32 @@
         <ion-icon name="close"> </ion-icon>
       </button>
     </ion-buttons>
-
     <ion-title> Lembrete do medicamento </ion-title>
-
   </ion-navbar>
 </ion-header>
 
-<ion-content class="event">
+<ion-content class="background-color-dark">
   <form [formGroup]="formEvent" (ngSubmit)="insertEvent(formEvent.value)">
-    <div class="datas-main">
-      <div>
-          <ion-input placeholder="Nome do medicamento" type="text" formControlName="title"></ion-input>
-      </div>
-
-      <div class="divider"> </div>
-
-      <div>
+    <div class="input-field">
+        <ion-input placeholder="Nome do medicamento" type="text" formControlName="title"></ion-input>
         <ion-input placeholder="Concentração(mg)" type="text" formControlName="conc"></ion-input>
-      </div>
-
-      <div class="divider"> </div>
-
-      <div>
         <ion-input placeholder="Dosagem" type="number" formControlName="dosage"></ion-input>
-      </div>
     </div>
 
-    <div class="datas-date">
-      <ion-grid>
-        <ion-row>
-          <ion-col width-25>
-            <label> Inicio </label>
-          </ion-col>
-
-          <ion-col width-45>
-            <ion-item>
-                <ion-datetime displayFormat="DD MMM YYYY" pickerFormat="DD MMM YYYY" formControlName="startDate"> </ion-datetime>
-            </ion-item>
-          </ion-col>
-
-          <ion-col width-30>
-            <ion-item>
-                <ion-datetime displayFormat="H:mm" pickerFormat="H:mm" formControlName="startTime"> </ion-datetime>
-            </ion-item>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-
-      <div class="divider"> </div>
-
+    <div class="input-field">
+      <div class="datetime">
+        <div class="label">Início</div>
+        <div class="date">
+          <ion-item>
+            <ion-datetime displayFormat="DD MMM YYYY" pickerFormat="DD MMM YYYY" formControlName="startDate"> </ion-datetime>
+          </ion-item>
+        </div>
+        <div class="time">
+          <ion-item>
+            <ion-datetime displayFormat="H:mm" pickerFormat="H:mm" formControlName="startTime"> </ion-datetime>
+          </ion-item>
+        </div>
+      </div>
       <ion-item>
         <ion-label> Intervalos </ion-label>
         <ion-select cancelText="cancelar" formControlName="interval">
@@ -62,13 +39,7 @@
           </ion-option>
         </ion-select>
       </ion-item>
-
-      <div class="divider"> </div>
-
-      <ion-row>
-        <textarea placeholder="Observações" formControlName="obs"></textarea>
-      </ion-row>
-
+      <ion-textarea placeholder="Observações" formControlName="obs"></ion-textarea>
     </div>
 
     <button ion-button full clear [disabled]="!formEvent.valid"> Salvar </button>

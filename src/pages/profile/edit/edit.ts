@@ -8,7 +8,7 @@ import { NavController, ViewController, NavParams } from 'ionic-angular';
 
 export class ProfileEditPage {
   user;
-
+  date;
   constructor(
     public navCtrl: NavController,
     public ViewCtrl: ViewController,
@@ -17,7 +17,7 @@ export class ProfileEditPage {
     }
 
   ionViewDidLoad() {
-
+    this.date = new Date();
   }
 
   closePage() {

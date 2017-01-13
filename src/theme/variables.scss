@@ -4,14 +4,6 @@ $font-path: "../assets/fonts";
 
 @import "ionic.globals";
 
-
-// Shared Variables
-// --------------------------------------------------
-// To customize the look and feel of this app, you can override
-// the Sass variables found in Ionic's source scss files.
-// To view all the possible Ionic variables, see:
-// http://ionicframework.com/docs/v2/theming/overriding-ionic-variables/
-
 @font-face {
   font-family: 'lato';
   src: url('../assets/fonts/Lato-Regular.woff?ngpcqs') format('woff'),
@@ -21,19 +13,18 @@ $font-path: "../assets/fonts";
 }
 
 $font-family : "lato";
-$font-size : 1.6rem;
+$font-size : 1.7rem;
 
-$spacing-elements: 15px;
+$spacing-elements: 10px;
 
 $text-color: #000;
-$background-color:  #fff;
 $text-primary : #808080;
 $text-secondary: #666;
 $text-light : #888888;
-$background-dark: #f7f7f7;
-$background-main: #c099ea;
-$background-blue: #5da0d2;
-$background-light: #f5f5f5;
+$background-color-dark: #f7f7f7;
+$background-color-main: #c099ea;
+$background-color-blue: #5da0d2;
+$background-color-light: #f5f5f5;
 
 $overcomer-color: #f2be38;
 $angel-color: #5da0d2;

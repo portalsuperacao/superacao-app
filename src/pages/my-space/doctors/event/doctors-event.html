@@ -9,34 +9,17 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content class="event">
+<ion-content class="background-color-dark">
   <form [formGroup]="formEvent" (ngSubmit)="insertEvent(formEvent.value)">
-    <div class="datas-main">
-      <div>
-          <ion-input placeholder="Nome" type="text" formControlName="name"></ion-input>
-      </div>
-      <div class="divider"> </div>
-      <div>
-        <ion-input placeholder="Sobrenome" type="text" formControlName="lastName"></ion-input>
-      </div>
-      <div class="divider"> </div>
-
-      <div>
-        <ion-input placeholder="Especialidade" type="text" formControlName="speciality"></ion-input>
-      </div>
-      <div class="divider"> </div>
-
-      <div>
-        <ion-input placeholder="Endereço" type="text" formControlName="address"></ion-input>
-      </div>
-      <div class="divider"> </div>
-
-      <div>
-        <ion-input placeholder="E-mail" type="text" formControlName="email"></ion-input>
-      </div>
+    <div class="input-field">
+      <ion-input placeholder="Nome" type="text" formControlName="name"></ion-input>
+      <ion-input placeholder="Sobrenome" type="text" formControlName="lastName"></ion-input>
+      <ion-input placeholder="Especialidade" type="text" formControlName="speciality"></ion-input>
+      <ion-input placeholder="Endereço" type="text" formControlName="address"></ion-input>
+      <ion-input placeholder="E-mail" type="text" formControlName="email"></ion-input>
     </div>
 
-    <div class="datas-others">
+    <div class="input-field">
       <ion-row *ngFor="let phone of phones; let i = index">
         <ion-col width-40>
             <select [(ngModel)]="phone.type" [ngModelOptions]="{standalone: true}">
@@ -45,7 +28,6 @@
               <option> Celular </option>
             </select>
         </ion-col>
-
         <ion-col width-50>
           <ion-input placeholder="Telefone" type="text"
           [textMask]="{mask: mask}"
@@ -53,16 +35,15 @@
           [ngModelOptions]="{standalone: true}"
           (click)="clickPhone(i)"> </ion-input>
         </ion-col>
-
         <ion-col width-10>
           <ion-icon name="close" [hidden]="showClosePhone != i" (click)="removePhone(i)"> </ion-icon>
         </ion-col>
       </ion-row>
+      <ion-item>
+        <span (click)="addPhone()"> <ion-icon name="md-add"> </ion-icon> Adicionar telefone </span>
+      </ion-item>
     </div>
-
-    <div class="add" (click)="addPhone()"> Adicionar telefone <ion-icon name="md-add-circle"> </ion-icon> </div>
-
-
+    
     <button ion-button clear full [disabled]="!formEvent.valid || !validePhones()"> Enviar </button>
   </form>
 

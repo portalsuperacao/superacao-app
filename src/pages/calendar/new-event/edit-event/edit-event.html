@@ -11,107 +11,64 @@
 
 <ion-content class="event">
   <form [formGroup]="formEvent" (ngSubmit)="insertEvent(formEvent.value)">
-    <div class="datas-main">
-      <div *ngIf="typeEvent == 'Consulta'">
-          <ion-input placeholder="Médico" type="text" formControlName="title"></ion-input>
-      </div>
-
-      <div *ngIf="typeEvent == 'Consulta'" class="divider"> </div>
-
-      <div *ngIf="typeEvent == 'Consulta'">
-          <ion-input placeholder="Especialidade" type="text" formControlName="typeOfMedic"></ion-input>
-      </div>
-
-      <div *ngIf="typeEvent == 'Exame'">
-          <ion-input placeholder="Tipo do exame" type="text" formControlName="title"></ion-input>
-      </div>
-
-      <div *ngIf="typeEvent == 'Procedimento'">
-          <ion-input placeholder="Tipo do procedimento" type="text" formControlName="title"></ion-input>
-      </div>
-
-      <div *ngIf="typeEvent == 'Internação'">
-          <ion-input placeholder="Motivo" type="text" formControlName="title"></ion-input>
-      </div>
-
-      <div *ngIf="typeEvent == 'Pessoal'">
-        <ion-input placeholder="Titulo" type="text" formControlName="title"></ion-input>
-      </div>
-
-      <div class="divider"> </div>
-
-      <div>
-        <ion-input placeholder="Local" type="text" formControlName="address"></ion-input>
-      </div>
+    <div class="input-field">
+      <ion-input *ngIf="typeEvent == 'Consulta'" placeholder="Médico" type="text" formControlName="title"></ion-input>
+      <ion-input *ngIf="typeEvent == 'Consulta'" placeholder="Especialidade" type="text" formControlName="typeOfMedic"></ion-input>
+      <ion-input *ngIf="typeEvent == 'Exame'" placeholder="Tipo do exame" type="text" formControlName="title"></ion-input>
+      <ion-input *ngIf="typeEvent == 'Procedimento'" placeholder="Tipo do procedimento" type="text" formControlName="title"></ion-input>
+      <ion-input *ngIf="typeEvent == 'Internação'" placeholder="Motivo" type="text" formControlName="title"></ion-input>
+      <ion-input *ngIf="typeEvent == 'Pessoal'" placeholder="Titulo" type="text" formControlName="title"></ion-input>
+      <ion-input placeholder="Local" type="text" formControlName="address"></ion-input>
     </div>
 
-    <div class="datas-date">
-      <ion-row>
-        <ion-col width-35>
-          <label> Começa </label>
-        </ion-col>
-
-        <ion-col width-35>
+    <div class="input-field">
+      <div class="datetime">
+        <div class="label"> Começa </div>
+        <div class="date">
           <ion-item>
               <ion-datetime displayFormat="DD MMM YYYY" pickerFormat="DD MMM YYYY" formControlName="startDate"> </ion-datetime>
           </ion-item>
-        </ion-col>
-
-        <ion-col width-30>
+        </div>
+        <div class="time">
           <ion-item>
               <ion-datetime displayFormat="H:mm" pickerFormat="H:mm" formControlName="startTime"> </ion-datetime>
           </ion-item>
-        </ion-col>
-      </ion-row>
-
-      <div class="divider"> </div>
-
-
-      <ion-row>
-        <ion-col width-35>
-          <label> Termina </label>
-        </ion-col>
-
-        <ion-col width-35>
+        </div>
+      </div>
+      <div class="datetime">
+        <div class="label"> Termina </div>
+        <div class="date">
           <ion-item>
               <ion-datetime displayFormat="DD MMM YYYY" pickerFormat="DD MMM YYYY" formControlName="endDate"> </ion-datetime>
           </ion-item>
-        </ion-col>
-
-        <ion-col width-30>
+        </div>
+        <div class="time">
           <ion-item>
               <ion-datetime displayFormat="H:mm" pickerFormat="H:mm" formControlName="endTime"> </ion-datetime>
           </ion-item>
-        </ion-col>
-      </ion-row>
+          </div>
+        </div>
     </div>
 
-    <div class="datas-others">
+    <div class="input-field">
       <ion-row class="items" (click)="addNeedBring()">
         <ion-col width-30> <p> O que preciso levar </p> </ion-col>
         <ion-col width-70> <ion-icon name="md-add-circle">  </ion-icon> </ion-col>
       </ion-row>
-
-      <div class="items-list">
-        <ion-row *ngFor="let item of countItems; let i = index;" (click)="clickItem(i)">
-          <ion-col width-80>
-            <input placeholder="Digite o seu item" [(ngModel)]="needBrings[i]" [ngModelOptions]="{standalone: true}" type="text">
-          </ion-col>
-          <ion-col width-20>
-            <ion-icon *ngIf="i == showCloseItem" name="close"  (click)="closeItem(i)"> </ion-icon>
-          </ion-col>
-        </ion-row>
-      </div>
-
-      <div *ngIf="typeEvent == 'Consulta'" class="divider"> </div>
-
-        <ion-row class="items" *ngIf="typeEvent == 'Consulta'">
-          <ion-col width-80 (click)="addQuestions()"> <p> Perguntas a fazer </p> </ion-col>
-          <ion-col width-10 (click)="openQuestions()"> <ion-icon name="md-search">  </ion-icon> </ion-col>
-          <ion-col width-10 (click)="addQuestions()"> <ion-icon name="md-add-circle">  </ion-icon> </ion-col>
-        </ion-row>
-
-      <div *ngIf="typeEvent == 'Consulta'" class="items-list">
+      <ion-row *ngFor="let item of countItems; let i = index;" (click)="clickItem(i)">
+        <ion-col width-80>
+          <input placeholder="Digite o seu item" [(ngModel)]="needBrings[i]" [ngModelOptions]="{standalone: true}" type="text">
+        </ion-col>
+        <ion-col width-20>
+          <ion-icon *ngIf="i == showCloseItem" name="close"  (click)="closeItem(i)"> </ion-icon>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="typeEvent == 'Consulta'">
+        <ion-col width-80 (click)="addQuestions()"> <p> Perguntas a fazer </p> </ion-col>
+        <ion-col width-10 (click)="openQuestions()"> <ion-icon name="md-search">  </ion-icon> </ion-col>
+        <ion-col width-10 (click)="addQuestions()"> <ion-icon name="md-add-circle">  </ion-icon> </ion-col>
+      </ion-row>
+      <ion-item *ngIf="typeEvent == 'Consulta'">
         <ion-row *ngFor="let item of countItemsQuestions; let i = index;" (click)="clickItemQuestion(i)">
           <ion-col width-80>
             <input placeholder="Digite o seu item" [(ngModel)]="questions[i]" [ngModelOptions]="{standalone: true}" type="text">
@@ -120,21 +77,14 @@
             <ion-icon *ngIf="i == showCloseQuestionItem" name="close" (click)="closeItemQuestion(i)"> </ion-icon>
           </ion-col>
         </ion-row>
-      </div>
-
-      <div class="divider"> </div>
-
-      <ion-row>
-        <textarea placeholder="Observações" formControlName="comments"></textarea>
-      </ion-row>
-
-      <div class="divider"> </div>
-      <ion-row class="items">
-          <ion-col width-30> <p> Compartilhado </p> </ion-col>
-          <ion-col width-70> <ion-toggle formControlName="share"></ion-toggle> </ion-col>
-      </ion-row>
-
+      </ion-item>
+      <ion-textarea placeholder="Observações" formControlName="comments"></ion-textarea>
+      <ion-item>
+        <ion-label> Compartilhado </ion-label>
+        <ion-toggle formControlName="share"></ion-toggle>
+      </ion-item>
     </div>
+
 
     <button ion-button full clear [disabled]="!formEvent.valid"> Concluir </button>
   </form>

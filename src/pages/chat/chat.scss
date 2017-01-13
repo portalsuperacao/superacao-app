@@ -7,7 +7,6 @@
 
   .message {
     font-size: 1.6rem;
-
     .message1 {
       display: block;
       background: #FFF;
@@ -19,11 +18,9 @@
       line-height: 2rem;
       color: #696969;
     }
-
-
     .message2 {
       display: block;
-      background: $background-main;
+      background: $background-color-main;
       max-width: 80%;
       margin: 0 0 0.5em;
       border-radius: 1em;
@@ -32,10 +29,9 @@
       line-height: 2rem;
       color: #FFF;
     }
-
     .message-status {
       display: block;
-      background: $background-blue;
+      background: $background-color-blue;
       max-width: 100%;
       margin: 0 0 0.5em;
       border-radius: 1em;
@@ -44,20 +40,17 @@
       color: #FFF;
       text-align: center;
       font-size: 2rem;
-
       img {
         width: 60px;
         height: 60px;
       }
     }
-
     .thumb1 {
       background: #FFF;
       padding: 1em;
       margin: 0 0 0.5em;
       border-radius: 1em;
     }
-
     .thumb2 {
       background: #9170b1;
       padding: 0.8em;
@@ -65,7 +58,6 @@
       border-radius: 1em;
     }
   }
-
   ion-icon {
     text-align: center;
     color: #696969;
@@ -73,7 +65,6 @@
     font-size: 2.8rem;
     margin-top: 1rem;
   }
-
   ion-input {
     display: block;
     width: 100%;
@@ -82,13 +73,11 @@
     background: #FFF;
     border-radius: 0.3em;
   }
-
   .footer {
     padding-right: 10px;
     padding-left: 10px;
     button {
-      background: $background-blue;
-
+      background: $background-color-blue;
       ion-icon {
         color: #FFF;
         margin-bottom: 5px;

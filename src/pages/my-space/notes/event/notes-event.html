@@ -5,13 +5,11 @@
         <ion-icon name="close"> </ion-icon>
       </button>
     </ion-buttons>
-
     <ion-title> Anotaçoes </ion-title>
-
   </ion-navbar>
 </ion-header>
 
-<ion-content class="background-dark">
+<ion-content class="background-color-dark">
   <ion-segment [(ngModel)]="noteOptions" class="custom-segment">
     <ion-segment-button value="list">
       <ion-icon name="md-list"> </ion-icon> <span> Lista </span>
@@ -23,36 +21,33 @@
 
   <div [ngSwitch]="noteOptions">
     <div *ngSwitchCase="'list'">
-      <div class="input">
-        <input type="text" placeholder="Titulo" [(ngModel)]="title" />
+      <div class="input-field">
+        <ion-input type="text" placeholder="Titulo" [(ngModel)]="title"></ion-input>
       </div>
 
-      <div class="input">
+      <div class="input-field">
         <ion-row *ngFor="let item of list">
           <ion-col width-90>
-            <input type="text" placeholder="Item" [(ngModel)]="item.value" />
+            <ion-input type="text" placeholder="Digite algum item" [(ngModel)]="item.value"></ion-input>
           </ion-col>
-
           <ion-col width-10>
             <ion-icon (click)="removeItem(i)" name="close"> </ion-icon>
           </ion-col>
         </ion-row>
-
-        <span (click)="addItem()"> <ion-icon name="md-add"> </ion-icon> Item da list </span>
+        <ion-item>
+          <span (click)="addItem()"> <ion-icon name="md-add"> </ion-icon> Adicionar item </span>
+        </ion-item>
       </div>
-
       <button ion-button full clear (click)="insertNote('list')" [disabled]="!validateForm('list')"> Enviar </button>
     </div>
 
     <div *ngSwitchCase="'text'">
-      <div class="input">
-          <input type="text" placeholder="Titulo"  [(ngModel)]="title" />
+      <div class="input-field">
+          <ion-input type="text" placeholder="Titulo"  [(ngModel)]="title"></ion-input>
       </div>
-
-      <div class="input">
-        <textarea placeholder="Texto" [(ngModel)]="text"></textarea>
+      <div class="input-field">
+        <ion-textarea placeholder="Texto" [(ngModel)]="text"></ion-textarea>
       </div>
-
       <button ion-button full clear (click)="insertNote('text')" [disabled]="!validateForm('text')"> Enviar </button>
     </div>
 
