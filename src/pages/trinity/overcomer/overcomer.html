@@ -10,24 +10,51 @@
 </ion-header>
 
 
-<ion-content class="trinity" padding>
+<ion-content class="trinity">
     <!-- ========= STATUS =========== -->
-    <div class="status" (click)="openStatusEmotion()">
+    <div class="trinity-card status" (click)="openStatusEmotion()">
       <p> Diga ao seu anjo como está se sentindo: </p>
-
-        <ion-row>
-          <div> <img class="emoji" [src]="(overcomerObs | async)?.emotion?.img"> </div>
-          <div *ngIf="(overcomerObs | async)?.emotion?.status != 'Normal'">
-            <b>Sentindo-se {{ (overcomerObs | async)?.emotion?.status }}</b>
-          </div>
-          <div *ngIf="(overcomerObs | async)?.emotion?.status  == 'Normal'">
-            <b>Escolha algum sentimento</b>
-          </div>
-        </ion-row>
+      <div class="emotion">
+        <img class="emoji" [src]="(overcomerObs | async)?.emotion?.img">
+        <p><b>Sentindo-se {{ (overcomerObs | async)?.emotion?.status }}</b></p>
+      </div>
     </div>
 
+    <div class="trinity-card">
+      <div class="trinity">
+        <div class="main-datas">
+          <ion-row>
+            <ion-col width-25 class="avatar">
+              <img [src]="angel?.avatar" />
+            </ion-col>
+            <ion-col width-50 class="description">
+              <h2>{{ angel?.type_user }}</h2>
+              <h1>{{ angel?.name }}</h1>
+              <p class="message">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus hendrerit, nisi eu sodales faucibus
+              </p>
+              <p class="date">14:33h</p>
+            </ion-col>
+            <ion-col width-25 class="others">
+              <ion-icon name="md-calendar" (click)="openPublicEvents(angel)"> </ion-icon>
+            </ion-col>
+          </ion-row>
+        </div>
+
+        <div class="sub-datas">
+          <ion-row>
+            <ion-col width-50>
+              <div class="avatar"></div>
+            </ion-col>
+            <ion-col width-50>
+              <p>Ajuda</p>
+            </ion-col>
+          </ion-row>
+        </div>
+      </div>
+    </div>
     <!-- ========= USERS CHAT =========== -->
-    <div class="chat-user">
+    <!-- <div class="chat-user">
       <ion-grid>
         <ion-row [ngClass]="{'text-notification': !(angelNotification | async)?.view}">
           <ion-col width-40 (click)="openChat(overcomer, angel)">
@@ -62,6 +89,6 @@
 
         </ion-row>
       </ion-grid>
-    </div>
+    </div> -->
 
 </ion-content>

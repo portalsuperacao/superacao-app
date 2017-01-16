@@ -9,7 +9,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content class="event">
+<ion-content class="background-color-dark">
   <form [formGroup]="formEvent" (ngSubmit)="insertEvent(formEvent.value)">
     <div class="input-field">
       <ion-input *ngIf="typeEvent == 'Consulta'" placeholder="Médico" type="text" formControlName="title"></ion-input>
@@ -23,7 +23,7 @@
 
     <div class="input-field">
       <div class="datetime">
-        <div class="label"> Começa </div>
+        <label> Começa </label>
         <div class="date">
           <ion-item>
               <ion-datetime displayFormat="DD MMM YYYY" pickerFormat="DD MMM YYYY" formControlName="startDate"> </ion-datetime>
@@ -36,7 +36,7 @@
         </div>
       </div>
       <div class="datetime">
-        <div class="label"> Termina </div>
+        <label> Termina </label>
         <div class="date">
           <ion-item>
               <ion-datetime displayFormat="DD MMM YYYY" pickerFormat="DD MMM YYYY" formControlName="endDate"> </ion-datetime>
@@ -51,9 +51,9 @@
     </div>
 
     <div class="input-field">
-      <ion-row class="items" (click)="addNeedBring()">
-        <ion-col width-30> <p> O que preciso levar </p> </ion-col>
-        <ion-col width-70> <ion-icon name="md-add-circle">  </ion-icon> </ion-col>
+      <ion-row (click)="addNeedBring()">
+        <ion-col width-80> <p> O que preciso levar </p> </ion-col>
+        <ion-col width-20> <ion-icon name="md-add-circle">  </ion-icon> </ion-col>
       </ion-row>
       <ion-row *ngFor="let item of countItems; let i = index;" (click)="clickItem(i)">
         <ion-col width-80>
@@ -65,10 +65,10 @@
       </ion-row>
       <ion-row *ngIf="typeEvent == 'Consulta'">
         <ion-col width-80 (click)="addQuestions()"> <p> Perguntas a fazer </p> </ion-col>
-        <ion-col width-10 (click)="openQuestions()"> <ion-icon name="md-search">  </ion-icon> </ion-col>
-        <ion-col width-10 (click)="addQuestions()"> <ion-icon name="md-add-circle">  </ion-icon> </ion-col>
+        <ion-col width-10 (click)="openQuestions()"> <ion-icon name="md-search"> </ion-icon> </ion-col>
+        <ion-col width-10 (click)="addQuestions()"> <ion-icon name="md-add-circle"> </ion-icon> </ion-col>
       </ion-row>
-      <ion-item *ngIf="typeEvent == 'Consulta'">
+      <ng-container *ngIf="typeEvent == 'Consulta'">
         <ion-row *ngFor="let item of countItemsQuestions; let i = index;" (click)="clickItemQuestion(i)">
           <ion-col width-80>
             <input placeholder="Digite o seu item" [(ngModel)]="questions[i]" [ngModelOptions]="{standalone: true}" type="text">
@@ -77,15 +77,14 @@
             <ion-icon *ngIf="i == showCloseQuestionItem" name="close" (click)="closeItemQuestion(i)"> </ion-icon>
           </ion-col>
         </ion-row>
-      </ion-item>
+      </ng-container>
       <ion-textarea placeholder="Observações" formControlName="comments"></ion-textarea>
       <ion-item>
         <ion-label> Compartilhado </ion-label>
         <ion-toggle formControlName="share"></ion-toggle>
       </ion-item>
     </div>
-
-
+    
     <button ion-button full clear [disabled]="!formEvent.valid"> Concluir </button>
   </form>
 

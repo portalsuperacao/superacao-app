@@ -128,23 +128,30 @@ page-my-space {
       font-size: 1.6rem;
       color: $text-primary;
     }
-
   }
-  .grid-full {
+
+  .cards {
+    position: relative;
     height: 55%;
-    text-align: center;
-    ion-row {
+    font-size: $font-size;
+    color: #FFF;
+    div {
+      position: relative;
+      float: left;
+      width: 50%;
       height: 50%;
-      color: #FFF;
-      ion-col {
-        padding-top: 2%;
-        padding-bottom: 2%;
-      }
-      ion-icon {
-        font-size: 4rem;
-      }
-      p {
-        font-size: 1.6rem;
+      text-align: center;
+      > div {
+        width: 100%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: $spacing-elements / 2;
+        > * {
+          margin: 0;
+          padding: 0;
+        }
       }
     }
     .calendar {

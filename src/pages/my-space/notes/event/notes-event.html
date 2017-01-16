@@ -34,8 +34,8 @@
             <ion-icon (click)="removeItem(i)" name="close"> </ion-icon>
           </ion-col>
         </ion-row>
-        <ion-item>
-          <span (click)="addItem()"> <ion-icon name="md-add"> </ion-icon> Adicionar item </span>
+        <ion-item (click)="addItem()">
+          <ion-icon name="md-add"> </ion-icon> Adicionar item 
         </ion-item>
       </div>
       <button ion-button full clear (click)="insertNote('list')" [disabled]="!validateForm('list')"> Enviar </button>
@@ -43,7 +43,7 @@
 
     <div *ngSwitchCase="'text'">
       <div class="input-field">
-          <ion-input type="text" placeholder="Titulo"  [(ngModel)]="title"></ion-input>
+        <ion-input type="text" placeholder="Titulo"  [(ngModel)]="title"></ion-input>
       </div>
       <div class="input-field">
         <ion-textarea placeholder="Texto" [(ngModel)]="text"></ion-textarea>

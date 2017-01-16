@@ -11,42 +11,41 @@
 
 
 <ion-content class="background-dark">
-  <div class="avatar trinity">
+  <div class="avatar trinity" (click)="openProfile()">
     <div class="thumb overcomer">
       <img [src]="(user | async)?.avatar" />
       <div [hidden]="(user | async)?.type_user != 'Superador'" class="emotion">
         <img [src]="(user | async)?.emotion?.img">
       </div>
     </div>
-
-
     <div class="name"> {{ (user | async)?.name }} </div>
     <div class="type"> {{ (user | async)?.type_user }} </div>
   </div>
 
-  <div class="grid-full">
-    <ion-row>
-      <ion-col width-50 class="calendar" (click)="openPage(calendarPage)">
+  <div class="cards">
+    <div class="calendar" (click)="openPage(calendarPage)">
+      <div>
         <ion-icon name="md-flag"> </ion-icon>
-        <p> Agenda de <br /> tratamento </p>
-      </ion-col>
-
-      <ion-col width-50 class="medicines" (click)="openPage(medicinesPage)">
+        <p>Agenda de tratamento</p>
+      </div>
+    </div>
+    <div class="doctors" (click)="openPage(medicinesPage)">
+      <div>
         <ion-icon name="md-flag"> </ion-icon>
-        <p> Lembrete de <br />  medicamento </p>
-      </ion-col>
-    </ion-row>
-
-    <ion-row>
-      <ion-col width-50 class="doctors" (click)="openPage(doctorsPage)">
+        <p>Lembrete de medicamento</p>
+      </div>
+    </div>
+    <div class="medicines" (click)="openPage(doctorsPage)">
+      <div>
         <ion-icon name="md-flag"> </ion-icon>
-        <p> Meus <br /> médicos </p>
-      </ion-col>
-
-      <ion-col width-50 class="notes" (click)="openPage(notesPage)">
+        <p>Meus medicamentos</p>
+      </div>
+    </div>
+    <div class="notes" (click)="openPage(notesPage)">
+      <div>
         <ion-icon name="md-flag"> </ion-icon>
-        <p> Minhas <br /> anotações </p>
-      </ion-col>
-    </ion-row>
+        <p>Minhas <br /> anotações</p>
+      </div>
+    </div>
   </div>
 </ion-content>

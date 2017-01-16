@@ -1,27 +1,33 @@
+.trinity-card {
+  margin: ($spacing-elements / 2) 0;
+  padding: $spacing-elements 0;
+  border-bottom: 1px solid #DDD;
+  border-top: 1px solid #DDD;
+
+  .trinity {
+    .main-datas {
+
+    }
+  }
+}
+
+
 .trinity {
   .overcomer {
-    background: $overcomer-color;
+    background-color: $overcomer-color;
   }
   .angel {
-    background: $angel-color;
+    background-color: $angel-color;
   }
   .archangel {
-    background: $archangel-color;
+    background-color: $archangel-color;
   }
   .status {
-    padding-bottom: 1rem;
-    border-bottom: 1px solid #DDD;
-    font-size: 1.8rem;
-    color: $text-primary;
-    ion-row {
-      div {
+    text-align: center;
+    .emotion {
+      > * {
         display: inline-block;
-        margin: auto;
       }
-    }
-    p {
-      text-align: center;
-      color: $text-primary;
     }
   }
   .form-active {

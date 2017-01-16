@@ -5,6 +5,7 @@ import { CalendarPage } from '../calendar/calendar';
 import { MySpaceMedicinesPage } from './medicines/medicines';
 import { MySpaceNotesPage } from './notes/notes';
 import { MySpaceDoctorsPage } from './doctors/doctors';
+import { ProfilePage } from '../profile/profile';
 
 
 
@@ -29,6 +30,10 @@ export class MySpacePage {
 
   openPage(page) {
     this.navCtrl.push(page);
+  }
+
+  openProfile() {
+    this.navCtrl.setRoot(ProfilePage)
   }
 
 }

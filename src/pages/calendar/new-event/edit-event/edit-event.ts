@@ -39,11 +39,8 @@ export class CalendarEventEditPage {
     let tomorrow = new Date();
     tomorrow.setHours(today.getHours() + 1);
 
-
-
     if(this.params.get('datas')) {
       this.eventDatas = this.params.get('datas');
-
       this.typeEvent = this.eventDatas.type;
 
       this.formEvent = this.fb.group({
@@ -118,7 +115,7 @@ export class CalendarEventEditPage {
     }
 
     if(this.eventDatas) {
-      this.userStorageService.getUserLocal().then((user: any) => {
+      this.userStorageService.getUser().then((user: any) => {
         this.calendarStorageService.updateEvent(newDatas, this.eventDatas, user.$key);
       });
 
@@ -126,7 +123,7 @@ export class CalendarEventEditPage {
       return;
     }
 
-    this.userStorageService.getUserLocal().then((user: any) => {
+    this.userStorageService.getUser().then((user: any) => {
         this.calendarStorageService.insertEvent(newDatas, user.$key)
     });
 

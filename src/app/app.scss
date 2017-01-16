@@ -86,36 +86,47 @@ ion-footer {
 
 .input-field {
   margin: ($spacing-elements * 3) 0;
-  .item-inner {
-    border-bottom: none !important;
-    padding: none !important;
+  * {
+    margin: 0;
+    padding: 0;
   }
   > * {
     background-color: #FFF;
-    padding: $spacing-elements / 2;
+    padding: $spacing-elements;
+    box-shadow: none;
     border-bottom: solid 1px #DDD;
     font-size: $font-size !important;
+    color: $text-light;
     &:last-child {
       border: none;
     }
   }
+  .item-inner {
+    border-bottom: none !important;
+  }
+  .item-block {
+    min-height: 0;
+  }
   .datetime {
     color: $text-light;
     > * {
-      display: inline-block;
+      display: block;
+      float: left;
+      width: 33%;
+    }
+    &:after {
+      content: "";
+      display: table;
+      clear: both;
     }
   }
-  ion-select, ion-label, select {
-    color: $text-light;
-  }
-  select {
-    margin-top: 10px;
+  select, input {
     border: none;
-    background: none;
-    box-shadow: none;
   }
-  span {
-    display: block;
-    text-align: center;
+  ion-textarea {
+    min-height: 100px;
+  }
+  ion-icon {
+    float: right;
   }
 }
