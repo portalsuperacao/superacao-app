@@ -5,6 +5,45 @@
 .background-color-dark {
   background: $background-color-dark;
 }
+.background-color-overcomer {
+  background-color: $overcomer-color;
+}
+.background-color-angel {
+  background-color: $angel-color;
+}
+.background-color-archangel {
+  background-color: $archangel-color;
+}
+
+h1 {
+  font-size: $font-size * 1.50;
+  color: $text-secondary;
+}
+h2 {
+  font-size: $font-size * 1.35;
+  color: $text-secondary;
+}
+h3 {
+  font-size: $font-size * 1.25;
+  color: $text-secondary;
+}
+h4 {
+  font-size: $font-size * 1.15;
+  color: $text-secondary;
+}
+h5 {
+  font-size: $font-size ;
+  color: $text-secondary;
+}
+
+p, ion-icon {
+  color: $text-primary;
+}
+
+.text-center {
+  text-align: center;
+}
+
 
 ion-footer {
   &::before {

@@ -1,221 +1,303 @@
 .trinity-card {
-  margin: ($spacing-elements / 2) 0;
   padding: $spacing-elements 0;
+  margin: ($spacing-elements / 2) 0;
   border-bottom: 1px solid #DDD;
   border-top: 1px solid #DDD;
+  .emotion {
+    width: 100%;
+    text-align: center;
+    > * {
+      display: inline-block;
+      vertical-align: middle;
+      padding: 0 $spacing-elements / 2;
+      p {
+        margin: 0;
+        padding: 0;
+      }
+    }
+  }
 
   .trinity {
-    .main-datas {
-
-    }
-  }
-}
-
-
-.trinity {
-  .overcomer {
-    background-color: $overcomer-color;
-  }
-  .angel {
-    background-color: $angel-color;
-  }
-  .archangel {
-    background-color: $archangel-color;
-  }
-  .status {
-    text-align: center;
-    .emotion {
-      > * {
-        display: inline-block;
-      }
-    }
-  }
-  .form-active {
-    text-align: center;
-    margin-top: 3rem;
-
-    button {
-      margin-top: 1rem;
-    }
-
-    ion-input {
-      width: 100%;
-      font-size: 2rem;
-      background: #FFF;
-    }
-  }
-  .chat-user {
-    padding-top: 2rem;
-    padding-bottom: 2rem;
-    border-bottom: 1px solid #DDD;
-    h4 {
-      color: $text-secondary;
-    }
-    .user-archangel {
-      div {
-        display: inline-block;
-        color: $text-secondary;
-      }
-      .avatar {
-        padding: 0.2rem;
-        width: 3rem;
-        height: 3rem;
-      }
-      .user {
-        position: relative;
-        bottom: 7px;
-        left: 5px;
-        margin-top: 1rem;
-      }
-      .help {
-        display: block;
-        float: right;
-        margin-top: 7px;
-      }
-    }
-    .text-notification {
-      h4 {
-        color: #0f8edf !important;
-      }
-      p {
-        color: #0f8edf !important;
-        font-weight: bold;
-      }
-    }
-    .second-notification {
-      color: #0f8edf !important;
-    }
-    .message {
-      p {
-        line-height: 20px;
-        color: $text-primary;
-      }
-      .hour {
-        position: relative;
-        bottom: 1rem;
-      }
-    }
-    ion-icon {
-      font-size: 4.5rem;
-      margin-top: 3rem;
-      color: $background-color-blue;
-    }
-    ion-col[width-20] {
-      text-align: center;
-    }
-    .avatar {
-      width: 10rem;
-      height: 10rem;
-      border-radius: 100%;
-      padding: 0.4rem;
-      .emotion {
-        position: relative;
-        bottom: 40px;
-        right: 15px;
-        width: 50px;
-        height: 50px;
-      }
-      img {
-        border-radius: 100%;
-      }
-    }
-  }
-  .missions {
-    .avatar {
-      width: 6.5rem;
-      height: 6.5rem;
-      margin: auto;
-      border-radius: 100%;
-      padding: 0.4rem;
-      .emotion {
-        position: relative;
-        bottom: 30px;
-        right: 15px;
-        width: 35px;
-        height: 35px;
-      }
-      img {
-        border-radius: 100%;
-      }
-    }
-    .name {
-      text-align: center;
-      margin-top: 5px;
-    }
-  }
-  .space-user {
-    padding-top: 2rem;
-    padding-bottom: 2rem;
-    border-bottom: 1px solid #DDD;
-    .close {
-      background: $text-primary;
-    }
-    .open {
-      background: $overcomer-color;
-    }
-    .avatar {
-      width: 10rem;
-      height: 10rem;
-      border-radius: 100%;
-      padding: 0.4rem;
-      ion-icon {
-        font-size: 3.6rem;
-        margin-top: 3rem;
-        margin-left: 3rem;
-        color: #FFF;
-      }
-    }
-    ion-col[width-67] {
-      padding-left: 30px;
-      h4 {
-        color: $text-secondary;
-      }
-      p {
-        color: $background-color-blue;
-        ion-icon {
-          position: relative;
-          top: 5px;
-          padding-right: 1rem;
-          font-size: 3rem;
-        }
-      }
-    }
-  }
-  .help {
-    button {
-      text-transform: none;
-      background: #919192;
-      color: #FFF;
-      letter-spacing: 0.07rem;
-    }
-  }
-  .missions {
-    color: $text-primary !important;
-    ion-row {
-      margin-top: 10px;
-      border-bottom: solid 1px #ddd;
-    }
-    .title {
-      font-size: 2rem;
+    * {
       margin: 0;
       padding: 0;
     }
-    .alert {
-      margin: 5px;
-      padding: 0;
-      span {
-        display: inline-block;
-        width: 15px;
-        height: 15px;
-        background: #FF0000;
+    .avatar {
+      figure {
+        width: 100%;
+        padding: $spacing-elements / 3;
         border-radius: 100%;
+        overflow: hidden;
+        img {
+          display: block;
+          width: 100%;
+          height: 100%;
+          margin: 0 auto;
+          border-radius: 100%;
+        }
       }
     }
-    .time {
-      font-size: 1.6rem;
+    .main-datas {
+      padding: 0 $spacing-elements * 2;
+      ion-col {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+      }
+      .description {
+        padding: 0 $spacing-elements;
+      }
+      .others {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        ion-icon {
+          font-size: $font-size * 2;
+        }
+      }
+      p {
+        margin-top: $spacing-elements / 2;
+      }
+    }
+    .sub-datas {
+      padding: 0 $spacing-elements;
+      h2 {
+        font-size: $font-size / 1.10;
+      }
+      h5 {
+        font-size: $font-size / 1.50;
+      }
+      button {
+        color: $text-primary;
+        float: right;
+        margin: 0 auto;
+      }
+      .avatar {
+        margin: auto;
+        > * {
+          display: inline-block;
+          vertical-align: middle;
+        }
+        figure {
+          max-width: 40px;
+          max-height: 40px;
+          img {
+            width: 100%;
+            height: 100%;
+          }
+        }
+      }
+      p {
+        text-align: center;
+      }
     }
   }
 }
+
+// .trinity {
+//   .overcomer {
+//     background-color: $overcomer-color;
+//   }
+//   .angel {
+//     background-color: $angel-color;
+//   }
+//   .archangel {
+//     background-color: $archangel-color;
+//   }
+//   .status {
+//     text-align: center;
+//     .emotion {
+//       > * {
+//         display: inline-block;
+//       }
+//     }
+//   }
+//   .form-active {
+//     text-align: center;
+//     margin-top: 3rem;
+//
+//     button {
+//       margin-top: 1rem;
+//     }
+//
+//     ion-input {
+//       width: 100%;
+//       font-size: 2rem;
+//       background: #FFF;
+//     }
+//   }
+//   .chat-user {
+//     padding-top: 2rem;
+//     padding-bottom: 2rem;
+//     border-bottom: 1px solid #DDD;
+//     h4 {
+//       color: $text-secondary;
+//     }
+//     .user-archangel {
+//       div {
+//         display: inline-block;
+//         color: $text-secondary;
+//       }
+//       .avatar {
+//         padding: 0.2rem;
+//         width: 3rem;
+//         height: 3rem;
+//       }
+//       .user {
+//         position: relative;
+//         bottom: 7px;
+//         left: 5px;
+//         margin-top: 1rem;
+//       }
+//       .help {
+//         display: block;
+//         float: right;
+//         margin-top: 7px;
+//       }
+//     }
+//     .text-notification {
+//       h4 {
+//         color: #0f8edf !important;
+//       }
+//       p {
+//         color: #0f8edf !important;
+//         font-weight: bold;
+//       }
+//     }
+//     .second-notification {
+//       color: #0f8edf !important;
+//     }
+//     .message {
+//       p {
+//         line-height: 20px;
+//         color: $text-primary;
+//       }
+//       .hour {
+//         position: relative;
+//         bottom: 1rem;
+//       }
+//     }
+//     ion-icon {
+//       font-size: 4.5rem;
+//       margin-top: 3rem;
+//       color: $background-color-blue;
+//     }
+//     ion-col[width-20] {
+//       text-align: center;
+//     }
+//     .avatar {
+//       width: 10rem;
+//       height: 10rem;
+//       border-radius: 100%;
+//       padding: 0.4rem;
+//       .emotion {
+//         position: relative;
+//         bottom: 40px;
+//         right: 15px;
+//         width: 50px;
+//         height: 50px;
+//       }
+//       img {
+//         border-radius: 100%;
+//       }
+//     }
+//   }
+//   .missions {
+//     .avatar {
+//       width: 6.5rem;
+//       height: 6.5rem;
+//       margin: auto;
+//       border-radius: 100%;
+//       padding: 0.4rem;
+//       .emotion {
+//         position: relative;
+//         bottom: 30px;
+//         right: 15px;
+//         width: 35px;
+//         height: 35px;
+//       }
+//       img {
+//         border-radius: 100%;
+//       }
+//     }
+//     .name {
+//       text-align: center;
+//       margin-top: 5px;
+//     }
+//   }
+//   .space-user {
+//     padding-top: 2rem;
+//     padding-bottom: 2rem;
+//     border-bottom: 1px solid #DDD;
+//     .close {
+//       background: $text-primary;
+//     }
+//     .open {
+//       background: $overcomer-color;
+//     }
+//     .avatar {
+//       width: 10rem;
+//       height: 10rem;
+//       border-radius: 100%;
+//       padding: 0.4rem;
+//       ion-icon {
+//         font-size: 3.6rem;
+//         margin-top: 3rem;
+//         margin-left: 3rem;
+//         color: #FFF;
+//       }
+//     }
+//     ion-col[width-67] {
+//       padding-left: 30px;
+//       h4 {
+//         color: $text-secondary;
+//       }
+//       p {
+//         color: $background-color-blue;
+//         ion-icon {
+//           position: relative;
+//           top: 5px;
+//           padding-right: 1rem;
+//           font-size: 3rem;
+//         }
+//       }
+//     }
+//   }
+//   .help {
+//     button {
+//       text-transform: none;
+//       background: #919192;
+//       color: #FFF;
+//       letter-spacing: 0.07rem;
+//     }
+//   }
+//   .missions {
+//     color: $text-primary !important;
+//     ion-row {
+//       margin-top: 10px;
+//       border-bottom: solid 1px #ddd;
+//     }
+//     .title {
+//       font-size: 2rem;
+//       margin: 0;
+//       padding: 0;
+//     }
+//     .alert {
+//       margin: 5px;
+//       padding: 0;
+//       span {
+//         display: inline-block;
+//         width: 15px;
+//         height: 15px;
+//         background: #FF0000;
+//         border-radius: 100%;
+//       }
+//     }
+//     .time {
+//       font-size: 1.6rem;
+//     }
+//   }
+// }
 
 page-visitor {
   ion-content {

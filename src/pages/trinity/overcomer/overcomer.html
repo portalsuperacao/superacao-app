@@ -10,13 +10,12 @@
 </ion-header>
 
 
-<ion-content class="trinity">
-    <!-- ========= STATUS =========== -->
+<ion-content class="trinity background-color-dark">
     <div class="trinity-card status" (click)="openStatusEmotion()">
-      <p> Diga ao seu anjo como está se sentindo: </p>
+      <p class="text-center"> Diga ao seu anjo como está se sentindo: </p>
       <div class="emotion">
-        <img class="emoji" [src]="(overcomerObs | async)?.emotion?.img">
-        <p><b>Sentindo-se {{ (overcomerObs | async)?.emotion?.status }}</b></p>
+        <img class="emoji" [src]="(overcomerObs | async)?.emotion?.img" />
+        <p class="text-center"><b>Sentindo-se {{ (overcomerObs | async)?.emotion?.status }}</b></p>
       </div>
     </div>
 
@@ -25,15 +24,17 @@
         <div class="main-datas">
           <ion-row>
             <ion-col width-25 class="avatar">
-              <img [src]="angel?.avatar" />
+              <figure class="background-color-overcomer">
+                <img [src]="angel?.avatar" />
+              </figure>
             </ion-col>
             <ion-col width-50 class="description">
-              <h2>{{ angel?.type_user }}</h2>
-              <h1>{{ angel?.name }}</h1>
-              <p class="message">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus hendrerit, nisi eu sodales faucibus
-              </p>
-              <p class="date">14:33h</p>
+              <h5>{{ angel?.type_user }}</h5>
+              <h2>{{ angel?.name }}</h2>
+              <p class="message" *ngIf="!(angel?.lastMessages | async)"> Não há nenhum mensagem disponivel </p>
+              <p class="message" *ngIf="(angel?.lastMessages | async) && !(angel?.lastMessages | async)?.msg"> O {{ angel?.name }} enviou uma imagem </p>
+              <p class="message" *ngIf="(angel?.lastMessages | async)?.msg"> {{ (angel?.lastMessages | async)?.msg | truncate:20 }} </p>
+              <p class="date" *ngIf="(angel?.lastMessages | async)?.created_at" class="hour"> {{ (angel?.lastMessages | async)?.created_at | customDate:"c" }} </p>
             </ion-col>
             <ion-col width-25 class="others">
               <ion-icon name="md-calendar" (click)="openPublicEvents(angel)"> </ion-icon>
@@ -43,11 +44,19 @@
 
         <div class="sub-datas">
           <ion-row>
-            <ion-col width-50>
-              <div class="avatar"></div>
+            <ion-col width-75>
+              <div class="avatar">
+                <figure class="background-color-angel">
+                  <img [src]="archangel?.avatar" />
+                </figure>
+                <div class="name">
+                  <h5>{{ archangel?.type_user }}</h5>
+                  <h2>{{ archangel?.name }}</h2>
+                </div>
+              </div>
             </ion-col>
-            <ion-col width-50>
-              <p>Ajuda</p>
+            <ion-col width-25>
+              <button ion-button color="light" clear>Ajuda</button>
             </ion-col>
           </ion-row>
         </div>
