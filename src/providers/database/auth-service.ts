@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AuthProviders, FirebaseAuth, FirebaseAuthState, AuthMethods, AngularFire } from 'angularfire2';
+import { AuthProviders, AngularFireAuth, AuthMethods, AngularFire } from 'angularfire2';
 import { UserStorageService } from './user-storage-service';
 import { Platform } from 'ionic-angular';
 import { Facebook } from 'ionic-native';
@@ -8,10 +8,9 @@ import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class AuthService {
-  private authState : FirebaseAuthState
 
   constructor(
-    public auth: FirebaseAuth,
+    public auth: AngularFireAuth,
     public af: AngularFire,
     public userStorageService: UserStorageService,
     public platform: Platform) {

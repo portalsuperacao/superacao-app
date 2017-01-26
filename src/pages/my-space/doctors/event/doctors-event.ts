@@ -65,7 +65,7 @@ export class MySpaceDoctorsEventPage {
     }
 
     if(this.params) {
-      wrapper.$key = this.params.$key;
+      wrapper.uid = this.params.uid;
     }
 
     this.viewCtrl.dismiss(wrapper);
@@ -79,7 +79,6 @@ export class MySpaceDoctorsEventPage {
     if(this.phones.length <= 1) {
       return;
     }
-
     this.phones.splice(index, 1);
   }
 
@@ -89,7 +88,6 @@ export class MySpaceDoctorsEventPage {
         return false;
       }
     }
-
     return true;
   }
 

@@ -25,13 +25,13 @@ export class MySpaceMedicinesPage {
   }
 
   ionViewDidLoad() {
-    this.user = this.userStorageService.getUserObs();
-
-    this.user.subscribe((user) => {
-      this.medicines = this.mySpaceStorageService.getMedicinesEvents(user.$key);
-    });
-
-    this.date = new Date().getTime();
+    this.userStorageService.getUser().then((user) => {
+      this.user = user
+    })
+    .then(() => {
+      this.medicines = this.mySpaceStorageService.getMedicinesEvents(this.user.$key)
+      this.date = new Date().getTime()
+    })
   }
 
   newEvent() {
@@ -42,7 +42,6 @@ export class MySpaceMedicinesPage {
     modal.present();
 
     modal.onDidDismiss((data) => {
-
       if(!data) {
         return;
       }
@@ -55,10 +54,9 @@ export class MySpaceMedicinesPage {
         at: _5_sec_from_now,
         firstAt: now,
       });*/
-
-      this.user.subscribe((user) => {
-        this.mySpaceStorageService.insertMedicineEvent(user.$key, data);
-      });
+      this.mySpaceStorageService.insertMedicineEvent(this.user.$key, data).then(() => {
+        this.medicines = this.mySpaceStorageService.getMedicinesEvents(this.user.$key)
+      })
     });
   }
 
@@ -71,8 +69,8 @@ export class MySpaceMedicinesPage {
           text: 'Sim',
           handler: data => {
             LocalNotifications.clearAll();
-            this.user.subscribe((user) => {
-              this.mySpaceStorageService.removeMedicineEvent(user.$key, medicine);
+            this.mySpaceStorageService.removeMedicineEvent(this.user.$key, medicine).then(() => {
+              this.medicines = this.mySpaceStorageService.getMedicinesEvents(this.user.$key)
             });
           }
         },
@@ -83,6 +81,7 @@ export class MySpaceMedicinesPage {
     });
 
     alert.present();
+
   }
 
   editEvent(medicine) {
@@ -94,11 +93,16 @@ export class MySpaceMedicinesPage {
         return;
       }
 
-      this.user.subscribe((user) => {
-        this.mySpaceStorageService.updateMedicineEvent(user.$key, data);
-      });
-    });
+      this.mySpaceStorageService.updateMedicineEvent(this.user.$key, data).then(() => {
+        this.medicines = this.mySpaceStorageService.getMedicinesEvents(this.user.$key)
+      })
+    })
+  }
 
+  intervalOfHours(interval) {
+    let date = new Date()
+    date.setTime(date.getTime() + (interval*60*60*1000))
+    return date
   }
 
 }

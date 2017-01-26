@@ -23,11 +23,12 @@ export class MySpaceDoctorsPage {
   }
 
   ionViewDidLoad() {
-    this.user = this.userStorageService.getUserObs();
-
-    this.user.subscribe((user) => {
-      this.doctors = this.mySpaceStorageService.getDoctors(user.$key);
-    });
+    this.userStorageService.getUser().then((user) => {
+      this.user = user
+    })
+    .then(() => {
+      this.doctors = this.mySpaceStorageService.getDoctorsEvent(this.user.$key)
+    })
 
   }
 
@@ -41,8 +42,8 @@ export class MySpaceDoctorsPage {
         return;
       }
 
-      this.user.subscribe((user) => {
-        this.mySpaceStorageService.insertDoctors(user.$key, data);
+      this.mySpaceStorageService.insertDoctorsEvent(this.user.$key, data).then(() => {
+        this.doctors = this.mySpaceStorageService.getDoctorsEvent(this.user.$key)
       });
     });
   }
@@ -55,8 +56,8 @@ export class MySpaceDoctorsPage {
         {
           text: 'Sim',
           handler: data => {
-            this.user.subscribe((user) => {
-              this.mySpaceStorageService.removeDoctors(user.$key, doctor);
+            this.mySpaceStorageService.removeDoctorsEvent(this.user.$key, doctor).then(() => {
+              this.doctors = this.mySpaceStorageService.getDoctorsEvent(this.user.$key)
             });
           }
         },
@@ -78,8 +79,8 @@ export class MySpaceDoctorsPage {
         return;
       }
 
-      this.user.subscribe((user) => {
-        this.mySpaceStorageService.updateDoctors(user.$key, data);
+      this.mySpaceStorageService.updateDoctorsEvent(this.user.$key, data).then(() => {
+        this.doctors = this.mySpaceStorageService.getDoctorsEvent(this.user.$key)
       });
     });
 

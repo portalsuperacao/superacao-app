@@ -23,11 +23,11 @@ export class MySpaceNotesPage {
   }
 
   ionViewDidLoad() {
-    this.user = this.userStorageService.getUserObs();
-
-    this.user.subscribe((user) => {
-      this.notes = this.mySpaceStorageService.getNotes(user.$key);
-    });
+    this.userStorageService.getUser().then((user) => {
+      this.user = user
+    }).then(() => {
+      this.notes = this.mySpaceStorageService.getNotesEvent(this.user.$key)
+    })
   }
 
   newEvent() {
@@ -39,8 +39,8 @@ export class MySpaceNotesPage {
         return;
       }
 
-      this.user.subscribe((user) => {
-        this.mySpaceStorageService.insertNotes(user.$key, data);
+      this.mySpaceStorageService.insertNotesEvent(this.user.$key, data).then(() => {
+        this.notes = this.mySpaceStorageService.getNotesEvent(this.user.$key)
       });
     });
   }
@@ -53,8 +53,8 @@ export class MySpaceNotesPage {
         {
           text: 'Sim',
           handler: data => {
-            this.user.subscribe((user) => {
-              this.mySpaceStorageService.removeNotes(user.$key, note);
+            this.mySpaceStorageService.removeNotesEvent(this.user.$key, note).then(() => {
+              this.notes = this.mySpaceStorageService.getNotesEvent(this.user.$key)
             });
           }
         },
@@ -75,12 +75,11 @@ export class MySpaceNotesPage {
       if(!data) {
         return;
       }
-      
-      this.user.subscribe((user) => {
-        this.mySpaceStorageService.updateNotes(user.$key, data);
+
+      this.mySpaceStorageService.updateNotesEvent(this.user.$key, data).then(() => {
+        this.notes = this.mySpaceStorageService.getNotesEvent(this.user.$key)
       });
     });
-
   }
 
 

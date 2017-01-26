@@ -28,10 +28,10 @@
 
     <div class="content" (click)="editEvent(medicine)">
       <ion-row class="container">
-        <ion-col width-25> 0:00h </ion-col>
-        <ion-col width-25 class="highlight"> 6:00h </ion-col>
-        <ion-col width-25> 12:00h </ion-col>
-        <ion-col width-25> 16:00h </ion-col>
+        <ion-col width-25> {{ medicine.start_at | date:"HH:mm" }}h </ion-col>
+        <ion-col width-25 class="highlight"> {{ intervalOfHours(medicine.interval) | date:"HH:mm" }}h </ion-col>
+        <ion-col width-25> {{ intervalOfHours(medicine.interval * 2) | date:"HH:mm" }}h </ion-col>
+        <ion-col width-25> {{ intervalOfHours(medicine.interval * 3) | date:"HH:mm" }}h </ion-col>
       </ion-row>
       <div class="icon"> <ion-icon name="ios-arrow-forward"> </ion-icon> </div>
     </div>

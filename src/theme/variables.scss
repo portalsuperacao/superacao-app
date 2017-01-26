@@ -109,13 +109,13 @@ $event-colors: (
 // The premium icon font for Ionic. For more info, please see:
 // http://ionicframework.com/docs/v2/ionicons/
 
-@import "ionicons";
+@import "ionic.ionicons";
 
 
 // Fonts
 // --------------------------------------------------
 $ionicons-font-path: "../assets/fonts";
-@import "ionicons";
+@import "ionic.ionicons";
 
 @import "roboto";
 @import "noto-sans";

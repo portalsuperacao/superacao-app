@@ -50,7 +50,6 @@ export class MySpaceNotesEventPage {
     if(this.list.length <= 1) {
       return;
     }
-
     this.list.splice(index, 1);
   }
 
@@ -69,7 +68,7 @@ export class MySpaceNotesEventPage {
     }
 
     if(this.params) {
-      wrapper.$key = this.params.$key;
+      wrapper.uid = this.params.uid;
     }
 
     this.viewCtrl.dismiss(wrapper);

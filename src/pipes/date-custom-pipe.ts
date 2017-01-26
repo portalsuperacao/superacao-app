@@ -30,7 +30,6 @@ export class DateCustomPipe implements PipeTransform {
       if(date.getMinutes() < 10) {
         return h + " : 0" + m;
       }
-
       return h + " : " + m;
 
     } else if (exponent === 'b'){
@@ -41,15 +40,12 @@ export class DateCustomPipe implements PipeTransform {
       if ((d < 10) && (m < 10)) {
         return "0" + d + "/0" + m + "/" +  y;
       }
-
       if(d < 10) {
         return "0" + d + "/" + m + "/" +  y;
       }
-
       if (m < 10) {
         return "0" + d + "/0" + m + "/" +  y;
       }
-
       return  d + "/" + m + "/" +  y;
 
     } else {

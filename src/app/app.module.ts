@@ -11,6 +11,7 @@ import { TextMaskModule } from 'angular2-text-mask';
 // PROVIDERS
 import { AngularFireModule } from 'angularfire2';
 import { AuthService } from '../providers/database/auth-service';
+import { Storage } from '@ionic/storage';
 import { UserStorageService } from '../providers/database/user-storage-service';
 import { CalendarStorageService } from '../providers/database/calendar-storage-service';
 import { ChatStorageService } from '../providers/database/chat-storage-service';
@@ -139,8 +140,9 @@ firebase.initializeApp(firebaseConfig);
     UserStorageService,
     CalendarStorageService,
     ChatStorageService,
-    MySpaceStorageService,
     DateUtil,
+    MySpaceStorageService,
+    Storage,
     Utils
   ]
 })

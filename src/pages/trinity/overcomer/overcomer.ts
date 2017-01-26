@@ -152,7 +152,6 @@ export class OvercomerPage {
       }
 
       function getChatAngel(trinity) {
-        console.log(trinity);
         return chatStorageService.getChatUsers(trinity.angel.chat).then((chat) => {
           trinity.angel.chat = chat;
           return trinity;
@@ -207,7 +206,6 @@ export class OvercomerPage {
       }
 
       function resolvePromise(trinity) {
-        console.log(trinity);
         resolve(trinity);
       }
 
