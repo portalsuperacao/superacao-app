@@ -49,7 +49,6 @@ export class ChatStorageService {
        database.once('value').then((snapshots) => {
          snapshots.forEach((snapshot) => {
             let data = snapshot.val();
-
             if(data.users[0].uid == userUid1 && data.users[1].uid == userUid2) {
               chatDatas = data;
             } else if (data.users[1].uid == userUid1 && data.users[0].uid == userUid2) {
@@ -87,8 +86,14 @@ export class ChatStorageService {
     return this.af.database.object('/chat/' + chatKey + '/users/' + user)
   }
 
-  getMessages(chatUid) {
-    return this.af.database.list('/messages/' + chatUid);
+  getMessages(chatUid, amount) {
+    return this.af.database.list('/messages/' + chatUid, {
+      query: {
+        orderByChild: 'created_at',
+        startAt: Date.now() / 1000,
+        limitToLast: amount
+      }
+    });
   }
 
   getLastMessage(chatUid, userUid) {

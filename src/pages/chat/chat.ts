@@ -19,6 +19,7 @@ export class ChatPage {
   chat;
   ctrlFloat = true;
   status;
+  countMessages = 0;
 
 
   constructor(
@@ -124,7 +125,7 @@ _getMessages(chatStorageService, chat, user1, utils) {
     }
 
     function getMessages(msg) {
-      msg.messages = chatStorageService.getMessages(chat.chatUid);
+      msg.messages = chatStorageService.getMessages(chat.chatUid, 20);
       return msg;
     }
 
@@ -155,33 +156,11 @@ _getMessages(chatStorageService, chat, user1, utils) {
    });
  }
 
-  openGallery() {
-    this.utils.openGallery().then((image) => {
-      this._sendImg(image);
-    }).catch((error) => {
-      console.log(error);
-    });
-  }
+ doRefresh(refresh) {
+   
+ }
 
-  _sendImg(img) {
-    let msgWrapper : any = {
-      uid_user : this.user1.$key,
-      "img" : img,
-      created_at: new Date().getTime()
-    }
 
-    this.chatStorageService.pushMessage(msgWrapper, this.chat.chatUid);
-
-    msgWrapper.token_device = this.user2.other_datas.token_device;
-    msgWrapper.name_user = this.user1.name;
-    msgWrapper.msg = "Uma imagem foi enviada!";
-
-    // === Push notification ===
-    setTimeout(() => {
-        this.chatStorageService.pushNotification(msgWrapper);
-        this.content.scrollToBottom(0);
-    }, 100);
-  }
 
   _clearStatusEmotion() {
     if(this.status) {

@@ -3,6 +3,7 @@
   margin: ($spacing-elements / 2) 0;
   border-bottom: 1px solid #DDD;
   border-top: 1px solid #DDD;
+  background-color: #FFF;
   .emotion {
     width: 100%;
     text-align: center;
@@ -16,7 +17,6 @@
       }
     }
   }
-
   .trinity {
     * {
       margin: 0;
@@ -38,7 +38,7 @@
       }
     }
     .main-datas {
-      padding: 0 $spacing-elements * 2;
+      padding: $spacing-elements;
       ion-col {
         display: flex;
         justify-content: center;

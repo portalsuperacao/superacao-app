@@ -3,12 +3,9 @@
     <button ion-button menuToggle>
      <ion-icon name="menu"></ion-icon>
     </button>
-
     <ion-title> Anjos </ion-title>
-
   </ion-navbar>
 </ion-header>
-
 
 <ion-content class="trinity background-color-dark">
     <div class="trinity-card status" (click)="openStatusEmotion()">
@@ -28,7 +25,7 @@
                 <img [src]="angel?.avatar" />
               </figure>
             </ion-col>
-            <ion-col width-50 class="description">
+            <ion-col width-50 class="description" (click)="openChat(overcomer, angel)">
               <h5>{{ angel?.type_user }}</h5>
               <h2>{{ angel?.name }}</h2>
               <p class="message" *ngIf="!(angel?.lastMessages | async)"> Não há nenhum mensagem disponivel </p>
@@ -44,7 +41,7 @@
 
         <div class="sub-datas">
           <ion-row>
-            <ion-col width-75>
+            <ion-col width-75 (click)="openChat(overcomer, archangel)">
               <div class="avatar">
                 <figure class="background-color-angel">
                   <img [src]="archangel?.avatar" />
