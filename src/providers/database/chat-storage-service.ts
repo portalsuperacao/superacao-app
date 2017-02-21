@@ -130,23 +130,23 @@ export class ChatStorageService {
       this.db.push(datas);
   }
 
-  pushNotification(datas) {
-    return new Promise(resolve => {
-      this._getTokenJwt().then((token) => {
-        let body = JSON.stringify({
-          "token": token,
-          "token_device" : datas.token_device,
-          "message": datas.msg,
-          "name_user": datas.name_user
-        });
+  pushNotification(data) {
+    let notification = {
+      "collapse_key": 'demo',
+      "priority": 'normal',
+      "to": data.token_device,
+      "notification": {
+        "body": data.msg,
+        "title": data.name_user + ' enviou uma mensagem!',
+        "icon": 'icon',
+        "sound": 'default'
+      },
+      "data": {},
+      "icon": 'icon'
+    }
 
-        this.http.post(this.url, body, this.options)
-          .subscribe(data => {
-            resolve();
-          });
-        });
-      });
-
+    this.db = this.af.database.list('/notifications/')
+    this.db.push(notification)
   }
 
 
@@ -160,16 +160,4 @@ export class ChatStorageService {
       return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
         s4() + '-' + s4() + s4() + s4();
    }
-
-   _getTokenJwt() {
-     return new Promise((resolve) => {
-       firebase.auth().currentUser.getToken(true).then((token) => {
-         resolve(token);
-       }).catch((error) => {
-         resolve(error);
-       })
-     });
-   }
-
-
 }

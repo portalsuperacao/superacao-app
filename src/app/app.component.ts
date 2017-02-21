@@ -20,7 +20,7 @@ export class MyApp {
   profilePage = ProfilePage;
 
 
-  constructor(platform: Platform,
+  constructor(public platform: Platform,
     public menuCtrl: MenuController,
     public userStorageService: UserStorageService,
     public authService : AuthService) {
@@ -37,13 +37,12 @@ export class MyApp {
             this.rootPage = LoginPage;
           }
         });
-          //this.menuCtrl.enable(true);
-          // this.userStorageService.getUser().then((user : any) => {
-          //     this._navigationPages(user);
-          //     this._updateLastAccess(user);
-          // });
 
-
+        // this.menuCtrl.enable(true);
+        // this.userStorageService.getUser().then((user : any) => {
+        //     this._navigationPages(user);
+        //     this._updateLastAccess(user);
+        // });
 
         StatusBar.styleDefault();
         Splashscreen.hide();

@@ -7,7 +7,52 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding class="trinity">
+<ion-content class="trinity background-color-dark">
+    <div class="trinity-card" *ngFor="let trinity of trinitys | async; let i = index">
+      <div class="trinity">
+        <div class="main-datas">
+          <ion-row>
+            <ion-col width-25 class="avatar">
+              <figure class="background-color-overcomer">
+                <img [src]="trinity.overcomer?.avatar" />
+              </figure>
+            </ion-col>
+            <ion-col width-50 class="description" (click)="openChat(trinity.angel, trinity.overcomer)">
+              <h5>{{ trinity.overcomer.type_user }}</h5>
+              <h2>{{ trinity.overcomer.name }}</h2>
+              <p class="message" *ngIf="!(trinity.overcomer.lastMessages | async)"> Não há nenhum mensagem disponivel </p>
+              <p class="message" *ngIf="(trinity.overcomer.lastMessages | async) && !(trinity.overcomer.lastMessages | async)"> O {{ trinity.overcomer.name }} enviou uma imagem </p>
+              <p class="message" *ngIf="trinity.overcomer.lastMessages | async"> {{ (trinity.overcomer.lastMessages | async).msg | truncate:20 }} </p>
+              <p class="message" *ngIf="trinity.overcomer.lastMessages | async" class="hour"> {{ (trinity.overcomer.lastMessages | async).created_at | customDate:"c" }} </p>
+            </ion-col>
+            <ion-col width-25 class="others" (click)="openPublicEvents(trinity.overcomer)">
+              <img src="./assets/images/calendar.svg">
+            </ion-col>
+          </ion-row>
+        </div>
+
+        <div class="sub-datas">
+          <ion-row>
+            <ion-col width-75 (click)="openChat(trinity.angel, trinity.archangel)">
+              <div class="avatar">
+                <figure class="background-color-angel">
+                  <img [src]="trinity.archangel.avatar" />
+                </figure>
+                <div class="name">
+                  <h5>{{ trinity.archangel.type_user }}</h5>
+                  <h2>{{ trinity.archangel.name }}</h2>
+                </div>
+              </div>
+            </ion-col>
+            <ion-col width-25>
+              <button ion-button color="light" clear>Ajuda</button>
+            </ion-col>
+          </ion-row>
+        </div>
+      </div>
+    </div>
+
+<!-- <ion-content padding class="trinity">
     <div class="chat-user" *ngFor="let trinity of trinitys | async; let i = index">
       <ion-grid>
         <ion-row [ngClass]="{'text-notification': !(overcomerNotification[i] | async)?.view}">
@@ -61,6 +106,6 @@
           </ion-col>
         </ion-row>
       </ion-grid>
-    </div>
+    </div> -->
 
 </ion-content>

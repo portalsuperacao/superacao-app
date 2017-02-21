@@ -4,7 +4,7 @@ import { UserStorageService } from './user-storage-service';
 import { Platform } from 'ionic-angular';
 import { Facebook } from 'ionic-native';
 import { Observable } from 'rxjs/Observable';
-
+import firabase from 'firebase';
 
 @Injectable()
 export class AuthService {
@@ -14,6 +14,7 @@ export class AuthService {
     public af: AngularFire,
     public userStorageService: UserStorageService,
     public platform: Platform) {
+
   }
 
   getAuthentication() {
@@ -35,7 +36,8 @@ export class AuthService {
         method: AuthMethods.Popup
       })
       .then(findUser.bind(this))
-      .then(verifyIfRegisterUser.bind(this));
+      .then(verifyIfRegisterUser.bind(this))
+      .then(updateTokenDevice.bind(this));
     }
 
     function findUser(datas) {
@@ -45,8 +47,13 @@ export class AuthService {
 
     function verifyIfRegisterUser(datas) {
       if(datas.$value === null) {
-        this.userStorageService.registerUser(user);
+        return this.userStorageService.registerUser(user);
       }
+      return datas;
+    }
+
+    function updateTokenDevice() {
+      this.userStorageService.updateTokenDevice(user.uid)
     }
   }
 
@@ -64,6 +71,8 @@ export class AuthService {
     return this.af.auth.login(credentials, {
       provider: AuthProviders.Password,
       method: AuthMethods.Password
+    }).then((user) => {
+      this.userStorageService.updateTokenDevice(user.uid)
     });
   }
 

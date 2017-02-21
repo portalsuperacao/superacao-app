@@ -206,6 +206,7 @@ export class OvercomerPage {
       }
 
       function resolvePromise(trinity) {
+        console.log(trinity)
         resolve(trinity);
       }
 

@@ -51,7 +51,6 @@ import { ArchangelChatPage } from '../pages/trinity/archangel/chat/chat';
 import { VisitorPage } from '../pages/trinity/visitor/visitor';
 import * as firebase from 'firebase';
 
-
 export const firebaseConfig = {
    apiKey: "AIzaSyAnTqOEZHBU-1CMx0fKY2v4zFeGvPnvA1I",
    authDomain: "superacao-dc62e.firebaseapp.com",
@@ -101,7 +100,7 @@ firebase.initializeApp(firebaseConfig);
   imports: [
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(firebaseConfig),
-    TextMaskModule
+    TextMaskModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [

@@ -1,12 +1,17 @@
-<ion-header>
+<ion-header class="chat">
   <ion-navbar color="dark">
-    <ion-title> {{ user2.name }} </ion-title>
+    <ion-title>
+      <div *ngIf="user2.type_user == 'Superador'" class="avatar background-color-overcomer"><img [src]="user2.avatar"></div>
+      <div *ngIf="user2.type_user == 'Anjo'" class="avatar background-color-angel"><img [src]="user2.avatar"></div>
+      <div *ngIf="user2.type_user == 'Arcanjo'" class="avatar background-color-archangel"><img [src]="user2.avatar"></div>
+      <div class="name">{{ user2.name }}</div>
+    </ion-title>
   </ion-navbar>
 </ion-header>
 
 
 <ion-content padding class="chat">
-  <div class="message" *ngFor="let item of listMessages | async">
+  <div class="message" *ngFor="let item of listMessages">
     <!--<div class="thumb" *ngIf="item.img && !item.is_status" [ngClass]="getClassMsg(item.uid_user)">
       <img src="{{ item.img }}" />
     </div>-->
@@ -26,10 +31,10 @@
   <form (ngSubmit)="sendMessage()">
     <ion-grid>
       <ion-row class="footer">
-        <ion-col width-75>
+        <ion-col width-80>
           <ion-input type="text" [(ngModel)]="message" [ngModelOptions]="{standalone: true}" placeholder="Digite alguma coisa..."> </ion-input>
         </ion-col>
-        <ion-col width-25>
+        <ion-col width-20>
           <button ion-button round icon-only> <ion-icon name="md-arrow-dropright"> </ion-icon> </button>
         </ion-col>
       </ion-row>

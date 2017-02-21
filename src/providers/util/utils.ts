@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Platform } from 'ionic-angular';
 import { Camera, Push } from 'ionic-native';
+import { firebaseConfig } from '../../app/app.module'
 
 
 @Injectable()
@@ -36,15 +37,15 @@ export class Utils {
 
   getPushDeviceToken() {
     let push = Push.init({
-    android: {
-        senderID: "1018181753983"
-    },
-      ios: {
-          alert: "true",
-          badge: true,
-          sound: 'true'
+      android: {
+          senderID:  firebaseConfig.messagingSenderId
       },
-      windows: {}
+        ios: {
+            alert: "true",
+            badge: true,
+            sound: 'true'
+        },
+        windows: {}
     });
 
     return new Promise((resolve, reject) => {

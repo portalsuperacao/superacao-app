@@ -1,6 +1,24 @@
 .chat {
   background: rgb(227, 224, 230);
 
+  ion-title {
+    div {
+      display: inline-block;
+      vertical-align: middle;
+      margin: 0 $spacing-elements / 2;
+    }
+    .avatar {
+      width: 35px;
+      height: 35px;
+      padding: 2px;
+      border-radius: 100%;
+      overflow: hidden;
+      img {
+        border-radius: 100%;
+      }
+    }
+  }
+
   .clear {
     clear: both;
   }

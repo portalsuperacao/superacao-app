@@ -82,13 +82,13 @@
     font-size: 1.3rem;
   }
   .medicines {
-    background: $my-space-yellow;
+    background: $medicines-color;
   }
   .doctors {
-    background: $my-space-blue;
+    background: $doctors-color;
   }
   .notes {
-    background: $my-space-green;
+    background: $notes-color;
   }
 }
 
@@ -158,16 +158,16 @@ page-my-space {
       }
     }
     .calendar {
-      background: $my-space-red;
+      background: $calendar-color;
     }
     .doctors {
-      background: $my-space-blue
+      background: $doctors-color
     }
     .medicines {
-      background: $my-space-yellow;
+      background: $medicines-color;
     }
     .notes {
-      background: $my-space-green;
+      background: $notes-color;
     }
   }
 }

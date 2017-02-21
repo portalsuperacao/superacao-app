@@ -19,7 +19,7 @@ export class ChatPage {
   chat;
   ctrlFloat = true;
   status;
-  countMessages = 0;
+  countMessages = 30;
 
 
   constructor(
@@ -36,14 +36,17 @@ export class ChatPage {
   }
 
   ionViewDidLoad() {
-    this._getMessages(this.chatStorageService, this.chat, this.user1, this.utils).then((chat : any) => {
-      this.listMessages = chat.messages;
+    this._getChat(this.chatStorageService, this.chat, this.user1, this.utils).then((chat : any) => {
+      this.chat = chat;
+    }).then(() => {
+      this.chat.messages.subscribe((messages) => {
+        this.listMessages = messages
+      })
     })
   }
 
   ionViewWillEnter() {
     this.content.scrollToBottom(0);
-    this._setViewMessage(this.user1, 1);
     this._hideTabs();
   }
 
@@ -64,7 +67,6 @@ export class ChatPage {
   sendMessage() {
     this._validateMessage(this.message,this.user1, this.user2, this.chatStorageService, this.chat).then((msg) => {
       this.message = "";
-      this._setViewMessage(this.user2, 0);
       this.content.scrollToBottom(0);
     })
   }
@@ -75,8 +77,8 @@ export class ChatPage {
     Promise.resolve(i)
     .then(validateInput)
     .then(msgWrapper)
-    .then(sendMessage)
-    .then(pushNotification)
+    .then(sendMessage.bind(this))
+    .then(pushNotification.bind(this))
     .then(resolvePromise)
 
     function validateInput() {
@@ -89,34 +91,32 @@ export class ChatPage {
         msg : message,
         created_at: new Date().getTime(),
       }
-
       return msgWrapper;
     }
 
     function sendMessage(msg) {
-      chatStorageService.pushMessage(msg, chat.chatUid);
+      this.chatStorageService.pushMessage(msg, chat.chatUid);
       return msg;
     }
 
     function pushNotification(msg) {
       msg.token_device = user2.other_datas.token_device;
-      msg.name_user = user1.other_datas.name;
-
+      msg.name_user = user1.name;
+      this.chatStorageService.pushNotification(msg)
       return msg;
     }
 
     function resolvePromise(msg) {
       resolve(msg);
     }
-
   });
 }
 
-_getMessages(chatStorageService, chat, user1, utils) {
+_getChat(chatStorageService, chat, user1, utils) {
   return new Promise((resolve) => {
     Promise.resolve()
     .then(getChatDatas)
-    .then(getMessages)
+    .then(getMessages.bind(this))
     .then(removePushNotification)
     .then(resolvePromise)
 
@@ -125,21 +125,16 @@ _getMessages(chatStorageService, chat, user1, utils) {
     }
 
     function getMessages(msg) {
-      msg.messages = chatStorageService.getMessages(chat.chatUid, 20);
+      msg.messages = chatStorageService.getMessages(chat.chatUid, this.countMessages);
       return msg;
     }
-
 
     function removePushNotification(msg) {
       utils.generatePush().then((datas) => {
         console.log("remover o push!");
-      }).catch((error) => {
-
-      });
-
+      }).catch((error) => {});
       return msg;
     }
-
 
     function resolvePromise(msg) {
       resolve(msg)
@@ -148,36 +143,14 @@ _getMessages(chatStorageService, chat, user1, utils) {
 
 }
 
- _setViewMessage(user, valueView) {
-   this.chat.users.forEach((datas, index) => {
-     if(user.$key == datas.uid) {
-       this.chatStorageService.setViewChat(this.chat.chatKey, index, valueView);
-     }
-   });
- }
 
  doRefresh(refresh) {
-   
+   this.countMessages += this.countMessages
+   this.chatStorageService.getMessages(this.chat.chatUid, this.countMessages).subscribe((messages) => {
+     this.listMessages = messages
+     refresh.complete()
+   })
  }
-
-
-
-  _clearStatusEmotion() {
-    if(this.status) {
-      let status = this.user2.emotion;
-      status.is_active = 0;
-      this.userStorageService.setEmotion(status, this.user2.$key);
-    }
-  }
-
-
-  _generateMessageStaus(name, image, status) {
-    this.listMessages.push({
-      msg: name + ' está se sentindo ' + status,
-      is_status: 1,
-      img: image
-    });
-  }
 
   _hideTabs() {
     let elem = <HTMLElement>document.querySelector(".tabbar");
@@ -192,5 +165,29 @@ _getMessages(chatStorageService, chat, user1, utils) {
       elem.style.display = 'flex';
     }
   }
+
+  // _clearStatusEmotion() {
+  //   if(this.status) {
+  //     let status = this.user2.emotion;
+  //     status.is_active = 0;
+  //     this.userStorageService.setEmotion(status, this.user2.$key);
+  //   }
+  // }
+  //
+  // _setViewMessage(user, valueView) {
+  //   this.chat.users.forEach((datas, index) => {
+  //     if(user.$key == datas.uid) {
+  //       this.chatStorageService.setViewChat(this.chat.chatKey, index, valueView);
+  //     }
+  //   });
+  // }
+  //
+  // _generateMessageStaus(name, image, status) {
+  //   this.listMessages.push({
+  //     msg: name + ' está se sentindo ' + status,
+  //     is_status: 1,
+  //     img: image
+  //   });
+  // }
 
 }
