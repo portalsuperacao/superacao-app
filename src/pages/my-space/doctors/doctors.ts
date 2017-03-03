@@ -10,8 +10,8 @@ import { MySpaceStorageService } from '../../../providers/database/my-space-stor
   templateUrl: 'doctors.html'
 })
 export class MySpaceDoctorsPage {
-  user;
-  doctors;
+  user : any;
+  doctors : any;
 
   constructor(
     public navCtrl: NavController,

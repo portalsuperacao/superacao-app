@@ -12,14 +12,14 @@ import { Utils } from '../../providers/util/utils';
 export class ChatPage {
   @ViewChild(Content) content: Content;
 
-  message;
-  listMessages;
-  user1;
-  user2;
-  chat;
-  ctrlFloat = true;
-  status;
-  countMessages = 30;
+  message : any;
+  listMessages : any;
+  user1 : any;
+  user2 : any;
+  chat : any;
+  ctrlFloat : boolean = true;
+  status : any;
+  countMessages : number = 30;
 
 
   constructor(

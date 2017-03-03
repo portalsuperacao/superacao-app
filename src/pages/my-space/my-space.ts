@@ -14,11 +14,12 @@ import { ProfilePage } from '../profile/profile';
   templateUrl: 'my-space.html'
 })
 export class MySpacePage {
-  user
-  calendarPage = CalendarPage;
-  medicinesPage =  MySpaceMedicinesPage;
-  notesPage = MySpaceNotesPage;
-  doctorsPage = MySpaceDoctorsPage;
+  user: any
+  calendarPage: any = CalendarPage;
+  medicinesPage: any =  MySpaceMedicinesPage;
+  notesPage: any = MySpaceNotesPage;
+  doctorsPage: any = MySpaceDoctorsPage;
+  thumbClass : any;
 
   constructor(public navCtrl: NavController, public userStorageService : UserStorageService) {
 
@@ -26,6 +27,7 @@ export class MySpacePage {
 
   ionViewDidLoad() {
     this.user = this.userStorageService.getUserObs();
+    this._verifyClassOfThumb()
   }
 
   openPage(page) {
@@ -33,7 +35,17 @@ export class MySpacePage {
   }
 
   openProfile() {
-    this.navCtrl.setRoot(ProfilePage)
+    this.navCtrl.push(ProfilePage)
+  }
+
+  _verifyClassOfThumb() {
+    this.user.subscribe((datas : any) => {
+      if(datas.type_user == 'Superador') {
+        this.thumbClass = 'background-color-overcomer';
+      } else if (datas.type_user == 'Anjo') {
+        this.thumbClass = 'background-color-angel';
+      }
+    })
   }
 
 }

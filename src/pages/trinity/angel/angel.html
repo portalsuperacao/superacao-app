@@ -7,7 +7,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content class="trinity background-color-dark">
+<ion-content class="trinity background-color-dark" *ngIf="verifyNetwork === true">
     <div class="trinity-card" *ngFor="let trinity of trinitys | async; let i = index">
       <div class="trinity">
         <div class="main-datas">
@@ -35,7 +35,7 @@
           <ion-row>
             <ion-col width-75 (click)="openChat(trinity.angel, trinity.archangel)">
               <div class="avatar">
-                <figure class="background-color-angel">
+                <figure class="background-color-archangel">
                   <img [src]="trinity.archangel.avatar" />
                 </figure>
                 <div class="name">
@@ -51,61 +51,9 @@
         </div>
       </div>
     </div>
+</ion-content>
 
-<!-- <ion-content padding class="trinity">
-    <div class="chat-user" *ngFor="let trinity of trinitys | async; let i = index">
-      <ion-grid>
-        <ion-row [ngClass]="{'text-notification': !(overcomerNotification[i] | async)?.view}">
-          <ion-col width-40 (click)="openChat(trinity.angel, trinity.overcomer)">
-            <div class="avatar overcomer">
-              <img src="{{ trinity.overcomer?.avatar }}" />
-              <div class="emotion">
-                <img [src]="trinity.overcomer.emotion?.img">
-              </div>
-            </div>
-          </ion-col>
-          <ion-col width-40 (click)="openChat(trinity.angel, trinity.overcomer)">
-            <h4> {{ trinity.overcomer.name }} </h4>
-            <div class="message">
-              <p *ngIf="!(trinity.overcomer.lastMessages | async)"> Não há nenhum mensagem disponivel </p>
-              <p *ngIf="(trinity.overcomer.lastMessages | async) && !(trinity.overcomer.lastMessages | async)"> O {{ trinity.overcomer.name }} enviou uma imagem </p>
-              <p *ngIf="trinity.overcomer.lastMessages | async"> {{ (trinity.overcomer.lastMessages | async).msg | truncate:20 }} </p>
-              <p *ngIf="trinity.overcomer.lastMessages | async" class="hour"> {{ (trinity.overcomer.lastMessages | async).created_at | customDate:"c" }} </p>
-            </div>
-          </ion-col>
-          <ion-col width-20>
-            <ion-icon name="md-calendar" (click)="openPublicEvents(trinity.overcomer)"> </ion-icon>
-          </ion-col>
-        </ion-row>
-
-        <ion-row>
-          <ion-col width-80>
-            <span (click)="openChat(trinity.angel, trinity.archangel)" [ngClass]="{'second-notification': !(archangelNotification[i] | async)?.view}"> Arcanjo: {{ trinity.archangel.name }} </span>
-          </ion-col>
-          <ion-col width-20>
-            <span (click)="openHelpSystem()"> Ajuda </span>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </div>
-
-    <div class="space-user">
-      <ion-grid>
-        <ion-row>
-          <ion-col width-43 (click)="toggleSpace()">
-            <div class="avatar" [ngClass]="space">
-              <ion-icon name="ios-heart"> </ion-icon>
-            </div>
-          </ion-col>
-
-          <ion-col width-67 (click)="toggleSpace()">
-            <h4 *ngIf="space == 'open'"> Aguardando superador </h4>
-            <h4 *ngIf="space == 'close'"> Vaga fechada </h4>
-            <p *ngIf="space == 'open'"> <ion-icon name="md-remove-circle"> </ion-icon> Fechar vaga </p>
-            <p *ngIf="space == 'close'"> <ion-icon name="md-add-circle"> </ion-icon> Abrir vaga </p>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </div> -->
-
+<ion-content class="message-offline background-color-dark" *ngIf="verifyNetwork === false">
+    <h2>Sem conexão</h2>
+    <ion-icon name="ios-wifi"></ion-icon>
 </ion-content>

@@ -13,11 +13,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class LoginPage {
 
   messagesError;
-  ctrlLogo = false;
-  loading;
-  formType = 'login';
+  ctrlLogo : boolean = false;
+  loading : any;
+  formType : any = 'login';
 
- // --- FORM DATAS -----
   formSignup: FormGroup;
   formLogin : FormGroup;
 

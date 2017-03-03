@@ -5,10 +5,9 @@ import { IonicApp, IonicModule } from 'ionic-angular';
 import { CalendarPicker } from '../components/calendar-picker/calendar-picker';
 import { DateCustomPipe } from '../pipes/date-custom-pipe';
 import { TruncatePipe } from '../pipes/truncate-pipe';
-import { TextMaskModule } from 'angular2-text-mask';
-
 
 // PROVIDERS
+import { TextMaskModule } from 'angular2-text-mask';
 import { AngularFireModule } from 'angularfire2';
 import { AuthService } from '../providers/database/auth-service';
 import { Storage } from '@ionic/storage';
@@ -43,11 +42,6 @@ import { StatusEmotionPage } from '../pages/status-emotion/status-emotion';
 import { TabsPage } from '../pages/tabs/tabs';
 import { OvercomerPage } from '../pages/trinity/overcomer/overcomer';
 import { AngelPage } from '../pages/trinity/angel/angel';
-import { ArchangelPage } from '../pages/trinity/archangel/archangel';
-import { ArchangelMissionsPage } from '../pages/trinity/archangel/missions/missions';
-import { ArchangelMissionsDetailsPage } from '../pages/trinity/archangel/missions/details/details';
-import { ArchangelMissionsHistoricalPage } from '../pages/trinity/archangel/missions/historical/historical';
-import { ArchangelChatPage } from '../pages/trinity/archangel/chat/chat';
 import { VisitorPage } from '../pages/trinity/visitor/visitor';
 import * as firebase from 'firebase';
 
@@ -87,20 +81,15 @@ firebase.initializeApp(firebaseConfig);
     TabsPage,
     OvercomerPage,
     AngelPage,
-    ArchangelPage,
-    ArchangelMissionsPage,
-    ArchangelMissionsDetailsPage,
-    ArchangelMissionsHistoricalPage,
-    ArchangelChatPage,
-    VisitorPage,
     CalendarPicker,
     DateCustomPipe,
-    TruncatePipe
+    TruncatePipe,
+    VisitorPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(firebaseConfig),
-    TextMaskModule,
+    TextMaskModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -127,11 +116,6 @@ firebase.initializeApp(firebaseConfig);
     TabsPage,
     OvercomerPage,
     AngelPage,
-    ArchangelPage,
-    ArchangelMissionsPage,
-    ArchangelMissionsDetailsPage,
-    ArchangelMissionsHistoricalPage,
-    ArchangelChatPage,
     VisitorPage
   ],
   providers: [

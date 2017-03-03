@@ -8,7 +8,7 @@ import { NavController, ViewController } from 'ionic-angular';
 
 export class StatusEmotionPage {
 
-  emojis;
+  emojis : any;
 
   constructor(private nav: NavController, private viewCtrl: ViewController) {
     this.emojis = [{ status: 'Feliz',  img: './assets/images/happy-1.svg'},

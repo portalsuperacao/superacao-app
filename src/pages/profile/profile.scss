@@ -19,8 +19,18 @@ page-profile {
         right: 10px;
       }
       img {
+        padding: 5px;
         border-radius: 100%;
       }
+    }
+    .name {
+      font-weight: bold;
+      font-size: 2.3rem;
+      color: $text-secondary;
+    }
+    .type {
+      font-size: 1.6rem;
+      color: $text-primary;
     }
   }
   .profile-datas {

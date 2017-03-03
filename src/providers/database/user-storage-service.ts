@@ -43,7 +43,6 @@ export class UserStorageService {
     this.db.set(data)
   }
 
-
   getUser() {
     return new Promise((resolve) => {
       this.af.auth.subscribe((user) => {

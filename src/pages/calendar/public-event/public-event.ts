@@ -8,9 +8,9 @@ import { CalendarStorageService } from '../../../providers/database/calendar-sto
 })
 
 export class CalendarPublicEventPage {
-  user;
-  events;
-  isEmpty = true;
+  user : any;
+  events : any;
+  isEmpty : boolean = true;
 
   constructor(
     public navCtrl: NavController,

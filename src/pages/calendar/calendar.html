@@ -9,7 +9,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content class="calendar">
+<ion-content class="calendar" *ngIf="verifyNetwork === true">
   <calendar-picker [setEvents]="allSechedule" (dateSelected)="updateDate($event)" *ngIf="showCalendar"> </calendar-picker>
 
   <ion-list>
@@ -30,4 +30,9 @@
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>
+</ion-content>
+
+<ion-content class="message-offline background-color-dark" *ngIf="verifyNetwork === false">
+    <h2>Sem conexão</h2>
+    <ion-icon name="ios-wifi"></ion-icon>
 </ion-content>

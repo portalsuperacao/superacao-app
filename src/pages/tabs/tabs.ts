@@ -11,8 +11,8 @@ import { MySpacePage } from '../my-space/my-space';
 })
 export class TabsPage {
 
-  mySpacePage = MySpacePage;
-  trinityPage;
+  mySpacePage : any = MySpacePage;
+  trinityPage : any;
 
   constructor(public userStorageService: UserStorageService) {
     this._verifyTypeOfUserPage();

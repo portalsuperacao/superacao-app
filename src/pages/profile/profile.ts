@@ -10,7 +10,8 @@ import { UserStorageService } from '../../providers/database/user-storage-servic
 })
 
 export class ProfilePage {
-  user;
+  user : any;
+  thumbClass: any;
 
   constructor(
     public navCtrl: NavController,
@@ -19,6 +20,7 @@ export class ProfilePage {
 
   ionViewDidLoad() {
     this.user = this.userStorageService.getUserObs();
+    this._verifyClassOfThumb();
   }
 
   openEdit() {
@@ -26,6 +28,16 @@ export class ProfilePage {
       let modal = this.modalCtrl.create(ProfileEditPage, {user: user});
       modal.present();
     });
+  }
+
+  _verifyClassOfThumb() {
+    this.user.subscribe((datas : any) => {
+      if(datas.type_user == 'Superador') {
+        this.thumbClass = 'background-color-overcomer';
+      } else if (datas.type_user == 'Anjo') {
+        this.thumbClass = 'background-color-angel';
+      }
+    })
   }
 
 }

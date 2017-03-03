@@ -1,3 +1,4 @@
+import { Network } from 'ionic-native';
 import { Component } from '@angular/core';
 import { NavController, LoadingController } from 'ionic-angular';
 import { UserStorageService } from '../../../providers/database/user-storage-service';
@@ -16,9 +17,10 @@ import { ChatPage } from '../../chat/chat';
 export class AngelPage {
 
   trinitys;
-  space = 'close';
-  overcomerNotification = [];
-  archangelNotification = [];
+  space: any = 'close';
+  overcomerNotification: any = [];
+  archangelNotification: any = [];
+  verifyNetwork: boolean = true;
 
   constructor(
     public nav: NavController,
@@ -60,16 +62,12 @@ export class AngelPage {
     this.nav.push(ChatPage, {'user1' : user1, 'user2': user2, 'chat' : user2.chat, 'status': 1});
   }
 
-  toggleSpace() {
-    this.space == 'open' ? this.space = 'close' : this.space = 'open';
-  }
-
 
   updateDatas(userStorageService, chatStorageService, utils) {
     return new Promise((resolve) => {
       Promise.resolve()
       .then(getTrinityService)
-      .then(loopThroughTrinitys)
+      .then(loopThroughTrinitys.bind(this))
 
       function getTrinityService() {
         let trinitys = [{
@@ -89,6 +87,7 @@ export class AngelPage {
       function loopThroughTrinitys(trinitys) {
           for(let i = 0; i < trinitys.length; i++) {
             Promise.resolve(trinitys[i])
+            .then(verifyIfHaveConnect.bind(this))
             .then(findOvercomer)
             .then(findAngel)
             .then(findArchangel)
@@ -107,6 +106,13 @@ export class AngelPage {
           }
       }
 
+      function verifyIfHaveConnect(trinity) {
+        Network.onDisconnect().subscribe(() => {
+          this.verifyNetwork = false
+        });
+
+        return trinity;
+      }
 
       function findOvercomer(trinity) {
         return userStorageService.findUser(trinity.overcomer).then((user) => {
@@ -196,13 +202,6 @@ export class AngelPage {
     });
   }
 
-  _removePush() {
-    this.utils.generatePush().then((datas) => {
-      console.log("remover o push!");
-    }).catch((error) => {
-
-    });
-  }
 
 
 

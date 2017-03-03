@@ -8,11 +8,10 @@ import { FormBuilder, Validators } from '@angular/forms';
   templateUrl: 'doctors-event.html'
 })
 export class MySpaceDoctorsEventPage {
-  params;
-  formEvent;
-  showClosePhone;
-  phones = [];
-  mask = ['(', /[1-9]/, /[1-9]/, ')', ' ', /[1-9]/, /[1-9]/, /[1-9]/, /[1-9]/, '-', /[1-9]/, /[1-9]/, /[1-9]/, /[1-9]/];
+  params : any;
+  formEvent : any;
+  showClosePhone : any;
+  phones : any = [];
 
   constructor(
     public navCtrl: NavController,
@@ -89,6 +88,20 @@ export class MySpaceDoctorsEventPage {
       }
     }
     return true;
+  }
+
+  validateMask(userInput) {
+    let numbers = userInput.match(/\d/g);
+    let numberLength = 0;
+    if (numbers) {
+      numberLength = numbers.join("").length;
+    }
+
+    if (numberLength > 10) {
+      return ['(', /[1-9]/, /[1-9]/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
+    } else {
+      return ['(', /[1-9]/, /[1-9]/, ')', ' ', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
+    }
   }
 
 

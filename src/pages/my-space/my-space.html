@@ -11,9 +11,9 @@
 
 
 <ion-content class="background-dark">
-  <div class="avatar trinity" (click)="openProfile()">
-    <div class="thumb overcomer">
-      <img [src]="(user | async)?.avatar" />
+  <div class="avatar" (click)="openProfile()">
+    <div class="thumb">
+      <img [src]="(user | async)?.avatar" [ngClass]="thumbClass"/>
       <div [hidden]="(user | async)?.type_user != 'Superador'" class="emotion">
         <img [src]="(user | async)?.emotion?.img">
       </div>

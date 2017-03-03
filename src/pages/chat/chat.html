@@ -12,9 +12,6 @@
 
 <ion-content padding class="chat">
   <div class="message" *ngFor="let item of listMessages">
-    <!--<div class="thumb" *ngIf="item.img && !item.is_status" [ngClass]="getClassMsg(item.uid_user)">
-      <img src="{{ item.img }}" />
-    </div>-->
     <div [ngClass]="getClassMsg(item.uid_user)">
       {{ item.msg }}
     </div>

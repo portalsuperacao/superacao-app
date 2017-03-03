@@ -95,11 +95,8 @@ $event-colors: (
 // so that the above variables are used and Ionic's
 // default are overridden.
 
-// Custom scass
+// Custom scss
 @import '../pages/trinity/trinity';
-@import '../pages/trinity/archangel/missions/details/details';
-@import '../pages/trinity/archangel/missions/historical/historical';
-
 
 @import "ionic.theme.default";
 

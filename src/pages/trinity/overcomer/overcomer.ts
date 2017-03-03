@@ -1,3 +1,4 @@
+import { Network } from 'ionic-native';
 import { Component } from '@angular/core';
 import { NavController, LoadingController, ModalController } from 'ionic-angular';
 import { UserStorageService } from '../../../providers/database/user-storage-service';
@@ -18,12 +19,13 @@ import { StatusEmotionPage } from '../../status-emotion/status-emotion';
 export class OvercomerPage {
 
   //==== Trinity =====
-  overcomerObs;
-  overcomer;
-  angel;
-  archangel;
-  angelNotification;
-  archangelNotification;
+  overcomerObs: any;
+  overcomer: any;
+  angel: any;
+  archangel: any;
+  angelNotification: any;
+  archangelNotification: any;
+  verifyNetwork: boolean = true;
 
   loading;
 
@@ -82,6 +84,7 @@ export class OvercomerPage {
   updateDatas(userStorageService, chatStorageService, utils) {
     return new Promise((resolve) => {
       Promise.resolve()
+      .then(verifyIfHaveConnect.bind(this))
       .then(getTrinityService)
       .then(findOvercomer)
       .then(findAngel)
@@ -96,6 +99,11 @@ export class OvercomerPage {
       .then(getUserObs)
       .then(resolvePromise)
 
+      function verifyIfHaveConnect() {
+        Network.onDisconnect().subscribe(() => {
+          this.verifyNetwork = false
+        });
+      }
 
       function getTrinityService() {
         let trinity = {
@@ -206,17 +214,8 @@ export class OvercomerPage {
       }
 
       function resolvePromise(trinity) {
-        console.log(trinity)
         resolve(trinity);
       }
-
-    });
-  }
-
-  _removePush() {
-    this.utils.generatePush().then((datas) => {
-      console.log("remover o push!");
-    }).catch((error) => {
 
     });
   }

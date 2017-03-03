@@ -1,3 +1,4 @@
+import { Network } from 'ionic-native';
 import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 import { UserStorageService } from '../../providers/database/user-storage-service';
@@ -13,12 +14,13 @@ import { CalendarStorageService } from '../../providers/database/calendar-storag
 })
 
 export class CalendarPage {
-   events;
-   listSchedule;
-   allSechedule;
-   showCalendar;
+   events : any;
+   listSchedule : any;
+   allSechedule : any;
+   showCalendar : any;
+   verifyNetwork: any = true;
 
-   loading
+   loading : any
 
   constructor(
     public navCtrl: NavController,
@@ -32,6 +34,7 @@ export class CalendarPage {
   }
 
   ionViewWillEnter() {
+    this._verifyIfHaveConnect();
     this._generateAllSchedule();
   }
 
@@ -70,6 +73,12 @@ export class CalendarPage {
 
   editEvent(event) {
     this.navCtrl.push(CalendarEventEditPage, {datas: event});
+  }
+
+  _verifyIfHaveConnect() {
+    Network.onDisconnect().subscribe(() => {
+      this.verifyNetwork = false
+    });
   }
 
   _generateAllSchedule() {

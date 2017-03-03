@@ -30,8 +30,8 @@
         </ion-col>
         <ion-col width-50>
           <ion-input placeholder="Telefone" type="text"
-          [textMask]="{mask: mask}"
           [(ngModel)]="phone.number"
+          [textMask]="{mask: validateMask}"
           [ngModelOptions]="{standalone: true}"
           (click)="clickPhone(i)"> </ion-input>
         </ion-col>

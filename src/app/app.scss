@@ -169,3 +169,18 @@ ion-footer {
     float: right;
   }
 }
+
+.message-offline {
+  position: relative;
+  > * {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: center;
+    color: $text-primary;
+  }
+
+  ion-icon {
+    font-size: $font-size;
+  }
+}
