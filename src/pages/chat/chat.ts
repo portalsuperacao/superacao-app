@@ -59,9 +59,7 @@ export class ChatPage {
       return 'message1'
     } else if (this.user2.$key == uidUser) {
       return 'message2'
-    } else {
-      return 'message-status';
-    }
+    } 
   }
 
   sendMessage() {

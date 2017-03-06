@@ -46,11 +46,11 @@ import { VisitorPage } from '../pages/trinity/visitor/visitor';
 import * as firebase from 'firebase';
 
 export const firebaseConfig = {
-   apiKey: "AIzaSyAnTqOEZHBU-1CMx0fKY2v4zFeGvPnvA1I",
-   authDomain: "superacao-dc62e.firebaseapp.com",
-   databaseURL: "https://superacao-dc62e.firebaseio.com",
-   storageBucket: "superacao-dc62e.appspot.com",
-   messagingSenderId: "1018181753983"
+   apiKey: "<YOUR DATA>",
+   authDomain: "<YOUR DATA>",
+   databaseURL: "<YOUR DATA>",
+   storageBucket: "<YOUR DATA>",
+   messagingSenderId: "<YOUR DATA>"
 };
 
 firebase.initializeApp(firebaseConfig);

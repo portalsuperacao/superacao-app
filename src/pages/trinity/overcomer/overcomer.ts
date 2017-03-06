@@ -108,8 +108,8 @@ export class OvercomerPage {
       function getTrinityService() {
         let trinity = {
           overcomer : "",
-          angel: "t3RiITF4w5aHPgHfAgnUZYI6zBs1",
-          archangel: "RK2xk9yrgjSRgv5Tmm3ThRgdE102"
+          angel: "<UID DO ANJO>",
+          archangel: "<UID DO ARCANJO>"
         };
         return trinity;
       }

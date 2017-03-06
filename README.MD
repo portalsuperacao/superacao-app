@@ -1,3 +1,20 @@
+# Conhecimentos minimos
+* NodeJS
+* Typescript
+* Angular 2
+* Ionic 2
+* Firebase
+
+# Configurações basicas
+O aplicativo foi desenvolvido na linguagem TypeScript com o framework Ionic 2
+Para realizar a instalação do Ionic em sua máquina, você irá precisar do NodeJS com o NPM instalado em sua máquina. Após isso só é necessário realizar a instalação do Ionic em sua máquina com os seguintes comandos:
+```nodejs
+npm install -g ionic cordova
+```
+
+Para mais informações de instalação acesse a página do Ionic 2 oficial:
+https://ionicframework.com/docs/
+
 # Configurações iniciais
 ### 1. Configurar dados do firebase no aplicativo
 O aplicativo utiliza como base de dados o Firebase e para isso é necessário criar uma conta neste link:
@@ -14,7 +31,7 @@ Utilize algum editor de texto de sua preferência e insira os dados do firebase 
 export const firebaseConfig = {
    apiKey: "<YOUR DATAS>",
    authDomain: "<YOUR DATAS>",
-   databaseURL: "<YOUR DATASL>",
+   databaseURL: "<YOUR DATAS>",
    storageBucket: "<YOUR DATAS>",
    messagingSenderId: "<YOUR DATAS>"
 };
@@ -45,7 +62,66 @@ Para realizar os push notification no app, é necessário realizar uma pequena c
 </plugin>
 ```
 
+Abra o arquivo package.json e modifique também o seguinte objeto:
+```json
+    {
+      "variables": {
+        "SENDER_ID": "<YOUR DATA>"
+      },
+      "locator": "phonegap-plugin-push"
+    }
+```
+
+### 4. Geração dos trios
+Os trios ainda não são gerados automaticamente, e para fazer o relacionamento entre eles, é necessário o cadastro de um usuário para adquirir, o tipo e o ID dele. Para conseguir esses dados só é necessário cadastrar o usuário. Por padrão o tipo de usuário é setado como "Normal", por isso no próprio console do firebase troque o usuário para o tipo desejado (Superador, Anjo, Arcanjo ou Normal). Após isso abra os seguintes arquivo:
+
+```sh
+superacao-app/src/pages/trinity/overcomer/overcomer.ts
+superacao-app/src/pages/trinity/angel/angel.ts
+```
+
+Após isso encontre a função getTrinityService() e nele, troque os seguintes dados de acordo com o usuário que você deseja relacionar:
+
+##### Superador
+
+```typescript
+  function getTrinityService() {
+        let trinity = {
+          overcomer : "",
+          angel: "<UID DO ANJO DO FIREBASE>",
+          archangel: "<UID DO ARCANJO DO FIREBASE>"
+        };
+        return trinity;
+      }
+```
+
+##### Anjo
+```typescript
+  function getTrinityService() {
+        let trinitys = [{
+          overcomer : "<UID DO SUPERADOR DO FIREBASE>",
+          angel: "",
+          archangel: "<UID DO ARCANJO DO FIREBASE>"
+        },
+        {
+          overcomer : "<UID DO ARCANJO DO SUPERADOR>",
+          angel: "",
+          archangel: "<UID DO SUPERADOR DO FIREBASE>"
+        }];
+
+        return trinitys;
+      }
+```
+##### Observação
+O do componente "Overcomer" (Superador), só aceita um Objeto simples, pois ele só irá possuir um trio. Já o o componente "Angel" (Anjo), possuí um Array de Objetos, pois vai possuír mais de um trio.
+**Não é obrigatorio colocar o uid do componente** (Exemplo, se você esta no componente do Superador, não vai precisar colocar o Uid dele mesmo, por isso no exemplo acima eles estão em branco)
+
 # Inicializando aplicativo
+Após realizar todas configurações inicias, você pode instalar o app usando o comando:
+```nodejs
+npm install
+```
+
 Para iniciar o aplicativo em modo web (modo navegador), utilize o seguinte comando:
 
 ```sh
