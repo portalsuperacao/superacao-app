@@ -36,6 +36,16 @@ export class ProfilePage {
     modal.present();
   }
 
+  verifyRelationship(relationship) {
+    if(relationship == 1) {
+      return 'Solteiro(a)'
+    } else if (relationship == 2) {
+      return 'Casado(a)';
+    } else if (relationship == 3) {
+      return 'Divorciado(a)';
+    }
+  }
+
   _verifyClassOfThumb() {
     if(this.user.type_user == 'Superador') {
       this.thumbClass = 'background-color-overcomer';
@@ -43,5 +53,6 @@ export class ProfilePage {
       this.thumbClass = 'background-color-angel';
     }
   }
+
 
 }

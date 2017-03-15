@@ -3,7 +3,7 @@
     <ion-title> Perfil de {{ user.name }} </ion-title>
 
     <ion-buttons end>
-      <button ion-button (click)="closePage()">
+      <button ion-button (click)="closePage(formGroup.value)">
         <ion-icon name="close"> </ion-icon>
       </button>
     </ion-buttons>
@@ -11,7 +11,15 @@
 </ion-header>
 
 <ion-content class="background-color-dark">
-  <form [formGroup]="formGroup" (ngSubmit)="updateDatas(formGroup.value)">
+  <form [formGroup]="formGroup">
+    <div class="avatar">
+      <div class="thumb">
+        <img [src]="user?.avatar" [ngClass]="thumbClass" />
+        <div [hidden]="user?.type_user != 'Superador'" class="emotion">
+          <img [src]="user?.emotion?.img">
+        </div>
+      </div>
+    </div>
     <div class="input-field">
       <ion-input formControlName="name" placeholder="Nome" type="text"></ion-input>
       <ion-input formControlName="occupation" placeholder="Profissão" type="text"></ion-input>
@@ -85,6 +93,17 @@
           <ion-option value="5">Outra</ion-option>
         </ion-select>
       </ion-item>
+      <ion-item>
+        <ion-label>Filhos</ion-label>
+        <ion-select formControlName="children">
+          <ion-option value="0" selected="true">0</ion-option>
+          <ion-option value="1">1</ion-option>
+          <ion-option value="2">2</ion-option>
+          <ion-option value="3">3</ion-option>
+          <ion-option value="4">4</ion-option>
+          <ion-option value="n">Mais de 5</ion-option>
+        </ion-select>
+      </ion-item>
 
     </div>
 
@@ -128,8 +147,6 @@
       <ion-input formControlName="healing_phrase" placeholder="Frase de cura" type="text"></ion-input>
       <ion-textarea formControlName="phrase_of_difficulties" placeholder="Dificuldades" type="text"></ion-textarea>
     </div>
-
-    <button ion-button full color="dark">Atualizar</button>
   </form>
 
 </ion-content>

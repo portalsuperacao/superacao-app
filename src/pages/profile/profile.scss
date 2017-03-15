@@ -1,4 +1,4 @@
-page-profile {
+page-profile, page-edit-profile {
   .avatar {
     height: 45%;
     padding-top: 20px;
@@ -34,8 +34,6 @@ page-profile {
     }
   }
   .profile-datas {
-    padding-left: 20px;
-    padding-right: 20px;
     background: #FFF;
     font-size: $font-size;
     .title {
@@ -46,8 +44,11 @@ page-profile {
       color: $text-light;
     }
     .datas {
-      margin-top: 10px;
-      margin-bottom: 10px;
+      padding: $spacing-elements;
+      border-bottom: solid 1px #DDD;
+      &:last-child {
+        border-bottom: none;
+      }
       .left {
         float: left;
       }

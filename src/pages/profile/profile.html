@@ -7,8 +7,8 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content class="background-dark">
-  <div class="avatar">
+<ion-content class="background-color-dark">
+  <div class="avatar" (click)="openEdit()">
     <div class="thumb">
       <img [src]="user?.avatar" [ngClass]="thumbClass" />
       <div [hidden]="user?.type_user != 'Superador'" class="emotion">
@@ -20,34 +20,29 @@
   </div>
 
   <div class="profile-datas">
-    <button ion-button clear full color="primary" (click)="openEdit()">
-      <ion-icon name="ios-create-outline"> </ion-icon> Editar perfil
-     </button>
     <div class="datas">
       <div class="right">
-        <div class="title"> Professora </div>
-        <div class="title"> 38 anos </div>
+        <div class="title"> {{ user?.occupation }} </div>
+        <div class="title"> {{ user?.city }} - {{ user?.state }} </div>
       </div>
       <div class="left">
-        <div class="title"> Casada </div>
-        <div class="title"> 0 filhos </div>
+        <div class="title"> {{ verifyRelationship(user?.relationship) }}  </div>
+        <div class="title"> {{ user?.children }} filhos </div>
       </div>
       <div class="clear"> </div>
     </div>
 
-    <div class="divider"> </div>
-
     <div class="datas">
       <div class="title"> Frase de cura </div>
-      <div class="text"> Tudo passa! Passou pra min e passará pra você também </div>
+      <div class="text"> {{ user?.other_datas.healing_phrase }} </div>
     </div>
 
     <div class="datas">
       <div class="title"> Dificuldades </div>
-      <div class="text"> Tudo passa! Passou pra min e passará pra você também </div>
+      <div class="text"> {{ user?.other_datas.phrase_of_difficulties }} </div>
     </div>
 
-    <div class="others">
+    <div class="datas">
       <div class="title"> Cancêr de mama </div>
       <div class="text"> Radioterapia huds s ahduhds auhdsa </div>
     </div>

@@ -11,6 +11,8 @@ import { DateUtil } from '../../../providers/util/date-util';
 export class ProfileEditPage {
   user : any;
   formGroup: FormGroup;
+  thumbClass: any;
+
   constructor(
     public navCtrl: NavController,
     public viewCtrl: ViewController,
@@ -30,6 +32,7 @@ export class ProfileEditPage {
         genre: [this.user.genre],
         relationship: [this.user.relationship],
         religion: [this.user.religion],
+        children: [this.user.children],
         name_cancer: [this.user.name_cancer],
         type_cancer: [this.user.type_cancer],
         treatmentCirurgia : [this.user.treatment ? this.user.treatment.cirurgia : null],
@@ -44,14 +47,10 @@ export class ProfileEditPage {
     }
 
   ionViewDidLoad() {
-
+    this._verifyClassOfThumb();
   }
 
-  closePage() {
-    this.viewCtrl.dismiss();
-  }
-
-  updateDatas(formDatas) {
+  closePage(formDatas) {
     Promise.resolve()
     .then(filterDatas.bind(this))
     .then(updateDatas.bind(this))
@@ -100,5 +99,14 @@ export class ProfileEditPage {
       this.viewCtrl.dismiss(datas)
     }
   }
+
+  _verifyClassOfThumb() {
+    if(this.user.type_user == 'Superador') {
+      this.thumbClass = 'background-color-overcomer';
+    } else if (this.user.type_user == 'Anjo') {
+      this.thumbClass = 'background-color-angel';
+    }
+  }
+
 
 }
