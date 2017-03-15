@@ -71,14 +71,14 @@ export class AngelPage {
 
       function getTrinityService() {
         let trinitys = [{
-          overcomer : "<UID DO SUPERADOR>",
+          overcomer : "<UID DO SUPERADOR DO FIREBASE>",
           angel: "",
-          archangel: "<UID DO ARCANJO>"
+          archangel: "<UID DO ARCANJO DO FIREBASE>"
         },
         {
-          overcomer : "<UID DO SUPERADOR>",
+          overcomer : "<UID DO ARCANJO DO SUPERADOR>",
           angel: "",
-          archangel: "<UID DO ARCANJO>"
+          archangel: "<UID DO SUPERADOR DO FIREBASE>"
         }];
 
         return trinitys;

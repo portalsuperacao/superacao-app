@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-navbar color="dark">
+    <ion-title> Superação </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="register-user">
+  <p>
+    Eu serei o seu companheiro de Superação! Estou pronto para te ajudar
+  </p>
+  <p>
+    Vamos fazer um cadastro?
+  </p>
+  <form [formGroup]="formGroup" (ngSubmit)="sendDatas(formGroup.value)">
+    <ion-item>
+      <ion-label stacked>Nome:</ion-label>
+      <ion-input formControlName="name" type="text" placeholder="Digite seu nome"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Email:</ion-label>
+      <ion-input formControlName="email" type="email" placeholder="Digite seu e-mail"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Senha:</ion-label>
+      <ion-input formControlName="password" type="password" placeholder="Digite sua senha"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Verificação de senha:</ion-label>
+      <ion-input formControlName="passwordVerify" type="password" placeholder="Digite sua senha novamente"></ion-input>
+    </ion-item>
+
+    <ion-item *ngIf="showMessage">
+      <p>As senhas digitas não são iguais! </p>
+    </ion-item>
+
+    <button ion-button full color="dark" [disabled]="!formGroup.valid">Continuar</button>
+  </form>
+</ion-content>

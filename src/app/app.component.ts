@@ -8,6 +8,7 @@ import { AuthService } from '../providers/database/auth-service';
 import { TabsPage } from '../pages/tabs/tabs';
 import { LoginPage } from '../pages/login/login';
 import { ProfilePage } from '../pages/profile/profile';
+import { RegisterBasicDatas } from '../pages/register/basic-datas/basic-datas';
 
 @Component({
   templateUrl: 'app.html'

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ModalController } from 'ionic-angular';
+import { NavController, ModalController, ViewController } from 'ionic-angular';
 import { ProfileEditPage } from './edit/edit';
 import { UserStorageService } from '../../providers/database/user-storage-service';
 
@@ -16,28 +16,32 @@ export class ProfilePage {
   constructor(
     public navCtrl: NavController,
     public modalCtrl: ModalController,
+    public viewController: ViewController,
     public userStorageService: UserStorageService) {}
 
   ionViewDidLoad() {
-    this.user = this.userStorageService.getUserObs();
-    this._verifyClassOfThumb();
+    this.userStorageService.getUserObs().subscribe((user) => {
+      this.user = user;
+      this._verifyClassOfThumb();
+    });
+
   }
 
   openEdit() {
-    this.user.subscribe((user) => {
-      let modal = this.modalCtrl.create(ProfileEditPage, {user: user});
-      modal.present();
-    });
+    let modal = this.modalCtrl.create(ProfileEditPage, {user: this.user});
+    modal.onDidDismiss((datas) => {
+      if(!datas) return;
+      this.userStorageService.updateUser(datas, this.user.$key);
+    })
+    modal.present();
   }
 
   _verifyClassOfThumb() {
-    this.user.subscribe((datas : any) => {
-      if(datas.type_user == 'Superador') {
-        this.thumbClass = 'background-color-overcomer';
-      } else if (datas.type_user == 'Anjo') {
-        this.thumbClass = 'background-color-angel';
-      }
-    })
+    if(this.user.type_user == 'Superador') {
+      this.thumbClass = 'background-color-overcomer';
+    } else if (this.user.type_user == 'Anjo') {
+      this.thumbClass = 'background-color-angel';
+    }
   }
 
 }

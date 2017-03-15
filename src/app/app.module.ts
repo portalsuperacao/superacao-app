@@ -40,21 +40,29 @@ import { ProfilePage } from '../pages/profile/profile';
 import { ProfileEditPage } from '../pages/profile/edit/edit';
 import { StatusEmotionPage } from '../pages/status-emotion/status-emotion';
 import { TabsPage } from '../pages/tabs/tabs';
+import { RegisterBasicDatas } from '../pages/register/basic-datas/basic-datas';
+import { RegisterOtherCancer } from '../pages/register/other-cancer/other-cancer';
+import { RegisterOtherDatas } from '../pages/register/other-datas/other-datas';
+import { RegisterPicture } from '../pages/register/picture/picture';
+import { RegisterState } from '../pages/register/state/state';
+import { RegisterTypeCancer } from '../pages/register/type-cancer/type-cancer';
+import { RegisterTypeTreatment } from '../pages/register/type-treatment/type-treatment';
+import { RegisterTypeUser } from '../pages/register/type-user/type-user';
+import { RegisterPastCancer } from '../pages/register/past-cancer/past-cancer';
 import { OvercomerPage } from '../pages/trinity/overcomer/overcomer';
 import { AngelPage } from '../pages/trinity/angel/angel';
 import { VisitorPage } from '../pages/trinity/visitor/visitor';
 import * as firebase from 'firebase';
 
 export const firebaseConfig = {
-   apiKey: "<YOUR DATA>",
-   authDomain: "<YOUR DATA>",
-   databaseURL: "<YOUR DATA>",
-   storageBucket: "<YOUR DATA>",
-   messagingSenderId: "<YOUR DATA>"
+   apiKey: "<YOUR DATAS>",
+   authDomain: "<YOUR DATAS>",
+   databaseURL: "<YOUR DATAS>",
+   storageBucket: "<YOUR DATAS>",
+   messagingSenderId: "<YOUR DATAS>"
 };
 
 firebase.initializeApp(firebaseConfig);
-
 
 @NgModule({
   declarations: [
@@ -75,6 +83,15 @@ firebase.initializeApp(firebaseConfig);
     MySpaceMedicinesEventPage,
     MySpaceNotesPage,
     MySpaceNotesEventPage,
+    RegisterBasicDatas,
+    RegisterOtherCancer,
+    RegisterOtherDatas,
+    RegisterPicture,
+    RegisterState,
+    RegisterTypeCancer,
+    RegisterTypeTreatment,
+    RegisterTypeUser,
+    RegisterPastCancer,
     ProfilePage,
     ProfileEditPage,
     StatusEmotionPage,
@@ -110,6 +127,15 @@ firebase.initializeApp(firebaseConfig);
     MySpaceMedicinesEventPage,
     MySpaceNotesPage,
     MySpaceNotesEventPage,
+    RegisterBasicDatas,
+    RegisterOtherCancer,
+    RegisterOtherDatas,
+    RegisterPicture,
+    RegisterState,
+    RegisterTypeCancer,
+    RegisterTypeTreatment,
+    RegisterTypeUser,
+    RegisterPastCancer,
     ProfilePage,
     ProfileEditPage,
     StatusEmotionPage,

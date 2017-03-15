@@ -36,7 +36,7 @@ export class UserStorageService {
           token_device: "",
           active: "1",
           last_access: new Date().getTime()
-      },
+      }
     }
 
     this.db = this.af.database.object('/users/' + result.uid)

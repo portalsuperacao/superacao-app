@@ -165,6 +165,10 @@ ion-footer {
   ion-textarea {
     min-height: 100px;
   }
+  ion-checkbox {
+    margin-bottom: 0 !important;
+    margin-top: 0 !important;
+  }
   ion-icon {
     float: right;
   }

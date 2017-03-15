@@ -10,13 +10,13 @@
 <ion-content class="background-dark">
   <div class="avatar">
     <div class="thumb">
-      <img [src]="(user | async)?.avatar" [ngClass]="thumbClass" />
-      <div [hidden]="(user | async)?.type_user != 'Superador'" class="emotion">
-        <img [src]="(user | async)?.emotion?.img">
+      <img [src]="user?.avatar" [ngClass]="thumbClass" />
+      <div [hidden]="user?.type_user != 'Superador'" class="emotion">
+        <img [src]="user?.emotion?.img">
       </div>
     </div>
-    <div class="name"> {{ (user | async)?.name }} </div>
-    <div class="type"> {{ (user | async)?.type_user }} </div>
+    <div class="name"> {{ user?.name }} </div>
+    <div class="type"> {{ user?.type_user }} </div>
   </div>
 
   <div class="profile-datas">
@@ -38,7 +38,12 @@
     <div class="divider"> </div>
 
     <div class="datas">
-      <div class="title"> Mensagem </div>
+      <div class="title"> Frase de cura </div>
+      <div class="text"> Tudo passa! Passou pra min e passará pra você também </div>
+    </div>
+
+    <div class="datas">
+      <div class="title"> Dificuldades </div>
       <div class="text"> Tudo passa! Passou pra min e passará pra você também </div>
     </div>
 

@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-navbar color="dark">
+    <ion-title> Superação </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="register-user">
+  <p>
+    Muito obrigado por compartilhar os dados de tratamento comigo! Agora preciso saber somente mais alguns detalhes:
+  </p>
+  <ion-item>
+    <ion-label stacked>Profissão</ion-label>
+    <ion-input type="text" placeholder="Digite sua profissão"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>Data de nascimento</ion-label>
+    <ion-datetime displayFormat="DD/MM/YYYY" pickerFormat="DD MM YYYY"></ion-datetime>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>É casado?</ion-label>
+    <ion-toggle></ion-toggle>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Possuí crença religiosa</ion-label>
+    <ion-select>
+      <ion-option selected="true">Catolico</ion-option>
+      <ion-option>Evangelico</ion-option>
+      <ion-option>Ateu</ion-option>
+      <ion-option>Espirita</ion-option>
+      <ion-option>Mulçumano</ion-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Sexo</ion-label>
+    <ion-select>
+      <ion-option selected="true">Masculino</ion-option>
+      <ion-option>Feminino</ion-option>
+      <ion-option>Outro</ion-option>
+    </ion-select>
+  </ion-item>
+
+  <button ion-button full color="dark">Finalizar cadastro!</button>
+</ion-content>

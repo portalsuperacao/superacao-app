@@ -124,7 +124,7 @@ export class CalendarEventEditPage {
     }
 
     this.userStorageService.getUser().then((user: any) => {
-        this.calendarStorageService.insertEvent(newDatas, user.$key)
+      this.calendarStorageService.insertEvent(newDatas, user.$key)
     });
 
     this.navCtrl.pop().then(() => {
