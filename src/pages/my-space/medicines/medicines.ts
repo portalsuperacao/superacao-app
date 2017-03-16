@@ -42,18 +42,32 @@ export class MySpaceMedicinesPage {
     modal.present();
 
     modal.onDidDismiss((data) => {
+      console.log(data);
       if(!data) {
         return;
       }
+      let id = 1;
 
-      /*LocalNotifications.schedule({
-        id: data.start_at,
-        title: 'Medicamento!',
-        text: 'Notificação!!!',
-        every: 'minute',
-        at: _5_sec_from_now,
-        firstAt: now,
-      });*/
+      LocalNotifications.schedule({
+         text: 'Medicamento notificação!',
+         at: _5_sec_from_now,
+         led: 'FF0000',
+         every: 'second',
+         sound: null
+      });
+
+      LocalNotifications.on('trigger',(notification) => {
+        if(notification == id) {
+          LocalNotifications.schedule({
+            text: 'Medicamento notificação!',
+            at: _5_sec_from_now,
+            led: 'FF0000',
+            every: 'hour',
+            sound: null
+          })
+        }
+      })
+
       this.mySpaceStorageService.insertMedicineEvent(this.user.$key, data).then(() => {
         this.medicines = this.mySpaceStorageService.getMedicinesEvents(this.user.$key)
       })

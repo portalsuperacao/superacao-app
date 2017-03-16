@@ -8,22 +8,22 @@
       border-radius: 100%;
       background: $value;
     }
+    ion-item {
+      padding: 0;
+      color: $text-primary;
+      font-size: 1.7rem;
+      > * {
+        padding: 0 $spacing-elements
+      }
+    }
   }
 
   .event-title {
     display: inline-block;
     margin-left: 1rem;
-
     span {
       width: 12px;
       height: 12px;
-    }
-  }
-
-  .new-event {
-    ion-item {
-      color: $text-primary;
-      font-size: 1.7rem;
     }
   }
 
@@ -32,7 +32,11 @@
       text-align: left;
       color: $text-primary;
       font-size: 1.6rem;
-      background: $background-color-dark;
+      background-color: $background-color-dark;
+      border-bottom: solid 1px #DDDDDD !important;
+      &:first-child {
+        border-top: solid 1px #DDDDDD;
+      }
     }
   }
 
@@ -42,36 +46,30 @@
       height: 15px;
       margin-top: 15px;
     }
-
     h3 {
       font-weight: bold;
       color: $text-primary;
       text-align: center;
     }
-
     .item {
       background: #FFF;
       border-bottom: solid 1px #ddd;
     }
-
     .title {
       margin: 0;
       font-size: 2.2rem;
       text-align: center;
       color: $text-primary;
     }
-
     .subtitle {
       margin: 0;
       font-size: 1.6rem;
       text-align: center;
       color: $text-secondary;
     }
-
     .time {
       margin-top: 10px;
     }
-
     .empty {
       padding-top: 10px;
       font-size: 1.6rem;

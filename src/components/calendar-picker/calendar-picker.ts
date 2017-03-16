@@ -15,22 +15,18 @@ import 'moment/locale/pt-br';
               <ion-icon name="ios-arrow-back"> </ion-icon>
             </button>
           </div>
-
           <div> <p> {{ month.format("MMM, YYYY") }} </p> </div>
-
           <div class="arrow">
             <button ion-button icon-only clear (click)="nextMonth()">
               <ion-icon name="ios-arrow-forward"> </ion-icon>
             </button>
           </div>
-
           <div class="add">
             <button ion-button icon-only round (click)="addEvent()">
               <ion-icon name="add"> </ion-icon>
             </button>
           </div>
         </div>
-
         <ion-row class="week-name">
           <ion-col width-14> DOM </ion-col>
           <ion-col width-14> SEG </ion-col>
@@ -40,7 +36,6 @@ import 'moment/locale/pt-br';
           <ion-col width-14> SEX </ion-col>
           <ion-col width-14> SAB </ion-col>
         </ion-row>
-
         <ion-row class="week" *ngFor="let week of weeks">
           <ion-col width-14 class="day"
           [ngClass]="{today: day.isToday, 'different-month': !day.isCurrentMonth, selected: day.date.isSame(selected)}"

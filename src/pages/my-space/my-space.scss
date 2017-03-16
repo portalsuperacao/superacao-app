@@ -136,6 +136,10 @@ page-my-space {
     height: 55%;
     font-size: $font-size;
     color: #FFF;
+    img {
+      width: 30px;
+      height: 30px;
+    }
     div {
       position: relative;
       float: left;

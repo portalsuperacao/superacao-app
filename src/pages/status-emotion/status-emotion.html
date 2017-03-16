@@ -12,11 +12,9 @@
 
 <ion-content>
   <ion-item *ngFor="let emoji of emojis" class="simple-item" (click)="setEmotion(emoji)">
-    <ion-grid>
       <ion-row>
-        <ion-col width-25> <img class="emoji" src="{{ emoji.img }}">  </ion-col>
+        <ion-col width-25> <img class="emoji" src="{{ emoji.img }}"></ion-col>
         <ion-col width-75> <p> {{ emoji.status }} </p> </ion-col>
       </ion-row>
-    </ion-grid>
   </ion-item>
 </ion-content>
