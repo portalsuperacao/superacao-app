@@ -117,25 +117,10 @@ O do componente "Overcomer" (Superador), só aceita um Objeto simples, pois ele 
 **Não é obrigatorio colocar o uid do componente** (Exemplo, se você esta no componente do Superador, não vai precisar colocar o Uid dele mesmo, por isso no exemplo acima eles estão em branco)
 
 # Inicializando aplicativo
-Após realizar todas configurações inicias, você pode instalar o app usando o comando:
-```nodejs
-npm install
-```
 
-Para iniciar o aplicativo em modo web (modo navegador), utilize o seguinte comando:
+O aplicativo está configurado com Docker. Instale previamente o `docker` e `docker-compose` em seu sistema, em seguida:
 
-```sh
-ionic server
-```
-
-Para rodar o aplicativo em um dispositivo android ou ios, é necessário realizar o seguinte comando:
-```sh
-ionic add platform android
-ionic run android
-```
-ou
-
-```sh
-ionic add platform ios
-ionic run ios
+```docker
+docker-compose build
+docker-compose up
 ```
