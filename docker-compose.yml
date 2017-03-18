@@ -1,0 +1,9 @@
+version: '2'
+services:
+  ionic:
+    build: .
+    ports:
+     - "8100:8100"
+    volumes:
+     - .:/superacao-app
+     - /superacao-app/node_modules

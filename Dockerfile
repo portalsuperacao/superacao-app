@@ -59,9 +59,9 @@ ENV PATH ${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools:/opt/tools
 # RUN unzip ${ANDROID_HOME}/temp/*.zip -d ${ANDROID_HOME}
 
 # Install app
+WORKDIR ${SUPERACAO}
 RUN cd ${SUPERACAO}
 RUN npm install
 
-
-WORKDIR ${SUPERACAO}
 EXPOSE 8100 35729
+CMD ionic serve
