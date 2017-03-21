@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, ModalController, ViewController } from 'ionic-angular';
 import { ProfileEditPage } from './edit/edit';
 import { UserStorageService } from '../../providers/database/user-storage-service';
-
+import { Utils } from '../../providers/util/utils';
 
 @Component({
   selector: 'page-profile',
@@ -17,7 +17,8 @@ export class ProfilePage {
     public navCtrl: NavController,
     public modalCtrl: ModalController,
     public viewController: ViewController,
-    public userStorageService: UserStorageService) {}
+    public userStorageService: UserStorageService,
+    public utils: Utils) {}
 
   ionViewDidLoad() {
     this.userStorageService.getUserObs().subscribe((user) => {
@@ -34,6 +35,12 @@ export class ProfilePage {
       this.userStorageService.updateUser(datas, this.user.$key);
     })
     modal.present();
+  }
+
+  editProfilePicture() {
+    this.utils.openGallery().then((img) => {
+      console.log(img)
+    })
   }
 
   verifyRelationship(relationship) {

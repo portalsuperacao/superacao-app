@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController, ViewController, NavParams } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Geolocation } from 'ionic-native';
 import { DateUtil } from '../../../providers/util/date-util';
+import { Utils } from '../../../providers/util/utils';
 
 @Component({
   selector: 'page-edit-profile',
@@ -18,7 +20,8 @@ export class ProfileEditPage {
     public viewCtrl: ViewController,
     public params: NavParams,
     public formBuilder: FormBuilder,
-    public dateUtil: DateUtil ) {
+    public dateUtil: DateUtil,
+    public utils: Utils) {
       this.user  = this.params.get('user');
 
 
@@ -48,6 +51,22 @@ export class ProfileEditPage {
 
   ionViewDidLoad() {
     this._verifyClassOfThumb();
+  }
+
+  openGallery() {
+    this.utils.openGallery().then((image) => {
+      this.user.avatar = image
+    }).catch((error) => {
+      console.log(error)
+    })
+  }
+
+  updateLocation() {
+    Geolocation.getCurrentPosition().then((datas) => {
+      console.log(datas)
+    }).catch((error) => {
+      console.log(error)
+    })
   }
 
   closePage(formDatas) {
