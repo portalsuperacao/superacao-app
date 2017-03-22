@@ -3,7 +3,7 @@ import { Platform, NavController, ModalController, AlertController } from 'ionic
 import { UserStorageService } from '../../../providers/database/user-storage-service';
 import { MySpaceStorageService } from '../../../providers/database/my-space-storage-service';
 import { MySpaceMedicinesEventPage } from './event/medicines-event';
-import { LocalNotifications } from 'ionic-native';
+import { LocalNotifications } from '@ionic-native/local-notifications';
 
 
 @Component({
@@ -21,7 +21,8 @@ export class MySpaceMedicinesPage {
     public alertCtrl: AlertController,
     public userStorageService : UserStorageService,
     public mySpaceStorageService: MySpaceStorageService,
-    public modalCtrl : ModalController) {
+    public modalCtrl : ModalController,
+    public localNotifications: LocalNotifications) {
 
   }
 
@@ -49,14 +50,14 @@ export class MySpaceMedicinesPage {
 
       let idNotification;
       Promise.resolve()
-      .then(generateIdNotification)
+      .then(generateIdNotification.bind(this))
       .then(verifyLocalNotificationIsSchedule.bind(this))
-      .then(scheduleLocalNotification)
-      .then(verifyLocalNotificationTriggered)
+      .then(scheduleLocalNotification.bind(this))
+      .then(verifyLocalNotificationTriggered.bind(this))
       .then(registerMedicineEventInLocalStorage.bind(this))
 
       function generateIdNotification() {
-        return LocalNotifications.getAll().then((notification) => {
+        return this.localNotifications.getAll().then((notification) => {
           console.log(notification)
           // idNotification = ids[ids.length - 1]
           // console.log(idNotification)
@@ -83,15 +84,13 @@ export class MySpaceMedicinesPage {
           return false;
         }
 
-        LocalNotifications.schedule({
-           //id: idNotification,
+        this.localNotifications.schedule({
            title: medicine.title,
            text: medicine.text,
            at: _5_sec_from_now,
            led: 'FF0000',
            sound: null
         });
-        console.log(medicine)
 
         return true;
       }
@@ -100,7 +99,7 @@ export class MySpaceMedicinesPage {
         if(!isDevice) {
           return false;
         }
-        // LocalNotifications.on('trigger',(notification) => {
+        // this.localNotifications.on('trigger',(notification) => {
         //   if(notification == idNotification) {
         //     LocalNotifications.schedule({
         //       text: 'Medicamento notificação!',
@@ -130,13 +129,13 @@ export class MySpaceMedicinesPage {
         {
           text: 'Sim',
           handler: data => {
-            LocalNotifications.clearAll()
-            //LocalNotifications.clear(medicine.idNotification)
+            this.localNotifications.clearAll()
+            //this.LocalNotifications.clear(medicine.idNotification)
             this.mySpaceStorageService.removeMedicineEvent(this.user.$key, medicine).then(() => {
               this.medicines = this.mySpaceStorageService.getMedicinesEvents(this.user.$key)
             });
 
-            LocalNotifications.getAll().then((notification) => {
+            this.localNotifications.getAll().then((notification) => {
               console.log(notification)
             })
           }

@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { IonicApp, IonicModule } from 'ionic-angular';
+import { NgModule, ErrorHandler } from '@angular/core';
+import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 
 // COMPONENTS / PIPES / DIRECTIVES
 import { CalendarPicker } from '../components/calendar-picker/calendar-picker';
@@ -10,13 +10,24 @@ import { TruncatePipe } from '../pipes/truncate-pipe';
 import { TextMaskModule } from 'angular2-text-mask';
 import { AngularFireModule } from 'angularfire2';
 import { AuthService } from '../providers/database/auth-service';
-import { Storage } from '@ionic/storage';
+import { IonicStorageModule } from '@ionic/storage';
 import { UserStorageService } from '../providers/database/user-storage-service';
 import { CalendarStorageService } from '../providers/database/calendar-storage-service';
 import { ChatStorageService } from '../providers/database/chat-storage-service';
 import { MySpaceStorageService } from '../providers/database/my-space-storage-service';
 import { DateUtil } from '../providers/util/date-util';
 import { Utils } from '../providers/util/utils';
+
+// NATIVES
+import { Camera } from '@ionic-native/camera';
+import { CameraMock } from '../providers/natives/camera-mock.ts';
+import { Geolocation } from '@ionic-native/geolocation';
+import { GeolocationMock } from '../providers/natives/geolocation-mock';
+import { GoogleMaps } from '@ionic-native/google-maps';
+import { GoogleMapsMock } from '../providers/natives/google-maps-mock';
+import { Push } from '@ionic-native/push';
+import { LocalNotifications } from '@ionic-native/local-notifications';
+import { Calendar } from '@ionic-native/calendar';
 
 // PAGES
 import { MyApp } from './app.component';
@@ -106,6 +117,7 @@ firebase.initializeApp(firebaseConfig);
   ],
   imports: [
     IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot(),
     AngularFireModule.initializeApp(firebaseConfig),
     TextMaskModule
   ],
@@ -146,14 +158,20 @@ firebase.initializeApp(firebaseConfig);
     VisitorPage
   ],
   providers: [
+    { provide: Camera, useClass: CameraMock },
+    { provide: Geolocation, useClass: GeolocationMock },
+    { provide: GoogleMaps, useClass: GoogleMapsMock },
+    Push,
+    LocalNotifications,
+    Calendar,
     AuthService,
     UserStorageService,
     CalendarStorageService,
     ChatStorageService,
     DateUtil,
     MySpaceStorageService,
-    Storage,
-    Utils
+    Utils,
+    {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
 export class AppModule {}

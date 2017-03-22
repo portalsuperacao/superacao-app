@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, ViewController, NavParams } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Geolocation } from 'ionic-native';
+import { Geolocation } from '@ionic-native/geolocation';
 import { DateUtil } from '../../../providers/util/date-util';
 import { Utils } from '../../../providers/util/utils';
 
@@ -21,7 +21,8 @@ export class ProfileEditPage {
     public params: NavParams,
     public formBuilder: FormBuilder,
     public dateUtil: DateUtil,
-    public utils: Utils) {
+    public utils: Utils,
+    private geolocation: Geolocation) {
       this.user  = this.params.get('user');
 
 
@@ -62,7 +63,7 @@ export class ProfileEditPage {
   }
 
   updateLocation() {
-    Geolocation.getCurrentPosition().then((datas) => {
+    this.geolocation.getCurrentPosition().then((datas) => {
       console.log(datas)
     }).catch((error) => {
       console.log(error)
