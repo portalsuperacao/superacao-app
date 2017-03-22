@@ -15,7 +15,7 @@ import 'moment/locale/pt-br';
               <ion-icon name="ios-arrow-back"> </ion-icon>
             </button>
           </div>
-          <div> <p> {{ month.format("MMM, YYYY") }} </p> </div>
+          <p> {{ month.format("MMM, YYYY") }} </p>
           <div class="arrow">
             <button ion-button icon-only clear (click)="nextMonth()">
               <ion-icon name="ios-arrow-forward"> </ion-icon>
@@ -27,17 +27,17 @@ import 'moment/locale/pt-br';
             </button>
           </div>
         </div>
-        <ion-row class="week-name">
-          <ion-col width-14> DOM </ion-col>
-          <ion-col width-14> SEG </ion-col>
-          <ion-col width-14> TER </ion-col>
-          <ion-col width-14> QUA </ion-col>
-          <ion-col width-14> QUI </ion-col>
-          <ion-col width-14> SEX </ion-col>
-          <ion-col width-14> SAB </ion-col>
-        </ion-row>
-        <ion-row class="week" *ngFor="let week of weeks">
-          <ion-col width-14 class="day"
+        <div class="week-name grid-calendar">
+          <div> DOM </div>
+          <div> SEG </div>
+          <div> TER </div>
+          <div> QUA </div>
+          <div> QUI </div>
+          <div> SEX </div>
+          <div> SAB </div>
+        </div>
+        <div class="week grid-calendar" *ngFor="let week of weeks">
+          <div class="day"
           [ngClass]="{today: day.isToday, 'different-month': !day.isCurrentMonth, selected: day.date.isSame(selected)}"
           (click)="select(day)"
           *ngFor="let day of week.days">
@@ -45,8 +45,8 @@ import 'moment/locale/pt-br';
             <div *ngIf="day.event">
               <div *ngFor="let mark of day.event" class="event-mark" [ngClass]="mark"> </div>
             </div>
-          </ion-col>
-        </ion-row>
+          </div>
+        </div>
       </div>
     `
 })
