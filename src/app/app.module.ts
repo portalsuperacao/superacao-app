@@ -20,14 +20,11 @@ import { Utils } from '../providers/util/utils';
 
 // NATIVES
 import { Camera } from '@ionic-native/camera';
-import { CameraMock } from '../providers/natives/camera-mock.ts';
 import { Geolocation } from '@ionic-native/geolocation';
-import { GeolocationMock } from '../providers/natives/geolocation-mock';
-import { GoogleMaps } from '@ionic-native/google-maps';
-import { GoogleMapsMock } from '../providers/natives/google-maps-mock';
 import { Push } from '@ionic-native/push';
 import { LocalNotifications } from '@ionic-native/local-notifications';
 import { Calendar } from '@ionic-native/calendar';
+import { Facebook } from '@ionic-native/facebook';
 
 // PAGES
 import { MyApp } from './app.component';
@@ -158,12 +155,12 @@ firebase.initializeApp(firebaseConfig);
     VisitorPage
   ],
   providers: [
-    { provide: Camera, useClass: CameraMock },
-    { provide: Geolocation, useClass: GeolocationMock },
-    { provide: GoogleMaps, useClass: GoogleMapsMock },
+    Camera,
+    Geolocation,
     Push,
     LocalNotifications,
     Calendar,
+    Facebook,
     AuthService,
     UserStorageService,
     CalendarStorageService,

@@ -23,9 +23,11 @@
     "@ionic-native/camera": "^3.1.1",
     "@ionic-native/core": "^3.1.1",
     "@ionic-native/crop": "^3.1.1",
+    "@ionic-native/facebook": "^3.1.1",
     "@ionic-native/geolocation": "^3.1.1",
     "@ionic-native/google-maps": "^3.1.1",
     "@ionic-native/local-notifications": "^3.1.1",
+    "@ionic-native/network": "^3.1.1",
     "@ionic-native/push": "^3.1.1",
     "@ionic/storage": "2.0.0",
     "angular2-text-mask": "^2.2.0",
@@ -49,13 +51,7 @@
     "cordova-plugin-statusbar",
     "cordova-plugin-device",
     "cordova-plugin-splashscreen",
-    "ionic-plugin-keyboard",
-    {
-      "variables": {
-        "SENDER_ID": "<YOUR DATA>"
-      },
-      "locator": "phonegap-plugin-push"
-    }
+    "ionic-plugin-keyboard"
   ],
   "cordovaPlatforms": [],
   "description": "superacao-app: An Ionic project"

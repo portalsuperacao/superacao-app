@@ -90,12 +90,15 @@
     <plugin name="cordova-plugin-splashscreen" spec="~4.0.1" />
     <icon src="resources\android\icon\drawable-xhdpi-icon.png" />
     <plugin name="cordova-plugin-facebook4" spec="~1.7.4">
-        <variable name="APP_ID" value="&lt;YOUR DATA&gt;" />
-        <variable name="APP_NAME" value="&lt;YOUR DATA&gt;" />
+        <variable name="APP_ID" value="1740412492881253" />
+        <variable name="APP_NAME" value="Fiap - SuperAcao" />
     </plugin>
-    <plugin name="phonegap-plugin-push" spec="~1.9.2">
-        <variable name="SENDER_ID" value="&lt;YOUR DATA&gt;" />
+    <plugin name="phonegap-plugin-push" spec="~1.9.4">
+        <variable name="SENDER_ID" value="1018181753983" />
     </plugin>
-    <plugin name="cordova-plugin-network-information" spec="~1.3.1" />
     <plugin name="cordova-plugin-calendar" spec="~4.5.5" />
+    <plugin name="cordova-plugin-network-information" spec="~1.3.2" />
+    <plugin name="de.appplant.cordova.plugin.local-notification" spec="~0.8.4" />
+    <plugin name="cordova-plugin-geolocation" spec="~2.4.2" />
+    <plugin name="cordova-plugin-camera" spec="~2.4.0" />
 </widget>

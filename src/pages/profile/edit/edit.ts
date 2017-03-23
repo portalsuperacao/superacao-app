@@ -5,6 +5,8 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { DateUtil } from '../../../providers/util/date-util';
 import { Utils } from '../../../providers/util/utils';
 
+declare const google : any;
+
 @Component({
   selector: 'page-edit-profile',
   templateUrl: 'edit-profile.html'
@@ -63,10 +65,22 @@ export class ProfileEditPage {
   }
 
   updateLocation() {
-    this.geolocation.getCurrentPosition().then((datas) => {
-      console.log(datas)
-    }).catch((error) => {
-      console.log(error)
+    this.geolocation.getCurrentPosition().then((location) => {
+      let geocoder = new google.maps.Geocoder();
+      let latlng = {
+        location: {
+          lat: location.coords.latitude,
+          lng: location.coords.longitude
+        }
+      }
+
+      geocoder.geocode(latlng, (results) =>  {
+        this.formGroup.controls['state'].setValue(results[0].address_components[5].short_name);
+        this.formGroup.controls['city'].setValue(results[0].address_components[4].long_name);
+        this.formGroup.value.latitude = location.coords.latitude;
+        this.formGroup.value.longitude = location.coords.longitude;
+      })
+
     })
   }
 

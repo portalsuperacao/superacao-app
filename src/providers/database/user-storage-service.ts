@@ -94,13 +94,12 @@ export class UserStorageService {
   }
 
   updateTokenDevice(userUid) {
-    this.utils.getPushDeviceToken()
-    // this.utils.getPushDeviceToken().then((device) => {
-    //   this.db = this.af.database.object('/users/' + userUid)
-    //   this.db.update({"other_datas/token_device": device})
-    // }).catch((err) => {
-    //   console.log('Push notification desativado!')
-    // })
+    this.utils.getPushDeviceToken().then((device) => {
+      this.db = this.af.database.object('/users/' + userUid)
+      this.db.update({"other_datas/token_device": device})
+    }).catch((error) => {
+      console.log("Push notifcation desativado!");
+    });
   }
 
   getMessageDay() {

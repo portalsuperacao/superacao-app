@@ -29,11 +29,11 @@
           </select>
         </ion-col>
         <ion-col width-50>
-          <ion-input placeholder="Telefone" type="text"
+          <input placeholder="Telefone" type="text"
           [(ngModel)]="phone.number"
           [textMask]="{mask: validateMask}"
           [ngModelOptions]="{standalone: true}"
-          (click)="clickPhone(i)"> </ion-input>
+          (click)="clickPhone(i)">
         </ion-col>
         <ion-col width-10>
           <ion-icon name="close" [hidden]="showClosePhone != i" (click)="removePhone(i)"> </ion-icon>

@@ -1,25 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
-import { Observable } from 'rxjs/Observable';
 import * as firebase from 'firebase';
-import 'rxjs/Observable';
-
-
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 
 export class ChatStorageService {
   private db : FirebaseListObservable<any>;
-  private headers : Headers;
-  private options : RequestOptions;
-  private url = "http://172.17.62.169:3000/notification";
 
-  constructor(private af: AngularFire, private http: Http) {
-    this.headers = new Headers({ 'Content-Type': 'application/json' });
-    this.options = new RequestOptions({headers: this.headers});
-
-
+  constructor(private af: AngularFire) {
   }
 
   createChat(user1, user2) {
@@ -67,7 +57,6 @@ export class ChatStorageService {
       database.once('value').then((snapshots) => {
         snapshots.forEach((snapshot) => {
           let data = snapshot.val();
-
           if(data.chatUid === chatUid) {
             data.chatKey = snapshot.key;
             resolve(data)
@@ -105,7 +94,6 @@ export class ChatStorageService {
           let data;
           data = snapshot.val();
           data.$key = snapshot.key;
-
           subject.next(data);
         })
       } catch(err) {
@@ -117,7 +105,6 @@ export class ChatStorageService {
   getLastMessageKey(chatUid) {
     return new Promise((resolve) => {
       let database = firebase.database().ref('/messages/' + chatUid);
-
       database.orderByChild("uid_user").limitToLast(1).once("child_added", (snapshot) => {
         resolve(snapshot.key);
       })
@@ -130,14 +117,14 @@ export class ChatStorageService {
       this.db.push(datas);
   }
 
-  pushNotification(data) {
+  pushNotification(message) {
     let notification = {
       "collapse_key": 'demo',
       "priority": 'normal',
-      "to": data.token_device,
+      "to": message.token_device,
       "notification": {
-        "body": data.msg,
-        "title": data.name_user + ' enviou uma mensagem!',
+        "body": message.msg,
+        "title": message.name_user + ' enviou uma mensagem!',
         "icon": 'icon',
         "sound": 'default'
       },

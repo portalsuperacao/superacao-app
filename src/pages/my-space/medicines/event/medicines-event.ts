@@ -69,6 +69,7 @@ export class MySpaceMedicinesEventPage {
 
     if(this.params) {
       wrapper.uid = this.params.uid;
+      wrapper.idNotification = this.params.idNotification;
     }
 
     this.viewCtrl.dismiss(wrapper);
