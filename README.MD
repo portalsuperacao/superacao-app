@@ -124,3 +124,13 @@ O aplicativo está configurado com Docker. Instale previamente o `docker` e `doc
 docker-compose build
 docker-compose up
 ```
+
+# Contributors
+
+- [FIAP University](https://www.fiap.com.br) for supporting the development of mobile app
+- Gabriela Besser - Founder, product design, UI/UX
+- Diego Garcia - [@diegodsgarcia](http://github.com/diegodsgarcia)
+
+# License
+
+GNU GPL v3.0
