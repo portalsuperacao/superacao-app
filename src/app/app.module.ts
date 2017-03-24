@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { IonicApp, IonicModule } from 'ionic-angular';
+import { ENV } from '../config/environment.dev';
 
 // COMPONENTS / PIPES / DIRECTIVES
 import { CalendarPicker } from '../components/calendar-picker/calendar-picker';
@@ -55,13 +56,12 @@ import { VisitorPage } from '../pages/trinity/visitor/visitor';
 import * as firebase from 'firebase';
 
 export const firebaseConfig = {
-   apiKey: "AIzaSyAnTqOEZHBU-1CMx0fKY2v4zFeGvPnvA1I",
-   authDomain: "superacao-dc62e.firebaseapp.com",
-   databaseURL: "https://superacao-dc62e.firebaseio.com",
-   storageBucket: "superacao-dc62e.appspot.com",
-   messagingSenderId: "1018181753983"
+   apiKey: ENV.FIREBASE.apiKey,
+   authDomain: ENV.FIREBASE.authDomain,
+   databaseURL: ENV.FIREBASE.databaseURL,
+   storageBucket: ENV.FIREBASE.storageBucket,
+   messagingSenderId: ENV.FIREBASE.messagingSenderId
 };
-
 
 firebase.initializeApp(firebaseConfig);
 

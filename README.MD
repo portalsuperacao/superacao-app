@@ -16,26 +16,13 @@ Para mais informações de instalação acesse a página do Ionic 2 oficial:
 https://ionicframework.com/docs/
 
 # Configurações iniciais
-### 1. Configurar dados do firebase no aplicativo
-O aplicativo utiliza como base de dados o Firebase e para isso é necessário criar uma conta neste link:
-https://firebase.google.com/
-Após isso pegue todos os dados de configurações no console do Firebase
-Abra o seguinte arquivo:
+### 1. Firebase
+Crie sua conta no [Firebase](!firebase.google.com) e faça seguinte configuração:`
+
 ```sh
-$  superacao-app/app/app.module.ts
+$  cp src/config/environment.dev-template.ts src/config/environment.dev.ts
 ```
-
-Utilize algum editor de texto de sua preferência e insira os dados do firebase na seguinte constante:
-
-```typescript
-export const firebaseConfig = {
-   apiKey: "<YOUR DATAS>",
-   authDomain: "<YOUR DATAS>",
-   databaseURL: "<YOUR DATAS>",
-   storageBucket: "<YOUR DATAS>",
-   messagingSenderId: "<YOUR DATAS>"
-};
-```
+Edite o arquivo copiado e preencha com os dados do Firebase.
 
 ### 2. Configurar autenticação com Facebook
 Para realizar a autenticação com facebook, é necessário criar um aplicativo no Facebook developers (https://developers.facebook.com/). Após gerar um projeto, você ira precisar do ID e o nome do projeto.
