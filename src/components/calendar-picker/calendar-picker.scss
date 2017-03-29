@@ -1,52 +1,37 @@
 .calendar-picker {
   padding: 16px;
-
   .month-name {
+    margin: $spacing-elements 0;
     width: 100%;
-
+    > * {
+      display: inline-block;
+      vertical-align: middle;
+    }
     p {
       width: 100px;
-      position: relative;
-      bottom: 10px;
+      margin: 0;
       font-size: 1.8rem;
       text-align: center;
       text-transform: uppercase;
       color: $text-secondary;
     }
-
     .arrow {
-
       ion-icon {
         color: rgba(128, 128, 128, 0.65);
         font-size: 2rem;
       }
     }
-
     .add {
-      position: relative;
       float: right;
-      margin-right: 10px;
-
       button {
         background: $background-color-blue;
         box-shadow: none;
       }
-
       ion-icon {
         color: #FFF;
         font-size: 1.9rem;
       }
     }
-
-    div {
-      display: block;
-      float: left;
-    }
-
-    ion-icon {
-      color: $text-primary;
-    }
-
     button {
       width: 30px;
       height: 30px;
@@ -55,9 +40,21 @@
     }
   }
 
+  .grid-calendar {
+    > div {
+      width: 14.28571%;
+      float: left;
+    }
+    &:before, &:after {
+      content: " ";
+      display: table;
+    }
+    &:after {
+      clear: both;
+    }
+  }
+
   .week-name {
-    position: relative;
-    bottom: 10px;
     text-align: center;
     color: $text-secondary;
     font-size: 1.4rem;
@@ -71,7 +68,6 @@
     background: white;
     cursor: pointer;
     color: $text-primary;
-
     & span {
       display: inline-block;
       width: 30px;
@@ -79,20 +75,16 @@
       text-align: center;
       line-height: 30px;
     }
-
     &:first-child {
       border-left:none;
     }
-
     &.today span {
       background: #e4e2e2;
       border-radius: 100%;
     }
-
     &.different-month {
       color: $text-light;
     }
-
     &.selected span {
       font-weight: bold;
       background: #6abfd6;
