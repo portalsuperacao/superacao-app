@@ -2,7 +2,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { CalendarNewEventPage } from '../../pages/calendar/new-event/new-event';
 import { DateUtil } from '../../providers/util/date-util';
-import * as moment from 'moment';
+import moment from 'moment';
 import 'moment/locale/pt-br';
 
 @Component({
