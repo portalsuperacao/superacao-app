@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { IonicApp, IonicModule } from 'ionic-angular';
+import { NgModule, ErrorHandler } from '@angular/core';
+import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { ENV } from '../config/environment.dev';
 
 // COMPONENTS / PIPES / DIRECTIVES
@@ -11,7 +11,7 @@ import { TruncatePipe } from '../pipes/truncate-pipe';
 import { TextMaskModule } from 'angular2-text-mask';
 import { AngularFireModule } from 'angularfire2';
 import { AuthService } from '../providers/database/auth-service';
-import { Storage } from '@ionic/storage';
+import { IonicStorageModule } from '@ionic/storage';
 import { UserStorageService } from '../providers/database/user-storage-service';
 import { CalendarStorageService } from '../providers/database/calendar-storage-service';
 import { ChatStorageService } from '../providers/database/chat-storage-service';
@@ -106,6 +106,7 @@ firebase.initializeApp(firebaseConfig);
   ],
   imports: [
     IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot(),
     AngularFireModule.initializeApp(firebaseConfig),
     TextMaskModule
   ],
@@ -152,8 +153,8 @@ firebase.initializeApp(firebaseConfig);
     ChatStorageService,
     DateUtil,
     MySpaceStorageService,
-    Storage,
-    Utils
+    Utils,
+    {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
 export class AppModule {}
