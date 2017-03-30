@@ -51,8 +51,5 @@
     }
   ],
   "cordovaPlatforms": [],
-  "description": "superacao-app: An Ionic project",
-  "config": {
-      "ionic_rollup": "./config/rollup.config.js"
-  }
+  "description": "superacao-app: An Ionic project"
 }
