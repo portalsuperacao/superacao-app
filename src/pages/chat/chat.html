@@ -11,7 +11,7 @@
 
 
 <ion-content padding class="chat">
-  <div class="message" *ngFor="let item of listMessages">
+  <div class="messages" *ngFor="let item of listMessages">
     <div [ngClass]="getClassMsg(item.uid_user)">
       {{ item.msg }}
     </div>
@@ -26,15 +26,24 @@
 <!-- ==== ION FOOTER ==== -->
 <ion-footer class="chat">
   <form (ngSubmit)="sendMessage()">
-    <ion-grid>
-      <ion-row class="footer">
-        <ion-col width-80>
-          <ion-input type="text" [(ngModel)]="message" [ngModelOptions]="{standalone: true}" placeholder="Digite alguma coisa..."> </ion-input>
-        </ion-col>
-        <ion-col width-20>
-          <button ion-button round icon-only> <ion-icon name="md-arrow-dropright"> </ion-icon> </button>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+    <ion-row class="footer">
+      <ion-col col-10>
+        <div class="text-message">
+          <ion-row>
+            <ion-col col-2>
+              <img src="./assets/images/emoji-chat.svg">
+            </ion-col>
+            <ion-col col-10>
+              <ion-input type="text" [(ngModel)]="message" [ngModelOptions]="{standalone: true}" placeholder="Digite alguma coisa..."> </ion-input>
+            </ion-col>
+          </ion-row>
+        </div>
+      </ion-col>
+      <ion-col col-2>
+        <button ion-button round icon-only>
+          <img src="./assets/images/chat-arrow.svg">
+        </button>
+      </ion-col>
+    </ion-row>
   </form>
 </ion-footer>

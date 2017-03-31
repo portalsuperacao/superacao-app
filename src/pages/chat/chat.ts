@@ -56,10 +56,10 @@ export class ChatPage {
 
   getClassMsg(uidUser) {
     if(this.user1.$key == uidUser) {
-      return 'message1'
+      return 'message message1'
     } else if (this.user2.$key == uidUser) {
-      return 'message2'
-    } 
+      return 'message message2'
+    }
   }
 
   sendMessage() {
