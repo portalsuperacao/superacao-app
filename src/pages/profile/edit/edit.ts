@@ -33,8 +33,11 @@ export class ProfileEditPage {
         relationship: [this.user.relationship],
         religion: [this.user.religion],
         children: [this.user.children],
-        name_cancer: [this.user.name_cancer],
-        type_cancer: [this.user.type_cancer],
+        cancer_name: [this.user.cancer_name],
+        cancer_name_past: [this.user.cancer_name_past],
+        type_participant: [this.user.type_participant],
+        metastase: [this.user.type_cancer ? this.user.type_cancer.metastase : null],
+        reicidiva: [this.user.type_cancer ? this.user.type_cancer.reicidiva : null],
         treatmentCirurgia : [this.user.treatment ? this.user.treatment.cirurgia : null],
         treatmentQuimioterapia : [this.user.treatment ? this.user.treatment.quimioterapia : null],
         treatmentRadiografia : [this.user.treatment ? this.user.treatment.radiografia : null],
@@ -60,6 +63,7 @@ export class ProfileEditPage {
       let datas : any;
       datas = formDatas;
       datas.treatment = {};
+      datas.type_cancer = {};
 
       datas.email = this.user.email;
       datas.avatar = this.user.avatar;
@@ -68,6 +72,9 @@ export class ProfileEditPage {
       datas.other_datas = this.user.other_datas;
       datas.emotion = this.user.emotion;
       datas.birthdate = this.dateUtil.formatDateString(formDatas.birthdate);
+
+      datas.type_cancer.metastase = formDatas.metastase;
+      datas.type_cancer.reicidiva = formDatas.reicidiva;
 
       datas.treatment.cirurgia = formDatas.treatmentCirurgia;
       datas.treatment.quimioterapia = formDatas.treatmentQuimioterapia;

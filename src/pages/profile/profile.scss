@@ -60,4 +60,17 @@ page-profile, page-edit-profile {
       clear: both;
     }
   }
+
+  .profile-options-container {
+    .profile-options-label {
+      color: lighten($text-primary, 20%);
+    }
+    > * {
+      padding: $spacing-elements / 2 0;
+    }
+    ion-col[col-3] {
+      text-align: center;
+    }
+  }
+
 }
