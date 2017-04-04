@@ -21,7 +21,7 @@
       </div>
     </div>
     <div class="input-field">
-      <ion-input formControlName="name" placeholder="Nome" type="text" [ngClass]="{ 'validateInput' : formGroup.invalid }"></ion-input>
+      <ion-input formControlName="name" placeholder="Nome" type="text" [ngClass]="validateInput()"></ion-input>
       <ion-input formControlName="occupation" placeholder="Profissão" type="text"></ion-input>
       <ion-item>
         <ion-label>Data de nascimento</ion-label>

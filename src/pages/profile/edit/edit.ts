@@ -51,6 +51,12 @@ export class ProfileEditPage {
     this._verifyClassOfThumb();
   }
 
+  validateInput() {
+    if(this.formGroup.invalid) {
+      return 'validate-input'
+    }
+  }
+
   closePage(formDatas) {
     if(this.formGroup.invalid) {
       return
