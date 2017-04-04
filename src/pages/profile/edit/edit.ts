@@ -20,8 +20,6 @@ export class ProfileEditPage {
     public formBuilder: FormBuilder,
     public dateUtil: DateUtil ) {
       this.user  = this.params.get('user');
-
-
       this.formGroup = this.formBuilder.group({
         name: [this.user.name, Validators.required],
         occupation: [this.user.occupation],
@@ -54,6 +52,9 @@ export class ProfileEditPage {
   }
 
   closePage(formDatas) {
+    if(this.formGroup.invalid) {
+      return
+    }
     Promise.resolve()
     .then(filterDatas.bind(this))
     .then(updateDatas.bind(this))
@@ -81,7 +82,7 @@ export class ProfileEditPage {
       datas.treatment.radiografia = formDatas.treatmentRadiografia;
       datas.treatment.terapia_oral = formDatas.treatmentTerapiaOral;
       datas.treatment.terapia_oval = formDatas.treatmentTerapiaOval;
-      datas.treatment.terapia_natural = formDatas.treatmentTerapiaNaturais;
+      datas.treatment.terapia_naturais = formDatas.treatmentTerapiaNaturais;
 
       datas.other_datas.healing_phrase = formDatas.healing_phrase;
       datas.other_datas.phrase_of_difficulties = formDatas.phrase_of_difficulties;

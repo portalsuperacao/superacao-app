@@ -59,6 +59,10 @@ page-profile, page-edit-profile {
     .clear {
       clear: both;
     }
+    ul {
+      margin: 0;
+      padding: 0;
+    }
   }
 
   .profile-options-container {
@@ -71,6 +75,10 @@ page-profile, page-edit-profile {
     ion-col[col-2] {
       text-align: center;
     }
+  }
+
+  .validate-input {
+    background-color: #000000;
   }
 
 }
