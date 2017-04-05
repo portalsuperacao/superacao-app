@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AuthProviders, AngularFireAuth, AuthMethods, AngularFire } from 'angularfire2';
 import { UserStorageService } from './user-storage-service';
 import { Platform } from 'ionic-angular';
-import { Facebook } from 'ionic-native';
+import { Facebook } from '@ionic-native/facebook';
 import { Observable } from 'rxjs/Observable';
 import firabase from 'firebase';
 
@@ -13,7 +13,8 @@ export class AuthService {
     public auth: AngularFireAuth,
     public af: AngularFire,
     public userStorageService: UserStorageService,
-    public platform: Platform) {
+    public platform: Platform,
+    private facebook: Facebook) {
 
   }
 
@@ -24,7 +25,7 @@ export class AuthService {
   signWithFacebook() {
     let user = null;
     if(this.platform.is('cordova')) {
-      return Facebook.login(['email', 'public_profile']).then((res) => {
+      return this.facebook.login(['email', 'public_profile']).then((res) => {
         const facebookCredentials = firebase.auth.FacebookAuthProvider.credential(res.authResponse.accessToken);
         return firebase.auth().signInWithCredential(facebookCredentials);
       })
