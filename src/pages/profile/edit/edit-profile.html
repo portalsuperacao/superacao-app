@@ -109,7 +109,7 @@
     <div class="input-field">
       <ion-item>
         <ion-label>Tipo de participante</ion-label>
-        <ion-select formControlName="type_participant">
+        <ion-select formControlName="participant_type">
           <ion-option value="0" selected="true">Paciente</ion-option>
           <ion-option value="1">Mãe</ion-option>
           <ion-option value="2">Pai</ion-option>
@@ -119,16 +119,16 @@
         </ion-select>
       </ion-item>
       <ion-input formControlName="cancer_name" placeholder="Nome do câncer" type="text"></ion-input>
-      <ion-input formControlName="cancer_name_past" placeholder="Cancêr no passado" type="text"></ion-input>
+      <ion-input formControlName="past_cancer_type" placeholder="Câncer no passado" type="text"></ion-input>
       <div class="profile-options-container">
         <p>Tipo de cancer:</p>
         <ion-item>
           <ion-label class="profile-options-label">Metástase</ion-label>
-          <ion-checkbox formControlName="metastase"></ion-checkbox>
+          <ion-checkbox formControlName="is_metastasis"></ion-checkbox>
         </ion-item>
         <ion-item>
           <ion-label class="profile-options-label">Reicidiva</ion-label>
-          <ion-checkbox formControlName="reicidiva"></ion-checkbox>
+          <ion-checkbox formControlName="is_recurrent"></ion-checkbox>
         </ion-item>
       </div>
       <div class="profile-options-container">
@@ -216,7 +216,7 @@
             <ion-radio mode="md" value="0"></ion-radio>
           </ion-col>
         </ion-row>
-        <ion-row radio-group formControlName="treatmentTerapiaNaturais">
+        <ion-row radio-group formControlName="treatmentTerapiasNaturais">
           <ion-col col-6>
             <p class="profile-options-label">Terapia naturais</p>
           </ion-col>

@@ -44,16 +44,16 @@
     </div>
 
     <div class="datas" *ngIf="user?.cancer_name">
-      <div class="title"> Nome do cancer </div>
+      <div class="title"> Nome do câncer </div>
       <div class="text"> {{ user.cancer_name }} </div>
     </div>
 
-    <div class="datas" *ngIf="parseInt(user?.type_cancer.metastase) || parseInt(user?.type_cancer.reicidiva)">
-      <div class="title"> Tipo do cancer </div>
+    <div class="datas" *ngIf="parseInt(user?.type_cancer?.is_metastasis) || parseInt(user?.type_cancer?.is_recurrent)">
+      <div class="title"> Tipo do câncer </div>
       <div class="text">
         <ul>
-          <li *ngIf="parseInt(user?.type_cancer.metastase)">Metastase</li>
-          <li *ngIf="parseInt(user?.type_cancer.reicidiva)">Reicidiva</li>
+          <li *ngIf="parseInt(user?.type_cancer.is_metastasis)">Metastase</li>
+          <li *ngIf="parseInt(user?.type_cancer.is_recurrent)">Reicidiva</li>
         </ul>
       </div>
     </div>
@@ -67,7 +67,7 @@
           <li *ngIf="parseInt(user?.treatment.radiografia)">Radiografia</li>
           <li *ngIf="parseInt(user?.treatment.terapia_oval)">Terapia oval</li>
           <li *ngIf="parseInt(user?.treatment.terapia_oral)">Terapia oral</li>
-          <li *ngIf="parseInt(user?.treatment.terapia_naturais)">Terapia naturais</li>
+          <li *ngIf="parseInt(user?.treatment.terapias_naturais)">Terapia naturais</li>
         </ul>
       </div>
     </div>
