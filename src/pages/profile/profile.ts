@@ -55,7 +55,7 @@ export class ProfilePage {
   }
 
   parseInt(value) {
-    return Number(value)
+    return +value;
   }
 
 
