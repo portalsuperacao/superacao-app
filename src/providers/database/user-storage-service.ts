@@ -39,7 +39,7 @@ export class UserStorageService {
       }
     }
 
-    this.db = this.af.database.object('/users/' + result.uid)
+    this.db = this.af.database.object(`/users/${result.uid}`)
     this.db.set(data)
   }
 
@@ -47,7 +47,7 @@ export class UserStorageService {
     return new Promise((resolve) => {
       this.af.auth.subscribe((user) => {
         if(user) {
-          this.af.database.object('/users/' + user.uid).subscribe((data) => {
+          this.af.database.object(`/users/${user.uid}`).subscribe((data) => {
             resolve(data)
           })
         }
@@ -60,7 +60,7 @@ export class UserStorageService {
     return new Observable((subject) => {
       this.af.auth.subscribe((user) => {
         if(user) {
-          this.af.database.object('/users/' + user.uid).subscribe((data) => {
+          this.af.database.object(`/users/${user.uid}`).subscribe((data) => {
               subject.next(data)
               datas = data
           })
@@ -71,35 +71,35 @@ export class UserStorageService {
 
   updateUser(user, uid) {
     delete user.$key
-    this.db = this.af.database.object('/users/' + uid)
+    this.db = this.af.database.object(`/users/${uid}`)
     this.db.set(user)
   }
 
   findUser(uid) {
     return new Promise((resolve) => {
-      this.db = this.af.database.object('/users/' + uid).subscribe((userDatas) => {
+      this.db = this.af.database.object(`/users/${uid}`).subscribe((userDatas) => {
         resolve(userDatas)
       })
     })
   }
 
   findUserObs(uid) : any {
-    return this.af.database.object('/users/' + uid)
+    return this.af.database.object(`/users/${uid}`)
   }
 
-  setEmotion(emotion, uidUser) {
-    this.db = this.af.database.object('/users/' + uidUser)
+  setEmotion(emotion, userUid) {
+    this.db = this.af.database.object(`/users/${userUid}`)
     this.db.update({"emotion" : emotion})
   }
 
   updateLastAccess(date, userUid) {
-    this.db = this.af.database.object('/users/' + userUid)
+    this.db = this.af.database.object(`/users/${userUid}`)
     this.db.update({"other_datas/last_access" : date})
   }
 
   updateTokenDevice(userUid) {
     this.utils.getPushDeviceToken().then((device) => {
-      this.db = this.af.database.object('/users/' + userUid)
+      this.db = this.af.database.object(`/users/${userUid}`)
       this.db.update({"other_datas/token_device": device})
     }).catch((err) => {
       console.log('Push notification desativado!')
