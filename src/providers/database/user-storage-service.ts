@@ -46,9 +46,11 @@ export class UserStorageService {
   getUser() {
     return new Promise((resolve) => {
       this.af.auth.subscribe((user) => {
-        this.af.database.object('/users/' + user.uid).subscribe((data) => {
-          resolve(data)
-        })
+        if(user) {
+          this.af.database.object('/users/' + user.uid).subscribe((data) => {
+            resolve(data)
+          })
+        }
       })
     })
   }
@@ -57,10 +59,12 @@ export class UserStorageService {
     let datas
     return new Observable((subject) => {
       this.af.auth.subscribe((user) => {
-        this.af.database.object('/users/' + user.uid).subscribe((data) => {
-            subject.next(data)
-            datas = data
-        })
+        if(user) {
+          this.af.database.object('/users/' + user.uid).subscribe((data) => {
+              subject.next(data)
+              datas = data
+          })
+        }
       })
     })
   }
