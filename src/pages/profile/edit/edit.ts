@@ -20,8 +20,6 @@ export class ProfileEditPage {
     public formBuilder: FormBuilder,
     public dateUtil: DateUtil ) {
       this.user  = this.params.get('user');
-
-
       this.formGroup = this.formBuilder.group({
         name: [this.user.name, Validators.required],
         occupation: [this.user.occupation],
@@ -33,14 +31,17 @@ export class ProfileEditPage {
         relationship: [this.user.relationship],
         religion: [this.user.religion],
         children: [this.user.children],
-        name_cancer: [this.user.name_cancer],
-        type_cancer: [this.user.type_cancer],
+        cancer_name: [this.user.cancer_name],
+        past_cancer_type: [this.user.past_cancer_type],
+        participant_type: [this.user.participant_type],
+        is_metastasis: [this.user.type_cancer ? this.user.type_cancer.is_metastasis : null],
+        is_recurrent: [this.user.type_cancer ? this.user.type_cancer.is_recurrent : null],
         treatmentCirurgia : [this.user.treatment ? this.user.treatment.cirurgia : null],
         treatmentQuimioterapia : [this.user.treatment ? this.user.treatment.quimioterapia : null],
         treatmentRadiografia : [this.user.treatment ? this.user.treatment.radiografia : null],
         treatmentTerapiaOral : [this.user.treatment ? this.user.treatment.terapia_oral : null],
         treatmentTerapiaOval : [this.user.treatment ? this.user.treatment.terapia_oval : null],
-        treatmentTerapiaNaturais : [this.user.treatment ? this.user.treatment.terapia_naturais : null],
+        treatmentTerapiasNaturais : [this.user.treatment ? this.user.treatment.terapias_naturais : null],
         healing_phrase: [this.user.other_datas ? this.user.other_datas.healing_phrase : null],
         phrase_of_difficulties: [this.user.other_datas ? this.user.other_datas.phrase_of_difficulties : null]
       })
@@ -50,7 +51,16 @@ export class ProfileEditPage {
     this._verifyClassOfThumb();
   }
 
+  validateInput() {
+    if(this.formGroup.invalid) {
+      return 'validate-input'
+    }
+  }
+
   closePage(formDatas) {
+    if(this.formGroup.invalid) {
+      return
+    }
     Promise.resolve()
     .then(filterDatas.bind(this))
     .then(updateDatas.bind(this))
@@ -60,6 +70,7 @@ export class ProfileEditPage {
       let datas : any;
       datas = formDatas;
       datas.treatment = {};
+      datas.type_cancer = {};
 
       datas.email = this.user.email;
       datas.avatar = this.user.avatar;
@@ -69,12 +80,15 @@ export class ProfileEditPage {
       datas.emotion = this.user.emotion;
       datas.birthdate = this.dateUtil.formatDateString(formDatas.birthdate);
 
+      datas.type_cancer.is_metastasis = formDatas.is_metastasis;
+      datas.type_cancer.is_recurrent = formDatas.is_recurrent;
+
       datas.treatment.cirurgia = formDatas.treatmentCirurgia;
       datas.treatment.quimioterapia = formDatas.treatmentQuimioterapia;
       datas.treatment.radiografia = formDatas.treatmentRadiografia;
       datas.treatment.terapia_oral = formDatas.treatmentTerapiaOral;
       datas.treatment.terapia_oval = formDatas.treatmentTerapiaOval;
-      datas.treatment.terapia_natural = formDatas.treatmentTerapiaNaturais;
+      datas.treatment.terapias_naturais = formDatas.treatmentTerapiasNaturais;
 
       datas.other_datas.healing_phrase = formDatas.healing_phrase;
       datas.other_datas.phrase_of_difficulties = formDatas.phrase_of_difficulties;
@@ -87,7 +101,7 @@ export class ProfileEditPage {
       delete formDatas.treatmentRadiografia;
       delete formDatas.treatmentTerapiaOral;
       delete formDatas.treatmentTerapiaOval;
-      delete formDatas.treatmentTerapiaNaturais;
+      delete formDatas.treatmentTerapiasNaturais;
 
       delete formDatas.healing_phrase;
       delete formDatas.phrase_of_difficulties;

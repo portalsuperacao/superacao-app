@@ -23,7 +23,8 @@
     <div class="datas">
       <div class="right">
         <div class="title"> {{ user?.occupation }} </div>
-        <div class="title"> {{ user?.city }} - {{ user?.state }} </div>
+        <div class="title"> {{ user?.city }} </div>
+        <div class="title">{{ user?.state }} </div>
       </div>
       <div class="left">
         <div class="title"> {{ verifyRelationship(user?.relationship) }}  </div>
@@ -32,19 +33,43 @@
       <div class="clear"> </div>
     </div>
 
-    <div class="datas">
+    <div class="datas" *ngIf="user?.other_datas.healing_phrase">
       <div class="title"> Frase de cura </div>
       <div class="text"> {{ user?.other_datas.healing_phrase }} </div>
     </div>
 
-    <div class="datas">
+    <div class="datas" *ngIf="user?.other_datas.phrase_of_difficulties">
       <div class="title"> Dificuldades </div>
       <div class="text"> {{ user?.other_datas.phrase_of_difficulties }} </div>
     </div>
 
-    <div class="datas">
-      <div class="title"> Cancêr de mama </div>
-      <div class="text"> Radioterapia huds s ahduhds auhdsa </div>
+    <div class="datas" *ngIf="user?.cancer_name">
+      <div class="title"> Nome do câncer </div>
+      <div class="text"> {{ user.cancer_name }} </div>
+    </div>
+
+    <div class="datas" *ngIf="parseInt(user?.type_cancer?.is_metastasis) || parseInt(user?.type_cancer?.is_recurrent)">
+      <div class="title"> Tipo do câncer </div>
+      <div class="text">
+        <ul>
+          <li *ngIf="parseInt(user?.type_cancer.is_metastasis)">Metastase</li>
+          <li *ngIf="parseInt(user?.type_cancer.is_recurrent)">Reicidiva</li>
+        </ul>
+      </div>
+    </div>
+    <div class="datas" *ngIf="parseInt(user?.treatment.cirurgia) || parseInt(user?.treatment.quimioterapia) || parseInt(user?.treatment.radiografia) ||
+    parseInt(user?.treatment.terapia_oval) || parseInt(user?.treatment.terapia_oral) || parseInt(user?.treatment.terapia_naturais)">
+      <div class="title"> Tratamentos realizados </div>
+      <div class="text">
+        <ul>
+          <li *ngIf="parseInt(user?.treatment.cirurgia)">Cirurgia</li>
+          <li *ngIf="parseInt(user?.treatment.quimioterapia)">Quimioterapia</li>
+          <li *ngIf="parseInt(user?.treatment.radiografia)">Radiografia</li>
+          <li *ngIf="parseInt(user?.treatment.terapia_oval)">Terapia oval</li>
+          <li *ngIf="parseInt(user?.treatment.terapia_oral)">Terapia oral</li>
+          <li *ngIf="parseInt(user?.treatment.terapias_naturais)">Terapia naturais</li>
+        </ul>
+      </div>
     </div>
   </div>
 </ion-content>
