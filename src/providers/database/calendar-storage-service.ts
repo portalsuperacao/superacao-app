@@ -21,7 +21,7 @@ export class CalendarStorageService {
 
     this.calendar.createEvent(datas.title, datas.address, datas.comments, startDate, endDate);
 
-    let database = this.af.database.list('/calendar/' + userUid);
+    let database = this.af.database.list(`/calendar/${userUid}`);
     database.push(datas);
     this.setEventsLocal(datas);
   }
@@ -42,7 +42,7 @@ export class CalendarStorageService {
     this.calendar.deleteEvent(oldDatas.title, oldDatas.address, oldDatas.comments, oldStartDate, oldEndDate);
     this.calendar.createEvent(newDatas.title, newDatas.address, newDatas.comments, newStartDate, newEndDate);
 
-    let database = this.af.database.list('/calendar/' + userUid);
+    let database = this.af.database.list(`/calendar/${userUid}`);
     database.update(key, newDatas);
     this.setEventsLocal(newDatas);
   }
@@ -53,7 +53,7 @@ export class CalendarStorageService {
 
     this.calendar.deleteEvent(datas.title, datas.address, datas.comments, startDate, endDate);
 
-    let database = this.af.database.list('/calendar/' + userUid);
+    let database = this.af.database.list(`/calendar/${userUid}`);
     database.remove(datas.$key);
     this.setEventsLocal(datas);
   }
@@ -70,16 +70,16 @@ export class CalendarStorageService {
    });
   }
 
-  getEvents(uidUser) {
+  getEvents(userUid) {
     return new Promise((resolve) => {
         let subject = new BehaviorSubject(null);
 
-          this.af.database.list('/calendar/' + uidUser).subscribe((datas) => {
+          this.af.database.list(`/calendar/${userUid}`).subscribe((datas) => {
             subject.next(datas);
           });
 
           if(!subject.getValue()) {
-            this.af.database.list('/calendar/' + uidUser).subscribe((datas) => {
+            this.af.database.list(`/calendar/${userUid}`).subscribe((datas) => {
               resolve(datas);
             });
 
@@ -103,8 +103,8 @@ export class CalendarStorageService {
       });
   }
 
-  getPublicEvents(uidUser) : any {
-    return this.af.database.list('/calendar/' + uidUser, {
+  getPublicEvents(userUid) : any {
+    return this.af.database.list(`/calendar/${userUid}`, {
       query: {
         orderByChild: 'share',
         equalTo: true

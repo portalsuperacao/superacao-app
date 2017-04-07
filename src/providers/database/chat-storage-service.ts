@@ -78,16 +78,16 @@ export class ChatStorageService {
   }
 
   setViewChat(chatKey, user, value) {
-    let db = this.af.database.object('/chat/' + chatKey + '/users/' + user);
+    let db = this.af.database.object(`/chat/${chatKey}/users/${user}`);
     db.update({view : value});
   }
 
   getChatDatasObs(chatKey, user) : any {
-    return this.af.database.object('/chat/' + chatKey + '/users/' + user)
+    return this.af.database.object(`/chat/${chatKey}/users/${user}`)
   }
 
   getMessages(chatUid, amount) {
-    return this.af.database.list('/messages/' + chatUid, {
+    return this.af.database.list(`/messages/${chatUid}`, {
       query: {
         orderByChild: 'created_at',
         startAt: Date.now() / 1000,
@@ -99,7 +99,7 @@ export class ChatStorageService {
   getLastMessage(chatUid, userUid) {
     return new Observable((subject) => {
       try {
-        let database = firebase.database().ref('/messages/' + chatUid);
+        let database = firebase.database().ref(`/messages/${chatUid}`);
 
         database.orderByChild("uid_user").equalTo(userUid).limitToLast(1).on("child_added", (snapshot) => {
           let data;
@@ -116,7 +116,7 @@ export class ChatStorageService {
 
   getLastMessageKey(chatUid) {
     return new Promise((resolve) => {
-      let database = firebase.database().ref('/messages/' + chatUid);
+      let database = firebase.database().ref(`/messages/${chatUid}`);
 
       database.orderByChild("uid_user").limitToLast(1).once("child_added", (snapshot) => {
         resolve(snapshot.key);
@@ -126,7 +126,7 @@ export class ChatStorageService {
 
 
   pushMessage(datas, chatUid) {
-      this.db = this.af.database.list('/messages/' + chatUid);
+      this.db = this.af.database.list(`/messages/${chatUid}`);
       this.db.push(datas);
   }
 
