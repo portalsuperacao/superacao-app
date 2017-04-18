@@ -11,13 +11,7 @@ import 'rxjs/Observable';
 
 export class ChatStorageService {
   private db : FirebaseListObservable<any>;
-  private headers : Headers;
-  private options : RequestOptions;
-  private url = "http://172.17.62.169:3000/notification";
-
-  constructor(private af: AngularFire, private http: Http) {
-    this.headers = new Headers({ 'Content-Type': 'application/json' });
-    this.options = new RequestOptions({headers: this.headers});
+  constructor(private af: AngularFire) {
 
 
   }
