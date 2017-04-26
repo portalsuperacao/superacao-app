@@ -3,7 +3,7 @@ import { AuthProviders, AngularFireAuth, AuthMethods, AngularFire } from 'angula
 import { UserStorageService } from './user-storage-service';
 import { Platform } from 'ionic-angular';
 import { Facebook } from '@ionic-native/facebook';
-import firabase from 'firebase';
+import firebase from 'firebase';
 
 @Injectable()
 export class AuthService {
