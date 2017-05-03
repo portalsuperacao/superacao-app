@@ -9,4 +9,8 @@ import { NavController } from 'ionic-angular';
 
 export class HelpSystemOvercomerPage {
 
+  constructor(public navCtrl: NavController) {
+
+  }
+
 }

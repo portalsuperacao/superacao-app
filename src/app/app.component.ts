@@ -23,22 +23,23 @@ export class MyApp {
     public platform: Platform,
     public menuCtrl: MenuController,
     public userStorageService: UserStorageService,
-    public authService : AuthService) {
+    public authService : AuthService
+  ) {
 
-      platform.ready().then(() => {
-        this.authService.getAuthentication().subscribe((state) =>{
-          if(state !== null) {
-            this.menuCtrl.enable(true);
-            this.rootPage = TabsPage;
-          } else {
-            this.menuCtrl.enable(false);
-            this.rootPage = LoginPage;
-          }
-        });
-
-        StatusBar.styleDefault();
-        Splashscreen.hide();
+    platform.ready().then(() => {
+      this.authService.getAuthentication().subscribe((state) =>{
+        if(state !== null) {
+          this.menuCtrl.enable(true);
+          this.rootPage = TabsPage;
+        } else {
+          this.menuCtrl.enable(false);
+          this.rootPage = LoginPage;
+        }
       });
+
+      StatusBar.styleDefault();
+      Splashscreen.hide();
+    });
   }
 
   openPage(page) {
