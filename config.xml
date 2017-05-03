@@ -5,7 +5,7 @@
     <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
     <content src="index.html" />
     <access origin="*" />
-    <allow-intent href="https://*.firebaseio.com"/>
+    <allow-intent href="https://*.firebaseio.com" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <allow-intent href="tel:*" />
@@ -89,12 +89,16 @@
     <plugin name="cordova-plugin-device" spec="1.1.4" />
     <plugin name="cordova-plugin-splashscreen" spec="~4.0.1" />
     <icon src="resources\android\icon\drawable-xhdpi-icon.png" />
+    <plugin name="cordova-plugin-calendar" spec="~4.5.5" />
+    <plugin name="cordova-plugin-camera" spec="~2.4.0" />
+    <plugin name="cordova-plugin-geolocation" spec="~2.4.2" />
+    <plugin name="de.appplant.cordova.plugin.local-notification" spec="~0.8.4" />
+    <plugin name="cordova-plugin-network-information" spec="~1.3.2" />
+    <plugin name="phonegap-plugin-push" spec="~1.9.4">
+        <variable name="SENDER_ID" value="XXXXXXXXX" />
+    </plugin>
     <plugin name="cordova-plugin-facebook4" spec="~1.7.4">
-        <variable name="APP_ID" value="<YOUR DATA>" />
-        <variable name="APP_NAME" value="<YOUR DATA>" />
+        <variable name="APP_ID" value="123456789" />
+        <variable name="APP_NAME" value="myApplication" />
     </plugin>
-    <plugin name="phonegap-plugin-push" spec="~1.9.2">
-        <variable name="SENDER_ID" value="<YOUR DATA>" />
-    </plugin>
-    <plugin name="cordova-plugin-network-information" spec="~1.3.1" />
 </widget>

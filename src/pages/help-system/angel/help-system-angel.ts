@@ -9,4 +9,7 @@ import { NavController } from 'ionic-angular';
 
 export class HelpSystemAngelPage {
 
+  constructor(public navCtrl: NavController) {
+
+  }
 }

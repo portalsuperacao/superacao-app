@@ -59,5 +59,26 @@ page-profile, page-edit-profile {
     .clear {
       clear: both;
     }
+    ul {
+      margin: 0;
+      padding: 0;
+    }
   }
+
+  .profile-options-container {
+    .profile-options-label {
+      color: lighten($text-primary, 20%);
+    }
+    > * {
+      padding: $spacing-elements / 2 0;
+    }
+    ion-col[col-2] {
+      text-align: center;
+    }
+  }
+
+  .validate-input {
+    background-color: #f4e2e2;
+  }
+
 }

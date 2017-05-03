@@ -1,6 +1,5 @@
-
 import { Component } from '@angular/core';
-import { NavController, LoadingController } from 'ionic-angular';
+import { NavController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RegisterPicture } from '../picture/picture';
 import { RegisterTypeUser } from '../type-user/type-user';
@@ -11,10 +10,10 @@ import { RegisterTypeUser } from '../type-user/type-user';
   templateUrl: 'register-basic-datas.html',
 })
 export class RegisterBasicDatas {
-  formGroup : FormGroup;
+  formGroup: FormGroup;
   showMessage: boolean;
 
-  constructor(public navCtrl: NavController, public fb : FormBuilder) {
+  constructor(public navCtrl: NavController, public fb: FormBuilder) {
     this.formGroup = this.fb.group({
       name: ["", Validators.required],
       email:["", Validators.required],

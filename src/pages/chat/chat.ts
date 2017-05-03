@@ -36,7 +36,7 @@ export class ChatPage {
   }
 
   ionViewDidLoad() {
-    this._getChat(this.chatStorageService, this.chat, this.user1, this.utils).then((chat : any) => {
+    this._getChat().then((chat : any) => {
       this.chat = chat;
     }).then(() => {
       this.chat.messages.subscribe((messages) => {
@@ -63,43 +63,43 @@ export class ChatPage {
   }
 
   sendMessage() {
-    this._validateMessage(this.message,this.user1, this.user2, this.chatStorageService, this.chat).then((msg) => {
+    this._validateMessage().then((msg) => {
       this.message = "";
       this.content.scrollToBottom(0);
     })
   }
 
- _validateMessage(message, user1, user2, chatStorageService, chat) {
+ _validateMessage() {
     return new Promise((resolve) => {
     let i = 0;
     Promise.resolve(i)
-    .then(validateInput)
-    .then(msgWrapper)
+    .then(validateInput.bind(this))
+    .then(msgWrapper.bind(this))
     .then(sendMessage.bind(this))
     .then(pushNotification.bind(this))
-    .then(resolvePromise)
+    .then(resolvePromise.bind(this))
 
     function validateInput() {
-      if (message.trim() !== "") return;
+      if (this.message.trim() !== "") return;
     }
 
     function msgWrapper() {
       let msgWrapper : any = {
-        uid_user : user1.$key,
-        msg : message,
+        uid_user : this.user1.$key,
+        msg : this.message,
         created_at: new Date().getTime(),
       }
       return msgWrapper;
     }
 
     function sendMessage(msg) {
-      this.chatStorageService.pushMessage(msg, chat.chatUid);
+      this.chatStorageService.pushMessage(msg, this.chat.chatUid);
       return msg;
     }
 
     function pushNotification(msg) {
-      msg.token_device = user2.other_datas.token_device;
-      msg.name_user = user1.name;
+      msg.token_device = this.user2.other_datas.token_device;
+      msg.name_user = this.user1.name;
       this.chatStorageService.pushNotification(msg)
       return msg;
     }
@@ -110,25 +110,25 @@ export class ChatPage {
   });
 }
 
-_getChat(chatStorageService, chat, user1, utils) {
+_getChat() {
   return new Promise((resolve) => {
     Promise.resolve()
-    .then(getChatDatas)
+    .then(getChatDatas.bind(this))
     .then(getMessages.bind(this))
-    .then(removePushNotification)
-    .then(resolvePromise)
+    //.then(removePushNotification.bind(this))
+    .then(resolvePromise.bind(this))
 
     function getChatDatas() {
-      return chat;
+      return this.chat;
     }
 
     function getMessages(msg) {
-      msg.messages = chatStorageService.getMessages(chat.chatUid, this.countMessages);
+      msg.messages = this.chatStorageService.getMessages(this.chat.chatUid, this.countMessages);
       return msg;
     }
 
     function removePushNotification(msg) {
-      utils.generatePush().then((datas) => {
+      this.utils.generatePush().then((datas) => {
         console.log("remover o push!");
       }).catch((error) => {});
       return msg;

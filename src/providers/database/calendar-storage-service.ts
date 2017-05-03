@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFire } from 'angularfire2';
-import { Calendar } from 'ionic-native';
+import { Calendar } from '@ionic-native/calendar';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import * as localforage from "localforage";
 import 'rxjs/Observable';
@@ -11,7 +11,7 @@ import 'rxjs/Observable';
 export class CalendarStorageService {
 
 
-  constructor(private af: AngularFire) {
+  constructor(private af: AngularFire, private calendar: Calendar) {
 
   }
 
@@ -19,9 +19,9 @@ export class CalendarStorageService {
     let startDate = new Date(datas.start_at);
     let endDate = new Date(datas.end_at);
 
-    Calendar.createEvent(datas.title, datas.address, datas.comments, startDate, endDate);
+    this.calendar.createEvent(datas.title, datas.address, datas.comments, startDate, endDate);
 
-    let database = this.af.database.list('/calendar/' + userUid);
+    let database = this.af.database.list(`/calendar/${userUid}`);
     database.push(datas);
     this.setEventsLocal(datas);
   }
@@ -39,10 +39,10 @@ export class CalendarStorageService {
       delete newDatas.userUid;
     }
 
-    Calendar.deleteEvent(oldDatas.title, oldDatas.address, oldDatas.comments, oldStartDate, oldEndDate);
-    Calendar.createEvent(newDatas.title, newDatas.address, newDatas.comments, newStartDate, newEndDate);
+    this.calendar.deleteEvent(oldDatas.title, oldDatas.address, oldDatas.comments, oldStartDate, oldEndDate);
+    this.calendar.createEvent(newDatas.title, newDatas.address, newDatas.comments, newStartDate, newEndDate);
 
-    let database = this.af.database.list('/calendar/' + userUid);
+    let database = this.af.database.list(`/calendar/${userUid}`);
     database.update(key, newDatas);
     this.setEventsLocal(newDatas);
   }
@@ -51,9 +51,9 @@ export class CalendarStorageService {
     let startDate = new Date(datas.start_at);
     let endDate = new Date(datas.end_at);
 
-    Calendar.deleteEvent(datas.title, datas.address, datas.comments, startDate, endDate);
+    this.calendar.deleteEvent(datas.title, datas.address, datas.comments, startDate, endDate);
 
-    let database = this.af.database.list('/calendar/' + userUid);
+    let database = this.af.database.list(`/calendar/${userUid}`);
     database.remove(datas.$key);
     this.setEventsLocal(datas);
   }
@@ -70,16 +70,16 @@ export class CalendarStorageService {
    });
   }
 
-  getEvents(uidUser) {
+  getEvents(userUid) {
     return new Promise((resolve) => {
         let subject = new BehaviorSubject(null);
 
-          this.af.database.list('/calendar/' + uidUser).subscribe((datas) => {
+          this.af.database.list(`/calendar/${userUid}`).subscribe((datas) => {
             subject.next(datas);
           });
 
           if(!subject.getValue()) {
-            this.af.database.list('/calendar/' + uidUser).subscribe((datas) => {
+            this.af.database.list(`/calendar/${userUid}`).subscribe((datas) => {
               resolve(datas);
             });
 
@@ -103,8 +103,8 @@ export class CalendarStorageService {
       });
   }
 
-  getPublicEvents(uidUser) : any {
-    return this.af.database.list('/calendar/' + uidUser, {
+  getPublicEvents(userUid) : any {
+    return this.af.database.list(`/calendar/${userUid}`, {
       query: {
         orderByChild: 'share',
         equalTo: true

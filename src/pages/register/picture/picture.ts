@@ -1,4 +1,3 @@
-
 import { Component } from '@angular/core';
 import { NavController, LoadingController } from 'ionic-angular';
 
@@ -7,7 +6,9 @@ import { NavController, LoadingController } from 'ionic-angular';
   templateUrl: 'register-picture.html',
 })
 export class RegisterPicture {
-  constructor() {
+
+  constructor(public navCtrl: NavController, public loadingCtrl: LoadingController) {
 
   }
+
 }

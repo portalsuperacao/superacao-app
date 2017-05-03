@@ -1,44 +1,24 @@
 import { Injectable } from '@angular/core';
 import { Platform } from 'ionic-angular';
-import { Camera, Push } from 'ionic-native';
+import { Camera, CameraOptions  } from '@ionic-native/camera'
+import { Push, PushObject, PushOptions } from '@ionic-native/push';
 import { firebaseConfig } from '../../app/app.module'
+import { Observable } from 'rxjs/Observable';
 
 
 @Injectable()
 
 export class Utils {
-  constructor(public platform: Platform) {
-
-  }
-
-  generatePush() {
-    let push = Push.init({
-    android: {
-        senderID: "1018181753983"
-    },
-      ios: {
-          alert: "true",
-          badge: true,
-          sound: 'true'
-      },
-      windows: {}
-    });
-
-    return new Promise((resolve, reject) => {
-      if(push.on) {
-        push.on('notification', (data) => {
-          resolve(data);
-        });
-      } else {
-        reject(false);
-      }
-    });
-  }
-
-  getPushDeviceToken() {
-    let push = Push.init({
+  private optionsPush: PushOptions;
+  constructor(
+    public platform: Platform,
+    public push: Push,
+    public camera: Camera
+  ) {
+    this.optionsPush =
+    {
       android: {
-          senderID:  firebaseConfig.messagingSenderId
+          senderID: "1018181753983"
       },
         ios: {
             alert: "true",
@@ -46,32 +26,49 @@ export class Utils {
             sound: 'true'
         },
         windows: {}
-    });
+    };
+  }
 
-    return new Promise((resolve, reject) => {
-      if(push.on) {
-        push.on('registration', (deviceToken) => {
-          resolve(deviceToken.registrationId);
+  generatePush() {
+    return new Observable((subject) => {
+      if(this.platform.is('cordova')) {
+        let pushObject: PushObject = this.push.init(this.optionsPush);
+        pushObject.on('notification').subscribe((push) => {
+          subject.next(push);
         });
       } else {
-        reject(false);
+        subject.next(null);
       }
     });
   }
 
+  getPushDeviceToken() {
+    return new Promise((resolve, reject) => {
+      if(this.platform.is('cordova')) {
+        let pushObject: PushObject = this.push.init(this.optionsPush)
+        pushObject.on('registration').subscribe((device) => {
+          resolve(device)
+        })
+      } else {
+        reject(null);
+      }
+    })
+  }
+
   openGallery() {
     return new Promise((resolve, reject) => {
-      let options = {
-          allowEdit: true,
-          sourceType: Camera.PictureSourceType.SAVEDPHOTOALBUM,
-          mediaType: Camera.MediaType.PICTURE,
-          destinationType: Camera.DestinationType.FILE_URI
+      let options : CameraOptions = {
+          quality: 100,
+          sourceType: this.camera.PictureSourceType.SAVEDPHOTOALBUM,
+          destinationType: this.camera.DestinationType.FILE_URI,
+          encodingType: this.camera.EncodingType.JPEG,
+          mediaType: this.camera.MediaType.PICTURE,
       };
 
-      Camera.getPicture(options).then((imgPath) => {
-        this._toBase64(imgPath).then((base64Img) => {
-          resolve(base64Img);
-        });
+      this.camera.getPicture(options).then((imagePath) => {
+        this._toBase64(imagePath).then((imageData) => {
+          resolve(imageData);
+        })
       }).catch((error) => {
         reject("Fail!! " + JSON.stringify(error));
       });
@@ -80,17 +77,18 @@ export class Utils {
 
   _toBase64(url: string) {
     return new Promise<string>(function (resolve) {
-        var xhr = new XMLHttpRequest();
-        xhr.responseType = 'blob';
-        xhr.onload = function () {
-            var reader = new FileReader();
-            reader.onloadend = function () {
-                resolve(reader.result);
-            }
-            reader.readAsDataURL(xhr.response);
-        };
-        xhr.open('GET', url);
-        xhr.send();
-        });
+      var xhr = new XMLHttpRequest();
+      xhr.responseType = 'blob';
+      xhr.onload = function () {
+          var reader = new FileReader();
+          reader.onloadend = function () {
+              resolve(reader.result);
+          }
+          reader.readAsDataURL(xhr.response);
+      };
+      xhr.open('GET', url);
+      xhr.send();
+    });
   }
+
 }

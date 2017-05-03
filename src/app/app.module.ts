@@ -8,6 +8,15 @@ import { CalendarPicker } from '../components/calendar-picker/calendar-picker';
 import { DateCustomPipe } from '../pipes/date-custom-pipe';
 import { TruncatePipe } from '../pipes/truncate-pipe';
 
+// NATIVES
+import { Calendar } from '@ionic-native/calendar';
+import { Camera } from '@ionic-native/camera';
+import { Facebook } from '@ionic-native/facebook';
+import { Geolocation } from '@ionic-native/geolocation';
+import { LocalNotifications } from '@ionic-native/local-notifications';
+import { Network } from '@ionic-native/network';
+import { Push } from '@ionic-native/push';
+
 // PROVIDERS
 import { TextMaskModule } from 'angular2-text-mask';
 import { AngularFireModule } from 'angularfire2';
@@ -150,6 +159,15 @@ firebase.initializeApp(firebaseConfig);
     VisitorPage
   ],
   providers: [
+    // Natives
+    Calendar,
+    Camera,
+    Facebook,
+    Geolocation,
+    LocalNotifications,
+    Network,
+    Push,
+    // Services
     AuthService,
     UserStorageService,
     CalendarStorageService,
