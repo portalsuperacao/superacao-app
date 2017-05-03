@@ -60,7 +60,7 @@
         </ion-select>
       </ion-item>
       <ion-input formControlName="city" placeholder="Cidade" type="text"></ion-input>
-      <ion-item>
+      <ion-item (click)="updateLocation()">
         Atualizar localização
         <ion-icon name="pin"></ion-icon>
       </ion-item>

@@ -1,0 +1,171 @@
+[33mcommit 85eafc6957788001ffc362d20d71735deffd5856[m
+Merge: 2078ba2 f8afe05
+Author: Diego Garcia <cl1308@fiap.com.br>
+Date:   Wed May 3 10:15:11 2017 -0300
+
+    Merge branch 'master' of https://github.com/portalsuperacao/superacao-app into app-115
+
+[33mcommit 2078ba2f68a615b989d8accf3086c9dfdda4f0fc[m
+Author: Diego Garcia <cl1308@fiap.com.br>
+Date:   Wed May 3 10:14:36 2017 -0300
+
+    Create method to active user code in back-end
+
+[33mcommit f8afe055ce1c077d28cd55736e272a17c28af85a[m
+Merge: 4f4a413 1d43689
+Author: Diego Garcia <diego.ds.garcia@gmail.com>
+Date:   Wed May 3 10:05:36 2017 -0300
+
+    Merge pull request #13 from olavocneto/fix/tslint
+    
+    Fix/tslint
+
+[33mcommit 1d4368924b58eae564f63196edfee86129d2a069[m
+Author: Olavo Neto <olavocn.neto@gmail.com>
+Date:   Tue Apr 25 21:35:51 2017 -0400
+
+    Import não usado
+
+[33mcommit c8e0bd983e27bd6e5ba1d0cadd9fd015f0fe6e1a[m
+Author: Olavo Neto <olavocn.neto@gmail.com>
+Date:   Tue Apr 25 21:35:29 2017 -0400
+
+    Indentação
+
+[33mcommit b165c5532e5a8337c5f378170ffbe53bec5c9bf2[m
+Author: Olavo Neto <olavocn.neto@gmail.com>
+Date:   Tue Apr 25 21:31:32 2017 -0400
+
+    Construtor
+
+[33mcommit efbfa2e8f8257cbf785c855db358f338bac90b1c[m
+Author: Olavo Neto <olavocn.neto@gmail.com>
+Date:   Tue Apr 25 21:29:29 2017 -0400
+
+    Construtor
+
+[33mcommit 8f771059f8b2fe0285868c97e7a2e7ca4dd50d2f[m
+Author: Olavo Neto <olavocn.neto@gmail.com>
+Date:   Tue Apr 25 21:28:15 2017 -0400
+
+    NavController é muito comum ser usado então apenas criando o construtor
+
+[33mcommit 5ad4f56c44a7a51f604d7cdfaa6d550289f9c11e[m
+Author: Olavo Neto <olavocn.neto@gmail.com>
+Date:   Tue Apr 25 21:25:43 2017 -0400
+
+    Unused import:
+    - FirebaseListObservable
+    - Observable
+
+[33mcommit 7d8f8ec57af6432c6d41b042903c114683e4ece3[m
+Author: Olavo Neto <olavocn.neto@gmail.com>
+Date:   Tue Apr 25 21:23:15 2017 -0400
+
+    Escrita no import do firebase
+
+[33mcommit e29ba4a65603c983dd9688d77d0093ef1d3ae1b6[m
+Author: Olavo Neto <olavocn.neto@gmail.com>
+Date:   Tue Apr 25 21:22:36 2017 -0400
+
+    Unused import: 'Observable'
+
+[33mcommit ffb92c52eeea8fd2153907527bf843aac8050525[m
+Author: Diego Garcia <cl1308@fiap.com.br>
+Date:   Tue Apr 18 14:08:38 2017 -0300
+
+    Remove code unusable
+
+[33mcommit 4f4a41374c0aaf7ecb4e41335ebd8fbed99e3cee[m
+Merge: 7d79ebd ccc36e3
+Author: Diego Garcia <diego.ds.garcia@gmail.com>
+Date:   Tue Apr 18 13:27:23 2017 -0300
+
+    Merge pull request #9 from portalsuperacao/app-156
+    
+    App 156 - Update Ionic Native to 3.x and others things
+
+[33mcommit ccc36e3503d1afab049de75d1f548da543d6cb95[m
+Author: Diego Garcia <cl1308@fiap.com.br>
+Date:   Fri Apr 7 14:04:19 2017 -0300
+
+    Update bind in ChatPage
+
+[33mcommit 0af5af3b9e0f00fc1b53bf62ccd5fb47f5c950c9[m
+Author: Diego Garcia <cl1308@fiap.com.br>
+Date:   Fri Apr 7 14:03:31 2017 -0300
+
+    Update all Ionic Natives Plugins and update concat to template string
+
+[33mcommit 1d9c52bab1ee71172ad8e1fedbff5a95d90f58d9[m
+Merge: 0e6b477 7d79ebd
+Author: Diego Garcia <cl1308@fiap.com.br>
+Date:   Thu Apr 6 19:03:06 2017 -0300
+
+    Merge branch 'master' into app-156
+
+[33mcommit 7d79ebdfeb868a9ef9ee9573b78c3c6d5c3fa613[m
+Merge: 6b550d8 a9e0b92
+Author: Diego Garcia <diego.ds.garcia@gmail.com>
+Date:   Thu Apr 6 18:54:02 2017 -0300
+
+    Merge pull request #8 from dpacosta/master
+    
+    app-140: Fix bug logout
+
+[33mcommit 6b550d876add9d265e30020438ca64443e3533e8[m
+Merge: ff4d03d 305122b
+Author: Diego Garcia <diego.ds.garcia@gmail.com>
+Date:   Thu Apr 6 17:39:49 2017 -0300
+
+    Merge pull request #7 from portalsuperacao/app-149
+    
+    app-149: Update profile page
+
+[33mcommit 305122bd8a01ba5cfdf8f43832ef907700855163[m
+Author: Diego Garcia <cl1308@fiap.com.br>
+Date:   Thu Apr 6 17:36:50 2017 -0300
+
+    Review changes of pull request
+
+[33mcommit a9e0b92b7a8adf9eaa8045679034d033f3bb0d4a[m
+Author: Daniel Costa <daniel.costa@skipthedishes.ca>
+Date:   Thu Apr 6 10:06:48 2017 -0500
+
+    app-140: use template literals
+
+[33mcommit 823af5141b2e91be3f6dec7bfbb350fbb62dfa1e[m
+Author: Daniel Costa <daniel.costa@skipthedishes.ca>
+Date:   Thu Apr 6 00:20:49 2017 -0500
+
+    app-140: avoid NPE when logged out
+
+[33mcommit 0e6b477574da4946a3b73adf6c90080e07e66e11[m
+Author: Diego Garcia <cl1308@fiap.com.br>
+Date:   Wed Apr 5 18:56:35 2017 -0300
+
+    Install all plugins cordova native and update
+
+[33mcommit 731e62d8468c2545256be764a6ec9e9ca5733c76[m
+Author: Diego Garcia <cl1308@fiap.com.br>
+Date:   Tue Apr 4 13:43:06 2017 -0300
+
+    Finish update profile and edit page
+
+[33mcommit f7efa6d80bc6d5737a1c3f381e93d912193245d0[m
+Author: Diego Garcia <cl1308@fiap.com.br>
+Date:   Tue Apr 4 10:48:27 2017 -0300
+
+    Update layout profile
+
+[33mcommit 1359d1c0c1c22a3eda814dc7f3fdaf7fc8f23b53[m
+Author: Diego Garcia <cl1308@fiap.com.br>
+Date:   Tue Apr 4 09:14:47 2017 -0300
+
+    Update layout edit with one more option in radio button
+
+[33mcommit 2ffb2cace1f8a7dfb15bb7b186b1e721b93329ac[m
+Author: Diego Garcia <cl1308@fiap.com.br>
+Date:   Mon Apr 3 18:58:15 2017 -0300
+
+    Update layout - Edit Profile
