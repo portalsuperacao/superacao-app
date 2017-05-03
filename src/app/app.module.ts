@@ -1,5 +1,6 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import { HttpModule } from '@angular/http';
 import { ENV } from '../config/environment.dev';
 
 // COMPONENTS / PIPES / DIRECTIVES
@@ -15,6 +16,7 @@ import { IonicStorageModule } from '@ionic/storage';
 import { UserStorageService } from '../providers/database/user-storage-service';
 import { CalendarStorageService } from '../providers/database/calendar-storage-service';
 import { ChatStorageService } from '../providers/database/chat-storage-service';
+import { TrinityService } from '../providers/database/trinity-service';
 import { MySpaceStorageService } from '../providers/database/my-space-storage-service';
 import { DateUtil } from '../providers/util/date-util';
 import { Utils } from '../providers/util/utils';
@@ -108,6 +110,7 @@ firebase.initializeApp(firebaseConfig);
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
     AngularFireModule.initializeApp(firebaseConfig),
+    HttpModule,
     TextMaskModule
   ],
   bootstrap: [IonicApp],
@@ -151,6 +154,7 @@ firebase.initializeApp(firebaseConfig);
     UserStorageService,
     CalendarStorageService,
     ChatStorageService,
+    TrinityService,
     DateUtil,
     MySpaceStorageService,
     Utils,

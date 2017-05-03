@@ -1,0 +1,270 @@
+[33mcommit ffb92c52eeea8fd2153907527bf843aac8050525[m
+Author: Diego Garcia <cl1308@fiap.com.br>
+Date:   Tue Apr 18 14:08:38 2017 -0300
+
+    Remove code unusable
+
+[33mcommit ff4d03d15524716cd4821b4a7f5b28dcf8b06954[m
+Merge: c7fa8d4 3e27880
+Author: Diego Garcia <diego.ds.garcia@gmail.com>
+Date:   Fri Mar 31 09:27:00 2017 -0300
+
+    Merge pull request #6 from portalsuperacao/app-139
+    
+    Update layout chat
+
+[33mcommit c7fa8d41d96e28ba571b531b5495f714e789d0f2[m
+Merge: 047839f d89ad62
+Author: Diego Garcia <diego.ds.garcia@gmail.com>
+Date:   Wed Mar 29 23:25:50 2017 -0300
+
+    Merge pull request #5 from portalsuperacao/app-155
+    
+    Fix problem with import MomentJS and rollup
+
+[33mcommit 3e2788000469b0a1682fb43d52ba5dba989660ef[m
+Author: Diego Garcia <cl1308@fiap.com.br>
+Date:   Wed Mar 29 18:07:03 2017 -0300
+
+    Fix calendar-component which new grid
+
+[33mcommit 801cd8aaf423bfb446b332c6db42c6a53e198b9a[m
+Author: Diego Garcia <cl1308@fiap.com.br>
+Date:   Wed Mar 29 17:59:45 2017 -0300
+
+    Update design of chat
+
+[33mcommit cc643a91a580c08464324d8bb9afdcd74e592f59[m
+Author: Diego Garcia <cl1308@fiap.com.br>
+Date:   Wed Mar 29 16:20:35 2017 -0300
+
+    Update ionic 2 and insert image chat-arrow
+
+[33mcommit 3e1e3b9cb21c0c707f51309cfb652140c9948be2[m
+Author: Diego Garcia <cl1308@fiap.com.br>
+Date:   Wed Mar 29 16:05:01 2017 -0300
+
+    Insert images, set background-image in chat
+
+[33mcommit d89ad624b9c91b019420b2f3a891314e98459864[m
+Author: Diego Garcia <Diego Garcia>
+Date:   Tue Mar 28 22:48:59 2017 -0300
+
+    Fix problem with import MomentJS and rollup
+
+[33mcommit 047839f160ad687a9bbb233a1ae659515ab0f0a9[m
+Merge: 1774089 022c74f
+Author: Diego Garcia <diego.ds.garcia@gmail.com>
+Date:   Fri Mar 24 11:25:14 2017 -0300
+
+    Merge pull request #2 from portalsuperacao/app-137
+    
+    External configuration variables
+
+[33mcommit 1774089dae3bac64a60245a261645e34447a222e[m
+Author: Michel Bottan <michel.bottan@gmail.com>
+Date:   Thu Mar 23 20:46:29 2017 -0300
+
+    License
+
+[33mcommit 022c74f2aee0d051726a6211710718b971094021[m
+Author: Michel Bottan <michel.bottan@gmail.com>
+Date:   Mon Mar 20 10:48:40 2017 -0300
+
+    External configuration variables
+
+[33mcommit e4a8c699114885979992737d48caacc9c48f6b32[m
+Merge: 0c8a95c ea921ac
+Author: Michel Bottan <michel.bottan@gmail.com>
+Date:   Sat Mar 18 17:45:16 2017 -0300
+
+    Merge pull request #1 from portalsuperacao/app-135
+    
+    Docker compose configuration
+
+[33mcommit ea921ac9951923db4a5fd6299caced4f034df22c[m
+Author: Michel Bottan <michel.bottan@gmail.com>
+Date:   Sat Mar 18 17:12:05 2017 -0300
+
+    Docker compose configuration
+
+[33mcommit 0c8a95c15fd3f5d7df8c428cca910fc043a1ca90[m
+Author: Diego Garcia <cl1308@fiap.com.br>
+Date:   Thu Mar 16 19:16:09 2017 -0300
+
+    Atualização dos icones
+
+[33mcommit 589ab0bf832c9875a19c0e4b4f5b016bffc43cfc[m
+Author: Diego Garcia <cl1308@fiap.com.br>
+Date:   Wed Mar 15 19:25:08 2017 -0300
+
+    Inserção dos updates de dados, no perfil do usuário
+
+[33mcommit 8f96618ce1d2cfa4c540f03f48f945f9cffa9dc7[m
+Author: Diego Garcia <cl1308@fiap.com.br>
+Date:   Wed Mar 15 14:33:12 2017 -0300
+
+    Criação do modulo de edição de perfil, e estrutura de tela do fluxo de cadastro
+
+[33mcommit 2d79c92d5d59d4523802cc6783f08dd4618acab0[m
+Author: Diego Garcia <cl1308@fiap.com.br>
+Date:   Mon Mar 6 14:03:27 2017 -0300
+
+    Finalização da documentação e remoção dos dados firebase
+
+[33mcommit 60441736eac7bc8c23a94dfee34c5b8f60e254cd[m
+Author: Diego Garcia <cl1308@fiap.com.br>
+Date:   Fri Mar 3 19:06:58 2017 -0300
+
+    Preparação para publicação no github, criação de telas offline e outras alterações
+
+[33mcommit bdc1ff6bd423a4a48167eff624eab31d32572bb0[m
+Author: Diego Garcia <Diego Garcia>
+Date:   Mon Feb 20 23:16:44 2017 -0300
+
+    Adição do Dockerfile
+
+[33mcommit 3d7ad279527d9177dd99e993c6c347dab6ad83d9[m
+Author: Diego Garcia <Diego Garcia>
+Date:   Tue Feb 7 23:56:00 2017 -0200
+
+    Inicio das melhorias do chat
+
+[33mcommit 5f6127dd34aec0724304c4e007d276149749a751[m
+Author: Diego Garcia <Diego Garcia>
+Date:   Wed Jan 25 22:19:27 2017 -0200
+
+    Inicio da atualização dos componentes offline
+
+[33mcommit 8ff929dcf4c1eb7b26f48a132b52e17e66d63891[m
+Author: Diego Garcia <cl1308@fiap.com.br>
+Date:   Tue Jan 24 19:47:58 2017 -0200
+
+    Padrão de layout - inicio da atualização dos trios
+
+[33mcommit 866d14b4939099a205f751e27899b7924d669ed5[m
+Author: Diego Garcia <cl1308@fiap.com.br>
+Date:   Mon Jan 16 19:30:09 2017 -0200
+
+    Padrão de layout -> formulários, encerrado!
+
+[33mcommit 548c3f4e0124b10d159f8f8400672e91df99a381[m
+Author: Diego Garcia <cl1308@fiap.com.br>
+Date:   Fri Jan 13 19:17:51 2017 -0200
+
+    Atualização e padronização do layout (formulario)
+
+[33mcommit 33eedba08a776cb03f9a78adc78e93a87484da04[m
+Author: Diego Garcia <cl1308@fiap.com.br>
+Date:   Thu Jan 12 19:40:30 2017 -0200
+
+    Finalização do modulo login (só precisa consertar o bug do logout), e inicio da criação do layout de perfil
+
+[33mcommit 227f1be2de619fd5e720bfa483f6dc8153679d29[m
+Author: Diego Garcia <cl1308@fiap.com.br>
+Date:   Tue Jan 10 19:14:27 2017 -0200
+
+    Atualização da versão do Ionic e inicio da atualiação do component login
+
+[33mcommit 23c6eb2f97538b6194e6562ea7cd7616bae9985f[m
+Author: Diego Garcia <cl1308@fiap.com.br>
+Date:   Tue Nov 29 20:05:23 2016 -0200
+
+    Start update layout trinity
+
+[33mcommit 86fef13dbec5998ac16616fb41201c6c9d3b1f0f[m
+Author: Diego Garcia <cl1308@fiap.com.br>
+Date:   Fri Nov 25 19:46:47 2016 -0200
+
+    Finish refactory trinity
+
+[33mcommit 180e0621d67559eaf2a074018108979acd1e4a46[m
+Author: Diego Garcia <cl1308@fiap.com.br>
+Date:   Wed Nov 23 20:00:16 2016 -0200
+
+    Updates 23/11
+
+[33mcommit 78ef090ff95c613037fe2c5a8651548426d70a47[m
+Author: Diego Garcia <cl1308@fiap.com.br>
+Date:   Tue Nov 22 20:57:54 2016 -0200
+
+    22/11/16
+
+[33mcommit d5e427223d8186efa2cd57db7fe2f088381fc617[m
+Author: Diego Garcia <cl1308@fiap.com.br>
+Date:   Mon Nov 21 19:56:18 2016 -0200
+
+    Start refatory Trinity - Overcomer
+
+[33mcommit 2c1725c0e3b6c2ab8d02a266cc642e8d214e503f[m
+Author: Diego Garcia <cl1308@fiap.com.br>
+Date:   Fri Nov 18 19:56:38 2016 -0200
+
+    Finish all design and CRUD of My-Space
+
+[33mcommit 082a66268db8f71cbe40f829daf08c2ddc2bcbf5[m
+Author: Diego Garcia <cl1308@fiap.com.br>
+Date:   Thu Nov 17 19:40:56 2016 -0200
+
+    Update MySpace - Doctors
+
+[33mcommit da98e6440e398fd3170a258f06c9cb0b1ee5227a[m
+Author: Diego Garcia <cl1308@fiap.com.br>
+Date:   Wed Nov 16 19:02:28 2016 -0200
+
+    Start update layout
+
+[33mcommit 2d869d8af4f9ecd8b988dabf5c4068a5ef6d2bd0[m
+Author: Diego Garcia <Diego Garcia>
+Date:   Tue Nov 15 13:06:30 2016 -0200
+
+    Some updates in MySpaceDoctorsPage
+
+[33mcommit 55f5dfdc105830e06840ff2147fa96e2ec660837[m
+Author: Diego Garcia <cl1308@fiap.com.br>
+Date:   Fri Nov 11 19:03:53 2016 -0200
+
+    Updates Archangel - Missions and Historical and start DoctorsPage
+
+[33mcommit 0da549962c38453a07ebcdab35c9e0db874be6cf[m
+Author: Diego Garcia <cl1308@fiap.com.br>
+Date:   Thu Nov 10 19:16:55 2016 -0200
+
+    Finish MySpace - Medicines, and Start Archangel Missions
+
+[33mcommit 129066f9610c858530ed8f45d36bed696cddc341[m
+Author: Diego Garcia <cl1308@fiap.com.br>
+Date:   Wed Nov 9 19:03:34 2016 -0200
+
+    Updates with page MySpace
+
+[33mcommit 8d7cefd0f44d307d494ee5f391310b5cae3694d6[m
+Author: Diego Garcia <cl1308@fiap.com.br>
+Date:   Tue Nov 8 18:55:02 2016 -0200
+
+    Updates 08/10
+
+[33mcommit 9e8f3e4344755cb774f758926b5f9ccbfec1ad8e[m
+Author: Diego Garcia <cl1308@fiap.com.br>
+Date:   Mon Nov 7 19:05:06 2016 -0200
+
+    Start my Space - Medicines
+
+[33mcommit 48b68b1dbc55ae63090bf23ebacc50767c56a997[m
+Author: Diego Garcia <cl1308@fiap.com.br>
+Date:   Fri Nov 4 18:55:12 2016 -0200
+
+    FINALLY!!! Finish trinity and notifications
+
+[33mcommit 8a373f0aa6f185a24dc407165afc70b72d899d48[m
+Author: Diego Garcia <cl1308@fiap.com.br>
+Date:   Thu Nov 3 19:03:50 2016 -0200
+
+    Fix all bugs with notification!!
+
+[33mcommit 58815a7b7b9d8027fb1adaa2f9447bd991dc4668[m
+Author: Diego Garcia <cl1308@fiap.com.br>
+Date:   Tue Nov 1 19:06:43 2016 -0200
+
+    Fix others bugs with notifications...
+

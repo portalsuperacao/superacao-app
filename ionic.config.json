@@ -2,5 +2,8 @@
   "name": "Superação",
   "app_id": "f7c47d4d",
   "v2": true,
-  "typescript": true
+  "typescript": true,
+  "proxies": [{
+    "proxyUrl": "http://192.168.99.100:3000/"
+  }]
 }

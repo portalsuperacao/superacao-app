@@ -7,13 +7,11 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding class="trinity">
-  <input type="text" placeholder="Digite o código de validação" />
-  <button ion-button full color="dark"> Enviar </button>
+<ion-content padding class="trinity background-color-dark">
+  <input type="text" [(ngModel)]="code" placeholder="Digite o código de validação" />
+  <button ion-button full color="dark" (click)="sendActiveUserCode()"> Enviar </button>
   <p>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-    Nulla rutrum interdum sapien, imperdiet eleifend ante luctus et.
-    Vestibulum ac feugiat leo, vitae porta sapien. Nam id lorem tempus
+    Para se tornar um superador ou anjo, digite seu código aqui!
   </p>
 
 </ion-content>
