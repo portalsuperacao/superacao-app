@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, ViewController, NavParams } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Utils } from '../../../providers/util/utils';
 import { DateUtil } from '../../../providers/util/date-util';
 
 @Component({
@@ -18,7 +19,8 @@ export class ProfileEditPage {
     public viewCtrl: ViewController,
     public params: NavParams,
     public formBuilder: FormBuilder,
-    public dateUtil: DateUtil ) {
+    public dateUtil: DateUtil,
+    public utils: Utils ) {
       this.user  = this.params.get('user');
       this.formGroup = this.formBuilder.group({
         name: [this.user.name, Validators.required],
@@ -55,6 +57,14 @@ export class ProfileEditPage {
     if(this.formGroup.invalid) {
       return 'validate-input'
     }
+  }
+
+  openGallery() {
+    this.utils.openGallery().then((image) => {
+      this.user.avatar = image
+    }).catch((error) => {
+      console.log(error)
+    })
   }
 
   closePage(formDatas) {
