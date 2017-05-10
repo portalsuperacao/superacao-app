@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
-import { NavController, ViewController, NavParams } from 'ionic-angular';
+import { NavController, ViewController, NavParams, LoadingController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Utils } from '../../../providers/util/utils';
 import { DateUtil } from '../../../providers/util/date-util';
+import { Geolocation } from '@ionic-native/geolocation';
+
+declare const google : any;
 
 @Component({
   selector: 'page-edit-profile',
@@ -15,9 +18,11 @@ export class ProfileEditPage {
   thumbClass: any;
 
   constructor(
+    private geolocation: Geolocation,
     public navCtrl: NavController,
     public viewCtrl: ViewController,
     public params: NavParams,
+    public loadingCtrl: LoadingController,
     public formBuilder: FormBuilder,
     public dateUtil: DateUtil,
     public utils: Utils ) {
@@ -57,6 +62,31 @@ export class ProfileEditPage {
     if(this.formGroup.invalid) {
       return 'validate-input'
     }
+  }
+
+  updateLocation() {
+    let loading = this.loadingCtrl.create({
+      content: 'Atualizando...'
+    })
+    loading.present()
+
+    this.geolocation.getCurrentPosition().then((location) => {
+      let geocoder = new google.maps.Geocoder();
+      let latlng = {
+        location: {
+          lat: location.coords.latitude,
+          lng: location.coords.longitude
+        }
+      }
+
+      geocoder.geocode(latlng, (results) =>  {
+        loading.dismiss()
+        this.formGroup.controls['state'].setValue(results[0].address_components[5].short_name);
+        this.formGroup.controls['city'].setValue(results[0].address_components[4].long_name);
+        this.formGroup.value.latitude = location.coords.latitude;
+        this.formGroup.value.longitude = location.coords.longitude;
+      })
+    })
   }
 
   openGallery() {
