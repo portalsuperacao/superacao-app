@@ -19,7 +19,7 @@
       </div>
     </div>
     <div class="name"> {{ (user | async)?.name }} </div>
-    <div class="type"> {{ (user | async)?.type_user }} </div>
+    <div class="type" *ngIf="(user | async)?.type_user != 'Normal'"> {{ (user | async)?.type_user }} </div>
   </div>
 
   <div class="cards">

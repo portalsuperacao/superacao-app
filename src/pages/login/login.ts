@@ -26,8 +26,7 @@ export class LoginPage {
     public alertCtrl: AlertController,
     public menuCtrl: MenuController,
     public fb : FormBuilder,
-    public authService: AuthService
-  ) {
+    public authService: AuthService) {
       this.formSignup = this.fb.group({
         name: ["", Validators.required],
         email: ["", Validators.required],

@@ -47,7 +47,7 @@ export class AuthService {
 
     function verifyIfRegisterUser(datas) {
       if(datas.$value === null) {
-        return this.userStorageService.registerUser(user);
+        return this.userStorageService.registerUser(datas.auth);
       }
       return datas;
     }
@@ -58,12 +58,12 @@ export class AuthService {
   }
 
   signUpWithEmail(credentials) {
-    let user = credentials;
     return this.af.auth.createUser({
       email: credentials.email,
       password: credentials.password
-    }).then((credentials) => {
-      this.userStorageService.registerUser(credentials, user);
+    }).then((datas) => {
+      credentials.uid = datas.auth.uid;
+      this.userStorageService.registerUser(credentials);
     });
   }
 
