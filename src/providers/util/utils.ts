@@ -46,8 +46,8 @@ export class Utils {
     return new Promise((resolve, reject) => {
       if(this.platform.is('cordova')) {
         let pushObject: PushObject = this.push.init(this.optionsPush)
-        pushObject.on('registration').subscribe((device) => {
-          resolve(device)
+        pushObject.on('registration').subscribe((device : any) => {
+          resolve(device.registrationId)
         })
       } else {
         reject(null);

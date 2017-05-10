@@ -25,12 +25,11 @@
                 <img [src]="angel?.avatar" />
               </figure>
             </ion-col>
-            <ion-col width-50 class="description" (click)="openChat(overcomer, angel)">
+            <ion-col width-50 [ngClass]="{'description': true, 'notification' : (angelNotification | async)?.view }" (click)="openChat(overcomer, angel)">
               <h5>{{ angel?.type_user }}</h5>
               <h2>{{ angel?.name }}</h2>
-              <p class="message" *ngIf="!(angel?.lastMessages | async)"> Não há nenhum mensagem disponivel </p>
-              <p class="message" *ngIf="(angel?.lastMessages | async) && !(angel?.lastMessages | async)?.msg"> O {{ angel?.name }} enviou uma imagem </p>
-              <p class="message" *ngIf="(angel?.lastMessages | async)?.msg"> {{ (angel?.lastMessages | async)?.msg | truncate:20 }} </p>
+              <p class="message" *ngIf="!(angel?.lastMessages | async)"> Não há nenhuma mensagem disponivel </p>
+              <p class="message" *ngIf="(angel?.lastMessages | async)?.msg"> {{ (angel?.lastMessages | async)?.msg | truncate: 20}} </p>
               <p class="date" *ngIf="(angel?.lastMessages | async)?.created_at" class="hour"> {{ (angel?.lastMessages | async)?.created_at | customDate:"c" }} </p>
             </ion-col>
             <ion-col width-25 class="others" (click)="openPublicEvents(angel)">
@@ -46,7 +45,7 @@
                 <figure class="background-color-archangel">
                   <img [src]="archangel?.avatar" />
                 </figure>
-                <div class="name">
+                <div [ngClass]="{'name': true, 'notification' : (archangelNotification | async)?.view }">
                   <h5>{{ archangel?.type_user }}</h5>
                   <h2>{{ archangel?.name }}</h2>
                 </div>

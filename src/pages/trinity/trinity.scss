@@ -97,6 +97,12 @@
     ion-icon {
       color: $text-primary
     }
+    .notification {
+      p, h2, h5 {
+        color: $background-color-blue !important;
+        font-weight: bold;
+      }
+    }
   }
 }
 

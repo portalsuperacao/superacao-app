@@ -26,16 +26,40 @@ export class UserStorageService {
       name : result.name,
       email: result.email || null,
       avatar: result.photoURL || "https://placehold.it/150x150",
+      occupation: "",
+      birthdate: "",
+      state: "",
+      city: "",
+      country: "",
+      genre: "",
+      relationship: "",
+      religion: "",
+      children: 0,
+      cancer_name: "",
+      type_cancer : {
+        is_metastasis: 0,
+        is_recurrent: 0
+      },
+      treatment: {
+        circurgia: 0,
+        quimioterapia: 0,
+        radiografia: 0,
+        terapia_oral: 0,
+        terapia_oval: 0,
+        terapias_naturais: 0
+      },
+      phrase_of_difficulties: "",
+      healing_phrase: "",
       emotion: {
         status: "Normal",
-        img: "./assets/images/happy.svg",
+        img: "./assets/images/emoji-happy.svg",
         is_active: 0
       },
       type_user: "Normal",
       other_datas: {
-          token_device: "",
-          active: "1",
-          last_access: new Date().getTime()
+        token_device: "",
+        active: "1",
+        last_access: new Date().getTime()
       }
     }
 

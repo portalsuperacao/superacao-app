@@ -12,7 +12,7 @@
 
 <ion-content class="background-color-dark">
   <form [formGroup]="formGroup">
-    <div class="avatar">
+    <div class="avatar" (click)="openGallery()">
       <div class="thumb">
         <img [src]="user?.avatar" [ngClass]="thumbClass" />
         <div [hidden]="user?.type_user != 'Superador'" class="emotion">

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, ViewController, NavParams, LoadingController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Utils } from '../../../providers/util/utils';
 import { DateUtil } from '../../../providers/util/date-util';
 import { Geolocation } from '@ionic-native/geolocation';
 
@@ -23,7 +24,8 @@ export class ProfileEditPage {
     public params: NavParams,
     public loadingCtrl: LoadingController,
     public formBuilder: FormBuilder,
-    public dateUtil: DateUtil ) {
+    public dateUtil: DateUtil,
+    public utils: Utils ) {
       this.user  = this.params.get('user');
       this.formGroup = this.formBuilder.group({
         name: [this.user.name, Validators.required],
@@ -84,6 +86,14 @@ export class ProfileEditPage {
         this.formGroup.value.latitude = location.coords.latitude;
         this.formGroup.value.longitude = location.coords.longitude;
       })
+    })
+  }
+
+  openGallery() {
+    this.utils.openGallery().then((image) => {
+      this.user.avatar = image
+    }).catch((error) => {
+      console.log(error)
     })
   }
 

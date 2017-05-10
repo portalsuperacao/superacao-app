@@ -16,7 +16,7 @@
       </div>
     </div>
     <div class="name"> {{ user?.name }} </div>
-    <div class="type"> {{ user?.type_user }} </div>
+    <div class="type" *ngIf="user?.type_user != 'Normal'"> {{ user?.type_user }} </div>
   </div>
 
   <div class="profile-datas">
