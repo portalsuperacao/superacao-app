@@ -17,7 +17,6 @@ export class ChatPage {
   user1 : any;
   user2 : any;
   chat : any;
-  ctrlFloat : boolean = true;
   status : any;
   countMessages : number = 30;
 
@@ -32,7 +31,6 @@ export class ChatPage {
       this.user1 = this.params.get('user1');
       this.user2 = this.params.get('user2');
       this.chat = this.params.get('chat');
-      this.status = this.user2.emotion.is_active;
   }
 
   ionViewDidLoad() {
@@ -69,6 +67,14 @@ export class ChatPage {
     })
   }
 
+  doRefresh(refresh) {
+    this.countMessages += this.countMessages
+    this.chatStorageService.getMessages(this.chat.chatUid, this.countMessages).subscribe((messages) => {
+      this.listMessages = messages
+      refresh.complete()
+    })
+  }
+
  _validateMessage() {
     return new Promise((resolve) => {
     let i = 0;
@@ -77,6 +83,7 @@ export class ChatPage {
     .then(msgWrapper.bind(this))
     .then(sendMessage.bind(this))
     .then(pushNotification.bind(this))
+    .then(updateChatView.bind(this))
     .then(resolvePromise.bind(this))
 
     function validateInput() {
@@ -97,10 +104,16 @@ export class ChatPage {
       return msg;
     }
 
+
     function pushNotification(msg) {
       msg.token_device = this.user2.other_datas.token_device;
       msg.name_user = this.user1.name;
       this.chatStorageService.pushNotification(msg)
+      return msg;
+    }
+
+    function updateChatView(msg) {
+      this._setChatView(this.user1.$key, 1)
       return msg;
     }
 
@@ -115,7 +128,7 @@ _getChat() {
     Promise.resolve()
     .then(getChatDatas.bind(this))
     .then(getMessages.bind(this))
-    //.then(removePushNotification.bind(this))
+    .then(updateChatView.bind(this))
     .then(resolvePromise.bind(this))
 
     function getChatDatas() {
@@ -127,10 +140,8 @@ _getChat() {
       return msg;
     }
 
-    function removePushNotification(msg) {
-      this.utils.generatePush().then((datas) => {
-        console.log("remover o push!");
-      }).catch((error) => {});
+    function updateChatView(msg) {
+      this._setChatView(this.user2.$key, 0)
       return msg;
     }
 
@@ -141,51 +152,25 @@ _getChat() {
 
 }
 
-
- doRefresh(refresh) {
-   this.countMessages += this.countMessages
-   this.chatStorageService.getMessages(this.chat.chatUid, this.countMessages).subscribe((messages) => {
-     this.listMessages = messages
-     refresh.complete()
-   })
- }
-
-  _hideTabs() {
-    let elem = <HTMLElement>document.querySelector(".tabbar");
-    if (elem != null) {
-      elem.style.display = 'none';
+_setChatView(user, value) {
+  for(let i = 0; i < this.chat.users.length; i++) {
+    if(this.chat.users[i].uid == user) {
+      this.chatStorageService.updateChatView(this.chat.$key, i, value)
     }
   }
+}
 
-  _showTabs() {
-    let elem = <HTMLElement>document.querySelector(".tabbar");
-    if (elem != null) {
-      elem.style.display = 'flex';
-    }
+_hideTabs() {
+  let elem = <HTMLElement>document.querySelector(".tabbar");
+  if (elem != null) {
+    elem.style.display = 'none';
   }
+}
 
-  // _clearStatusEmotion() {
-  //   if(this.status) {
-  //     let status = this.user2.emotion;
-  //     status.is_active = 0;
-  //     this.userStorageService.setEmotion(status, this.user2.$key);
-  //   }
-  // }
-  //
-  // _setViewMessage(user, valueView) {
-  //   this.chat.users.forEach((datas, index) => {
-  //     if(user.$key == datas.uid) {
-  //       this.chatStorageService.setViewChat(this.chat.chatKey, index, valueView);
-  //     }
-  //   });
-  // }
-  //
-  // _generateMessageStaus(name, image, status) {
-  //   this.listMessages.push({
-  //     msg: name + ' está se sentindo ' + status,
-  //     is_status: 1,
-  //     img: image
-  //   });
-  // }
-
+_showTabs() {
+  let elem = <HTMLElement>document.querySelector(".tabbar");
+  if (elem != null) {
+    elem.style.display = 'flex';
+  }
+}
 }
