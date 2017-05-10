@@ -17,13 +17,12 @@
                 <img [src]="trinity.overcomer?.avatar" />
               </figure>
             </ion-col>
-            <ion-col width-50 class="description" (click)="openChat(trinity.angel, trinity.overcomer)">
+            <ion-col width-50 [ngClass]="{'description': true, 'notification' : (overcomerNotification[i] | async)?.view }" (click)="openChat(trinity.angel, trinity.overcomer)">
               <h5>{{ trinity.overcomer.type_user }}</h5>
               <h2>{{ trinity.overcomer.name }}</h2>
-              <p class="message" *ngIf="!(trinity.overcomer.lastMessages | async)"> Não há nenhum mensagem disponivel </p>
-              <p class="message" *ngIf="(trinity.overcomer.lastMessages | async) && !(trinity.overcomer.lastMessages | async)"> O {{ trinity.overcomer.name }} enviou uma imagem </p>
-              <p class="message" *ngIf="trinity.overcomer.lastMessages | async"> {{ (trinity.overcomer.lastMessages | async).msg | truncate:20 }} </p>
-              <p class="message" *ngIf="trinity.overcomer.lastMessages | async" class="hour"> {{ (trinity.overcomer.lastMessages | async).created_at | customDate:"c" }} </p>
+              <p class="message" *ngIf="!(trinity.overcomer?.lastMessages | async)"> Não há nenhuma mensagem disponivel </p>
+              <p class="message" *ngIf="(trinity.overcomer?.lastMessages | async)?.msg "> {{ (trinity.overcomer?.lastMessages | async)?.msg | truncate:20 }} </p>
+              <p class="message" *ngIf="(trinity.overcomer?.lastMessages | async)?.created_at" class="hour"> {{ (trinity.overcomer?.lastMessages | async)?.created_at | customDate:"c" }} </p>
             </ion-col>
             <ion-col width-25 class="others" (click)="openPublicEvents(trinity.overcomer)">
               <img src="./assets/images/calendar.svg">
@@ -38,7 +37,7 @@
                 <figure class="background-color-archangel">
                   <img [src]="trinity.archangel.avatar" />
                 </figure>
-                <div class="name">
+                <div [ngClass]="{'name': true, 'notification' : (archangelNotification[i] | async)?.view }">
                   <h5>{{ trinity.archangel.type_user }}</h5>
                   <h2>{{ trinity.archangel.name }}</h2>
                 </div>

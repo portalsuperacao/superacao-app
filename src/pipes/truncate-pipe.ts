@@ -6,12 +6,15 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 export class TruncatePipe implements PipeTransform {
   transform(value, args) : string {
+    if (!value) {
+      return 'Valor inválido';
+    }
+
     let limit = parseInt(args);
     if(!args) {
       if(value.length > 30) {
         return value.substring(0, 30) + "...";
       }
-
       return value;
     }
 
