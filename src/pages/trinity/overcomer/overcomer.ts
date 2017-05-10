@@ -100,8 +100,8 @@ export class OvercomerPage {
       function getTrinityService() {
         let trinity = {
           overcomer : "",
-          angel: "t3RiITF4w5aHPgHfAgnUZYI6zBs1",
-          archangel: "RK2xk9yrgjSRgv5Tmm3ThRgdE102"
+          angel: "YzGSf5qjZ4gIq3B7fbU1cdX6FjJ2",
+          archangel: "wNQcwXofuHUeYjETY4pZYmtQ9nD3"
         };
         return trinity;
       }
@@ -128,6 +128,7 @@ export class OvercomerPage {
       }
 
       function validateChatAngel(trinity) {
+
         return this.chatStorageService.getChat(trinity.overcomer.$key, trinity.angel.$key).then((chatDatas : any) => {
           if(!chatDatas) {
             trinity.angel.chat = this.chatStorageService.createChat(trinity.overcomer, trinity.angel).chatUid;
