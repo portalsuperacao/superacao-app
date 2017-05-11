@@ -1,6 +1,5 @@
 
 export class UserModel {
-  uid = '';
   avatar = 'https://placehold.it/150x150';
   birthdate = 0;
   cancer_name = '';
