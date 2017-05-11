@@ -14,13 +14,12 @@ import { CalendarStorageService } from '../../providers/database/calendar-storag
 })
 
 export class CalendarPage {
-   events : any;
-   listSchedule : any;
-   allSechedule : any;
-   showCalendar : any;
-   verifyNetwork: any = true;
-
-   loading : any
+   events;
+   listSchedule;
+   allSechedule;
+   showCalendar;
+   verifyNetwork = true;
+   loading;
 
   constructor(
     public navCtrl: NavController,
@@ -75,13 +74,13 @@ export class CalendarPage {
     this.navCtrl.push(CalendarEventEditPage, {datas: event});
   }
 
-  _verifyIfHaveConnect() {
+  private _verifyIfHaveConnect() {
     Network.onDisconnect().subscribe(() => {
       this.verifyNetwork = false
     });
   }
 
-  _generateAllSchedule() {
+  private _generateAllSchedule() {
     this.showCalendar = false;
      this._generateSchedule(new Date(), this.userStorageService, this.calendarStorageService, this.dateUtil).then((schedule : any) => {
        this.allSechedule = schedule.events;
@@ -89,7 +88,7 @@ export class CalendarPage {
      });
   }
 
-  _generateSchedule(dateNow, userStorageService, calendarStorageService, dateUtil) {
+  private _generateSchedule(dateNow, userStorageService, calendarStorageService, dateUtil) {
     return new Promise((resolve) => {
       Promise.resolve(dateNow)
       .then(getUser)

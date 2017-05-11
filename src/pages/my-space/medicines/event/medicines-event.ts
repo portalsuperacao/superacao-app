@@ -9,10 +9,10 @@ import { DateUtil } from '../../../../providers/util/date-util';
   templateUrl: 'medicines-event.html'
 })
 export class MySpaceMedicinesEventPage {
-  formEvent : any;
-  isEndDate : any;
-  intervalOptions : any = [];
-  params : any
+  formEvent;
+  isEndDate;
+  intervalOptions = [];
+  params;
 
   constructor(
     public navCtrl: NavController,

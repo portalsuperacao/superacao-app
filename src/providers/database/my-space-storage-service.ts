@@ -7,11 +7,13 @@ import 'rxjs/Observable';
 
 
 export class MySpaceStorageService {
-  constructor(private af: AngularFire, private storage: Storage) {
+  constructor(
+    private af: AngularFire,
+    private storage: Storage) {
 
   }
 
-  private makeUid() {
+  private _makeUid() {
     let possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
     let uid = ''
     for(let i = 0; i < 10; i++) {
@@ -20,7 +22,7 @@ export class MySpaceStorageService {
     return uid
   }
 
-  private updateArrayDatasOfLocalStorage(key, value) {
+  private _updateArrayDatasOfLocalStorage(key, value) {
     return new Promise((resolve) => {
       this.storage.get(key).then((datas) => {
         if(datas) {
@@ -33,10 +35,10 @@ export class MySpaceStorageService {
     })
   }
 
-  private insertDatasInLocalStorage(key, value) {
+  private _insertDatasInLocalStorage(key, value) {
     return new Promise((resolve) => {
-      value.uid = this.makeUid()
-      this.updateArrayDatasOfLocalStorage(key, value).then((datas : any) => {
+      value.uid = this._makeUid()
+      this._updateArrayDatasOfLocalStorage(key, value).then((datas : any) => {
         this.storage.set(key, datas).then(() => {
           resolve()
         })
@@ -44,7 +46,7 @@ export class MySpaceStorageService {
     })
   }
 
-  private deleteDatasInLocalStorage(key, uid) {
+  private _deleteDatasInLocalStorage(key, uid) {
     return new Promise((resolve) => {
       this.storage.get(key).then((datas) => {
         for(let i = 0; i < datas.length; i++ ){
@@ -61,10 +63,10 @@ export class MySpaceStorageService {
     })
   }
 
-  private updateDatasInLocalStorage(key, uid, value) {
+  private _updateDatasInLocalStorage(key, uid, value) {
     return new Promise((resolve) => {
-      this.deleteDatasInLocalStorage(key, uid).then(() => {
-         this.insertDatasInLocalStorage(key, value).then(() => {
+      this._deleteDatasInLocalStorage(key, uid).then(() => {
+         this._insertDatasInLocalStorage(key, value).then(() => {
            resolve()
          })
       })
@@ -73,15 +75,15 @@ export class MySpaceStorageService {
 
   // Medicines
   insertMedicineEvent(uidUser, datas) {
-    return this.insertDatasInLocalStorage('medicines', datas)
+    return this._insertDatasInLocalStorage('medicines', datas)
   }
 
   updateMedicineEvent(uidUser, datas) {
-    return this.updateDatasInLocalStorage('medicines', datas.uid, datas)
+    return this._updateDatasInLocalStorage('medicines', datas.uid, datas)
   }
 
   removeMedicineEvent(uidUser, datas) {
-    return this.deleteDatasInLocalStorage('medicines', datas.uid)
+    return this._deleteDatasInLocalStorage('medicines', datas.uid)
   }
 
   getMedicinesEvents(uidUser) {
@@ -91,15 +93,15 @@ export class MySpaceStorageService {
 
   // Doctors
   insertDoctorsEvent(uidUser, datas) {
-    return this.insertDatasInLocalStorage('doctors', datas)
+    return this._insertDatasInLocalStorage('doctors', datas)
   }
 
   updateDoctorsEvent(uidUser, datas) {
-    return this.updateDatasInLocalStorage('doctors', datas.uid, datas)
+    return this._updateDatasInLocalStorage('doctors', datas.uid, datas)
   }
 
   removeDoctorsEvent(uidUser, datas) {
-    return this.deleteDatasInLocalStorage('doctors', datas.uid)
+    return this._deleteDatasInLocalStorage('doctors', datas.uid)
   }
 
   getDoctorsEvent(uidUser) {
@@ -108,15 +110,15 @@ export class MySpaceStorageService {
 
   // Notes
   insertNotesEvent(uidUser, datas) {
-    return this.insertDatasInLocalStorage('notes', datas)
+    return this._insertDatasInLocalStorage('notes', datas)
   }
 
   updateNotesEvent(uidUser, datas) {
-    return this.updateDatasInLocalStorage('notes', datas.uid, datas)
+    return this._updateDatasInLocalStorage('notes', datas.uid, datas)
   }
 
   removeNotesEvent(uidUser, datas) {
-    return this.deleteDatasInLocalStorage('notes', datas.uid)
+    return this._deleteDatasInLocalStorage('notes', datas.uid)
   }
 
   getNotesEvent(uidUser) : any {

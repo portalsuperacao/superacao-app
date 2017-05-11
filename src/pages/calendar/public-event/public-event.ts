@@ -8,14 +8,14 @@ import { CalendarStorageService } from '../../../providers/database/calendar-sto
 })
 
 export class CalendarPublicEventPage {
-  user : any;
-  events : any;
-  isEmpty : boolean = true;
+  user;
+  events;
+  isEmpty = true;
 
   constructor(
-    public navCtrl: NavController,
-    public params: NavParams,
-    public calendarStorageService: CalendarStorageService) {
+    private navCtrl: NavController,
+    private params: NavParams,
+    private calendarStorageService: CalendarStorageService) {
       this.user = this.params.get('user');
       this.events = this.calendarStorageService.getPublicEvents(this.user.$key);
 

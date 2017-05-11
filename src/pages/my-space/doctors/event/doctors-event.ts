@@ -8,10 +8,10 @@ import { FormBuilder, Validators } from '@angular/forms';
   templateUrl: 'doctors-event.html'
 })
 export class MySpaceDoctorsEventPage {
-  params : any;
-  formEvent : any;
-  showClosePhone : any;
-  phones : any = [];
+  params;
+  formEvent;
+  showClosePhone;
+  phones = [];
 
   constructor(
     public navCtrl: NavController,

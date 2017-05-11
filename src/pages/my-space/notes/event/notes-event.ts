@@ -7,11 +7,11 @@ import { NavController, NavParams, ViewController } from 'ionic-angular';
   templateUrl: 'notes-event.html'
 })
 export class MySpaceNotesEventPage {
-  noteOptions : any;
-  title : any;
-  text : any;
-  list : any = [];
-  params : any;
+  noteOptions;
+  title;
+  text;
+  list = [];
+  params;
 
   constructor(
     public navCtrl: NavController,

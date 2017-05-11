@@ -8,9 +8,11 @@ import { NavController, ViewController } from 'ionic-angular';
 
 export class StatusEmotionPage {
 
-  emojis : any;
+  emojis;
 
-  constructor(private nav: NavController, private viewCtrl: ViewController) {
+  constructor(
+    public nav: NavController, 
+    public viewCtrl: ViewController) {
     this.emojis = [{ status: 'Abençoado', img: './assets/images/emoji-blessed.svg'},
                    { status: 'Apaixonado(a)', img: './assets/images/emoji-love.svg'},
                    { status: 'Cansado', img: './assets/images/emoji-sleep.svg'},
@@ -27,9 +29,7 @@ export class StatusEmotionPage {
                    { status: 'Serio', img: './assets/images/emoji-serious.svg'},
                    { status: 'Surpreso', img: './assets/images/emoji-surprise.svg'},
                    { status: 'Tenso', img: './assets/images/emoji-nervous.svg'},
-                   { status: 'Triste', img: './assets/images/emoji-sad.svg'},
-
-                   ]
+                   { status: 'Triste', img: './assets/images/emoji-sad.svg'}]
   }
 
 

@@ -11,9 +11,9 @@ import { Observable } from 'rxjs/Observable';
 export class Utils {
   private optionsPush: PushOptions;
   constructor(
-    public platform: Platform,
-    public push: Push,
-    public camera: Camera
+    private platform: Platform,
+    private push: Push,
+    private camera: Camera
   ) {
     this.optionsPush =
     {

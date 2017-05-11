@@ -12,6 +12,7 @@ export class CalendarNewEventPage {
   constructor(
     public navCtrl: NavController,
     public params: NavParams) {
+
   }
 
   addEvent(typeEvent) {

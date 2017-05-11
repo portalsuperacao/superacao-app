@@ -60,8 +60,9 @@ export class CalendarPicker {
   month;
   start;
 
-
-  constructor(public nav: NavController, public dateUtil : DateUtil) {
+  constructor(
+    public nav: NavController,
+    public dateUtil : DateUtil) {
 
   }
 
@@ -99,7 +100,7 @@ export class CalendarPicker {
     this.nav.push(CalendarNewEventPage);
   }
 
-  _initCalendar() {
+  private _initCalendar() {
     this.selected = moment();
     this.month = this.selected.clone();
 
@@ -110,7 +111,7 @@ export class CalendarPicker {
     this._buildMonth(start, this.month);
   }
 
-  _buildMonth(start, month) {
+  private _buildMonth(start, month) {
     this.weeks = [];
     let done = false;
     let date = start.clone();
@@ -125,7 +126,7 @@ export class CalendarPicker {
     }
   }
 
-  _buildWeek(date , month) {
+  private _buildWeek(date , month) {
     let days = [];
     let index = 0;
 
@@ -174,7 +175,7 @@ export class CalendarPicker {
     return days;
   }
 
-  _verifyEventMark(date) {
+  private _verifyEventMark(date) {
     return new Promise((resolve) => {
       this.setEvents.forEach((event) => {
         if(date.valueOf() >= this.dateUtil.removeTime(event.start_at) &&
@@ -188,5 +189,7 @@ export class CalendarPicker {
   _resetWeek(date) {
     return date.day(0).hour(0).minute(0).second(0).millisecond(0);
   }
+
+
 
 }

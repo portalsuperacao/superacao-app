@@ -13,9 +13,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class LoginPage {
 
   messagesError;
-  ctrlLogo : boolean = false;
-  loading : any;
-  formType : any = 'login';
+  ctrlLogo = false;
+  loading;
+  formType = 'login';
 
   formSignup: FormGroup;
   formLogin : FormGroup;
@@ -74,7 +74,7 @@ export class LoginPage {
     });
   }
 
-  _showLoading() {
+  private _showLoading() {
     this.loading = this.loadingCtrl.create({
       content: "Aguarde...",
     });
@@ -82,7 +82,7 @@ export class LoginPage {
     this.loading.present();
   }
 
-  _showError(text) {
+  private _showError(text) {
     this.loading.dismiss();
     let alert = this.alertCtrl.create({
       title: "Houve algum problema!",
@@ -93,7 +93,7 @@ export class LoginPage {
     alert.present();
   }
 
-  _validateForm(credentials) : any {
+  private _validateForm(credentials) : any {
     if(!credentials.name || !credentials.email || !credentials.password || !credentials.passConfirm) {
       this._showError('Preencha todos os campos');
       return false;
@@ -106,7 +106,7 @@ export class LoginPage {
     return true;
   }
 
-  _validateMessagesError(message) {
+  private _validateMessagesError(message) {
     let errorMessages = {
       userNotFind : 'Não foi possivel realizar o cadastro, este usuário não existe',
       userEquals : 'Não foi possivel realizar o cadastro, este usuário já existe',

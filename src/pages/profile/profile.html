@@ -25,7 +25,7 @@
         <div class="title" *ngIf="user?.occupation"> {{ user?.occupation }} </div>
         <div class="title" *ngIf="!user?.occupation"> Proffisão não informado </div>
         <div class="title" *ngIf="parseInt(user?.birthdate)"> {{ user?.birthdate | customDate:"a" }} </div>
-        <div class="title" *ngIf="!user?.birthdate">  Idade não informado</div>
+        <div class="title" *ngIf="!parseInt(user?.birthdate)">Idade não informado</div>
       </div>
       <div class="right">
         <div class="title"> {{ verifyRelationship(user?.relationship) }}  </div>

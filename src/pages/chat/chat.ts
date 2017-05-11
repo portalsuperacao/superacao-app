@@ -12,13 +12,13 @@ import { Utils } from '../../providers/util/utils';
 export class ChatPage {
   @ViewChild(Content) content: Content;
 
-  message : any;
-  listMessages : any;
-  user1 : any;
-  user2 : any;
-  chat : any;
-  status : any;
-  countMessages : number = 30;
+  message;
+  listMessages;
+  user1;
+  user2;
+  chat;
+  status;
+  countMessages = 30;
 
 
   constructor(
@@ -75,7 +75,7 @@ export class ChatPage {
     })
   }
 
- _validateMessage() {
+ private _validateMessage() {
     return new Promise((resolve) => {
     let i = 0;
     Promise.resolve(i)
@@ -123,7 +123,7 @@ export class ChatPage {
   });
 }
 
-_getChat() {
+private _getChat() {
   return new Promise((resolve) => {
     Promise.resolve()
     .then(getChatDatas.bind(this))
@@ -152,7 +152,7 @@ _getChat() {
 
 }
 
-_setChatView(user, value) {
+private _setChatView(user, value) {
   for(let i = 0; i < this.chat.users.length; i++) {
     if(this.chat.users[i].uid == user) {
       this.chatStorageService.updateChatView(this.chat.$key, i, value)
@@ -160,14 +160,14 @@ _setChatView(user, value) {
   }
 }
 
-_hideTabs() {
+private _hideTabs() {
   let elem = <HTMLElement>document.querySelector(".tabbar");
   if (elem != null) {
     elem.style.display = 'none';
   }
 }
 
-_showTabs() {
+private _showTabs() {
   let elem = <HTMLElement>document.querySelector(".tabbar");
   if (elem != null) {
     elem.style.display = 'flex';

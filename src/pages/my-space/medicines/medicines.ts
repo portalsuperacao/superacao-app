@@ -11,9 +11,9 @@ import { LocalNotifications } from 'ionic-native';
   templateUrl: 'medicines.html'
 })
 export class MySpaceMedicinesPage {
-  user : any;
-  medicines : any;
-  date : any;
+  user;
+  medicines;
+  date;
 
   constructor(
     public navCtrl: NavController,

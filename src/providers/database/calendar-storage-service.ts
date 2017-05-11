@@ -11,7 +11,9 @@ import 'rxjs/Observable';
 export class CalendarStorageService {
 
 
-  constructor(private af: AngularFire, private calendar: Calendar) {
+  constructor(
+    private af: AngularFire,
+    private calendar: Calendar) {
 
   }
 

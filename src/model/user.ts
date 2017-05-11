@@ -1,7 +1,7 @@
 
 export class UserModel {
   avatar = 'https://placehold.it/150x150';
-  birthdate = 0;
+  birthdate = '';
   cancer_name = '';
   children = 0;
   city = '';

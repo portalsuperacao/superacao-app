@@ -9,10 +9,10 @@ import firebase from 'firebase';
 export class AuthService {
 
   constructor(
-    public auth: AngularFireAuth,
-    public af: AngularFire,
-    public userStorageService: UserStorageService,
-    public platform: Platform,
+    private auth: AngularFireAuth,
+    private af: AngularFire,
+    private userStorageService: UserStorageService,
+    private platform: Platform,
     private facebook: Facebook) {
 
   }

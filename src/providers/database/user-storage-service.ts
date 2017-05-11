@@ -8,7 +8,7 @@ import 'rxjs/Observable'
 @Injectable()
 
 export class UserStorageService {
-  private db : any
+  private db : any;
 
   constructor(
     private af: AngularFire,

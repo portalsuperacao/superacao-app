@@ -14,14 +14,16 @@ import { ProfilePage } from '../profile/profile';
   templateUrl: 'my-space.html'
 })
 export class MySpacePage {
-  user: any
-  calendarPage: any = CalendarPage;
-  medicinesPage: any =  MySpaceMedicinesPage;
-  notesPage: any = MySpaceNotesPage;
-  doctorsPage: any = MySpaceDoctorsPage;
-  thumbClass : any;
+  user;
+  calendarPage = CalendarPage;
+  medicinesPage =  MySpaceMedicinesPage;
+  notesPage = MySpaceNotesPage;
+  doctorsPage = MySpaceDoctorsPage;
+  thumbClass;
 
-  constructor(public navCtrl: NavController, public userStorageService : UserStorageService) {
+  constructor(
+    public navCtrl: NavController,
+    public userStorageService : UserStorageService) {
 
   }
 
@@ -38,7 +40,7 @@ export class MySpacePage {
     this.navCtrl.push(ProfilePage)
   }
 
-  _verifyClassOfThumb() {
+  private _verifyClassOfThumb() {
     this.user.subscribe((datas : any) => {
       if(datas.type_user == 'Superador') {
         this.thumbClass = 'background-color-overcomer';

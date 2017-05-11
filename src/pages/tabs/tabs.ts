@@ -11,14 +11,14 @@ import { MySpacePage } from '../my-space/my-space';
 })
 export class TabsPage {
 
-  mySpacePage : any = MySpacePage;
-  trinityPage : any;
+  mySpacePage = MySpacePage;
+  trinityPage;
 
   constructor(public userStorageService: UserStorageService) {
     this._verifyTypeOfUserPage();
   }
 
-  _verifyTypeOfUserPage() {
+  private _verifyTypeOfUserPage() {
     this.userStorageService.getUser().then((user : any) => {
       if(user.type_user === "Superador") {
         this.trinityPage = OvercomerPage;

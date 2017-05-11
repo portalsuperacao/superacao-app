@@ -20,10 +20,10 @@ export class MyApp {
   profilePage : any = ProfilePage;
 
   constructor(
-    public platform: Platform,
-    public menuCtrl: MenuController,
-    public userStorageService: UserStorageService,
-    public authService : AuthService
+    private platform: Platform,
+    private menuCtrl: MenuController,
+    private userStorageService: UserStorageService,
+    private authService : AuthService
   ) {
 
     platform.ready().then(() => {
@@ -42,6 +42,10 @@ export class MyApp {
     });
   }
 
+  private _updateLastAccess(user) {
+    this.userStorageService.updateLastAccess(new Date().getTime(), user.$key);
+  }
+
   openPage(page) {
     this.rootPage = page;
   }
@@ -50,7 +54,5 @@ export class MyApp {
     this.authService.signOut();
   }
 
-  _updateLastAccess(user) {
-    this.userStorageService.updateLastAccess(new Date().getTime(), user.$key);
-  }
+
 }

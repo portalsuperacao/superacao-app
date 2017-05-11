@@ -21,8 +21,8 @@ export class CalendarEventEditPage {
   questions = [];
   countItems = [];
   countItemsQuestions = [];
-  showCloseItem : any = false;
-  showCloseQuestionItem : any = false;
+  showCloseItem = false;
+  showCloseQuestionItem = false;
 
   constructor(
     public fb: FormBuilder,
