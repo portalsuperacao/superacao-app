@@ -127,7 +127,6 @@ export class CalendarPage {
             return false;
           }
         });
-
         return wrapper;
       }
 
