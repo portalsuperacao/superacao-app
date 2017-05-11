@@ -32,8 +32,11 @@ export class CalendarPage {
 
   }
 
-  ionViewWillEnter() {
+  ionViewDidLoad() {
     this._verifyIfHaveConnect();
+  }
+
+  ionViewWillEnter() {
     this._generateAllSchedule();
   }
 
@@ -76,7 +79,12 @@ export class CalendarPage {
 
   private _verifyIfHaveConnect() {
     Network.onDisconnect().subscribe(() => {
-      this.verifyNetwork = false
+      console.log('deslogado!');
+      this.verifyNetwork = false;
+    });
+    Network.onConnect().subscribe(() => {
+      console.log('logado!');
+      this.verifyNetwork = true;
     });
   }
 

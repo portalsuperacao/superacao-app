@@ -25,6 +25,7 @@ export class OvercomerPage {
   angelNotification: any;
   archangelNotification: any;
   verifyNetwork: boolean = true;
+  loading;
 
   constructor(
     public navCtrl: NavController,
@@ -35,11 +36,11 @@ export class OvercomerPage {
     public utils: Utils) {}
 
   ionViewDidLoad() {
-    let loading = this.loadingCtrl.create({
+    this.loading = this.loadingCtrl.create({
       content: "Carregando..."
     });
 
-    loading.present();
+    this.loading.present();
     this.updateDatas().then((datas : any) => {
       this.overcomerObs = datas.user;
       this.overcomer = datas.trinity.overcomer;
@@ -47,7 +48,7 @@ export class OvercomerPage {
       this.archangel = datas.trinity.archangel;
       this.angelNotification = datas.trinity.angel.chat.view;
       this.archangelNotification = datas.trinity.archangel.chat.view;
-      loading.dismiss();
+      this.loading.dismiss();
     });
   }
 
@@ -73,10 +74,20 @@ export class OvercomerPage {
     this.navCtrl.push(CalendarPublicEventPage, {'user' : user});
   }
 
+  verifyIfHaveConnect() {
+    Network.onDisconnect().subscribe(() => {
+      this.verifyNetwork = false;
+    });
+    Network.onConnect().subscribe(() => {
+      console.log(123);
+      this.verifyNetwork = true;
+    });
+  }
+
   updateDatas() {
     return new Promise((resolve) => {
       Promise.resolve()
-      .then(verifyIfHaveConnect.bind(this))
+      //.then(verifyIfHaveConnect.bind(this))
       .then(getTrinityService.bind(this))
       .then(findOvercomer.bind(this))
       .then(findAngel.bind(this))
@@ -91,11 +102,18 @@ export class OvercomerPage {
       .then(getUserObs.bind(this))
       .then(resolvePromise.bind(this))
 
-      function verifyIfHaveConnect() {
-        Network.onDisconnect().subscribe(() => {
-          this.verifyNetwork = false
-        });
-      }
+      // function verifyIfHaveConnect() {
+      //   Network.onDisconnect().subscribe(() => {
+      //     this.verifyNetwork = false;
+      //     if(this.loading) {
+      //       this.loading.dismiss;
+      //     };
+      //   });
+      //   Network.onConnect().subscribe(() => {
+      //     console.log(123);
+      //     this.verifyNetwork = true;
+      //   });
+      // }
 
       function getTrinityService() {
         let trinity = {

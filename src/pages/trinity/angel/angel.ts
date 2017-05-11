@@ -98,7 +98,10 @@ export class AngelPage {
 
       function verifyIfHaveConnect(trinity) {
         Network.onDisconnect().subscribe(() => {
-          this.verifyNetwork = false
+          this.verifyNetwork = false;
+        });
+        Network.onConnect().subscribe(() => {
+          this.verifyNetwork = true;
         });
 
         return trinity;
