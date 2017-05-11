@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core'
 import { AngularFire } from 'angularfire2'
 import { Observable } from 'rxjs/Observable'
 import { Utils } from '../util/utils'
-import { UserModal } from '../../modal/user';
+import { UserModel } from '../../model/user';
 import 'rxjs/Observable'
 
 @Injectable()
@@ -17,7 +17,7 @@ export class UserStorageService {
 
 
   registerUser(result) {
-    let user = new UserModal();
+    let user = new UserModel();
     user.uid = result.uid;
     //user.avatar = result.photoURL;
     user.name = result.name;

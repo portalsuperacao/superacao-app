@@ -5,6 +5,7 @@ import { Utils } from '../../../providers/util/utils';
 import { DateUtil } from '../../../providers/util/date-util';
 import { Geolocation } from '@ionic-native/geolocation';
 
+
 declare const google : any;
 
 @Component({

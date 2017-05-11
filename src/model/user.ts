@@ -1,5 +1,5 @@
 
-export class UserModal {
+export class UserModel {
   uid = '';
   avatar = 'https://placehold.it/150x150';
   brithdate = '';
@@ -43,5 +43,4 @@ export class UserModal {
     is_recurrent: 0
   };
   type_user = 'Normal';
-
 }
