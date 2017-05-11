@@ -1,6 +1,5 @@
 {
   "name": "Superação",
   "app_id": "f7c47d4d",
-  "v2": true,
-  "typescript": true
+  "type": "ionic-angular"
 }
