@@ -21,26 +21,31 @@
 
   <div class="profile-datas">
     <div class="datas">
-      <div class="right">
-        <div class="title"> {{ user?.occupation }} </div>
-        <div class="title"> {{ user?.city }} </div>
-        <div class="title">{{ user?.state }} </div>
-      </div>
       <div class="left">
+        <div class="title" *ngIf="user?.occupation"> {{ user?.occupation }} </div>
+        <div class="title" *ngIf="!user?.occupation"> Proffisão não informado </div>
+        <div class="title" *ngIf="parseInt(user?.birthdate)"> {{ user?.birthdate | customDate:"a" }} </div>
+        <div class="title" *ngIf="!user?.birthdate">  Idade não informado</div>
+      </div>
+      <div class="right">
         <div class="title"> {{ verifyRelationship(user?.relationship) }}  </div>
         <div class="title"> {{ user?.children }} filhos </div>
       </div>
       <div class="clear"> </div>
     </div>
 
+    <div class="datas">
+      <div class="title">{{ verifyParticipant(user?.type_participant) }}</div>
+      <div class="title">
+        <span *ngIf="user?.city">{{ user?.city }}</span>
+        <span *ngIf="user?.city && user?.state">-</span>
+        <span *ngIf="user?.state">{{ user?.state }}</span>
+      </div>
+    </div>
+
     <div class="datas" *ngIf="user?.other_datas.healing_phrase">
       <div class="title"> Frase de cura </div>
       <div class="text"> {{ user?.other_datas.healing_phrase }} </div>
-    </div>
-
-    <div class="datas" *ngIf="user?.other_datas.phrase_of_difficulties">
-      <div class="title"> Dificuldades </div>
-      <div class="text"> {{ user?.other_datas.phrase_of_difficulties }} </div>
     </div>
 
     <div class="datas" *ngIf="user?.cancer_name">
@@ -70,6 +75,11 @@
           <li *ngIf="parseInt(user?.treatment.terapias_naturais)">Terapia naturais</li>
         </ul>
       </div>
+    </div>
+
+    <div class="datas" *ngIf="user?.other_datas.phrase_of_difficulties">
+      <div class="title"> Dificuldades </div>
+      <div class="text"> {{ user?.other_datas.phrase_of_difficulties }} </div>
     </div>
   </div>
 </ion-content>

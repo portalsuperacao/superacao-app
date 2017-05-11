@@ -18,12 +18,11 @@ export class UserStorageService {
 
   registerUser(result) {
     let user = new UserModel();
-    user.uid = result.uid;
     //user.avatar = result.photoURL;
     user.name = result.name;
     user.email = result.email;
 
-    this.db = this.af.database.object(`/users/${user.uid}`);
+    this.db = this.af.database.object(`/users/${result.uid}`);
     this.db.set(user);
   }
 

@@ -37,12 +37,32 @@ export class ProfilePage {
   }
 
   verifyRelationship(relationship) {
-    if(relationship == 1) {
-      return 'Solteiro(a)'
-    } else if (relationship == 2) {
+    this.parseInt(relationship);
+    if(relationship == 0) {
+      return 'Solteiro(a)';
+    } else if (relationship == 1) {
       return 'Casado(a)';
-    } else if (relationship == 3) {
+    } else if (relationship == 2) {
       return 'Divorciado(a)';
+    }
+  }
+
+  verifyParticipant(participant) {
+    this.parseInt(participant);
+    if(participant == 0) {
+      return 'Paciente';
+    } else if (participant == 1) {
+      return 'Mãe';
+    } else if (participant == 2) {
+      return 'Pai';
+    } else if (participant == 3) {
+      return 'Filho(a)';
+    } else if (participant == 4) {
+      return 'Irmão(a)'
+    } else if (participant == 5) {
+      return 'Parente';
+    } else if (participant == 6) {
+      return 'Outro';
     }
   }
 

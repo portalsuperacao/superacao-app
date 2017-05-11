@@ -70,28 +70,28 @@
       <ion-item>
         <ion-label>Sexo</ion-label>
         <ion-select formControlName="genre">
-          <ion-option value="1" selected="true">Masculino</ion-option>
-          <ion-option value="2">Feminino</ion-option>
-          <ion-option value="3">Outro</ion-option>
+          <ion-option value="m" selected="true">Masculino</ion-option>
+          <ion-option value="f">Feminino</ion-option>
+          <ion-option value="o">Outro</ion-option>
         </ion-select>
       </ion-item>
       <ion-item>
         <ion-label>Estado civil</ion-label>
         <ion-select formControlName="relationship">
-          <ion-option value="1" selected="true">Solteiro(a)</ion-option>
-          <ion-option value="2">Casado(a)</ion-option>
-          <ion-option value="3">Divorciado(a)</ion-option>
+          <ion-option value="0" selected="true">Solteiro(a)</ion-option>
+          <ion-option value="1">Casado(a)</ion-option>
+          <ion-option value="2">Divorciado(a)</ion-option>
           <ion-option value="3">Viuvo(a)</ion-option>
         </ion-select>
       </ion-item>
       <ion-item>
         <ion-label>Crença religiosa</ion-label>
         <ion-select formControlName="religion">
-          <ion-option value="1" selected="true">Católico(a)</ion-option>
-          <ion-option value="2">Espirita</ion-option>
-          <ion-option value="3">Evangelico(a)</ion-option>
-          <ion-option value="4">Outra</ion-option>
-          <ion-option value="5">Nenhuma</ion-option>
+          <ion-option value="0" selected="true">Católico(a)</ion-option>
+          <ion-option value="1">Espirita</ion-option>
+          <ion-option value="2">Evangelico(a)</ion-option>
+          <ion-option value="3">Outra</ion-option>
+          <ion-option value="4">Nenhuma</ion-option>
         </ion-select>
       </ion-item>
       <ion-item>
@@ -117,6 +117,7 @@
           <ion-option value="3">Filho(a)</ion-option>
           <ion-option value="4">Irmão(a)</ion-option>
           <ion-option value="5">Parente</ion-option>
+          <ion-option value="6">Outro</ion-option>
         </ion-select>
       </ion-item>
       <ion-input formControlName="cancer_name" placeholder="Nome do câncer" type="text"></ion-input>

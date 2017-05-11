@@ -3,6 +3,7 @@ import { NavController, ViewController, NavParams, LoadingController } from 'ion
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Utils } from '../../../providers/util/utils';
 import { DateUtil } from '../../../providers/util/date-util';
+import { UserModel } from '../../../model/user';
 import { Geolocation } from '@ionic-native/geolocation';
 
 
@@ -104,54 +105,49 @@ export class ProfileEditPage {
     }
     Promise.resolve()
     .then(filterDatas.bind(this))
-    .then(updateDatas.bind(this))
+    .then(removeDatasExtra.bind(this))
     .then(sendDatas.bind(this))
 
     function filterDatas() {
-      let datas : any;
-      datas = formDatas;
-      datas.treatment = {};
-      datas.type_cancer = {};
+      let user = new UserModel();
+      Object.assign(user, formDatas);
 
-      datas.email = this.user.email;
-      datas.avatar = this.user.avatar;
-      datas.type_user = this.user.type_user;
-      datas.provider = this.user.provider;
-      datas.other_datas = this.user.other_datas;
-      datas.emotion = this.user.emotion;
-      datas.birthdate = this.dateUtil.formatDateString(formDatas.birthdate);
+      if(formDatas.birthdate) {
+        user.birthdate = this.dateUtil.parseDate(formDatas.birthdate, '00:00:00');
+      }
+      
+      user.type_cancer.is_metastasis = formDatas.is_metastasis;
+      user.type_cancer.is_recurrent = formDatas.is_recurrent;
 
-      datas.type_cancer.is_metastasis = formDatas.is_metastasis;
-      datas.type_cancer.is_recurrent = formDatas.is_recurrent;
+      user.treatment.cirurgia = formDatas.treatmentCirurgia;
+      user.treatment.quimioterapia = formDatas.treatmentQuimioterapia;
+      user.treatment.radiografia = formDatas.treatmentRadiografia;
+      user.treatment.terapia_oral = formDatas.treatmentTerapiaOral;
+      user.treatment.terapia_oval = formDatas.treatmentTerapiaOval;
+      user.treatment.terapias_naturais = formDatas.treatmentTerapiasNaturais;user
+      user.other_datas.healing_phrase = formDatas.healing_phrase;
+      user.other_datas.phrase_of_difficulties = formDatas.phrase_of_difficulties;
 
-      datas.treatment.cirurgia = formDatas.treatmentCirurgia;
-      datas.treatment.quimioterapia = formDatas.treatmentQuimioterapia;
-      datas.treatment.radiografia = formDatas.treatmentRadiografia;
-      datas.treatment.terapia_oral = formDatas.treatmentTerapiaOral;
-      datas.treatment.terapia_oval = formDatas.treatmentTerapiaOval;
-      datas.treatment.terapias_naturais = formDatas.treatmentTerapiasNaturais;
-
-      datas.other_datas.healing_phrase = formDatas.healing_phrase;
-      datas.other_datas.phrase_of_difficulties = formDatas.phrase_of_difficulties;
-      return datas;
+      return user;
     }
 
-    function updateDatas(datas) {
-      delete formDatas.treatmentCirurgia;
-      delete formDatas.treatmentQuimioterapia;
-      delete formDatas.treatmentRadiografia;
-      delete formDatas.treatmentTerapiaOral;
-      delete formDatas.treatmentTerapiaOval;
-      delete formDatas.treatmentTerapiasNaturais;
-
-      delete formDatas.healing_phrase;
-      delete formDatas.phrase_of_difficulties;
-
+    function removeDatasExtra(datas) {
+      delete datas.uid;
+      delete datas.treatmentCirurgia;
+      delete datas.treatmentQuimioterapia;
+      delete datas.treatmentRadiografia;
+      delete datas.treatmentTerapiaOral;
+      delete datas.treatmentTerapiaOval;
+      delete datas.treatmentTerapiasNaturais;
+      delete datas.healing_phrase;
+      delete datas.phrase_of_difficulties;
+      delete datas.is_metastasis;
+      delete datas.is_recurrent;
       return datas;
     }
 
     function sendDatas(datas) {
-      this.viewCtrl.dismiss(datas)
+      this.viewCtrl.dismiss(datas);
     }
   }
 

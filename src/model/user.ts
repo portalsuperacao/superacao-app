@@ -2,7 +2,7 @@
 export class UserModel {
   uid = '';
   avatar = 'https://placehold.it/150x150';
-  brithdate = '';
+  birthdate = 0;
   cancer_name = '';
   children = 0;
   city = '';
@@ -14,7 +14,6 @@ export class UserModel {
     status: 'Normal'
   };
   genre = '';
-  healing_phrase = '';
   latitude = '';
   longitude = '';
   name = '';
@@ -22,14 +21,15 @@ export class UserModel {
   other_datas = {
     active: 0,
     token_device: '',
-    last_access: ''
+    last_access: '',
+    healing_phrase : '',
+    phrase_of_difficulties: ''
   };
-  participant_type = '';
-  phrase_of_difficulties = '';
+  type_participant = 0;
   provider = 0;
   relationship = '';
   religion = 5;
-  state = 1;
+  state = '';
   treatment = {
     cirurgia: 0,
     quimioterapia: 0,

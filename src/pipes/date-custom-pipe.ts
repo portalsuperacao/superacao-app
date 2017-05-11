@@ -10,6 +10,9 @@ import 'moment/locale/pt-br';
 /*
 ----- 'm' -> Return name of month
 ----- 'd' -> Return name of day
+----- 'c' -> Return days from now
+----- 'a' -> Return age
+----- 't' -> Return time
 */
 
 export class DateCustomPipe implements PipeTransform {
@@ -23,6 +26,8 @@ export class DateCustomPipe implements PipeTransform {
       return moment(date).format('dddd');
     } else if (exponent === 'c') {
       return moment(date).fromNow();
+    } else if (exponent === 'a') {
+      return `${moment().diff(date, 'years')} anos`;
     } else if (exponent === 't') {
       let h = date.getHours();
       let m = date.getMinutes();
@@ -31,25 +36,6 @@ export class DateCustomPipe implements PipeTransform {
         return h + " : 0" + m;
       }
       return h + " : " + m;
-
-    } else if (exponent === 'b'){
-      let d = date.getDate();
-      let m = date.getMonth() + 1;
-      let y = date.getFullYear();
-
-      if ((d < 10) && (m < 10)) {
-        return "0" + d + "/0" + m + "/" +  y;
-      }
-      if(d < 10) {
-        return "0" + d + "/" + m + "/" +  y;
-      }
-      if (m < 10) {
-        return "0" + d + "/0" + m + "/" +  y;
-      }
-      return  d + "/" + m + "/" +  y;
-
-    } else {
-      return 'Exponent invalid';
     }
   }
 
