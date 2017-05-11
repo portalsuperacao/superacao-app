@@ -18,10 +18,16 @@ export class UserStorageService {
 
   registerUser(result) {
     let user = new UserModel();
-    //user.avatar = result.photoURL;
+    user.avatar = result.photoURL || 'https://placehold.it/150x150';
     user.name = result.name;
     user.email = result.email;
-
+    user.type_user = 'Normal';
+    user.religion = 5;
+    user.emotion = {
+      img: './assets/images/emoji-happy.svg',
+      is_active: 0,
+      status: 'Normal'
+    };
     this.db = this.af.database.object(`/users/${result.uid}`);
     this.db.set(user);
   }
