@@ -1,10 +1,10 @@
 import { Network } from 'ionic-native';
 import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
-import { UserStorageService } from '../../providers/database/user-storage-service';
-import { DateUtil } from '../../providers/util/date-util';
+import { UserStorageService } from '../../../providers/database/user-storage-service';
+import { DateUtil } from '../../../providers/util/date-util';
 import { CalendarEventEditPage } from './new-event/edit-event/edit-event';
-import { CalendarStorageService } from '../../providers/database/calendar-storage-service';
+import { CalendarStorageService } from '../../../providers/database/calendar-storage-service';
 
 
 

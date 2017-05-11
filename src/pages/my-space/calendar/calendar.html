@@ -9,7 +9,6 @@
 
 <ion-content class="calendar" *ngIf="verifyNetwork === true">
   <calendar-picker [setEvents]="allSechedule" (dateSelected)="updateDate($event)" *ngIf="showCalendar"> </calendar-picker>
-
   <ion-list>
     <ion-item-sliding *ngFor="let schedule of (listSchedule | async)?.eventsSelected" class="schedule">
       <ion-item class="simple-item" (click)="editEvent(schedule)">

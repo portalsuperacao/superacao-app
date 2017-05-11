@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { CalendarStorageService } from '../../../providers/database/calendar-storage-service';
+import { CalendarStorageService } from '../../../../providers/database/calendar-storage-service';
 
 @Component({
     selector: 'page-public-event',

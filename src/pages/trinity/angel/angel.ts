@@ -5,7 +5,7 @@ import { UserStorageService } from '../../../providers/database/user-storage-ser
 import { ChatStorageService } from '../../../providers/database/chat-storage-service';
 import { Utils } from '../../../providers/util/utils';
 
-import { CalendarPublicEventPage } from '../../calendar/public-event/public-event';
+import { CalendarPublicEventPage } from '../../my-space/calendar/public-event/public-event';
 import { ChatPage } from '../../chat/chat';
 
 

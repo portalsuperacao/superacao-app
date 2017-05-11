@@ -30,11 +30,11 @@ import { Utils } from '../providers/util/utils';
 
 // PAGES
 import { MyApp } from './app.component';
-import { CalendarPage } from '../pages/calendar/calendar';
-import { CalendarNewEventPage } from '../pages/calendar/new-event/new-event'
-import { CalendarEventEditPage } from '../pages/calendar/new-event/edit-event/edit-event';
-import { CalendarEventQuestionsPage } from '../pages/calendar/new-event/edit-event/questions/questions';
-import { CalendarPublicEventPage } from '../pages/calendar/public-event/public-event';
+import { CalendarPage } from '../pages/my-space/calendar/calendar';
+import { CalendarNewEventPage } from '../pages/my-space/calendar/new-event/new-event'
+import { CalendarEventEditPage } from '../pages/my-space/calendar/new-event/edit-event/edit-event';
+import { CalendarEventQuestionsPage } from '../pages/my-space/calendar/new-event/edit-event/questions/questions';
+import { CalendarPublicEventPage } from '../pages/my-space/calendar/public-event/public-event';
 import { ChatPage } from '../pages/chat/chat';
 import { HelpSystemAngelPage } from '../pages/help-system/angel/help-system-angel';
 import { HelpSystemOvercomerPage } from '../pages/help-system/overcomer/help-system-overcomer';

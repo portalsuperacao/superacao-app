@@ -1,54 +1,13 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { CalendarNewEventPage } from '../../pages/calendar/new-event/new-event';
+import { CalendarNewEventPage } from '../../pages/my-space/calendar/new-event/new-event';
 import { DateUtil } from '../../providers/util/date-util';
 import moment from 'moment';
 import 'moment/locale/pt-br';
 
 @Component({
-    selector: 'calendar-picker',
-    template: `
-    <div class="calendar-picker">
-      <div class="month-name">
-        <div class="arrow">
-          <button ion-button icon-only clear (click)="previousMonth()">
-            <ion-icon name="ios-arrow-back"> </ion-icon>
-          </button>
-        </div>
-        <p> {{ month.format("MMM, YYYY") }} </p>
-        <div class="arrow">
-          <button ion-button icon-only clear (click)="nextMonth()">
-            <ion-icon name="ios-arrow-forward"> </ion-icon>
-          </button>
-        </div>
-        <div class="add">
-          <button ion-button icon-only round (click)="addEvent()">
-            <ion-icon name="add"> </ion-icon>
-          </button>
-        </div>
-      </div>
-      <div class="week-name grid-calendar">
-        <div> DOM </div>
-        <div> SEG </div>
-        <div> TER </div>
-        <div> QUA </div>
-        <div> QUI </div>
-        <div> SEX </div>
-        <div> SAB </div>
-      </div>
-      <div class="week grid-calendar" *ngFor="let week of weeks">
-        <div class="day"
-        [ngClass]="{today: day.isToday, 'different-month': !day.isCurrentMonth, selected: day.date.isSame(selected)}"
-        (click)="select(day)"
-        *ngFor="let day of week.days">
-          <span> {{ day.number }} </span>
-          <div *ngIf="day.event">
-            <div *ngFor="let mark of day.event" class="event-mark" [ngClass]="mark"> </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    `
+  selector: 'calendar-picker',
+  templateUrl: 'calendar-picker.html'
 })
 
 export class CalendarPicker {
