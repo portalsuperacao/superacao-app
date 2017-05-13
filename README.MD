@@ -17,7 +17,8 @@ https://ionicframework.com/docs/
 
 # Configurações iniciais
 ### 1. Firebase
-Crie sua conta no [Firebase](!firebase.google.com) e faça seguinte configuração:`
+Crie sua conta no [Firebase](!firebase.google.com) e crie um projeto, sem seguida preencha o arquivo de
+configuração abaixo com os dados em *Projeto > Configurações* e em *Geral e Cloud Messaging* :`
 
 ```sh
 $  cp src/config/environment.dev-template.ts src/config/environment.dev.ts
@@ -25,7 +26,7 @@ $  cp src/config/environment.dev-template.ts src/config/environment.dev.ts
 Edite o arquivo copiado e preencha com os dados do Firebase.
 
 ### 2. Configurar autenticação com Facebook
-Para realizar a autenticação com facebook, é necessário criar um aplicativo no Facebook developers (https://developers.facebook.com/). Após gerar um projeto, você ira precisar do ID e o nome do projeto.
+Crie um aplicativo no [Facebook](!https://developers.facebook.com/) e pegueo o *ID* e *Nome* do app. 
 
 Feito tudo isso, abra o arquivo
 ```sh
