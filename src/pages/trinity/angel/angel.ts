@@ -1,4 +1,4 @@
-import { Network } from 'ionic-native';
+import { Network } from '@ionic-native/network';
 import { Component } from '@angular/core';
 import { NavController, LoadingController } from 'ionic-angular';
 import { UserStorageService } from '../../../providers/database/user-storage-service';
@@ -26,7 +26,8 @@ export class AngelPage {
     public userStorageService: UserStorageService,
     public chatStorageService: ChatStorageService,
     public utils: Utils,
-    public loadingCtrl: LoadingController) {
+    public loadingCtrl: LoadingController,
+    public network: Network) {
 
     }
 
@@ -97,10 +98,10 @@ export class AngelPage {
       }
 
       function verifyIfHaveConnect(trinity) {
-        Network.onDisconnect().subscribe(() => {
+        this.network.onDisconnect().subscribe(() => {
           this.verifyNetwork = false;
         });
-        Network.onConnect().subscribe(() => {
+        this.network.onConnect().subscribe(() => {
           this.verifyNetwork = true;
         });
 

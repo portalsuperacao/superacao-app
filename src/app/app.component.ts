@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Platform, MenuController } from 'ionic-angular';
-import { StatusBar, Splashscreen } from 'ionic-native';
+import { SplashScreen } from '@ionic-native/splash-screen';
+import { StatusBar } from '@ionic-native/status-bar';
 
 import { UserStorageService } from '../providers/database/user-storage-service';
 import { AuthService } from '../providers/database/auth-service';
@@ -23,7 +24,9 @@ export class MyApp {
     private platform: Platform,
     private menuCtrl: MenuController,
     private userStorageService: UserStorageService,
-    private authService : AuthService
+    private authService : AuthService,
+    public splashScreen: SplashScreen,
+    public statusBar: StatusBar
   ) {
 
     platform.ready().then(() => {
@@ -37,8 +40,8 @@ export class MyApp {
         }
       });
 
-      StatusBar.styleDefault();
-      Splashscreen.hide();
+      this.statusBar.styleDefault();
+      this.splashScreen.hide();
     });
   }
 

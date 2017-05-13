@@ -1,4 +1,4 @@
-import { Network } from 'ionic-native';
+import { Network } from '@ionic-native/network';
 import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 import { UserStorageService } from '../../providers/database/user-storage-service';
@@ -28,6 +28,7 @@ export class CalendarPage {
     public calendarStorageService: CalendarStorageService,
     public userStorageService : UserStorageService,
     public dateUtil: DateUtil,
+    public network: Network,
     public alertCtrl: AlertController) {
 
   }
@@ -78,11 +79,11 @@ export class CalendarPage {
   }
 
   private _verifyIfHaveConnect() {
-    Network.onDisconnect().subscribe(() => {
+    this.network.onDisconnect().subscribe(() => {
       console.log('deslogado!');
       this.verifyNetwork = false;
     });
-    Network.onConnect().subscribe(() => {
+    this.network.onConnect().subscribe(() => {
       console.log('logado!');
       this.verifyNetwork = true;
     });
