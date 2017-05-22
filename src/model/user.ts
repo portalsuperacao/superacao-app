@@ -1,6 +1,6 @@
 
 export class UserModel {
-  avatar = 'https://placehold.it/150x150';
+  avatar = '';
   birthdate = '';
   cancer_name = '';
   children = 0;
@@ -8,9 +8,9 @@ export class UserModel {
   country = '';
   email = '';
   emotion = {
-    img: './assets/images/emoji-happy.svg',
+    img: '',
     is_active: 0,
-    status: 'Normal'
+    status: ''
   };
   genre = '';
   latitude = '';
@@ -27,7 +27,7 @@ export class UserModel {
   type_participant = 0;
   provider = 0;
   relationship = '';
-  religion = 5;
+  religion = 0;
   state = '';
   treatment = {
     cirurgia: 0,
@@ -41,5 +41,5 @@ export class UserModel {
     is_metastasis : 0,
     is_recurrent: 0
   };
-  type_user = 'Normal';
+  type_user = '';
 }

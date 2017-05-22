@@ -2,7 +2,7 @@ FROM     ubuntu:14.04.4
 
 ENV DEBIAN_FRONTEND=noninteractive \
     ANDROID_HOME=/opt/android-sdk-linux \
-    NODE_VERSION=6.9.1 \
+    NODE_VERSION=7.4.0 \
     SUPERACAO=/superacao-app
 
 # Install basics

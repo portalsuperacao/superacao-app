@@ -40,6 +40,11 @@ Altere os seguintes dados, com o ID e o nome do seu projeto:
 </plugin>
 ```
 
+Ative o login do Facebook no Firebase:
+1. No Firebase console, abra a seção Authentication.
+2. Na guia Sign in method, ative o método de login Facebook e especifique o ID de aplicativo e o segredo de aplicativo que você obteve do Facebook.
+3. Em seguida, certifique-se de que o URI de redirecionamento OAuth (por exemplo, my-app-12345.firebaseapp.com/__/auth/handler) esteja listado como um de seus URIs de redirecionamento OAuth na página de configurações do aplicativo do Facebook, no site Facebook for Developers, na configuração Product Settings > Facebook Login.
+
 ### 3. Configurar Push Notification
 Para realizar os push notification no app, é necessário realizar uma pequena configuração. Para o serviço tambem utilizamos o FCM (Firebase Cloud Message), e para isso, você precisará do "Sender ID" da sua conta firebase (este dado você pode pegar no console do firebase). No mesmo arquivo XML altere os seguintes dados
 

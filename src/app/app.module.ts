@@ -1,6 +1,8 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { ENV } from '../config/environment.dev';
+import { BrowserModule } from '@angular/platform-browser';
+import { HttpModule } from '@angular/http';
 
 // COMPONENTS / PIPES / DIRECTIVES
 import { CalendarPicker } from '../components/calendar-picker/calendar-picker';
@@ -21,6 +23,8 @@ import { TextMaskModule } from 'angular2-text-mask';
 import { AngularFireModule } from 'angularfire2';
 import { AuthService } from '../providers/database/auth-service';
 import { IonicStorageModule } from '@ionic/storage';
+import { SplashScreen } from '@ionic-native/splash-screen';
+import { StatusBar } from '@ionic-native/status-bar';
 import { UserStorageService } from '../providers/database/user-storage-service';
 import { CalendarStorageService } from '../providers/database/calendar-storage-service';
 import { ChatStorageService } from '../providers/database/chat-storage-service';
@@ -114,6 +118,8 @@ firebase.initializeApp(firebaseConfig);
     VisitorPage
   ],
   imports: [
+    BrowserModule,
+    HttpModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
     AngularFireModule.initializeApp(firebaseConfig),
@@ -157,6 +163,8 @@ firebase.initializeApp(firebaseConfig);
   ],
   providers: [
     // Natives
+    SplashScreen,
+    StatusBar,
     Calendar,
     Camera,
     Facebook,

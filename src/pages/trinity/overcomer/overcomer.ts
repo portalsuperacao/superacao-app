@@ -1,4 +1,4 @@
-import { Network } from 'ionic-native';
+import { Network } from '@ionic-native/network';
 import { Component } from '@angular/core';
 import { NavController, LoadingController, ModalController } from 'ionic-angular';
 import { UserStorageService } from '../../../providers/database/user-storage-service';
@@ -33,7 +33,8 @@ export class OvercomerPage {
     public chatStorageService: ChatStorageService,
     public loadingCtrl: LoadingController,
     public modalCtrl: ModalController,
-    public utils: Utils) {}
+    public utils: Utils,
+    public network: Network) {}
 
   ionViewDidLoad() {
     this.loading = this.loadingCtrl.create({
@@ -75,10 +76,10 @@ export class OvercomerPage {
   }
 
   verifyIfHaveConnect() {
-    Network.onDisconnect().subscribe(() => {
+    this.network.onDisconnect().subscribe(() => {
       this.verifyNetwork = false;
     });
-    Network.onConnect().subscribe(() => {
+    this.network.onConnect().subscribe(() => {
       console.log(123);
       this.verifyNetwork = true;
     });
@@ -103,13 +104,13 @@ export class OvercomerPage {
       .then(resolvePromise.bind(this))
 
       // function verifyIfHaveConnect() {
-      //   Network.onDisconnect().subscribe(() => {
+      //   this.network.onDisconnect().subscribe(() => {
       //     this.verifyNetwork = false;
       //     if(this.loading) {
       //       this.loading.dismiss;
       //     };
       //   });
-      //   Network.onConnect().subscribe(() => {
+      //   this.network.onConnect().subscribe(() => {
       //     console.log(123);
       //     this.verifyNetwork = true;
       //   });
