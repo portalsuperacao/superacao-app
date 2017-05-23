@@ -13,6 +13,7 @@ import { DateUtil } from '../../../../../providers/util/date-util';
 })
 
 export class CalendarEventEditPage {
+  user;
   formEvent : FormGroup;
   typeEvent;
   eventDatas;
@@ -34,58 +35,10 @@ export class CalendarEventEditPage {
     public userStorageService: UserStorageService,
     public calendarStorageService: CalendarStorageService,
     public dateUtil: DateUtil) {
-
-    let today = new Date();
-    let tomorrow = new Date();
-    tomorrow.setHours(today.getHours() + 1);
-
-    if(this.params.get('datas')) {
-      this.eventDatas = this.params.get('datas');
-      this.typeEvent = this.eventDatas.type;
-
-      this.formEvent = this.fb.group({
-        title: [this.eventDatas.title, Validators.required],
-        address: [this.eventDatas.address, Validators.required],
-        startDate: [this.dateUtil.formatDate(this.eventDatas.start_at), Validators.required],
-        startTime: [this.dateUtil.formatTime(this.eventDatas.start_at), Validators.required],
-        endDate: [this.dateUtil.formatDate(this.eventDatas.end_at), Validators.required],
-        endTime: [this.dateUtil.formatTime(this.eventDatas.end_at), Validators.required],
-        typeOfMedic: [this.eventDatas.other_datas.type_of_medic || ""],
-        share: [this.eventDatas.share || true],
-        comments: [this.eventDatas.comments || ""]
-      });
-
-      this.needBrings = this.eventDatas.other_datas.need_bring || [];
-      this.questions = this.eventDatas.other_datas.questions || [];
-
-      if(this.needBrings) {
-        this.needBrings.forEach((datas) => {
-            this.countItems.push("");
-        });
-      }
-
-      if(this.questions) {
-        this.questions.forEach((datas) => {
-          this.countItemsQuestions.push("");
-        })
-      }
-      return;
+      this._getUser();
+      this._validateFormWithParams();
+      this._validateFormWithoutParams();
     }
-
-    this.typeEvent = this.params.get('type');
-
-    this.formEvent = this.fb.group({
-      title: ["", Validators.required],
-      address: ["", Validators.required],
-      startDate: [this.dateUtil.formatDate(today.getTime()), Validators.required],
-      startTime: [this.dateUtil.formatTime(today.getTime()), Validators.required],
-      endDate: [this.dateUtil.formatDate(tomorrow.getTime()), Validators.required],
-      endTime: [this.dateUtil.formatTime(tomorrow.getTime()), Validators.required],
-      typeOfMedic: [""],
-      share: [true],
-      comments: [""]
-    });
-  }
 
   insertEvent(datas) {
     let newDatas  = {
@@ -115,20 +68,19 @@ export class CalendarEventEditPage {
     }
 
     if(this.eventDatas) {
-      this.userStorageService.getUser().then((user: any) => {
-        this.calendarStorageService.updateEvent(newDatas, this.eventDatas, user.$key);
-      });
-
-      this.navCtrl.pop();
+      let datas = {
+        oldDatas: this.eventDatas,
+        newDatas: newDatas,
+        userKey: this.user.$key
+      }
+      this.viewCtrl.dismiss(datas);
       return;
     }
 
-    this.userStorageService.getUser().then((user: any) => {
-      this.calendarStorageService.insertEvent(newDatas, user.$key)
-    });
-
-    this.navCtrl.pop().then(() => {
+    this.calendarStorageService.insertEvent(newDatas, this.user.$key).then(() => {
+      this.navCtrl.pop().then(() => {
         this.navCtrl.pop();
+      });
     });
   }
 
@@ -171,6 +123,66 @@ export class CalendarEventEditPage {
       this.questions.push(datas.question);
       this.countItemsQuestions.push("");
     })
+  }
+
+  private _getUser() {
+    this.userStorageService.getUser().then((user: any) => {
+      this.user = user;
+    });
+  }
+
+  private _validateFormWithParams() {
+    if(this.params.get('datas')) {
+      this.eventDatas = this.params.get('datas');
+      this.typeEvent = this.eventDatas.type;
+
+      this.formEvent = this.fb.group({
+        title: [this.eventDatas.title, Validators.required],
+        address: [this.eventDatas.address, Validators.required],
+        startDate: [this.dateUtil.formatDate(this.eventDatas.start_at), Validators.required],
+        startTime: [this.dateUtil.formatTime(this.eventDatas.start_at), Validators.required],
+        endDate: [this.dateUtil.formatDate(this.eventDatas.end_at), Validators.required],
+        endTime: [this.dateUtil.formatTime(this.eventDatas.end_at), Validators.required],
+        typeOfMedic: [this.eventDatas.other_datas.type_of_medic || ""],
+        share: [this.eventDatas.share || true],
+        comments: [this.eventDatas.comments || ""]
+      });
+
+      this.needBrings = this.eventDatas.other_datas.need_bring || [];
+      this.questions = this.eventDatas.other_datas.questions || [];
+
+      if(this.needBrings) {
+        this.needBrings.forEach((datas) => {
+            this.countItems.push("");
+        });
+      }
+
+      if(this.questions) {
+        this.questions.forEach((datas) => {
+          this.countItemsQuestions.push("");
+        })
+      }
+    }
+  }
+
+  private _validateFormWithoutParams() {
+    let today = new Date();
+    let tomorrow = new Date();
+    tomorrow.setHours(today.getHours() + 1);
+    if(!this.params.get('datas')) {
+      this.typeEvent = this.params.get('type');
+      this.formEvent = this.fb.group({
+        title: ["", Validators.required],
+        address: ["", Validators.required],
+        startDate: [this.dateUtil.formatDate(today.getTime()), Validators.required],
+        startTime: [this.dateUtil.formatTime(today.getTime()), Validators.required],
+        endDate: [this.dateUtil.formatDate(tomorrow.getTime()), Validators.required],
+        endTime: [this.dateUtil.formatTime(tomorrow.getTime()), Validators.required],
+        typeOfMedic: [""],
+        share: [true],
+        comments: [""]
+      });
+    }
   }
 
 }

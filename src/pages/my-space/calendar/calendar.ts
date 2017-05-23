@@ -1,10 +1,11 @@
 import { Network } from '@ionic-native/network';
 import { Component } from '@angular/core';
-import { NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, AlertController, ModalController } from 'ionic-angular';
 import { UserStorageService } from '../../../providers/database/user-storage-service';
 import { DateUtil } from '../../../providers/util/date-util';
 import { CalendarEventEditPage } from './new-event/edit-event/edit-event';
 import { CalendarStorageService } from '../../../providers/database/calendar-storage-service';
+import { Observable } from 'rxjs/Observable';
 
 
 
@@ -15,16 +16,18 @@ import { CalendarStorageService } from '../../../providers/database/calendar-sto
 
 export class CalendarPage {
    events;
+   user;
    listSchedule;
-   allSechedule;
-   showCalendar;
+   allSchedule : Observable<any>;
    verifyNetwork = true;
+   showCalendar = false;
    loading;
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public loadingCtrl: LoadingController,
+    public modalCtrl: ModalController,
     public calendarStorageService: CalendarStorageService,
     public userStorageService : UserStorageService,
     public dateUtil: DateUtil,
@@ -34,16 +37,14 @@ export class CalendarPage {
   }
 
   ionViewDidLoad() {
-    this._verifyIfHaveConnect();
+    Promise.resolve()
+    .then(this._verifyIfHaveConnect.bind(this))
+    .then(this._getUser.bind(this))
+    .then(this._generateAllSchedule.bind(this));
   }
 
-  ionViewWillEnter() {
-    this._generateAllSchedule();
-  }
-
-  ionViewWillLeave() {
-    this._generateAllSchedule();
-    this.updateDate(new Date());
+  updateDate($event) {
+    this.listSchedule = this._generateSchedule($event);
   }
 
   removeEvent(event, userUid) {
@@ -54,10 +55,11 @@ export class CalendarPage {
         {
           text: 'Sim',
           handler: data => {
-            this.listSchedule.then((schedule) => {
-              this.calendarStorageService.removeEvent(schedule.user.$key, event);
-              this._generateAllSchedule();
-              this.updateDate(new Date());
+            this.listSchedule.subscribe((schedule) => {
+              this.calendarStorageService.removeEvent(schedule.user.$key, event).then(() => {
+                this._generateAllSchedule();
+                this.updateDate(new Date());
+              });
             });
           }
         },
@@ -66,16 +68,25 @@ export class CalendarPage {
         }
       ]
     });
-
     alert.present();
   }
 
-  updateDate($event) {
-    this.listSchedule = this._generateSchedule($event, this.userStorageService, this.calendarStorageService, this.dateUtil);
+  editEvent(event) {
+    let modal = this.modalCtrl.create(CalendarEventEditPage, {datas: event});
+    modal.present();
+
+    modal.onDidDismiss((datas) => {
+      this.calendarStorageService.updateEvent(datas.newDatas, datas.oldDatas, datas.userKey).then(() => {
+        this.updateDate(new Date(datas.newDatas.start_at));
+      });
+    })
+
   }
 
-  editEvent(event) {
-    this.navCtrl.push(CalendarEventEditPage, {datas: event});
+  private _getUser() {
+    this.userStorageService.getUser().then((user: any) => {
+      this.user = user
+    });
   }
 
   private _verifyIfHaveConnect() {
@@ -90,30 +101,25 @@ export class CalendarPage {
   }
 
   private _generateAllSchedule() {
-    this.showCalendar = false;
-     this._generateSchedule(new Date(), this.userStorageService, this.calendarStorageService, this.dateUtil).then((schedule : any) => {
-       this.allSechedule = schedule.events;
-       this.showCalendar = true;
-     });
+    this.allSchedule = this._generateSchedule(new Date());
+    this.showCalendar = true;
   }
 
-  private _generateSchedule(dateNow, userStorageService, calendarStorageService, dateUtil) {
-    return new Promise((resolve) => {
+  private _generateSchedule(dateNow) {
+    return new Observable((subject) => {
       Promise.resolve(dateNow)
-      .then(getUser)
-      .then(getEvents)
-      .then(verifyIfEventSelected)
-      .then(resolvePromise)
+      .then(getUserAndDateNow.bind(this))
+      .then(getEvents.bind(this))
+      .then(verifyIfEventSelected.bind(this))
+      .then(resolvePromise.bind(this))
 
-      function getUser(dateNow) {
-        return userStorageService.getUser().then((user : any) => {
-          let wrapper = { user : user, dateNow: dateNow }
-          return wrapper;
-        });
+      function getUserAndDateNow(dateNow) {
+        let wrapper = { user : this.user, dateNow: dateNow }
+        return wrapper;
       }
 
       function getEvents(wrapper) {
-        return calendarStorageService.getEvents(wrapper.user.$key).then((events : any) => {
+        return this.calendarStorageService.getEvents(wrapper.user.$key).then((events : any) => {
           wrapper.events = events;
           return wrapper;
         });
@@ -121,8 +127,8 @@ export class CalendarPage {
 
       function verifyIfEventSelected(wrapper) {
          wrapper.eventsSelected = wrapper.events.filter((event) => {
-          if(dateUtil.removeTime(dateNow) >= dateUtil.removeTime(event.start_at) &&
-          dateUtil.removeTime(dateNow) <= dateUtil.removeTime(event.end_at)) {
+          if(this.dateUtil.removeTime(dateNow) >= this.dateUtil.removeTime(event.start_at) &&
+          this.dateUtil.removeTime(dateNow) <= this.dateUtil.removeTime(event.end_at)) {
             return true;
           } else {
             return false;
@@ -132,7 +138,7 @@ export class CalendarPage {
       }
 
       function resolvePromise(wrapper) {
-        resolve(wrapper);
+        subject.next(wrapper);
       }
     })
   }

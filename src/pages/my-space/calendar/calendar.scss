@@ -28,14 +28,19 @@
   }
 
   .schedule {
+    &:first-child {
+      ion-item {
+        border-top: solid 1px #DDDDDD;
+      }
+    }
     ion-item {
       text-align: left;
       color: $text-primary;
       font-size: 1.6rem;
       background-color: $background-color-dark;
-      border-bottom: solid 1px #DDDDDD !important;
-      &:first-child {
-        border-top: solid 1px #DDDDDD;
+      border-bottom: solid 1px #DDDDDD;
+      .item-inner {
+        border: none;
       }
     }
   }

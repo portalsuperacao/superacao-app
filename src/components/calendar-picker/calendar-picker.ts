@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, OnChanges } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { CalendarNewEventPage } from '../../pages/my-space/calendar/new-event/new-event';
 import { DateUtil } from '../../providers/util/date-util';
@@ -10,7 +10,7 @@ import 'moment/locale/pt-br';
   templateUrl: 'calendar-picker.html'
 })
 
-export class CalendarPicker {
+export class CalendarPicker implements OnInit, OnChanges {
   @Output() dateSelected = new EventEmitter();
   @Input() setEvents;
   schedule;
@@ -30,8 +30,8 @@ export class CalendarPicker {
     this.dateSelected.emit(this.selected);
   }
 
-  ngOnChanges($changes) {
-    this._initCalendar();
+  ngOnChanges() {
+    this.dateSelected.emit(this.selected);
   }
 
   nextMonth() {
@@ -93,27 +93,26 @@ export class CalendarPicker {
       let controller = true;
       let count = 0;
 
-      this.setEvents.forEach((event) => {
-        if(date.valueOf() >= this.dateUtil.removeTime(event.start_at) &&
-           date.valueOf() <= event.end_at && count == 0) {
-
-          days.push({
-            name: date.format("dd").substring(0, 1),
-            number: date.date(),
-            isCurrentMonth: date.month() === month.month(),
-            isToday: date.isSame(new Date(), "day"),
-            date: date,
-            event: [event.type]
-          });
-
-          controller = false;
-          count++;
-        } else if (date.valueOf() >= this.dateUtil.removeTime(event.start_at) &&
-                   date.valueOf() <= event.end_at && count > 0) {
-          days[index].event.push(event.type);
-        }
+      this.setEvents.subscribe((datas) => {
+        datas.events.forEach((event) => {
+          if(date.valueOf() >= this.dateUtil.removeTime(event.start_at) &&
+             date.valueOf() <= event.end_at && count == 0) {
+            days.push({
+              name: date.format("dd").substring(0, 1),
+              number: date.date(),
+              isCurrentMonth: date.month() === month.month(),
+              isToday: date.isSame(new Date(), "day"),
+              date: date,
+              events: [event.type]
+            });
+            controller = false;
+            count++;
+          } else if (date.valueOf() >= this.dateUtil.removeTime(event.start_at) &&
+                     date.valueOf() <= event.end_at && count > 0) {
+            days[index].event.push(event.type);
+          }
+        });
       });
-
       if(controller) {
         days.push({
           name: date.format("dd").substring(0, 1),
@@ -121,8 +120,7 @@ export class CalendarPicker {
           isCurrentMonth: date.month() === month.month(),
           isToday: date.isSame(new Date(), "day"),
           date: date,
-          event: false
-
+          events: false
         });
       }
 
@@ -134,18 +132,18 @@ export class CalendarPicker {
     return days;
   }
 
-  private _verifyEventMark(date) {
-    return new Promise((resolve) => {
-      this.setEvents.forEach((event) => {
-        if(date.valueOf() >= this.dateUtil.removeTime(event.start_at) &&
-           date.valueOf() <= this.dateUtil.removeTime(event.end_at)) {
-            resolve(event.type);
-        }
-      });
-      resolve(false);
-    });
-  }
-  _resetWeek(date) {
+  // private _verifyEventMark(date) {
+  //   return new Promise((resolve) => {
+  //     this.setEvents.forEach((event) => {
+  //       if(date.valueOf() >= this.dateUtil.removeTime(event.start_at) &&
+  //          date.valueOf() <= this.dateUtil.removeTime(event.end_at)) {
+  //           resolve(event.type);
+  //       }
+  //     });
+  //     resolve(false);
+  //   });
+  // }
+  private _resetWeek(date) {
     return date.day(0).hour(0).minute(0).second(0).millisecond(0);
   }
 

@@ -10,11 +10,9 @@ import 'rxjs/Observable';
 
 export class CalendarStorageService {
 
-
   constructor(
     private af: AngularFire,
     private calendar: Calendar) {
-
   }
 
   insertEvent(datas, userUid) {
@@ -22,10 +20,10 @@ export class CalendarStorageService {
     let endDate = new Date(datas.end_at);
 
     this.calendar.createEvent(datas.title, datas.address, datas.comments, startDate, endDate);
+    this.setEventsLocal(datas);
 
     let database = this.af.database.list(`/calendar/${userUid}`);
-    database.push(datas);
-    this.setEventsLocal(datas);
+    return database.push(datas);
   }
 
   updateEvent(newDatas, oldDatas, userUid) {
@@ -43,10 +41,11 @@ export class CalendarStorageService {
 
     this.calendar.deleteEvent(oldDatas.title, oldDatas.address, oldDatas.comments, oldStartDate, oldEndDate);
     this.calendar.createEvent(newDatas.title, newDatas.address, newDatas.comments, newStartDate, newEndDate);
+    this.setEventsLocal(newDatas);
 
     let database = this.af.database.list(`/calendar/${userUid}`);
-    database.update(key, newDatas);
-    this.setEventsLocal(newDatas);
+    return database.update(key, newDatas);
+
   }
 
   removeEvent(userUid, datas) {
@@ -54,10 +53,11 @@ export class CalendarStorageService {
     let endDate = new Date(datas.end_at);
 
     this.calendar.deleteEvent(datas.title, datas.address, datas.comments, startDate, endDate);
-
-    let database = this.af.database.list(`/calendar/${userUid}`);
-    database.remove(datas.$key);
     this.setEventsLocal(datas);
+    let database = this.af.database.list(`/calendar/${userUid}`);
+
+    return database.remove(datas.$key);
+
   }
 
   setEventsLocal(datas) {
