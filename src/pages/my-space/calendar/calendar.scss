@@ -34,7 +34,7 @@
       }
     }
     ion-item {
-      text-align: left;
+      text-align: center;
       color: $text-primary;
       font-size: 1.6rem;
       background-color: $background-color-dark;
@@ -81,5 +81,21 @@
       text-align: center;
       color: $text-secondary;
     }
+  }
+}
+
+page-calendar-event-edit {
+  .event-itens {
+    min-height: auto;
+  }
+}
+
+page-calendar-event-questions {
+  ion-col {
+    position: relative;
+    color: $text-primary;
+  }
+  ion-icon {
+    font-size: 2rem
   }
 }

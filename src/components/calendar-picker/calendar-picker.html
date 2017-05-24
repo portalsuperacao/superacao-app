@@ -32,8 +32,8 @@
     (click)="select(day)"
     *ngFor="let day of week.days">
       <span> {{ day.number }} </span>
-      <div *ngIf="day.event">
-        <div *ngFor="let mark of day.event" class="event-mark" [ngClass]="mark"> </div>
+      <div *ngIf="day.marks">
+        <div *ngFor="let mark of day.marks" class="event-mark" [ngClass]="mark"> </div>
       </div>
     </div>
   </div>

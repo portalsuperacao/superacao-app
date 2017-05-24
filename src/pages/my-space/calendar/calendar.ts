@@ -1,11 +1,10 @@
-import { Network } from '@ionic-native/network';
+
 import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController, AlertController, ModalController } from 'ionic-angular';
 import { UserStorageService } from '../../../providers/database/user-storage-service';
 import { DateUtil } from '../../../providers/util/date-util';
 import { CalendarEventEditPage } from './new-event/edit-event/edit-event';
 import { CalendarStorageService } from '../../../providers/database/calendar-storage-service';
-import { Observable } from 'rxjs/Observable';
 
 
 
@@ -18,8 +17,7 @@ export class CalendarPage {
    events;
    user;
    listSchedule;
-   allSchedule : Observable<any>;
-   verifyNetwork = true;
+   allSchedule;
    showCalendar = false;
    loading;
 
@@ -31,14 +29,12 @@ export class CalendarPage {
     public calendarStorageService: CalendarStorageService,
     public userStorageService : UserStorageService,
     public dateUtil: DateUtil,
-    public network: Network,
     public alertCtrl: AlertController) {
 
   }
 
   ionViewDidLoad() {
     Promise.resolve()
-    .then(this._verifyIfHaveConnect.bind(this))
     .then(this._getUser.bind(this))
     .then(this._generateAllSchedule.bind(this));
   }
@@ -55,7 +51,7 @@ export class CalendarPage {
         {
           text: 'Sim',
           handler: data => {
-            this.listSchedule.subscribe((schedule) => {
+            this.listSchedule.then((schedule) => {
               this.calendarStorageService.removeEvent(schedule.user.$key, event).then(() => {
                 this._generateAllSchedule();
                 this.updateDate(new Date());
@@ -77,10 +73,10 @@ export class CalendarPage {
 
     modal.onDidDismiss((datas) => {
       this.calendarStorageService.updateEvent(datas.newDatas, datas.oldDatas, datas.userKey).then(() => {
-        this.updateDate(new Date(datas.newDatas.start_at));
+        this._generateAllSchedule();
+        this.updateDate(new Date());
       });
-    })
-
+    });
   }
 
   private _getUser() {
@@ -89,24 +85,15 @@ export class CalendarPage {
     });
   }
 
-  private _verifyIfHaveConnect() {
-    this.network.onDisconnect().subscribe(() => {
-      console.log('deslogado!');
-      this.verifyNetwork = false;
-    });
-    this.network.onConnect().subscribe(() => {
-      console.log('logado!');
-      this.verifyNetwork = true;
-    });
-  }
-
   private _generateAllSchedule() {
-    this.allSchedule = this._generateSchedule(new Date());
-    this.showCalendar = true;
+    this._generateSchedule(new Date()).then((schedules : any) => {
+      this.allSchedule = schedules.events;
+      this.showCalendar = true;
+    });
   }
 
   private _generateSchedule(dateNow) {
-    return new Observable((subject) => {
+    return new Promise((resolve) => {
       Promise.resolve(dateNow)
       .then(getUserAndDateNow.bind(this))
       .then(getEvents.bind(this))
@@ -126,9 +113,9 @@ export class CalendarPage {
       }
 
       function verifyIfEventSelected(wrapper) {
-         wrapper.eventsSelected = wrapper.events.filter((event) => {
+        wrapper.eventsSelected = wrapper.events.filter((event) => {
           if(this.dateUtil.removeTime(dateNow) >= this.dateUtil.removeTime(event.start_at) &&
-          this.dateUtil.removeTime(dateNow) <= this.dateUtil.removeTime(event.end_at)) {
+            this.dateUtil.removeTime(dateNow) <= this.dateUtil.removeTime(event.end_at)) {
             return true;
           } else {
             return false;
@@ -138,7 +125,7 @@ export class CalendarPage {
       }
 
       function resolvePromise(wrapper) {
-        subject.next(wrapper);
+        resolve(wrapper);
       }
     })
   }

@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ViewController, AlertController, ModalController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { CalendarPage } from '../../../calendar/calendar';
 import { CalendarStorageService } from '../../../../../providers/database/calendar-storage-service';
 import { UserStorageService } from '../../../../../providers/database/user-storage-service';
 import { CalendarEventQuestionsPage } from './questions/questions';
@@ -93,20 +92,14 @@ export class CalendarEventEditPage {
     this.countItemsQuestions.push("");
   }
 
-  clickItem(index) {
-    this.showCloseItem = index;
-  }
-
-  clickItemQuestion(index) {
-    this.showCloseQuestionItem = index;
-  }
-
   closeItem(index) {
+    console.log(index);
     this.countItems.splice(index, 1);
     this.needBrings.splice(index, 1);
   }
 
   closeItemQuestion(index) {
+    console.log(index);
     this.countItemsQuestions.splice(index, 1);
     this.questions.splice(index, 1);
   }

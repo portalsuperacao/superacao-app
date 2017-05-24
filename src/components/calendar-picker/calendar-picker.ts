@@ -31,6 +31,7 @@ export class CalendarPicker implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
+    this._initCalendar();
     this.dateSelected.emit(this.selected);
   }
 
@@ -92,27 +93,24 @@ export class CalendarPicker implements OnInit, OnChanges {
     for(let i = 0; i < 7; i++) {
       let controller = true;
       let count = 0;
+      this.setEvents.forEach((event) => {
+        if(date.valueOf() >= this.dateUtil.removeTime(event.start_at) && date.valueOf() <= event.end_at && count == 0) {
+          days.push({
+            name: date.format("dd").substring(0, 1),
+            number: date.date(),
+            isCurrentMonth: date.month() === month.month(),
+            isToday: date.isSame(new Date(), "day"),
+            date: date,
+            marks: [event.type]
+          });
 
-      this.setEvents.subscribe((datas) => {
-        datas.events.forEach((event) => {
-          if(date.valueOf() >= this.dateUtil.removeTime(event.start_at) &&
-             date.valueOf() <= event.end_at && count == 0) {
-            days.push({
-              name: date.format("dd").substring(0, 1),
-              number: date.date(),
-              isCurrentMonth: date.month() === month.month(),
-              isToday: date.isSame(new Date(), "day"),
-              date: date,
-              events: [event.type]
-            });
-            controller = false;
-            count++;
-          } else if (date.valueOf() >= this.dateUtil.removeTime(event.start_at) &&
-                     date.valueOf() <= event.end_at && count > 0) {
-            days[index].event.push(event.type);
-          }
-        });
+          controller = false;
+          count++;
+        } else if (date.valueOf() >= this.dateUtil.removeTime(event.start_at) && date.valueOf() <= event.end_at && count > 0) {
+          days[index].marks.push(event.type);
+        }
       });
+
       if(controller) {
         days.push({
           name: date.format("dd").substring(0, 1),
@@ -120,7 +118,7 @@ export class CalendarPicker implements OnInit, OnChanges {
           isCurrentMonth: date.month() === month.month(),
           isToday: date.isSame(new Date(), "day"),
           date: date,
-          events: false
+          event: false
         });
       }
 
@@ -132,17 +130,6 @@ export class CalendarPicker implements OnInit, OnChanges {
     return days;
   }
 
-  // private _verifyEventMark(date) {
-  //   return new Promise((resolve) => {
-  //     this.setEvents.forEach((event) => {
-  //       if(date.valueOf() >= this.dateUtil.removeTime(event.start_at) &&
-  //          date.valueOf() <= this.dateUtil.removeTime(event.end_at)) {
-  //           resolve(event.type);
-  //       }
-  //     });
-  //     resolve(false);
-  //   });
-  // }
   private _resetWeek(date) {
     return date.day(0).hour(0).minute(0).second(0).millisecond(0);
   }

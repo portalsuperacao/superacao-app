@@ -10,23 +10,21 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content class="event">
-  <div class="consult" *ngFor="let questions of consult; let i = index">
-    <div class="title-question"> <h2> {{ titles[i] }} </h2> </div>
+<ion-content>
+  <ion-list *ngFor="let questions of consult; let i = index">
+    <ion-list-header>
+      {{ titles[i] }}
+    </ion-list-header>
+    <button ion-item text-wrap *ngFor="let question of questions.consult" (click)="clickQuestion(question)">
+      <ion-row>
+        <ion-col col-10>
+          {{ question }}
+        </ion-col>
+        <ion-col col-1>
+          <ion-icon name="md-add-circle"> </ion-icon>
+        </ion-col>
+      </ion-row>
+    </button>
 
-    <ion-list>
-      <div class="question" *ngFor="let question of questions.consult" (click)="clickQuestion(question)">
-        <ion-grid>
-          <ion-row>
-            <ion-col width-80>
-              <p> {{ question }} </p>
-            </ion-col>
-            <ion-col width-20>
-              <ion-icon name="md-add-circle"> </ion-icon>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </div>
-    </ion-list>
-  </div>
+  </ion-list>
 </ion-content>
