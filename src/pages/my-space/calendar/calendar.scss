@@ -28,17 +28,15 @@
   }
 
   .schedule {
-    &:first-child {
-      ion-item {
-        border-top: solid 1px #DDDDDD;
-      }
+    > *:first-child {
+      border-top: solid 1px #DDDDDD;
     }
     ion-item {
       text-align: center;
       color: $text-primary;
       font-size: 1.6rem;
       background-color: $background-color-dark;
-      border-bottom: solid 1px #DDDDDD;
+      border-bottom: solid 1px #DDDDDD !important;
       .item-inner {
         border: none;
       }
@@ -94,8 +92,21 @@ page-calendar-event-questions {
   ion-col {
     position: relative;
     color: $text-primary;
+    &:nth-child(2) {
+      text-align: right;
+    }
   }
   ion-icon {
-    font-size: 2rem
+    font-size: 2rem;
+  }
+  .list-header-md, .list-header-ios {
+    font-size: $font-size;
+    text-transform: uppercase;
+    margin-bottom: 0;
+    background-color: #efefef;
+    border: none;
+  }
+  .list-ios {
+    margin: 0;
   }
 }

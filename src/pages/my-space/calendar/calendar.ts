@@ -36,11 +36,19 @@ export class CalendarPage {
   ionViewDidLoad() {
     Promise.resolve()
     .then(this._getUser.bind(this))
-    .then(this._generateAllSchedule.bind(this));
+    .then(this._generateAllSchedule.bind(this))
+    .then(this.updateSchedule.bind(this))
   }
 
   updateDate($event) {
     this.listSchedule = this._generateSchedule($event);
+  }
+
+  updateSchedule() {
+    this.calendarStorageService.refreshDatas.subscribe((datas) => {
+      this._generateAllSchedule();
+      this.updateDate(new Date());
+    });
   }
 
   removeEvent(event, userUid) {
@@ -52,10 +60,7 @@ export class CalendarPage {
           text: 'Sim',
           handler: data => {
             this.listSchedule.then((schedule) => {
-              this.calendarStorageService.removeEvent(schedule.user.$key, event).then(() => {
-                this._generateAllSchedule();
-                this.updateDate(new Date());
-              });
+              this.calendarStorageService.removeEvent(schedule.user.$key, event);
             });
           }
         },
@@ -72,10 +77,7 @@ export class CalendarPage {
     modal.present();
 
     modal.onDidDismiss((datas) => {
-      this.calendarStorageService.updateEvent(datas.newDatas, datas.oldDatas, datas.userKey).then(() => {
-        this._generateAllSchedule();
-        this.updateDate(new Date());
-      });
+      this.calendarStorageService.updateEvent(datas.newDatas, datas.oldDatas, datas.userKey);
     });
   }
 

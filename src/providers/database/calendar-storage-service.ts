@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { AngularFire } from 'angularfire2';
 import { Calendar } from '@ionic-native/calendar';
 import { Network } from '@ionic-native/network';
@@ -10,6 +10,7 @@ import { Storage } from '@ionic/storage';
 
 export class CalendarStorageService {
   connection = true
+  refreshDatas = new EventEmitter();
   constructor(
     private af: AngularFire,
     private calendar: Calendar,
@@ -34,6 +35,7 @@ export class CalendarStorageService {
     return database.push(datas).then((db) => {
       datas.$key = db.path.o[2];
       this.insertEventsLocal(datas);
+      this.refreshDatas.emit(datas);
     });
   }
 
@@ -55,6 +57,7 @@ export class CalendarStorageService {
     this.updateEventsLocal(newDatas);
 
     let database = this.af.database.list(`/calendar/${userUid}`);
+    this.refreshDatas.emit(newDatas);
     return database.update(key, newDatas);
 
   }
@@ -66,6 +69,7 @@ export class CalendarStorageService {
     this.calendar.deleteEvent(datas.title, datas.address, datas.comments, startDate, endDate);
     this.removeEventsLocal(datas);
     let database = this.af.database.list(`/calendar/${userUid}`);
+    this.refreshDatas.emit(null);
 
     return database.remove(datas.$key);
 

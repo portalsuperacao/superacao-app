@@ -9,11 +9,11 @@
 
 <ion-content class="calendar">
   <calendar-picker [setEvents]="allSchedule" (dateSelected)="updateDate($event)" *ngIf="showCalendar"> </calendar-picker>
-  <ion-list>
+  <ion-list class="schedule">
     <ion-item *ngIf="(listSchedule | async)?.eventsSelected == ''">
       <p class="text-center"> Não há nenhum agendamento</p>
     </ion-item>
-    <ion-item-sliding *ngFor="let schedule of (listSchedule | async)?.eventsSelected" class="schedule">
+    <ion-item-sliding *ngFor="let schedule of (listSchedule | async)?.eventsSelected">
       <ion-item (click)="editEvent(schedule)">
           <ion-row>
             <ion-col col-1> <span [ngClass]="schedule.type"> </span> </ion-col>

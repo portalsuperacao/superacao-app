@@ -41,6 +41,7 @@ export class CalendarPicker implements OnInit, OnChanges {
     this.month.month(this.month.month()+1);
 
     this._buildMonth(next, this.month);
+    this.dateSelected.emit(this.month);
   }
 
   previousMonth() {
@@ -49,6 +50,7 @@ export class CalendarPicker implements OnInit, OnChanges {
     this.month.month(this.month.month()-1);
 
     this._buildMonth(previous, this.month);
+    this.dateSelected.emit(this.month);
   }
 
   select(day) {
