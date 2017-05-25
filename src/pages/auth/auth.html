@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-navbar color="dark">
+    <ion-title> Superação </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <div class="auth" padding>
+    <img src="./assets/images/logo.svg">
+    <div class="description">
+      <h2>Olá, seja bem vindo!</h2>
+      <p>
+        Aqui você encontrará amor e solidaridade entre pacientes
+        com câncer e seus familiares.
+      </p>
+    </div>
+    <button class="auth-button" [navPush]="registerPage"> Começar </button>
+    <div class="description">
+      <h3>Já tem conta? <b [navPush]="loginPage">Clique aqui</b></h3>
+    </div>
+  </div>
+</ion-content>

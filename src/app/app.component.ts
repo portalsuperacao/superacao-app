@@ -7,7 +7,8 @@ import { UserStorageService } from '../providers/database/user-storage-service';
 import { AuthService } from '../providers/database/auth-service';
 
 import { TabsPage } from '../pages/tabs/tabs';
-import { LoginPage } from '../pages/login/login';
+import { AuthPage } from '../pages/auth/auth';
+//import { LoginPage } from '../pages/login/login';
 import { ProfilePage } from '../pages/profile/profile';
 import { RegisterBasicDatas } from '../pages/register/basic-datas/basic-datas';
 
@@ -36,7 +37,7 @@ export class MyApp {
           this.rootPage = TabsPage;
         } else {
           this.menuCtrl.enable(false);
-          this.rootPage = LoginPage;
+          this.rootPage = AuthPage;
         }
       });
 

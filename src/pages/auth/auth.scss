@@ -1,0 +1,46 @@
+.auth {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #f2e3fc;
+  .auth-button {
+    width: 100%;
+    margin: $spacing-elements 0;
+    padding: $spacing-elements 0;
+    border-radius: 20px;
+    background-color: #6cc1b3;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    ion-icon {
+      margin-right: 5px;
+    }
+  }
+  figure {
+    margin: 0;
+    padding: $spacing-elements * 3;
+  }
+  .description {
+    text-align: center;
+  }
+  .form-header {
+    border-bottom: solid 3px darken(#f2e3fc, 60%);
+    text-align: center;
+    > * {
+      color: darken(#f2e3fc, 60%);
+    }
+  }
+  .item-md, .item-ios {
+    background-color: transparent;
+    margin: $spacing-elements 0;
+    padding: 0px;
+    .item-inner {
+      border-bottom-color: darken(#f2e3fc, 60%);
+    }
+  }
+  .facebook {
+    background-color: #3a5897;
+    text-transform: none;
+  }
+
+}
