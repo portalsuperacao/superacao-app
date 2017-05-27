@@ -3,31 +3,28 @@ import { AngularFire } from 'angularfire2'
 import { Observable } from 'rxjs/Observable'
 import { Utils } from '../util/utils'
 import { UserModel } from '../../model/user';
+import { Http, Headers } from '@angular/http';
 import 'rxjs/Observable'
 
 @Injectable()
 
 export class UserStorageService {
-  private db : any;
+  private db: any;
 
   constructor(
     private af: AngularFire,
-    private utils: Utils) {
+    private utils: Utils,
+    private http: Http) {
   }
 
 
   registerUser(result) {
     let user = new UserModel();
-    user.avatar = result.photoURL || 'https://placehold.it/150x150';
-    user.name = result.name || result.displayName;
-    user.email = result.email;
-    user.type_user = 'Normal';
-    user.religion = 5;
-    user.emotion = {
-      img: './assets/images/emoji-happy.svg',
-      is_active: 0,
-      status: 'Normal'
-    };
+    user.participant_profile.first_name = result.name || result.displayName;
+    user.participant_profile.participant_type = "overcomer";
+    user.participant_profile.first_name = "Allison";
+    user.participant_profile.email = "allisonverdam@gmail.com"    
+    
     this.db = this.af.database.object(`/users/${result.uid}`);
     this.db.set(user);
   }
@@ -35,7 +32,7 @@ export class UserStorageService {
   getUser() {
     return new Promise((resolve) => {
       this.af.auth.subscribe((user) => {
-        if(user) {
+        if (user) {
           this.af.database.object(`/users/${user.uid}`).subscribe((data) => {
             resolve(data)
           })
@@ -48,7 +45,7 @@ export class UserStorageService {
     let datas
     return new Observable((subject) => {
       this.af.auth.subscribe((user) => {
-        if(user) {
+        if (user) {
           this.af.database.object(`/users/${user.uid}`).subscribe((data) => {
             subject.next(data)
             datas = data
@@ -72,24 +69,24 @@ export class UserStorageService {
     })
   }
 
-  findUserObs(uid) : any {
+  findUserObs(uid): any {
     return this.af.database.object(`/users/${uid}`)
   }
 
   setEmotion(emotion, userUid) {
     this.db = this.af.database.object(`/users/${userUid}`)
-    this.db.update({"emotion" : emotion})
+    this.db.update({ "emotion": emotion })
   }
 
   updateLastAccess(date, userUid) {
     this.db = this.af.database.object(`/users/${userUid}`)
-    this.db.update({"other_datas/last_access" : date})
+    this.db.update({ "other_datas/last_access": date })
   }
 
   updateTokenDevice(userUid) {
     this.utils.getPushDeviceToken().then((device) => {
       this.db = this.af.database.object(`/users/${userUid}`)
-      this.db.update({"other_datas/token_device": device})
+      this.db.update({ "other_datas/token_device": device })
     }).catch((err) => {
       console.log('Push notification desativado!')
     })
@@ -99,6 +96,20 @@ export class UserStorageService {
     return new Promise((resolve) => {
       this.af.database.list('/message_of_day').subscribe((snapshots) => {
       })
+    })
+  }
+
+  getUserFromBackEnd(headers){
+    return console.log("pegar usuario: ", headers)
+  }
+
+  sendUserToBackEnd(user) {
+    console.log('Usuario:', user)
+    let headers = new Headers();
+    return this.http.post("http://192.168.244.119:3000", user, headers).subscribe(res => {
+      console.log("cadastrou: ",res)
+    }, err => {
+      console.log("deu erro: ",err)
     })
   }
 

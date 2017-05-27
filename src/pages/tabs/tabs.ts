@@ -12,7 +12,7 @@ import { MySpacePage } from '../my-space/my-space';
 export class TabsPage {
 
   mySpacePage = MySpacePage;
-  trinityPage;
+  trinityPage:any = 'VideoStepPage';
 
   constructor(public userStorageService: UserStorageService) {
     this._verifyTypeOfUserPage();
@@ -24,9 +24,7 @@ export class TabsPage {
         this.trinityPage = OvercomerPage;
       } else if (user.type_user === "Anjo") {
         this.trinityPage = AngelPage;
-      } else {
-        this.trinityPage = VisitorPage;
-      }
+      } 
     });
   }
 

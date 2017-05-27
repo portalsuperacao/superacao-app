@@ -115,7 +115,7 @@ export class ProfileEditPage {
       if(formDatas.birthdate) {
         user.birthdate = this.dateUtil.parseDate(formDatas.birthdate, '00:00:00');
       }
-      
+
       user.type_cancer.is_metastasis = formDatas.is_metastasis;
       user.type_cancer.is_recurrent = formDatas.is_recurrent;
 

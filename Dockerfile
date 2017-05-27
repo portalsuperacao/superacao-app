@@ -26,7 +26,7 @@ RUN apt-get update &&  \
 
     add-apt-repository ppa:webupd8team/java -y && \
     echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections && \
-    apt-get update && apt-get -y install oracle-java7-installer && \
+    apt-get update && apt-get -y install oracle-java8-installer && \
 
 
 #ANDROID STUFF
