@@ -19,7 +19,7 @@ export class UserStorageService {
   registerUser(result) {
     let user = new UserModel();
     user.avatar = result.photoURL || 'https://placehold.it/150x150';
-    user.name = result.name;
+    user.name = result.name || result.displayName;
     user.email = result.email;
     user.type_user = 'Normal';
     user.religion = 5;

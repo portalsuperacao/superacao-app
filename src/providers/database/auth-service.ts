@@ -47,7 +47,7 @@ export class AuthService {
 
     function verifyIfRegisterUser(datas) {
       if(datas.$value === null) {
-        return this.userStorageService.registerUser(datas.auth);
+        return this.userStorageService.registerUser(user.auth);
       }
       return datas;
     }
