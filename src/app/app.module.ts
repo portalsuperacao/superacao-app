@@ -2,7 +2,7 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { ENV } from '../config/environment.dev';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpModule } from '@angular/http';
+import { HttpModule, JsonpModule } from '@angular/http';
 
 // COMPONENTS / PIPES / DIRECTIVES
 import { CalendarPicker } from '../components/calendar-picker/calendar-picker';
@@ -120,6 +120,7 @@ firebase.initializeApp(firebaseConfig);
   imports: [
     BrowserModule,
     HttpModule,
+    JsonpModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
     AngularFireModule.initializeApp(firebaseConfig),
