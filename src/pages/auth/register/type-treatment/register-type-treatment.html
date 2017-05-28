@@ -4,41 +4,96 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding class="register-user">
-  <p>
-    Diga pra min quais tipos de tratamento você já realizou ou ainda vai fazer:
-  </p>
-  <ion-list>
-    <ion-item>
-      <ion-label>Cirurgia</ion-label>
-      <ion-checkbox [(ngModel)]="typeTreatment.cirurgia"></ion-checkbox>
-    </ion-item>
+<ion-content class="auth" padding>
+    <ion-row>
+      <ion-col col-6>
+        <img src="./assets/images/logo-angel-6.svg" />
+      </ion-col>
+      <ion-col>
+        <p *ngIf="typeUser == 'paciente'" class="speech-bubble">Qual tipos de tratamento você já realizou ou ainda vai fazer?</p>
+        <p *ngIf="typeUser == 'familiar'" class="speech-bubble">Qual tipos de tratamento seu familiar já realizou ou ainda vai fazer?</p>
+      </ion-col>
+    </ion-row>
+    <div class="radio-group">
+      <ion-row class="radio-group-header">
+        <ion-col col-3>
+          <p>Já fiz</p>
+        </ion-col>
+        <ion-col col-3>
+          <p>Fazendo / a fazer</p>
+        </ion-col>
+        <ion-col col-6>
+          <p>Tipos de tratamentos:</p>
+        </ion-col>
+      </ion-row>
+      <ion-row radio-group>
+        <ion-col col-3>
+          <ion-radio mode="md"></ion-radio>
+        </ion-col>
+        <ion-col col-3>
+          <ion-radio mode="md"></ion-radio>
+        </ion-col>
+        <ion-col col-6>
+          <p>Cirurgia</p>
+        </ion-col>
+      </ion-row>
+      <ion-row radio-group>
+        <ion-col col-3>
+          <ion-radio mode="md"></ion-radio>
+        </ion-col>
+        <ion-col col-3>
+          <ion-radio mode="md"></ion-radio>
+        </ion-col>
+        <ion-col col-6>
+          <p>Quimioterapia</p>
+        </ion-col>
+      </ion-row>
+      <ion-row radio-group>
+        <ion-col col-3>
+          <ion-radio mode="md"></ion-radio>
+        </ion-col>
+        <ion-col col-3>
+          <ion-radio mode="md"></ion-radio>
+        </ion-col>
+        <ion-col col-6>
+          <p>Radiografia</p>
+        </ion-col>
+      </ion-row>
+      <ion-row radio-group>
+        <ion-col col-3>
+          <ion-radio mode="md"></ion-radio>
+        </ion-col>
+        <ion-col col-3>
+          <ion-radio mode="md"></ion-radio>
+        </ion-col>
+        <ion-col col-6>
+          <p>Terapia oral</p>
+        </ion-col>
+      </ion-row>
+      <ion-row radio-group>
+        <ion-col col-3>
+          <ion-radio mode="md"></ion-radio>
+        </ion-col>
+        <ion-col col-3>
+          <ion-radio mode="md"></ion-radio>
+        </ion-col>
+        <ion-col col-6>
+          <p>Terapia oval</p>
+        </ion-col>
+      </ion-row>
+      <ion-row radio-group>
+        <ion-col col-3>
+          <ion-radio mode="md"></ion-radio>
+        </ion-col>
+        <ion-col col-3>
+          <ion-radio mode="md"></ion-radio>
+        </ion-col>
+        <ion-col col-6>
+          <p>Terapia naturais</p>
+        </ion-col>
+      </ion-row>
+    </div>
 
-    <ion-item>
-      <ion-label>Quimioterapia</ion-label>
-      <ion-checkbox [(ngModel)]="typeTreatment.quimioterapia"></ion-checkbox>
-    </ion-item>
+    <button class="auth-button purple" [navPush]="nextPage" [navParams]="{'typeUser' : typeUser}">Continuar cadastro</button>
 
-    <ion-item>
-      <ion-label>Radiografia</ion-label>
-      <ion-checkbox [(ngModel)]="typeTreatment.radiografia"></ion-checkbox>
-    </ion-item>
-
-    <ion-item>
-      <ion-label>Terapia oral</ion-label>
-      <ion-checkbox [(ngModel)]="typeTreatment.terapia_oral"></ion-checkbox>
-    </ion-item>
-
-    <ion-item>
-      <ion-label>Terapia alvo</ion-label>
-      <ion-checkbox [(ngModel)]="typeTreatment.terapia_alvo"></ion-checkbox>
-    </ion-item>
-
-    <ion-item>
-      <ion-label>Terapia naturais</ion-label>
-      <ion-checkbox [(ngModel)]="typeTreatment.terapia_naturais"></ion-checkbox>
-    </ion-item>
-  </ion-list>
-
-  <button ion-button full color="dark" (click)="sendDatas()">Continuar</button>
 </ion-content>

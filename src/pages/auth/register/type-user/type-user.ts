@@ -1,20 +1,16 @@
 
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { RegisterState } from '../state/state'
+import { AuthRegisterStatePage } from '../state/state'
 
 @Component({
-  selector: 'page-register-type-user',
+  selector: 'page-auth-register-type-user',
   templateUrl: 'register-type-user.html',
 })
-export class RegisterTypeUser {
-  user : any
+export class AuthRegisterTypeUserPage {
+  nextPage
   constructor(public navCtrl : NavController, public navParams: NavParams) {
-    this.user = this.navParams.get('user')
+    this.nextPage = AuthRegisterStatePage;
   }
 
-  sendDatas(typeUser) {
-    this.user.type = typeUser
-    this.navCtrl.push(RegisterState, { user: this.user })
-  }
 }

@@ -3,13 +3,11 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
 @Component({
-  selector: 'page-register-other-datas',
-  templateUrl: 'register-other-datas.html',
+  selector: 'page-auth-register-conclusion',
+  templateUrl: 'register-conclusion.html',
 })
-export class RegisterOtherDatas {
-  user: any
+export class AuthRegisterConclusionPage {
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.user = this.navParams.get('user')
-    console.log(this.user)
+
   }
 }

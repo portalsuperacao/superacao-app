@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { NavController } from 'ionic-angular';
+import { AuthRegisterBasicDatasPage } from './basic-datas/basic-datas';
 
 
 @Component({
@@ -8,5 +10,10 @@ import { Component } from '@angular/core';
 
 
 export class AuthRegisterPage {
+  nextPage;
+
+  constructor(public navCtrl: NavController ) {
+    this.nextPage = AuthRegisterBasicDatasPage;
+  }
 
 }

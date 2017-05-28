@@ -1,22 +1,19 @@
 
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { RegisterTypeTreatment } from '../type-treatment/type-treatment';
+import { AuthRegisterTypeTreatmentPage } from '../type-treatment/type-treatment';
 
 @Component({
-  selector: 'page-register-type-cancer',
+  selector: 'page-auth-register-type-cancer',
   templateUrl: 'register-type-cancer.html',
 })
-export class RegisterTypeCancer {
-  user : any
-  typeCancer: any
+export class AuthRegisterTypeCancerPage {
+  typeUser;
+  nextPage;
 
   constructor(public navCtrl : NavController, public navParams: NavParams) {
-    this.user = this.navParams.get('user')
+    this.typeUser = this.navParams.get('typeUser');
+    this.nextPage = AuthRegisterTypeTreatmentPage;
   }
 
-  sendDatas(typeUser) {
-    this.user.type = typeUser
-    this.navCtrl.push(RegisterTypeTreatment, { user: this.user })
-  }
 }

@@ -4,38 +4,83 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding class="register-user">
-  <p>
-    Eu serei o seu companheiro de Superação! Estou pronto para te ajudar
-  </p>
-  <p>
-    Vamos fazer um cadastro?
-  </p>
-  <form [formGroup]="formGroup" (ngSubmit)="sendDatas(formGroup.value)">
-    <ion-item>
-      <ion-label stacked>Nome:</ion-label>
-      <ion-input formControlName="name" type="text" placeholder="Digite seu nome"></ion-input>
-    </ion-item>
+<ion-content padding class="auth">
+  <ion-row>
+    <ion-col col-6 class="description">
+      <img src="./assets/images/logo-angel-6.svg" />
+    </ion-col>
+    <ion-col col-6>
+      <p class="speech-bubble">Vamos completar seu cadastro!</p>
+    </ion-col>
+  </ion-row>
+  <ion-item *ngIf="!facebookDatas">
+    <ion-input type="text" placeholder="E-mail"></ion-input>
+  </ion-item>
+  <ion-item *ngIf="!facebookDatas">
+    <ion-input type="password" placeholder="Senha"></ion-input>
+  </ion-item>
+  <ion-row *ngIf="!facebookDatas">
+    <ion-col col-6>
+      <ion-item>
+        <ion-input type="text" placeholder="Sobrenome"></ion-input>
+      </ion-item>
+    </ion-col>
+    <ion-col col-6>
+      <ion-item>
+        <ion-select placeholder="Genero">
+          <ion-option *ngFor="let genre of genres">{{ genre }}</ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col col-6>
+      <ion-item>
+        <ion-datetime displayFormat="DD/MM/YYYY" placeholder="Data de nascimento"></ion-datetime>
+      </ion-item>
+    </ion-col>
+    <ion-col col-6>
+      <ion-item>
+        <ion-input type="text" placeholder="Profissão"></ion-input>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col col-6>
+      <ion-item>
+        <ion-select placeholder="Estado">
+          <ion-option *ngFor="let state of states">{{ state }}</ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-col>
+    <ion-col col-6>
+      <ion-item>
+        <ion-select placeholder="Tem filhos">
+          <ion-option *ngFor="let children of childrens">{{ children }}</ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col col-6>
+      <ion-item>
+        <ion-select placeholder="Estado civil">
+          <ion-option *ngFor="let relationship of relationships">{{ relationship }}</ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-col>
+    <ion-col col-6>
+      <ion-item>
+        <ion-select placeholder="Tem religião">
+          <ion-option *ngFor="let religion of religions">{{ religion }}</ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+  <div class="description">
+    <p>Confira nossos termos de uso. Se concorda clique abaixo:</p>
+    <div (click)="clickCheckTerms()"><button class="simple-radio-button" [ngClass]="{'simple-radio-button-selected' : isRadioButtonClass}"></button> Aceito os termos de uso</div>
+  </div>
 
-    <ion-item>
-      <ion-label stacked>Email:</ion-label>
-      <ion-input formControlName="email" type="email" placeholder="Digite seu e-mail"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label stacked>Senha:</ion-label>
-      <ion-input formControlName="password" type="password" placeholder="Digite sua senha"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label stacked>Verificação de senha:</ion-label>
-      <ion-input formControlName="passwordVerify" type="password" placeholder="Digite sua senha novamente"></ion-input>
-    </ion-item>
-
-    <ion-item *ngIf="showMessage">
-      <p>As senhas digitas não são iguais! </p>
-    </ion-item>
-
-    <button ion-button full color="dark" [disabled]="!formGroup.valid">Continuar</button>
-  </form>
+  <button class="auth-button" [navPush]="nextPage">Continuar cadastro</button>
 </ion-content>

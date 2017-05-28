@@ -5,29 +5,48 @@ import { IonicPageModule } from 'ionic-angular';
 import { AuthPage } from './auth';
 import { AuthLoginPage } from './login/login';
 import { AuthRegisterPage } from './register/register';
-// import { RegisterBasicDatas } from './register/basic-datas/basic-datas';
-// import { RegisterOtherCancer } from './register/other-cancer/other-cancer';
-// import { RegisterOtherDatas } from './register/other-datas/other-datas';
-// import { RegisterPicture } from './register/picture/picture';
-// import { RegisterState } from './register/state/state';
-// import { RegisterTypeCancer } from './register/type-cancer/type-cancer';
-// import { RegisterTypeTreatment } from './register/type-treatment/type-treatment';
-// import { RegisterTypeUser } from './register/type-user/type-user';
-// import { RegisterPastCancer } from './register/past-cancer/past-cancer';
+import { AuthRegisterBasicDatasPage } from './register/basic-datas/basic-datas';
+import { AuthRegisterOtherCancerPage } from './register/other-cancer/other-cancer';
+import { AuthRegisterPicturePage } from './register/picture/picture';
+import { AuthRegisterStatePage } from './register/state/state';
+import { AuthRegisterTypeCancerPage } from './register/type-cancer/type-cancer';
+import { AuthRegisterTypeTreatmentPage } from './register/type-treatment/type-treatment';
+import { AuthRegisterTypeUserPage } from './register/type-user/type-user';
+import { AuthRegisterPastCancerPage } from './register/past-cancer/past-cancer';
+import { AuthRegisterConclusionPage } from './register/conclusion/conclusion';
 
 @NgModule({
   declarations: [
     AuthPage,
     AuthLoginPage,
-    AuthRegisterPage
+    AuthRegisterPage,
+    AuthRegisterBasicDatasPage,
+    AuthRegisterPicturePage,
+    AuthRegisterStatePage,
+    AuthRegisterTypeUserPage,
+    AuthRegisterTypeCancerPage,
+    AuthRegisterOtherCancerPage,
+    AuthRegisterTypeTreatmentPage,
+    AuthRegisterPastCancerPage,
+    AuthRegisterConclusionPage
+
   ],
   entryComponents: [
     AuthPage,
     AuthLoginPage,
-    AuthRegisterPage
+    AuthRegisterPage,
+    AuthRegisterBasicDatasPage,
+    AuthRegisterPicturePage,
+    AuthRegisterStatePage,
+    AuthRegisterTypeUserPage,
+    AuthRegisterTypeCancerPage,
+    AuthRegisterOtherCancerPage,
+    AuthRegisterTypeTreatmentPage,
+    AuthRegisterPastCancerPage,
+    AuthRegisterConclusionPage
   ],
   imports: [
-    IonicPageModule.forChild(AuthPage)
+    IonicPageModule.forChild(AuthPage),
   ],
   exports: [
     AuthPage

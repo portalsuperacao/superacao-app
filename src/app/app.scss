@@ -56,6 +56,13 @@ ion-footer {
   }
 }
 
+.align-center {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .ion-ios-agenda, .ion-md-agenda {
  content: url(../assets/images/agenda.svg);
  width: 24px;

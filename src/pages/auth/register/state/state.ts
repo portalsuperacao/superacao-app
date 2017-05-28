@@ -1,27 +1,22 @@
 
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { RegisterTypeCancer } from '../type-cancer/type-cancer';
-import { RegisterOtherCancer } from '../other-cancer/other-cancer';
+import { AuthRegisterTypeCancerPage } from '../type-cancer/type-cancer';
+import { AuthRegisterPastCancerPage } from '../past-cancer/past-cancer';
 
 @Component({
-  selector: 'page-register-state',
+  selector: 'page-auth-register-state',
   templateUrl: 'register-state.html',
 })
-export class RegisterState {
-  user : any
+export class AuthRegisterStatePage {
+  typeUser;
+  nextPageMetastases;
+  nextPageRemissao;
+
   constructor(public navCtrl : NavController, public navParams: NavParams) {
-    this.user = this.navParams.get('user')
+    this.typeUser = this.navParams.get('typeUser');
+    this.nextPageMetastases = AuthRegisterTypeCancerPage;
+    this.nextPageRemissao = AuthRegisterPastCancerPage;
   }
-
-  sendDatas(stateUser) {
-    this.user.state = stateUser
-    if(stateUser === 'tratamento') {
-      this.navCtrl.push(RegisterTypeCancer, { user: this.user })
-    } else {
-      this.navCtrl.push(RegisterOtherCancer, { user: this.user })
-    }
-  }
-
 
 }

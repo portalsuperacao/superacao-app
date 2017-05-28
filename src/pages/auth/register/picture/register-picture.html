@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-navbar color="dark">
+    <ion-title> Superação </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="auth">
+  <div class="align-center">
+    <h3 class="description"> Estamos feliz em ter você! </h3>
+    <ion-row>
+      <ion-col col-6 class="description">
+        <img src="./assets/images/logo-angel-5.svg" />
+      </ion-col>
+      <ion-col col-6>
+        <p class="speech-bubble">Gostaria de conhecer você! Vamos por uma foto?</p>
+      </ion-col>
+    </ion-row>
+    <button class="auth-button">Escolher foto</button>
+    <button class="auth-button purple" [navPush]="nextPage">Continuar cadastro</button>
+    <p class="description">Gostaria de por depois. <b [navPush]="nextPage">Clique aqui</b></p>
+  </div>
+</ion-content>

@@ -4,12 +4,15 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding class="register-user">
-  <p>
-    Você já superou o cancer ou ainda está em tratamento?
-  </p>
+<ion-content class="auth">
+  <div class="align-center" padding>
+    <img src="./assets/images/logo-angel-1.svg" />
+    <h3 *ngIf="typeUser == 'paciente'" class="description"> Você já superou o câncer ou ainda está no tratamento? </h3>
+    <h3 *ngIf="typeUser == 'familiar'" class="description"> Seu familiar já superou o cãncer ou ainda está no tratamento.</h3>
 
-  <button class="register-button" (click)="sendDatas('tratamento')" color="dark">Estou no tratamento nesse momento</button>
-  <button class="register-button" (click)="sendDatas('remissão')" color="primary">Estou em remissão ou/ já superei o cancêr</button>
-
+    <button *ngIf="typeUser == 'paciente'" class="auth-button purple" [navPush]="nextPageMetastases" [navParams]="{ 'typeUser' : typeUser }">Estou no tratamento nesse momento / possuo metástases</button>
+    <button *ngIf="typeUser == 'paciente'" class="auth-button" [navPush]="nextPageRemissao" [navParams]="{ 'typeUser' : typeUser }">Estou em remissão ou/ já superei o câncer</button>
+    <button *ngIf="typeUser == 'familiar'" class="auth-button purple" [navPush]="nextPageMetastases" [navParams]="{ 'typeUser' : typeUser }">Está no tratamento nesse momento / possuo metástases</button>
+    <button *ngIf="typeUser == 'familiar'" class="auth-button" [navPush]="nextPageRemissao" [navParams]="{ 'typeUser' : typeUser }">Está em remissão ou/ já superei o câncer</button>
+  </div>
 </ion-content>
