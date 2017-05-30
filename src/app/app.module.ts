@@ -4,6 +4,9 @@ import { ENV } from '../config/environment.dev';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
 
+// MODULES
+import { AuthPageModule } from '../pages/auth/auth.module';
+
 // COMPONENTS / PIPES / DIRECTIVES
 import { CalendarPicker } from '../components/calendar-picker/calendar-picker';
 import { DateCustomPipe } from '../pipes/date-custom-pipe';
@@ -54,15 +57,7 @@ import { ProfilePage } from '../pages/profile/profile';
 import { ProfileEditPage } from '../pages/profile/edit/edit';
 import { StatusEmotionPage } from '../pages/status-emotion/status-emotion';
 import { TabsPage } from '../pages/tabs/tabs';
-import { RegisterBasicDatas } from '../pages/register/basic-datas/basic-datas';
-import { RegisterOtherCancer } from '../pages/register/other-cancer/other-cancer';
-import { RegisterOtherDatas } from '../pages/register/other-datas/other-datas';
-import { RegisterPicture } from '../pages/register/picture/picture';
-import { RegisterState } from '../pages/register/state/state';
-import { RegisterTypeCancer } from '../pages/register/type-cancer/type-cancer';
-import { RegisterTypeTreatment } from '../pages/register/type-treatment/type-treatment';
-import { RegisterTypeUser } from '../pages/register/type-user/type-user';
-import { RegisterPastCancer } from '../pages/register/past-cancer/past-cancer';
+
 import { OvercomerPage } from '../pages/trinity/overcomer/overcomer';
 import { AngelPage } from '../pages/trinity/angel/angel';
 import { VisitorPage } from '../pages/trinity/visitor/visitor';
@@ -97,15 +92,6 @@ firebase.initializeApp(firebaseConfig);
     MySpaceMedicinesEventPage,
     MySpaceNotesPage,
     MySpaceNotesEventPage,
-    RegisterBasicDatas,
-    RegisterOtherCancer,
-    RegisterOtherDatas,
-    RegisterPicture,
-    RegisterState,
-    RegisterTypeCancer,
-    RegisterTypeTreatment,
-    RegisterTypeUser,
-    RegisterPastCancer,
     ProfilePage,
     ProfileEditPage,
     StatusEmotionPage,
@@ -123,7 +109,8 @@ firebase.initializeApp(firebaseConfig);
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
     AngularFireModule.initializeApp(firebaseConfig),
-    TextMaskModule
+    TextMaskModule,
+    AuthPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -144,15 +131,6 @@ firebase.initializeApp(firebaseConfig);
     MySpaceMedicinesEventPage,
     MySpaceNotesPage,
     MySpaceNotesEventPage,
-    RegisterBasicDatas,
-    RegisterOtherCancer,
-    RegisterOtherDatas,
-    RegisterPicture,
-    RegisterState,
-    RegisterTypeCancer,
-    RegisterTypeTreatment,
-    RegisterTypeUser,
-    RegisterPastCancer,
     ProfilePage,
     ProfileEditPage,
     StatusEmotionPage,

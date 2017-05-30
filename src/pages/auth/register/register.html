@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-navbar color="dark">
+    <ion-title> Superação </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content class="auth">
+  <div class="align-center" padding>
+    <ion-row>
+      <ion-col col-6 class="description">
+        <img src="./assets/images/logo-angel-1.svg" />
+      </ion-col>
+      <ion-col col-6>
+        <p class="speech-bubble">Olá! Eu sou o Samuca e estarei ao seu lado, e serei seu companheiro de SuperAção!</p>
+      </ion-col>
+    </ion-row>
+    <h3 class="description">Vamos fazer seu cadastro. Como gostaria de ser chamado?</h3>
+    <ion-item>
+      <ion-input type="text" placeholder="Escreva aqui"></ion-input>
+    </ion-item>
+    <button class="auth-button" [navPush]="nextPage">Continuar</button>
+    <button class="auth-button facebook" [navPush]="nextPage" [navParams]="{ facebookDatas : true }">
+      <ion-icon name="logo-facebook"></ion-icon>
+      Conecte-se com o Facebook
+    </button>
+  </div>
+</ion-content>

@@ -1,0 +1,111 @@
+<ion-header>
+  <ion-navbar color="dark">
+    <ion-title> Superação </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="auth" padding>
+    <ion-row>
+      <ion-col col-6>
+        <img src="./assets/images/logo-angel-6.svg" />
+      </ion-col>
+      <ion-col>
+        <p *ngIf="typeUser == 'paciente'" class="speech-bubble">Qual tipo de câncer você teve?</p>
+        <p *ngIf="typeUser == 'familiar'" class="speech-bubble">Qual tipo de câncer seu familiar já teve?</p>
+        <div class="checkbox-group">
+          <ion-item>
+            <ion-label>Metástase</ion-label>
+            <ion-checkbox mode="ios"></ion-checkbox>
+          </ion-item>
+          <ion-item>
+            <ion-label>Reicidiva</ion-label>
+            <ion-checkbox mode="ios"></ion-checkbox>
+          </ion-item>
+        </div>
+      </ion-col>
+    </ion-row>
+    <h3  *ngIf="typeUser == 'paciente'" class="description">Qual tipo de câncer você possui agora?</h3>
+    <h3  *ngIf="typeUser == 'familiar'" class="description">Qual tipo de câncer seu familiar possui agora?</h3>
+    <div class="radio-group">
+      <ion-row class="radio-group-header">
+        <ion-col col-3>
+          <p>Já fiz</p>
+        </ion-col>
+        <ion-col col-3>
+          <p>Fazendo / a fazer</p>
+        </ion-col>
+        <ion-col col-6>
+          <p>Tipos de tratamentos:</p>
+        </ion-col>
+      </ion-row>
+      <ion-row radio-group>
+        <ion-col col-3>
+          <ion-radio mode="md"></ion-radio>
+        </ion-col>
+        <ion-col col-3>
+          <ion-radio mode="md"></ion-radio>
+        </ion-col>
+        <ion-col col-6>
+          <p>Cirurgia</p>
+        </ion-col>
+      </ion-row>
+      <ion-row radio-group>
+        <ion-col col-3>
+          <ion-radio mode="md"></ion-radio>
+        </ion-col>
+        <ion-col col-3>
+          <ion-radio mode="md"></ion-radio>
+        </ion-col>
+        <ion-col col-6>
+          <p>Quimioterapia</p>
+        </ion-col>
+      </ion-row>
+      <ion-row radio-group>
+        <ion-col col-3>
+          <ion-radio mode="md"></ion-radio>
+        </ion-col>
+        <ion-col col-3>
+          <ion-radio mode="md"></ion-radio>
+        </ion-col>
+        <ion-col col-6>
+          <p>Radiografia</p>
+        </ion-col>
+      </ion-row>
+      <ion-row radio-group>
+        <ion-col col-3>
+          <ion-radio mode="md"></ion-radio>
+        </ion-col>
+        <ion-col col-3>
+          <ion-radio mode="md"></ion-radio>
+        </ion-col>
+        <ion-col col-6>
+          <p>Terapia oral</p>
+        </ion-col>
+      </ion-row>
+      <ion-row radio-group>
+        <ion-col col-3>
+          <ion-radio mode="md"></ion-radio>
+        </ion-col>
+        <ion-col col-3>
+          <ion-radio mode="md"></ion-radio>
+        </ion-col>
+        <ion-col col-6>
+          <p>Terapia oval</p>
+        </ion-col>
+      </ion-row>
+      <ion-row radio-group>
+        <ion-col col-3>
+          <ion-radio mode="md"></ion-radio>
+        </ion-col>
+        <ion-col col-3>
+          <ion-radio mode="md"></ion-radio>
+        </ion-col>
+        <ion-col col-6>
+          <p>Terapia naturais</p>
+        </ion-col>
+      </ion-row>
+    </div>
+
+    <button class="auth-button purple" [navPush]="nextPage" [navParams]="{'typeUser' : typeUser}">Continuar cadastro</button>
+
+</ion-content>

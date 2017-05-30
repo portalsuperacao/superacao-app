@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-navbar color="dark">
+    <ion-title> Superação </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="auth">
+  <div class="align-center" padding>
+    <img src="./assets/images/logo-angel-1.svg" />
+    <h3 *ngIf="typeUser == 'paciente'" class="description"> Você já superou o câncer ou ainda está no tratamento? </h3>
+    <h3 *ngIf="typeUser == 'familiar'" class="description"> Seu familiar já superou o cãncer ou ainda está no tratamento.</h3>
+
+    <button *ngIf="typeUser == 'paciente'" class="auth-button purple" [navPush]="nextPageMetastases" [navParams]="{ 'typeUser' : typeUser }">Estou no tratamento nesse momento / possuo metástases</button>
+    <button *ngIf="typeUser == 'paciente'" class="auth-button" [navPush]="nextPageRemissao" [navParams]="{ 'typeUser' : typeUser }">Estou em remissão ou/ já superei o câncer</button>
+    <button *ngIf="typeUser == 'familiar'" class="auth-button purple" [navPush]="nextPageMetastases" [navParams]="{ 'typeUser' : typeUser }">Está no tratamento nesse momento / possuo metástases</button>
+    <button *ngIf="typeUser == 'familiar'" class="auth-button" [navPush]="nextPageRemissao" [navParams]="{ 'typeUser' : typeUser }">Está em remissão ou/ já superei o câncer</button>
+  </div>
+</ion-content>

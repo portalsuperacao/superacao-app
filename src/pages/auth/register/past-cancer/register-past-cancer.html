@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-navbar color="dark">
+    <ion-title> Superação </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="auth">
+  <div class="align-center" padding>
+    <ion-row>
+      <ion-col col-6>
+        <img src="./assets/images/logo-angel-4.svg" />
+      </ion-col>
+      <ion-col>
+        <p *ngIf="typeUser == 'paciente'" class="speech-bubble"> Você já teve algum outro câncer no passado? </p>
+        <p *ngIf="typeUser == 'familiar'" class="speech-bubble"> Seu familiar já teve algum outro câncer no passado?</p>
+      </ion-col>
+    </ion-row>
+
+    <button *ngIf="typeUser == 'paciente'" class="auth-button purple" [navPush]="nextPageOtherCancer" [navParams]="{ 'typeUser' : typeUser }">Sim</button>
+    <button *ngIf="typeUser == 'paciente'" class="auth-button" [navPush]="nextPageConclusion" [navParams]="{ 'typeUser' : typeUser }">Não</button>
+    <button *ngIf="typeUser == 'familiar'" class="auth-button purple" [navPush]="nextPageOtherCancer" [navParams]="{ 'typeUser' : typeUser }">Sim</button>
+    <button *ngIf="typeUser == 'familiar'" class="auth-button" [navPush]="nextPageConclusion" [navParams]="{ 'typeUser' : typeUser }">Não</button>
+  </div>
+</ion-content>
