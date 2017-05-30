@@ -6,7 +6,7 @@ import { ChatStorageService } from '../../../providers/database/chat-storage-ser
 import { Utils } from '../../../providers/util/utils';
 
 import { ChatPage } from '../../chat/chat';
-import { CalendarPublicEventPage } from '../../calendar/public-event/public-event';
+import { CalendarPublicEventPage } from '../../my-space/calendar/public-event/public-event';
 import { StatusEmotionPage } from '../../status-emotion/status-emotion';
 
 

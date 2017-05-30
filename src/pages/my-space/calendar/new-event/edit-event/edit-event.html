@@ -52,29 +52,29 @@
 
     <div class="input-field">
       <ion-row (click)="addNeedBring()">
-        <ion-col width-80> <p> O que preciso levar </p> </ion-col>
-        <ion-col width-20> <ion-icon name="md-add-circle">  </ion-icon> </ion-col>
+        <ion-col col-10> <p> O que preciso levar </p> </ion-col>
+        <ion-col col-2> <ion-icon name="md-add-circle">  </ion-icon> </ion-col>
       </ion-row>
-      <ion-row *ngFor="let item of countItems; let i = index;" (click)="clickItem(i)">
-        <ion-col width-80>
-          <input placeholder="Digite o seu item" [(ngModel)]="needBrings[i]" [ngModelOptions]="{standalone: true}" type="text">
+      <ion-row *ngFor="let item of countItems; let i = index">
+        <ion-col col-10>
+          <ion-textarea class="event-itens" [(ngModel)]="needBrings[i]" [ngModelOptions]="{standalone: true}" type="text"></ion-textarea>
         </ion-col>
-        <ion-col width-20>
-          <ion-icon *ngIf="i == showCloseItem" name="close"  (click)="closeItem(i)"> </ion-icon>
+        <ion-col col-2>
+          <ion-icon name="close-circle" (click)="closeItem(i)"> </ion-icon>
         </ion-col>
       </ion-row>
       <ion-row *ngIf="typeEvent == 'Consulta'">
-        <ion-col width-80 (click)="addQuestions()"> <p> Perguntas a fazer </p> </ion-col>
-        <ion-col width-10 (click)="openQuestions()"> <ion-icon name="md-search"> </ion-icon> </ion-col>
-        <ion-col width-10 (click)="addQuestions()"> <ion-icon name="md-add-circle"> </ion-icon> </ion-col>
+        <ion-col col-10 (click)="addQuestions()"> <p> Perguntas a fazer </p> </ion-col>
+        <ion-col col-1 (click)="openQuestions()"> <ion-icon name="md-search"> </ion-icon> </ion-col>
+        <ion-col col-1 (click)="addQuestions()"> <ion-icon name="md-add-circle"> </ion-icon> </ion-col>
       </ion-row>
       <ng-container *ngIf="typeEvent == 'Consulta'">
-        <ion-row *ngFor="let item of countItemsQuestions; let i = index;" (click)="clickItemQuestion(i)">
-          <ion-col width-80>
-            <input placeholder="Digite o seu item" [(ngModel)]="questions[i]" [ngModelOptions]="{standalone: true}" type="text">
+        <ion-row *ngFor="let item of countItemsQuestions; let i = index">
+          <ion-col col-10>
+            <ion-textarea class="event-itens" [(ngModel)]="questions[i]" [ngModelOptions]="{standalone: true}" type="text"></ion-textarea>
           </ion-col>
-          <ion-col width-20>
-            <ion-icon *ngIf="i == showCloseQuestionItem" name="close" (click)="closeItemQuestion(i)"> </ion-icon>
+          <ion-col col-2>
+            <ion-icon name="close-circle" (click)="closeItemQuestion(i)"> </ion-icon>
           </ion-col>
         </ion-row>
       </ng-container>
@@ -84,7 +84,7 @@
         <ion-toggle formControlName="share"></ion-toggle>
       </ion-item>
     </div>
-    
+
     <button ion-button full clear [disabled]="!formEvent.valid"> Concluir </button>
   </form>
 

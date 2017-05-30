@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { UserStorageService } from '../../providers/database/user-storage-service';
-import { CalendarPage } from '../calendar/calendar';
+import { CalendarPage } from './calendar/calendar';
 import { MySpaceMedicinesPage } from './medicines/medicines';
 import { MySpaceNotesPage } from './notes/notes';
 import { MySpaceDoctorsPage } from './doctors/doctors';

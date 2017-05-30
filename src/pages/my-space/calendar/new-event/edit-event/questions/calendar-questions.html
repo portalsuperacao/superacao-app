@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-navbar color="dark">
+    <ion-title> Perguntas a fazer </ion-title>
+
+    <ion-buttons start>
+      <button ion-button (click)="closePage()">
+        <ion-icon name="close"> </ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list *ngFor="let questions of consult; let i = index">
+    <ion-list-header>
+      {{ titles[i] }}
+    </ion-list-header>
+    <button ion-item text-wrap *ngFor="let question of questions.consult" (click)="clickQuestion(question)">
+      <ion-row>
+        <ion-col col-11>
+          {{ question }}
+        </ion-col>
+        <ion-col col-1>
+          <ion-icon name="md-add-circle"> </ion-icon>
+        </ion-col>
+      </ion-row>
+    </button>
+
+  </ion-list>
+</ion-content>

@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-navbar color="dark">
+    <button ion-button menuToggle>
+       <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title> Agenda de tratamento </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="calendar">
+  <calendar-picker [setEvents]="allSchedule" (dateSelected)="updateDate($event)" *ngIf="showCalendar"> </calendar-picker>
+  <ion-list class="schedule">
+    <ion-item *ngIf="(listSchedule | async)?.eventsSelected == ''">
+      <p class="text-center"> Não há nenhum agendamento</p>
+    </ion-item>
+    <ion-item-sliding *ngFor="let schedule of (listSchedule | async)?.eventsSelected">
+      <ion-item (click)="editEvent(schedule)">
+          <ion-row>
+            <ion-col col-1> <span [ngClass]="schedule.type"> </span> </ion-col>
+            <ion-col col-2> {{ schedule.start_at | customDate:"t" }} </ion-col>
+            <ion-col col-4> {{ schedule.type }} </ion-col>
+            <ion-col col-4> {{ schedule.title | truncate:8 }} </ion-col>
+            <ion-col col-1> <ion-icon name="ios-arrow-forward"> </ion-icon> </ion-col>
+          </ion-row>
+      </ion-item>
+      <ion-item-options side="right">
+        <button ion-button color="danger" icon-only (click)="removeEvent(schedule)">
+          <ion-icon name="trash"> </ion-icon>
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>

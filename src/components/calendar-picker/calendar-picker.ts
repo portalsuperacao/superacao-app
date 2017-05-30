@@ -1,57 +1,16 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, OnChanges } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { CalendarNewEventPage } from '../../pages/calendar/new-event/new-event';
+import { CalendarNewEventPage } from '../../pages/my-space/calendar/new-event/new-event';
 import { DateUtil } from '../../providers/util/date-util';
 import moment from 'moment';
 import 'moment/locale/pt-br';
 
 @Component({
-    selector: 'calendar-picker',
-    template: `
-    <div class="calendar-picker">
-      <div class="month-name">
-        <div class="arrow">
-          <button ion-button icon-only clear (click)="previousMonth()">
-            <ion-icon name="ios-arrow-back"> </ion-icon>
-          </button>
-        </div>
-        <p> {{ month.format("MMM, YYYY") }} </p>
-        <div class="arrow">
-          <button ion-button icon-only clear (click)="nextMonth()">
-            <ion-icon name="ios-arrow-forward"> </ion-icon>
-          </button>
-        </div>
-        <div class="add">
-          <button ion-button icon-only round (click)="addEvent()">
-            <ion-icon name="add"> </ion-icon>
-          </button>
-        </div>
-      </div>
-      <div class="week-name grid-calendar">
-        <div> DOM </div>
-        <div> SEG </div>
-        <div> TER </div>
-        <div> QUA </div>
-        <div> QUI </div>
-        <div> SEX </div>
-        <div> SAB </div>
-      </div>
-      <div class="week grid-calendar" *ngFor="let week of weeks">
-        <div class="day"
-        [ngClass]="{today: day.isToday, 'different-month': !day.isCurrentMonth, selected: day.date.isSame(selected)}"
-        (click)="select(day)"
-        *ngFor="let day of week.days">
-          <span> {{ day.number }} </span>
-          <div *ngIf="day.event">
-            <div *ngFor="let mark of day.event" class="event-mark" [ngClass]="mark"> </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    `
+  selector: 'calendar-picker',
+  templateUrl: 'calendar-picker.html'
 })
 
-export class CalendarPicker {
+export class CalendarPicker implements OnInit, OnChanges {
   @Output() dateSelected = new EventEmitter();
   @Input() setEvents;
   schedule;
@@ -71,8 +30,9 @@ export class CalendarPicker {
     this.dateSelected.emit(this.selected);
   }
 
-  ngOnChanges($changes) {
+  ngOnChanges() {
     this._initCalendar();
+    this.dateSelected.emit(this.selected);
   }
 
   nextMonth() {
@@ -81,6 +41,7 @@ export class CalendarPicker {
     this.month.month(this.month.month()+1);
 
     this._buildMonth(next, this.month);
+    this.dateSelected.emit(this.month);
   }
 
   previousMonth() {
@@ -89,6 +50,7 @@ export class CalendarPicker {
     this.month.month(this.month.month()-1);
 
     this._buildMonth(previous, this.month);
+    this.dateSelected.emit(this.month);
   }
 
   select(day) {
@@ -133,25 +95,21 @@ export class CalendarPicker {
     for(let i = 0; i < 7; i++) {
       let controller = true;
       let count = 0;
-
       this.setEvents.forEach((event) => {
-        if(date.valueOf() >= this.dateUtil.removeTime(event.start_at) &&
-           date.valueOf() <= event.end_at && count == 0) {
-
+        if(date.valueOf() >= this.dateUtil.removeTime(event.start_at) && date.valueOf() <= event.end_at && count == 0) {
           days.push({
             name: date.format("dd").substring(0, 1),
             number: date.date(),
             isCurrentMonth: date.month() === month.month(),
             isToday: date.isSame(new Date(), "day"),
             date: date,
-            event: [event.type]
+            marks: [event.type]
           });
 
           controller = false;
           count++;
-        } else if (date.valueOf() >= this.dateUtil.removeTime(event.start_at) &&
-                   date.valueOf() <= event.end_at && count > 0) {
-          days[index].event.push(event.type);
+        } else if (date.valueOf() >= this.dateUtil.removeTime(event.start_at) && date.valueOf() <= event.end_at && count > 0) {
+          days[index].marks.push(event.type);
         }
       });
 
@@ -163,7 +121,6 @@ export class CalendarPicker {
           isToday: date.isSame(new Date(), "day"),
           date: date,
           event: false
-
         });
       }
 
@@ -175,18 +132,7 @@ export class CalendarPicker {
     return days;
   }
 
-  private _verifyEventMark(date) {
-    return new Promise((resolve) => {
-      this.setEvents.forEach((event) => {
-        if(date.valueOf() >= this.dateUtil.removeTime(event.start_at) &&
-           date.valueOf() <= this.dateUtil.removeTime(event.end_at)) {
-            resolve(event.type);
-        }
-      });
-      resolve(false);
-    });
-  }
-  _resetWeek(date) {
+  private _resetWeek(date) {
     return date.day(0).hour(0).minute(0).second(0).millisecond(0);
   }
 
