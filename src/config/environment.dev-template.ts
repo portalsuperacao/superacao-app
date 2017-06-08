@@ -6,5 +6,6 @@ export const ENV = {
     databaseURL: "https://<project-id>.firebaseio.com",
     storageBucket: "<project-id>.appspot.com",
     messagingSenderId: ""
-  }
+  },
+  HOST: ""
 };

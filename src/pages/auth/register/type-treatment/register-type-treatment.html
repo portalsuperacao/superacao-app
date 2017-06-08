@@ -47,6 +47,10 @@
       </ion-row>
     </div>
 
-    <button class="auth-button purple" (click)="nextPage({'typeUser' : typeUser})">Continuar cadastro</button>
+    <button class="auth-button purple"
+    (click)="nextPage({'typeUser' : typeUser})"
+    [disabled]="disconnect">
+      Continuar cadastro
+    </button>
 
 </ion-content>

@@ -19,8 +19,8 @@
         </ion-item>
       </ion-col>
     </ion-row>
-    <h3  *ngIf="typeUser == 'paciente'" class="description">Qual tipo de tratamento você já fez?</h3>
-    <h3  *ngIf="typeUser == 'familiar'" class="description">Qual tipo de tratamento seu familiar já fez?</h3>
+    <h3 *ngIf="typeUser == 'paciente'" class="description">Qual tipo de tratamento você já fez?</h3>
+    <h3 *ngIf="typeUser == 'familiar'" class="description">Qual tipo de tratamento seu familiar já fez?</h3>
     <div class="radio-group">
       <ion-row class="radio-group-header">
         <ion-col col-3>
@@ -47,6 +47,10 @@
       </ion-row>
     </div>
 
-    <button class="auth-button purple" (click)="nextPage({'typeUser' : typeUser})">Continuar cadastro</button>
+    <button class="auth-button purple"
+    (click)="nextPage({'typeUser' : typeUser})"
+    [disabled]="disconnect">
+      Continuar cadastro
+    </button>
 
 </ion-content>

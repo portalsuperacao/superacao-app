@@ -35,7 +35,6 @@ export class AuthRegisterBasicDatasPage {
       this.relationships = ["Solteiro", "Casado", "Divorciado", "Viuvo"];
       this.beliefs = ["Católico", "Evangelico", "Espirita", "Ateu", "Outra religião"];
       this.genres = ["Masculino", "Feminino"];
-
   }
 
   nextPage() {

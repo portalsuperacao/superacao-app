@@ -1,11 +1,11 @@
-export interface UserTreatmentAttributes {
-  status: string,
-  treatment_type_id: number,
+export class UserTreatmentAttributes {
+  status: any
+  treatment_type_id: number
   treatable_type: any
 }
 
-export interface UserCancerTreatmentsAttributes {
-  cancer_type_id : number,
+export class UserCancerTreatmentsAttributes {
+  cancer_type_id : number
   cancerous_type: any
 }
 

@@ -1,53 +1,64 @@
 
 import { Component } from '@angular/core';
-import { NavController, NavParams, AlertController } from 'ionic-angular';
+import { NavController, NavParams, AlertController, LoadingController } from 'ionic-angular';
 import { AuthRegisterConclusionPage } from '../conclusion/conclusion';
 import { AuthService } from '../../../../providers/database/auth-service';
-import { UserTreatmentAttributes, UserCancerTreatmentsAttributes } from '../../../../model/user';
 
 @Component({
   selector: 'page-auth-register-other-cancer',
   templateUrl: 'register-other-cancer.html',
 })
+
 export class AuthRegisterOtherCancerPage {
   user: any;
   typeUser : any;
-  typesCancer : UserCancerTreatmentsAttributes [];
-  treatments : UserTreatmentAttributes [];
+  typesCancer :  any;
+  treatments : any;
 
   constructor(
     public navCtrl : NavController,
     public navParams: NavParams,
+    public loadingCtrl: LoadingController,
     public authService: AuthService,
     public alertCtrl: AlertController) {
-    this.typeUser = this.navParams.get('typeUser');
-    this.user = this.authService.user;
+      this.typeUser = this.navParams.get('typeUser');
+      this.user = this.authService.user;
+  }
 
-    this.typesCancer = [
-      {
-        cancer_type_id : 1,
-        cancerous_type: 'Cancer 1'
-      },
-      {
-        cancer_type_id : 2,
-        cancerous_type: 'Cancer 2'
-      }
-    ];
+  ionViewDidLoad() {
+    let loading = this.loadingCtrl.create({
+      content: 'Aguarde...'
+    });
+    loading.present();
 
-    this.treatments = [
-      {
-        status: null,
-        treatment_type_id: 1,
-        treatable_type: 'Cirurgia'
-      },
-      {
-        status: null,
-        treatment_type_id: 2,
-        treatable_type: 'Quimioterapia'
-      }
-    ];
+    Promise.resolve()
+    .then(getAllTreatments.bind(this))
+    .then(getAllTypersCancers.bind(this))
+    .then(closeLoading.bind(this))
+    .catch(disconnectNetwork.bind(this))
 
-    this.user.past_treatment_profile_attributes.treatments_attributes = this.treatments;
+    function getAllTreatments() {
+      return this.authService.getAllTreatments().then((datas) => {
+        this.treatments = datas;
+        this.user.past_treatment_profile_attributes.treatments_attributes = this.treatments;
+      });
+    }
+
+    function getAllTypersCancers() {
+      return this.authService.getAllTypesCancers().then((datas) => {
+        this.typesCancer = datas;
+      });
+    }
+
+    function closeLoading() {
+      loading.dismiss();
+    }
+
+    function disconnectNetwork() {
+      this.showMessage('Você deve estar conectado para continuar o cadastro.');
+      this.disconnect = true;
+      loading.dismiss();
+    }
   }
 
   nextPage(params) {

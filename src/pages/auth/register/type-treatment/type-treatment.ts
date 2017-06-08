@@ -1,9 +1,8 @@
 
 import { Component } from '@angular/core';
-import { NavController, NavParams, AlertController } from 'ionic-angular';
+import { NavController, NavParams, AlertController, LoadingController } from 'ionic-angular';
 import { AuthRegisterPastCancerPage } from '../past-cancer/past-cancer';
 import { AuthService } from '../../../../providers/database/auth-service';
-import { UserTreatmentAttributes, UserCancerTreatmentsAttributes } from '../../../../model/user';
 
 @Component({
   selector: 'page-auth-register-type-treatment',
@@ -11,50 +10,62 @@ import { UserTreatmentAttributes, UserCancerTreatmentsAttributes } from '../../.
 })
 export class AuthRegisterTypeTreatmentPage {
   typeUser : any;
-  typesCancer : UserCancerTreatmentsAttributes [];
-  treatments : UserTreatmentAttributes [];
+  typesCancer : any;
+  treatments : any;
   user : any;
+  disconnect: boolean;
 
 
   constructor(
     public navCtrl : NavController,
     public navParams: NavParams,
     public alertCtrl: AlertController,
-    public authService: AuthService
-  ) {
-    this.typeUser = this.navParams.get('typeUser');
-    this.user = this.authService.user;
+    public loadingCtrl: LoadingController,
+    public authService: AuthService) {
+      this.typeUser = this.navParams.get('typeUser');
+      this.user = this.authService.user;
+      this.disconnect = false;
+  }
 
-    this.typesCancer = [
-      {
-        cancer_type_id : 1,
-        cancerous_type: 'Cancer 1'
-      },
-      {
-        cancer_type_id : 2,
-        cancerous_type: 'Cancer 2'
-      }
-    ];
+  ionViewDidLoad() {
+    let loading = this.loadingCtrl.create({
+      content: 'Aguarde...'
+    });
+    loading.present();
 
-    this.treatments = [
-      {
-        status: null,
-        treatment_type_id: 1,
-        treatable_type: 'Cirurgia'
-      },
-      {
-        status: null,
-        treatment_type_id: 2,
-        treatable_type: 'Quimioterapia'
-      }
-    ];
+    Promise.resolve()
+    .then(getAllTreatments.bind(this))
+    .then(getAllTypersCancers.bind(this))
+    .then(closeLoading.bind(this))
+    .catch(disconnectNetwork.bind(this))
 
-    this.user.current_treatment_profile_attributes.treatments_attributes = this.treatments;
+    function getAllTreatments() {
+      return this.authService.getAllTreatments().then((datas) => {
+        this.treatments = datas;
+        this.user.current_treatment_profile_attributes.treatments_attributes = this.treatments;
+      });
+    }
+
+    function getAllTypersCancers() {
+      return this.authService.getAllTypesCancers().then((datas) => {
+        this.typesCancer = datas;
+      });
+    }
+
+    function closeLoading() {
+      loading.dismiss();
+    }
+
+    function disconnectNetwork() {
+      this.showMessage('Você deve estar conectado para continuar o cadastro.');
+      this.disconnect = true;
+      loading.dismiss();
+    }
   }
 
   nextPage(params) {
     if(!this.user.current_treatment_profile_attributes.cancer_treatments_attributes) {
-      this.showMessage();
+      this.showMessage('O usuário deve preencher algum tipo de câncer.');
       return;
     }
 
@@ -63,10 +74,10 @@ export class AuthRegisterTypeTreatmentPage {
 
   }
 
-  showMessage() {
+  showMessage(message) {
     let alert = this.alertCtrl.create({
       title: 'Ops! Ocorreu um problema!',
-      subTitle: 'O usuário deve preencher algum tipo de câncer.',
+      subTitle: message,
       buttons: ['Fechar']
     })
 
