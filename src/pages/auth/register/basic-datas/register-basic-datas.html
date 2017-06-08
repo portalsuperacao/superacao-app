@@ -14,20 +14,20 @@
     </ion-col>
   </ion-row>
   <ion-item *ngIf="!facebookDatas">
-    <ion-input type="text" placeholder="E-mail"></ion-input>
+    <ion-input type="text" placeholder="E-mail" [(ngModel)]="user.participant_profile_attributes.email"></ion-input>
   </ion-item>
   <ion-item *ngIf="!facebookDatas">
-    <ion-input type="password" placeholder="Senha"></ion-input>
+    <ion-input type="password" placeholder="Senha" [(ngModel)]="user.participant_profile_attributes.password"></ion-input>
   </ion-item>
   <ion-row *ngIf="!facebookDatas">
     <ion-col col-6>
       <ion-item>
-        <ion-input type="text" placeholder="Sobrenome"></ion-input>
+        <ion-input type="text" placeholder="Sobrenome" [(ngModel)]="user.participant_profile_attributes.last_name"></ion-input>
       </ion-item>
     </ion-col>
     <ion-col col-6>
       <ion-item>
-        <ion-select placeholder="Genero">
+        <ion-select placeholder="Genero" [(ngModel)]="user.participant_profile_attributes.genre">
           <ion-option *ngFor="let genre of genres">{{ genre }}</ion-option>
         </ion-select>
       </ion-item>
@@ -36,27 +36,27 @@
   <ion-row>
     <ion-col col-6>
       <ion-item>
-        <ion-datetime displayFormat="DD/MM/YYYY" placeholder="Data de nascimento"></ion-datetime>
+        <ion-datetime displayFormat="DD/MM/YYYY" placeholder="Data de nascimento" [(ngModel)]="user.participant_profile_attributes.birthdate"></ion-datetime>
       </ion-item>
     </ion-col>
     <ion-col col-6>
       <ion-item>
-        <ion-input type="text" placeholder="Profissão"></ion-input>
+        <ion-input type="text" placeholder="Profissão" [(ngModel)]="user.participant_profile_attributes.occupation"></ion-input>
       </ion-item>
     </ion-col>
   </ion-row>
   <ion-row>
     <ion-col col-6>
       <ion-item>
-        <ion-select placeholder="Estado">
+        <ion-select placeholder="Estado" [(ngModel)]="user.participant_profile_attributes.state">
           <ion-option *ngFor="let state of states">{{ state }}</ion-option>
         </ion-select>
       </ion-item>
     </ion-col>
     <ion-col col-6>
       <ion-item>
-        <ion-select placeholder="Tem filhos">
-          <ion-option *ngFor="let children of childrens">{{ children }}</ion-option>
+        <ion-select placeholder="Tem filhos" [(ngModel)]="user.participant_profile_attributes.sons">
+          <ion-option *ngFor="let son of sons; let i = index" value="{{ i }}">{{ son }}</ion-option>
         </ion-select>
       </ion-item>
     </ion-col>
@@ -64,15 +64,15 @@
   <ion-row>
     <ion-col col-6>
       <ion-item>
-        <ion-select placeholder="Estado civil">
+        <ion-select placeholder="Estado civil" [(ngModel)]="user.participant_profile_attributes.relationship">
           <ion-option *ngFor="let relationship of relationships">{{ relationship }}</ion-option>
         </ion-select>
       </ion-item>
     </ion-col>
     <ion-col col-6>
       <ion-item>
-        <ion-select placeholder="Tem religião">
-          <ion-option *ngFor="let religion of religions">{{ religion }}</ion-option>
+        <ion-select placeholder="Tem religião" [(ngModel)]="user.participant_profile_attributes.belief">
+          <ion-option *ngFor="let belief of beliefs">{{ belief }}</ion-option>
         </ion-select>
       </ion-item>
     </ion-col>
@@ -82,5 +82,5 @@
     <div (click)="clickCheckTerms()"><button class="simple-radio-button" [ngClass]="{'simple-radio-button-selected' : isRadioButtonClass}"></button> Aceito os termos de uso</div>
   </div>
 
-  <button class="auth-button" [navPush]="nextPage">Continuar cadastro</button>
+  <button class="auth-button" (click)="nextPage()">Continuar cadastro</button>
 </ion-content>

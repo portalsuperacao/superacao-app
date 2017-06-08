@@ -15,10 +15,10 @@
     </ion-row>
     <h3 class="description">Vamos fazer seu cadastro. Como gostaria de ser chamado?</h3>
     <ion-item>
-      <ion-input type="text" placeholder="Escreva aqui"></ion-input>
+      <ion-input type="text" placeholder="Escreva aqui" #name></ion-input>
     </ion-item>
-    <button class="auth-button" [navPush]="nextPage">Continuar</button>
-    <button class="auth-button facebook" [navPush]="nextPage" [navParams]="{ facebookDatas : true }">
+    <button class="auth-button" (click)="nextPageNormal(name.value)">Continuar</button>
+    <button class="auth-button facebook" (click)="nextPageFacebook()">
       <ion-icon name="logo-facebook"></ion-icon>
       Conecte-se com o Facebook
     </button>

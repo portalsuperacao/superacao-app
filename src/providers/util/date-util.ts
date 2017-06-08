@@ -34,7 +34,6 @@ export class DateUtil {
     return hour + ":" + sec;
   }
 
-
   formatDateString(date: string) {
     let parseDate = new Date(date);
     return parseDate.getTime();
@@ -47,6 +46,12 @@ export class DateUtil {
   removeTime(date) {
     let newDate = moment(date);
     return newDate.hour(0).minute(0).second(0).millisecond(0);
+  }
+
+  calculateAge(date) {
+    let now = new Date().getFullYear()
+    let dateYear = new Date(date).getFullYear()
+    return now - dateYear
   }
 
 }

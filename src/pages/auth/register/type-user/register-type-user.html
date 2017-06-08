@@ -15,7 +15,18 @@
       </ion-col>
     </ion-row>
     <h3 class="description"> Para te ajudar, preciso saber algumas informações sobre você.</h3>
-    <button class="auth-button purple" [navPush]="nextPage" [navParams]="{ typeUser : 'paciente' }">Sou paciente</button>
-    <button class="auth-button purple" [navPush]="nextPage" [navParams]="{ typeUser : 'familiar' }">Sou familiar</button>
+    <button class="auth-button purple" (click)="nextPage({ typeUser : 'paciente' })">Sou paciente</button>
+    <button class="auth-button purple" (click)="isFamiliar = !isFamiliar">Sou familiar</button>
+    <ion-item *ngIf="isFamiliar">
+      <ion-select placeholder="Qual tipo de familiar?" (ionChange)="pushPageWhenSelected($event)">
+        <ion-option value="son">Filho</ion-option>
+        <ion-option value="father">Pai</ion-option>
+        <ion-option value="mother">Mãe</ion-option>
+        <ion-option value="brother">Irmão</ion-option>
+        <ion-option value="sister">Irmã</ion-option>
+        <ion-option value="cousin">Tio</ion-option>
+        <ion-option value="uncle">Tia</ion-option>
+      </ion-select>
+    </ion-item>
   </div>
 </ion-content>

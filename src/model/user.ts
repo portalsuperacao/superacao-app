@@ -1,45 +1,54 @@
+export interface UserTreatmentAttributes {
+  status: string,
+  treatment_type_id: number,
+  treatable_type: any
+}
+
+export interface UserCancerTreatmentsAttributes {
+  cancer_type_id : number,
+  cancerous_type: any
+}
 
 export class UserModel {
-  avatar = '';
-  birthdate = '';
-  cancer_name = '';
-  children = 0;
-  city = '';
-  country = '';
-  email = '';
-  emotion = {
-    img: '',
-    is_active: 0,
-    status: ''
-  };
-  genre = '';
-  latitude = '';
-  longitude = '';
-  name = '';
-  occupation = '';
-  other_datas = {
-    active: 0,
-    token_device: '',
-    last_access: '',
-    healing_phrase : '',
-    phrase_of_difficulties: ''
-  };
-  type_participant = 0;
-  provider = 0;
-  relationship = '';
-  religion = 0;
-  state = '';
-  treatment = {
-    cirurgia: 0,
-    quimioterapia: 0,
-    radiografia: 0,
-    terapia_oval: 0,
-    terapia_oral: 0,
-    terapias_naturais: 0
-  };
-  type_cancer = {
-    is_metastasis : 0,
-    is_recurrent: 0
-  };
-  type_user = '';
+  uid: any
+  type: string
+  pacient: string
+  family_member: string
+  cancer_status: any
+  participant_profile_attributes = {
+    avatar: <string> null,
+    first_name: <string> null,
+    last_name: <string> null,
+    birthdate: <any> null,
+    occupation: <string> null,
+    country: <string> null,
+    state: <string> null,
+    city: <string> null,
+    relationship: <string> null,
+    sons: <number> null,
+    facebook: <string> null,
+    instagram: <string> null,
+    whatsapp: <string> null,
+    youtube: <string> null,
+    snapchat: <string> null,
+    participant_id: <number> null,
+    genre: <string> null,
+    email: <string> null,
+    password: <string> null,
+    belief: <string> null,
+    healing_quote: <string> null,
+    difficulty_quote: <string> null
+  }
+  past_treatment_profile_attributes = {
+    metastasis : <boolean> null,
+    relapse: <boolean> null,
+    treatments_attributes: <[UserTreatmentAttributes]> null,
+    cancer_treatments_attributes: <UserCancerTreatmentsAttributes> null
+  }
+  current_treatment_profile_attributes = {
+    metastasis: <boolean> null,
+    relapse : <boolean> null,
+    treatments_attributes: <[UserTreatmentAttributes]> null,
+    cancer_treatments_attributes: <UserCancerTreatmentsAttributes> null
+  }
 }

@@ -9,11 +9,12 @@ import { AuthRegisterOtherCancerPage } from '../other-cancer/other-cancer';
   templateUrl: 'register-past-cancer.html',
 })
 export class AuthRegisterPastCancerPage {
-  typeUser;
-  nextPageConclusion;
-  nextPageOtherCancer;
+  typeUser : any;
+  nextPageConclusion : any;
+  nextPageOtherCancer : any;
 
-  constructor(public navCtrl : NavController, public navParams: NavParams) {
+  constructor(
+    public navCtrl : NavController, public navParams: NavParams) {
     this.typeUser = this.navParams.get('typeUser');
     this.nextPageConclusion = AuthRegisterConclusionPage;
     this.nextPageOtherCancer = AuthRegisterOtherCancerPage;

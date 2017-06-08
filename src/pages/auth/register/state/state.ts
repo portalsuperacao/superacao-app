@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { AuthRegisterTypeCancerPage } from '../type-cancer/type-cancer';
 import { AuthRegisterPastCancerPage } from '../past-cancer/past-cancer';
+import { AuthService } from '../../../../providers/database/auth-service';
 
 @Component({
   selector: 'page-auth-register-state',
@@ -10,13 +11,20 @@ import { AuthRegisterPastCancerPage } from '../past-cancer/past-cancer';
 })
 export class AuthRegisterStatePage {
   typeUser;
-  nextPageMetastases;
-  nextPageRemissao;
 
-  constructor(public navCtrl : NavController, public navParams: NavParams) {
+  constructor(
+    public navCtrl : NavController,
+    public navParams: NavParams,
+    public authService: AuthService) {
     this.typeUser = this.navParams.get('typeUser');
-    this.nextPageMetastases = AuthRegisterTypeCancerPage;
-    this.nextPageRemissao = AuthRegisterPastCancerPage;
+  }
+
+  nextPageMetastases(params) {
+    this.navCtrl.push(AuthRegisterTypeCancerPage, params);
+  }
+
+  nextPageRemissao(params) {
+    this.navCtrl.push(AuthRegisterPastCancerPage, params);
   }
 
 }

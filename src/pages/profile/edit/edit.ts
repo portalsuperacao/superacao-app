@@ -43,8 +43,8 @@ export class ProfileEditPage {
         cancer_name: [this.user.cancer_name],
         past_cancer_type: [this.user.past_cancer_type],
         participant_type: [this.user.participant_type],
-        is_metastasis: [this.user.type_cancer ? this.user.type_cancer.is_metastasis : null],
-        is_recurrent: [this.user.type_cancer ? this.user.type_cancer.is_recurrent : null],
+        is_metastasis: [this.user.cancer_type ? this.user.cancer_type.is_metastasis : null],
+        is_recurrent: [this.user.cancer_type ? this.user.cancer_type.is_recurrent : null],
         treatmentCirurgia : [this.user.treatment ? this.user.treatment.cirurgia : null],
         treatmentQuimioterapia : [this.user.treatment ? this.user.treatment.quimioterapia : null],
         treatmentRadiografia : [this.user.treatment ? this.user.treatment.radiografia : null],
@@ -112,21 +112,21 @@ export class ProfileEditPage {
       let user = new UserModel();
       Object.assign(user, formDatas);
 
-      if(formDatas.birthdate) {
-        user.birthdate = this.dateUtil.parseDate(formDatas.birthdate, '00:00:00');
-      }
-      
-      user.type_cancer.is_metastasis = formDatas.is_metastasis;
-      user.type_cancer.is_recurrent = formDatas.is_recurrent;
-
-      user.treatment.cirurgia = formDatas.treatmentCirurgia;
-      user.treatment.quimioterapia = formDatas.treatmentQuimioterapia;
-      user.treatment.radiografia = formDatas.treatmentRadiografia;
-      user.treatment.terapia_oral = formDatas.treatmentTerapiaOral;
-      user.treatment.terapia_oval = formDatas.treatmentTerapiaOval;
-      user.treatment.terapias_naturais = formDatas.treatmentTerapiasNaturais;user
-      user.other_datas.healing_phrase = formDatas.healing_phrase;
-      user.other_datas.phrase_of_difficulties = formDatas.phrase_of_difficulties;
+      // if(formDatas.birthdate) {
+      //   user.birthdate = this.dateUtil.parseDate(formDatas.birthdate, '00:00:00');
+      // }
+      //
+      // user.cancer_type.is_metastasis = formDatas.is_metastasis;
+      // user.cancer_type.is_recurrent = formDatas.is_recurrent;
+      //
+      // user.treatment.cirurgia = formDatas.treatmentCirurgia;
+      // user.treatment.quimioterapia = formDatas.treatmentQuimioterapia;
+      // user.treatment.radiografia = formDatas.treatmentRadiografia;
+      // user.treatment.terapia_oral = formDatas.treatmentTerapiaOral;
+      // user.treatment.terapia_oval = formDatas.treatmentTerapiaOval;
+      // user.treatment.terapias_naturais = formDatas.treatmentTerapiasNaturais;user
+      // user.other_datas.healing_phrase = formDatas.healing_phrase;
+      // user.other_datas.phrase_of_difficulties = formDatas.phrase_of_difficulties;
 
       return user;
     }
@@ -152,9 +152,9 @@ export class ProfileEditPage {
   }
 
   _verifyClassOfThumb() {
-    if(this.user.type_user == 'Superador') {
+    if(this.user.user_type == 'Superador') {
       this.thumbClass = 'background-color-overcomer';
-    } else if (this.user.type_user == 'Anjo') {
+    } else if (this.user.user_type == 'Anjo') {
       this.thumbClass = 'background-color-angel';
     }
   }

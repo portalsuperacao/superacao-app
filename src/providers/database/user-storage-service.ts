@@ -8,29 +8,30 @@ import 'rxjs/Observable'
 @Injectable()
 
 export class UserStorageService {
-  private db : any;
+  db : any;
+  user: any;
 
   constructor(
-    private af: AngularFire,
-    private utils: Utils) {
+    public af: AngularFire,
+    public utils: Utils) {
+      this.user = new UserModel();
   }
-
 
   registerUser(result) {
-    let user = new UserModel();
-    user.avatar = result.photoURL || 'https://placehold.it/150x150';
-    user.name = result.name || result.displayName;
-    user.email = result.email;
-    user.type_user = 'Normal';
-    user.religion = 5;
-    user.emotion = {
-      img: './assets/images/emoji-happy.svg',
-      is_active: 0,
-      status: 'Normal'
-    };
-    this.db = this.af.database.object(`/users/${result.uid}`);
-    this.db.set(user);
-  }
+    // let user = new UserModel();
+    // user.avatar = result.photoURL || 'https://placehold.it/150x150';
+    // user.name = result.name || result.displayName;
+    // user.email = result.email;
+    // user.user_type = 'Normal';
+    // user.religion = 5;
+    // user.emotion = {
+    //   img: './assets/images/emoji-happy.svg',
+    //   is_active: 0,
+    //   status: 'Normal'
+    // };
+    // this.db = this.af.database.object(`/users/${result.uid}`);
+    // this.db.set(user);
+}
 
   getUser() {
     return new Promise((resolve) => {

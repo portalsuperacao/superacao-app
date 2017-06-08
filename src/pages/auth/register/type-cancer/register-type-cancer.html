@@ -21,13 +21,13 @@
     <div class="checkbox-group">
       <ion-item>
         <ion-label>Metástase</ion-label>
-        <ion-checkbox mode="ios"></ion-checkbox>
+        <ion-checkbox mode="ios" [(ngModel)]="user.current_treatment_profile_attributes.metastasis"></ion-checkbox>
       </ion-item>
       <ion-item>
         <ion-label>Reicidiva</ion-label>
-        <ion-checkbox mode="ios"></ion-checkbox>
+        <ion-checkbox mode="ios" [(ngModel)]="user.current_treatment_profile_attributes.relapse"></ion-checkbox>
       </ion-item>
     </div>
-    <button class="auth-button purple" [navPush]="nextPage" [navParams]="{'typeUser' : typeUser}">Continuar cadastro</button>
+    <button class="auth-button purple" (click)="nextPage({'typeUser' : typeUser})">Continuar cadastro</button>
   </div>
 </ion-content>

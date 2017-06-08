@@ -3,10 +3,11 @@ import { AuthProviders, AngularFireAuth, AuthMethods, AngularFire } from 'angula
 import { UserStorageService } from './user-storage-service';
 import { Platform } from 'ionic-angular';
 import { Facebook } from '@ionic-native/facebook';
-import firebase from 'firebase';
+import { UserModel } from '../../model/user';
 
 @Injectable()
 export class AuthService {
+  user: any;
 
   constructor(
     private auth: AngularFireAuth,
@@ -14,11 +15,21 @@ export class AuthService {
     private userStorageService: UserStorageService,
     private platform: Platform,
     private facebook: Facebook) {
-
+      this.user = new UserModel()
   }
 
   getAuthentication() {
     return this.auth;
+  }
+
+  getFacebookDatas() {
+    return new Promise((resolve, reject) => {
+      this.facebook.login(['email', 'public_profile']).then((res) => {
+        resolve(res);
+      }).catch((error) => {
+        reject(error);
+      })
+    })
   }
 
   signWithFacebook() {

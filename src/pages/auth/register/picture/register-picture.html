@@ -16,7 +16,6 @@
       </ion-col>
     </ion-row>
     <button class="auth-button">Escolher foto</button>
-    <button class="auth-button purple" [navPush]="nextPage">Continuar cadastro</button>
-    <p class="description">Gostaria de por depois. <b [navPush]="nextPage">Clique aqui</b></p>
+    <button class="auth-button purple" (click)="nextPage()">Continuar cadastro</button>
   </div>
 </ion-content>

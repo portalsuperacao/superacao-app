@@ -10,10 +10,17 @@
         <img src="./assets/images/logo-angel-6.svg" />
       </ion-col>
       <ion-col>
-        <p *ngIf="typeUser == 'paciente'" class="speech-bubble">Qual tipos de tratamento você já realizou ou ainda vai fazer?</p>
-        <p *ngIf="typeUser == 'familiar'" class="speech-bubble">Qual tipos de tratamento seu familiar já realizou ou ainda vai fazer?</p>
+        <p *ngIf="typeUser == 'paciente'" class="speech-bubble">Qual tipo de câncer você teve?</p>
+        <p *ngIf="typeUser == 'familiar'" class="speech-bubble">Qual tipo de câncer seu familiar teve?</p>
+        <ion-item>
+          <ion-select placeholder="Tipo do câncer" [(ngModel)]="user.current_treatment_profile_attributes.cancer_treatments_attributes">
+            <ion-option *ngFor="let typeCancer of typesCancer" value="{{ jsonStringify(typeCancer) }}">{{ typeCancer.cancerous_type }}</ion-option>
+          </ion-select>
+        </ion-item>
       </ion-col>
     </ion-row>
+    <h3 *ngIf="typeUser == 'paciente'" class="description" >Quais tratamentos você realizou</h3>
+    <h3 *ngIf="typeUser == 'familiar'" class="description" >Quais tipos de tratamentos seu familiar realizou </h3>
     <div class="radio-group">
       <ion-row class="radio-group-header">
         <ion-col col-3>
@@ -26,74 +33,20 @@
           <p>Tipos de tratamentos:</p>
         </ion-col>
       </ion-row>
-      <ion-row radio-group>
+      <ion-row radio-group *ngFor="let treatment of treatments; let i = index;"
+        [(ngModel)]="user.current_treatment_profile_attributes.treatments_attributes[i].status">
         <ion-col col-3>
-          <ion-radio mode="md"></ion-radio>
+          <ion-radio mode="md" value="done"></ion-radio>
         </ion-col>
         <ion-col col-3>
-          <ion-radio mode="md"></ion-radio>
+          <ion-radio mode="md" value="doing"></ion-radio>
         </ion-col>
         <ion-col col-6>
-          <p>Cirurgia</p>
-        </ion-col>
-      </ion-row>
-      <ion-row radio-group>
-        <ion-col col-3>
-          <ion-radio mode="md"></ion-radio>
-        </ion-col>
-        <ion-col col-3>
-          <ion-radio mode="md"></ion-radio>
-        </ion-col>
-        <ion-col col-6>
-          <p>Quimioterapia</p>
-        </ion-col>
-      </ion-row>
-      <ion-row radio-group>
-        <ion-col col-3>
-          <ion-radio mode="md"></ion-radio>
-        </ion-col>
-        <ion-col col-3>
-          <ion-radio mode="md"></ion-radio>
-        </ion-col>
-        <ion-col col-6>
-          <p>Radiografia</p>
-        </ion-col>
-      </ion-row>
-      <ion-row radio-group>
-        <ion-col col-3>
-          <ion-radio mode="md"></ion-radio>
-        </ion-col>
-        <ion-col col-3>
-          <ion-radio mode="md"></ion-radio>
-        </ion-col>
-        <ion-col col-6>
-          <p>Terapia oral</p>
-        </ion-col>
-      </ion-row>
-      <ion-row radio-group>
-        <ion-col col-3>
-          <ion-radio mode="md"></ion-radio>
-        </ion-col>
-        <ion-col col-3>
-          <ion-radio mode="md"></ion-radio>
-        </ion-col>
-        <ion-col col-6>
-          <p>Terapia oval</p>
-        </ion-col>
-      </ion-row>
-      <ion-row radio-group>
-        <ion-col col-3>
-          <ion-radio mode="md"></ion-radio>
-        </ion-col>
-        <ion-col col-3>
-          <ion-radio mode="md"></ion-radio>
-        </ion-col>
-        <ion-col col-6>
-          <p>Terapia naturais</p>
+          <p>{{ treatment.treatable_type }}</p>
         </ion-col>
       </ion-row>
     </div>
 
-    <button class="auth-button purple" [navPush]="nextPage" [navParams]="{'typeUser' : typeUser}">Continuar cadastro</button>
+    <button class="auth-button purple" (click)="nextPage({'typeUser' : typeUser})">Continuar cadastro</button>
 
 </ion-content>
