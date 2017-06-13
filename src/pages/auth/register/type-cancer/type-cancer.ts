@@ -23,15 +23,12 @@ export class AuthRegisterTypeCancerPage {
 
   nextPage(params) {
     if(!this.user.current_treatment_profile_attributes.metastasis &&
-       !this.user.current_treatment_profile_attributes.relapse) {
-         this.showMessage();
-         return;
+    !this.user.current_treatment_profile_attributes.relapse) {
+      this.showMessage();
+      return;
     }
-
     this.navCtrl.push(AuthRegisterTypeTreatmentPage, params)
   }
-
-
 
   showMessage() {
     let alert = this.alertCtrl.create({

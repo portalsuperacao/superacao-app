@@ -21,11 +21,12 @@ export class AuthRegisterTypeUserPage {
 
   nextPage(params) {
     this.authService.user.pacient = params.typeUser;
-    this.navCtrl.push(AuthRegisterStatePage, params);
+    this.navCtrl.push(AuthRegisterStatePage, {typeUser: 'paciente'});
   }
 
   pushPageWhenSelected(value) {
-    this.authService.user.familiar = value;
+    this.authService.user.pacient = 'family_member';
+    this.authService.user.family_member = value;
     this.navCtrl.push(AuthRegisterStatePage, {typeUser: 'familiar'});
   }
 

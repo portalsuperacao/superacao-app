@@ -1,0 +1,266 @@
+[33mcommit 452abf169a399d04ba1082e27cbdd5ad40a6249f[m
+Author: Diego Garcia <cl1308@fiap.com.br>
+Date:   Thu Jun 8 19:02:14 2017 -0300
+
+    Add video of page conclusion
+
+[33mcommit 35290deabd2b91c148920af74245354d71d9da9e[m
+Author: Diego Garcia <cl1308@fiap.com.br>
+Date:   Thu Jun 8 18:49:50 2017 -0300
+
+    Add endpoints of treatments and types of cancer
+
+[33mcommit 51bb742e1846c09e93ea85d71e9c25dda57ffcee[m
+Author: Diego Garcia <cl1308@fiap.com.br>
+Date:   Thu Jun 8 15:26:19 2017 -0300
+
+    Finish all basic data flow and validate inputs
+
+[33mcommit e3c8dff385dec0469ef9a84577affc1e287df2de[m
+Merge: 2c37c28 d8205cb
+Author: Michel Bottan <michel.bottan@gmail.com>
+Date:   Tue May 30 15:39:04 2017 -0300
+
+    Merge pull request #20 from portalsuperacao/app-169
+    
+    Telas de Sign-up
+
+[33mcommit 2c37c285c6a78f783ad0ed79bda802b0d8bb837c[m
+Merge: c38edce 77b6fed
+Author: Michel Bottan <michel.bottan@gmail.com>
+Date:   Tue May 30 15:25:22 2017 -0300
+
+    Merge pull request #19 from portalsuperacao/app-152
+    
+    App 152 - Refactor Calendar
+
+[33mcommit d8205cbf190aa46286fc0d3b49d56414bada97f1[m
+Author: Diego Garcia <diego.ds.garcia@gmail.com>
+Date:   Sat May 27 22:21:27 2017 -0300
+
+    Finish all layout and flow of Authentication
+
+[33mcommit d7d0c19cc8169638da79d9938074aa21891fa393[m
+Author: Diego Garcia <cl1308@fiap.com.br>
+Date:   Fri May 26 19:03:57 2017 -0300
+
+    Create class speech-bubble
+
+[33mcommit b0ba99c7e039caaf0190c1a380bd514062376797[m
+Author: Diego Garcia <cl1308@fiap.com.br>
+Date:   Thu May 25 19:23:25 2017 -0300
+
+    Create AuthModule with their Components
+
+[33mcommit 77b6fedc3f07d47fc46d5d1698a66314491e82b8[m
+Author: Diego Garcia <cl1308@fiap.com.br>
+Date:   Thu May 25 14:40:41 2017 -0300
+
+    Remove EventCalendarModel
+
+[33mcommit 70a5ca26328c22307d1d371ddb8dd4350610d9eb[m
+Merge: 2c9025f c38edce
+Author: Diego Garcia <cl1308@fiap.com.br>
+Date:   Thu May 25 14:23:11 2017 -0300
+
+    Merge branch 'master' of https://github.com/portalsuperacao/superacao-app into app-152
+
+[33mcommit c38edce85d020211d42509cd208e49b2d922e5a7[m
+Author: Diego Garcia <cl1308@fiap.com.br>
+Date:   Thu May 25 14:15:30 2017 -0300
+
+    Fix authentication with Facebook
+
+[33mcommit db4498f71414ff35d73c2706a25e5504f39683bf[m
+Author: Diego Garcia <cl1308@fiap.com.br>
+Date:   Thu May 25 14:04:41 2017 -0300
+
+    Update menu layout with new grid system
+
+[33mcommit 2c9025f2add22acd737a9d57b7af072d33c408fc[m
+Author: Diego Garcia <cl1308@fiap.com.br>
+Date:   Thu May 25 13:53:43 2017 -0300
+
+    Update Calendar Service and Component
+
+[33mcommit 6ea260bed65c6a1fe4ceb3a98482986810216678[m
+Author: Diego Garcia <cl1308@fiap.com.br>
+Date:   Wed May 24 19:08:46 2017 -0300
+
+    Update CalendarStorageService and CalendarEdit
+
+[33mcommit f54937fe06fe52d17d02d2b7b77b391c173ad7f8[m
+Author: Diego Garcia <cl1308@fiap.com.br>
+Date:   Tue May 23 16:16:20 2017 -0300
+
+    Update Calendar Components and Service
+
+[33mcommit 563a99b07c07ed39b5f5fd967fe05fdb689b8f7b[m
+Merge: 1a08ff4 a61ea92
+Author: Diego Garcia <cl1308@fiap.com.br>
+Date:   Mon May 22 14:23:46 2017 -0300
+
+    Merge branch 'master' of https://github.com/portalsuperacao/superacao-app into app-152
+
+[33mcommit a61ea9241565dec87268368b87c9d574a5d7bd99[m
+Merge: c69791c 19f049f
+Author: Diego Garcia <diego.ds.garcia@gmail.com>
+Date:   Mon May 22 14:00:09 2017 -0300
+
+    Merge pull request #18 from portalsuperacao/upgrade-ionic
+    
+    Angular 4 and Ionic dependencies
+
+[33mcommit c69791c8c8caa0e94e03de03ffdaf9cc88013726[m
+Merge: fefd90f a651d7d
+Author: Michel Bottan <michel.bottan@gmail.com>
+Date:   Sat May 13 13:27:00 2017 -0300
+
+    Merge pull request #14 from olavocneto/olavocneto-patch-1
+    
+    Instruções firebase login com facebook
+
+[33mcommit 19f049f4fc547589f444688bcc9f71da6f3399d4[m
+Author: Michel Bottan <michel.bottan@gmail.com>
+Date:   Sat May 13 13:23:57 2017 -0300
+
+    Angular 4 and Ionic dependencies
+
+[33mcommit fefd90f2d918927c562d98d166a50c76416bb10f[m
+Author: Diego Garcia <cl1308@fiap.com.br>
+Date:   Thu May 11 19:15:41 2017 -0300
+
+    Update datas of UserModel
+
+[33mcommit 1a08ff4acc18a03192dd71e0fa4a7c23860896e7[m
+Merge: 284c1ba 1267e94
+Author: Diego Garcia <cl1308@fiap.com.br>
+Date:   Thu May 11 19:01:24 2017 -0300
+
+    Merge branch 'master' of https://github.com/portalsuperacao/superacao-app into app-152
+
+[33mcommit 1267e941acd44e1957ae08df96fa1a66f296623a[m
+Author: Diego Garcia <cl1308@fiap.com.br>
+Date:   Thu May 11 18:48:49 2017 -0300
+
+    Update project to ionic-cli-3
+
+[33mcommit 284c1badc61d595fcf4979527e204a9c30870737[m
+Author: Diego Garcia <cl1308@fiap.com.br>
+Date:   Thu May 11 18:34:21 2017 -0300
+
+    Insert message when doesn't have event
+
+[33mcommit 31a807c336d373a89c35efc2a4ff982e5da13912[m
+Author: Diego Garcia <cl1308@fiap.com.br>
+Date:   Thu May 11 17:27:27 2017 -0300
+
+    Change structure folders Calendar to MySpace
+
+[33mcommit db0101ecfb2c67adf6e6d5a648c1fce19e076715[m
+Author: Diego Garcia <cl1308@fiap.com.br>
+Date:   Thu May 11 16:13:50 2017 -0300
+
+    Update app offline
+
+[33mcommit 323713a40e3290ef165be24c868d4c20f5608f6f[m
+Author: Diego Garcia <cl1308@fiap.com.br>
+Date:   Thu May 11 15:17:37 2017 -0300
+
+    Update modify acesser
+
+[33mcommit b22b56aa46851b5b67b0b253a0af7bc5f4c4235e[m
+Author: Diego Garcia <cl1308@fiap.com.br>
+Date:   Thu May 11 14:38:05 2017 -0300
+
+    Remove uid of UserModel
+
+[33mcommit 95a7d365d306d67d2ee77625e0706e8a38500634[m
+Author: Diego Garcia <cl1308@fiap.com.br>
+Date:   Thu May 11 14:25:54 2017 -0300
+
+    Refactory profile page and edit profile page
+
+[33mcommit 26baef593245efec7082ce22f8f64df6cd57a74c[m
+Author: Diego Garcia <cl1308@fiap.com.br>
+Date:   Thu May 11 09:34:48 2017 -0300
+
+    Rename classe UserModal to UserModel
+
+[33mcommit 616e2927f874d7f09499cb708145d661b18073b4[m
+Author: Diego Garcia <cl1308@fiap.com.br>
+Date:   Wed May 10 18:51:39 2017 -0300
+
+    Create UserModal, refactory component of register user, and update some things of layout
+
+[33mcommit 8698326b7f55d672befd17bacb98f97bd0f308ea[m
+Merge: ece5d61 8ea6e06
+Author: Diego Garcia <diego.ds.garcia@gmail.com>
+Date:   Wed May 10 16:47:09 2017 -0300
+
+    Merge pull request #15 from portalsuperacao/app-159
+    
+    app-159 -> Insert button update geolocation in profile
+
+[33mcommit 8ea6e0637eda2849751c35e43448ac9a26afefab[m
+Merge: 2aa5d1f ece5d61
+Author: Diego Garcia <cl1308@fiap.com.br>
+Date:   Wed May 10 16:46:27 2017 -0300
+
+    Resolve conflits
+
+[33mcommit ece5d61664f344d41fea0041a2b6fcf8ba57eb97[m
+Merge: f8afe05 8a7f219
+Author: Diego Garcia <diego.ds.garcia@gmail.com>
+Date:   Wed May 10 16:36:04 2017 -0300
+
+    Merge pull request #17 from portalsuperacao/app-161
+    
+    App 161 -> Update and refactoring trinity page, service and user service
+
+[33mcommit 8a7f21920365bfffe68a8e2f7618ab1bc1efb01d[m
+Author: Diego Garcia <cl1308@fiap.com.br>
+Date:   Wed May 10 16:30:27 2017 -0300
+
+    Create structure of user when a user is register, and fix others bugs when start app in first time
+
+[33mcommit 71e698229d1d5720803b08ef1410194e772e6820[m
+Author: Diego Garcia <cl1308@fiap.com.br>
+Date:   Wed May 10 15:28:31 2017 -0300
+
+    Update message notification and refactory trinity service
+
+[33mcommit 99f03d2bb6ab2beec98d1307a3238115efb34c7b[m
+Author: Diego Garcia <cl1308@fiap.com.br>
+Date:   Thu May 4 15:40:55 2017 -0300
+
+    Insert update image profile
+
+[33mcommit 2aa5d1f4d057022207362d532fe76e600326da8d[m
+Author: Diego Garcia <cl1308@fiap.com.br>
+Date:   Wed May 3 17:01:04 2017 -0300
+
+    remove a file useless
+
+[33mcommit b9678624dd3be8f9ae1547966216057fdf08fbe9[m
+Author: Diego Garcia <cl1308@fiap.com.br>
+Date:   Wed May 3 16:56:23 2017 -0300
+
+    Insert button update geolocation in profile
+
+[33mcommit f8afe055ce1c077d28cd55736e272a17c28af85a[m
+Merge: 4f4a413 1d43689
+Author: Diego Garcia <diego.ds.garcia@gmail.com>
+Date:   Wed May 3 10:05:36 2017 -0300
+
+    Merge pull request #13 from olavocneto/fix/tslint
+    
+    Fix/tslint
+
+[33mcommit a651d7d9337b2519f1988e335438118123c976e0[m
+Author: Olavo <olavocneto@users.noreply.github.com>
+Date:   Tue Apr 25 21:58:15 2017 -0400
+
+    Instruções firebase login com facebook
+    
+    Instruções par

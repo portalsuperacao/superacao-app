@@ -18,7 +18,12 @@
       <p>Neste vídeo vamos te explicar como funciona nossa rede de apoio:</p>
     </div>
     <iframe width="100%" height="auto" src="https://www.youtube.com/embed/BzkJEI3nIhA" frameborder="0" allowfullscreen></iframe>
-    <button class="auth-button purple">Finalizar inscrição!</button>
+    <button class="auth-button" (click)="signup('overcomer')">
+      Quero ser ajudado
+    </button>
+    <button class="auth-button purple" *ngIf="isHelp" (click)="signup('angel')">
+      Quero ajudar
+    </button>
   </div>
 
 </ion-content>

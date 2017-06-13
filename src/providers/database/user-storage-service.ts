@@ -1,36 +1,42 @@
 import { Injectable } from '@angular/core'
+import { Http, Headers, RequestOptions } from '@angular/http';
 import { AngularFire } from 'angularfire2'
-import { Observable } from 'rxjs/Observable'
+import { Observable } from 'rxjs/observable';
+import 'rxjs/add/operator/toPromise';
+import 'rxjs/add/operator/map';
+
+import { ENV } from '../../config/environment.dev';
 import { Utils } from '../util/utils'
 import { UserModel } from '../../model/user';
-import 'rxjs/Observable'
+
 
 @Injectable()
 
 export class UserStorageService {
   db : any;
   user: any;
+  headers : Headers;
+  options : RequestOptions;
 
   constructor(
     public af: AngularFire,
+    public http: Http,
     public utils: Utils) {
       this.user = new UserModel();
+      this.headers = new Headers();
   }
 
-  registerUser(result) {
-    // let user = new UserModel();
-    // user.avatar = result.photoURL || 'https://placehold.it/150x150';
-    // user.name = result.name || result.displayName;
-    // user.email = result.email;
-    // user.user_type = 'Normal';
-    // user.religion = 5;
-    // user.emotion = {
-    //   img: './assets/images/emoji-happy.svg',
-    //   is_active: 0,
-    //   status: 'Normal'
-    // };
-    // this.db = this.af.database.object(`/users/${result.uid}`);
-    // this.db.set(user);
+  registerUser(user: UserModel, token: string) {
+    let send = { participant: null };
+    send.participant = user;
+    this.headers.append('Content-Type', 'application/json');
+    this.headers.append('Authorization', `Bearer ${token}`);
+    this.options = new RequestOptions({headers: this.headers});
+    console.log(JSON.stringify(send));
+
+    return this.http.post(`${ENV.HOST}/participant.json`, JSON.stringify(send), this.options)
+      .map(res => res.json())
+      .toPromise();
 }
 
   getUser() {

@@ -13,8 +13,11 @@
         <p *ngIf="typeUser == 'paciente'" class="speech-bubble">Qual tipo de câncer você teve?</p>
         <p *ngIf="typeUser == 'familiar'" class="speech-bubble">Qual tipo de câncer seu familiar já teve?</p>
         <ion-item>
-          <ion-select placeholder="Tipo do câncer" [(ngModel)]="user.past_treatment_profile_attributes.cancer_treatments_attributes">
-            <ion-option *ngFor="let typeCancer of typesCancer" value="{{ jsonStringify(typeCancer) }}">{{ typeCancer.cancerous_type }}</ion-option>
+          <ion-select placeholder="*Tipo do câncer"
+          [(ngModel)]="typeCancerSelected"
+          #cancerType="ngModel"
+          required>
+            <ion-option *ngFor="let typeCancer of typesCancer" [value]="typeCancer">{{ typeCancer.cancerous_type }}</ion-option>
           </ion-select>
         </ion-item>
       </ion-col>
@@ -49,7 +52,7 @@
 
     <button class="auth-button purple"
     (click)="nextPage({'typeUser' : typeUser})"
-    [disabled]="disconnect">
+    [disabled]="disconnect || cancerType.errors">
       Continuar cadastro
     </button>
 

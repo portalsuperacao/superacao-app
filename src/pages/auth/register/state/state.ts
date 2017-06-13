@@ -20,10 +20,12 @@ export class AuthRegisterStatePage {
   }
 
   nextPageMetastases(params) {
+    this.authService.user.cancer_status = 'during_treatment'
     this.navCtrl.push(AuthRegisterTypeCancerPage, params);
   }
 
   nextPageRemissao(params) {
+    this.authService.user.cancer_status = 'overcome'
     this.navCtrl.push(AuthRegisterPastCancerPage, params);
   }
 

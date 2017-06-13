@@ -11,6 +11,7 @@ import { AuthService } from '../../../../providers/database/auth-service';
 export class AuthRegisterTypeTreatmentPage {
   typeUser : any;
   typesCancer : any;
+  typeCancerSelected : any;
   treatments : any;
   user : any;
   disconnect: boolean;
@@ -64,14 +65,8 @@ export class AuthRegisterTypeTreatmentPage {
   }
 
   nextPage(params) {
-    if(!this.user.current_treatment_profile_attributes.cancer_treatments_attributes) {
-      this.showMessage('O usuário deve preencher algum tipo de câncer.');
-      return;
-    }
-
-    this.user.current_treatment_profile_attributes.cancer_treatments_attributes = JSON.parse(this.user.current_treatment_profile_attributes.cancer_treatments_attributes);
+    this.user.current_treatment_profile_attributes.cancer_treatments_attributes = [this.typeCancerSelected];
     this.navCtrl.push(AuthRegisterPastCancerPage, params);
-
   }
 
   showMessage(message) {
@@ -82,10 +77,6 @@ export class AuthRegisterTypeTreatmentPage {
     })
 
     alert.present();
-  }
-
-  jsonStringify(obj) {
-    return JSON.stringify(obj)
   }
 
 }

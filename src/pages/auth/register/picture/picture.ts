@@ -22,7 +22,7 @@ export class AuthRegisterPicturePage {
 
   openGallery() {
     this.utils.openGallery().then((image) => {
-      this.authService.user.avatar = image;
+      //this.authService.user.participant_profile_attributes.avatar = image;
     }).catch((error) => {
       console.log(error);
     })

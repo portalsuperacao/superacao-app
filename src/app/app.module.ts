@@ -45,7 +45,6 @@ import { CalendarPublicEventPage } from '../pages/my-space/calendar/public-event
 import { ChatPage } from '../pages/chat/chat';
 import { HelpSystemAngelPage } from '../pages/help-system/angel/help-system-angel';
 import { HelpSystemOvercomerPage } from '../pages/help-system/overcomer/help-system-overcomer';
-import { LoginPage } from '../pages/login/login';
 import { MySpacePage } from '../pages/my-space/my-space';
 import { MySpaceDoctorsPage } from '../pages/my-space/doctors/doctors';
 import { MySpaceDoctorsEventPage } from '../pages/my-space/doctors/event/doctors-event';
@@ -84,7 +83,6 @@ firebase.initializeApp(firebaseConfig);
     ChatPage,
     HelpSystemAngelPage,
     HelpSystemOvercomerPage,
-    LoginPage,
     MySpacePage,
     MySpaceDoctorsPage,
     MySpaceDoctorsEventPage,
@@ -124,7 +122,6 @@ firebase.initializeApp(firebaseConfig);
     ChatPage,
     HelpSystemAngelPage,
     HelpSystemOvercomerPage,
-    LoginPage,
     MySpacePage,
     MySpaceDoctorsPage,
     MySpaceDoctorsEventPage,

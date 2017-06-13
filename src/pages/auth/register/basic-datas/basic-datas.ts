@@ -12,6 +12,7 @@ import { DateUtil } from '../../../../providers/util/date-util';
 export class AuthRegisterBasicDatasPage {
   alert : any;
   user : any;
+  credentias: any;
   facebookDatas : any;
   states: any;
   sons : any;
@@ -27,8 +28,10 @@ export class AuthRegisterBasicDatasPage {
     public navParams : NavParams,
     public authService: AuthService,
     public dateUtil: DateUtil) {
+      this.credentias = this.authService.credentials;
       this.user = this.authService.user;
       this.facebookDatas = this.navParams.get('facebookDatas');
+
       this.isRadioButtonClass = false;
       this.states =  [ "AC", "AL", "AM", "AP", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RO", "RS", "RR", "SC", "SE", "SP", "TO" ];
       this.sons = ["Não tenho filhos", "1 filho", "2 filhos", "3 filhos", "4 filhos", "Mais de 4 filhos"];
@@ -38,45 +41,18 @@ export class AuthRegisterBasicDatasPage {
   }
 
   nextPage() {
-    this.validateForm()
-    .then(this.validateTerms.bind(this))
-    .then(this.validateBirthdate.bind(this))
+    this.validateBirthdate()
     .then(this.verifyPushPage.bind(this))
     .catch(this.showMessage.bind(this))
   }
 
-  validateForm() {
-    return new Promise((resolve, reject) => {
-      if(!this.user.participant_profile_attributes.email || !this.user.participant_profile_attributes.password) {
-        reject("Digite os campos obrigatórios! <br> Email, senha, data de nascimento e genero");
-      }
-      if(this.user.participant_profile_attributes.email.trim() &&
-         this.user.participant_profile_attributes.password.trim() &&
-         this.user.participant_profile_attributes.birthdate &&
-         this.user.participant_profile_attributes.genre) {
-        resolve();
-      } else {
-        reject("Digite os campos obrigatórios! <br> Email, senha, data de nascimento e genero");
-      }
-    })
-  }
-
   validateBirthdate() {
+    this.credentias.email = this.user.participant_profile_attributes.email;
     return new Promise((resolve, reject) => {
       if(this.dateUtil.calculateAge(this.user.participant_profile_attributes.birthdate) > 18) {
         resolve();
       } else {
         reject("Você deve ser maior de idade!");
-      }
-    })
-  }
-
-  validateTerms() {
-    return new Promise((resolve, reject) => {
-      if(this.isRadioButtonClass) {
-        resolve()
-      } else {
-        reject("Para continuar você deve aceitar os termos de uso");
       }
     })
   }

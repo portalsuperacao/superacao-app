@@ -15,7 +15,7 @@
       </ion-col>
     </ion-row>
     <h3 class="description"> Para te ajudar, preciso saber algumas informações sobre você.</h3>
-    <button class="auth-button purple" (click)="nextPage({ typeUser : 'paciente' })">Sou paciente</button>
+    <button class="auth-button purple" (click)="nextPage({ typeUser : 'pacient' })">Sou paciente</button>
     <button class="auth-button purple" (click)="isFamiliar = !isFamiliar">Sou familiar</button>
     <ion-item *ngIf="isFamiliar">
       <ion-select placeholder="Qual tipo de familiar?" (ionChange)="pushPageWhenSelected($event)">

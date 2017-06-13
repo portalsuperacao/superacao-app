@@ -1,3 +1,10 @@
+export class UserCredentias {
+  constructor(
+    public email: string,
+    public password: string
+  ) {}
+}
+
 export class UserTreatmentAttributes {
   status: any
   treatment_type_id: number
@@ -5,7 +12,7 @@ export class UserTreatmentAttributes {
 }
 
 export class UserCancerTreatmentsAttributes {
-  cancer_type_id : number
+  cancer_type_id: number
   cancerous_type: any
 }
 
@@ -33,8 +40,7 @@ export class UserModel {
     snapchat: <string> null,
     participant_id: <number> null,
     genre: <string> null,
-    email: <string> null,
-    password: <string> null,
+    email: <any> null,
     belief: <string> null,
     healing_quote: <string> null,
     difficulty_quote: <string> null
@@ -43,12 +49,12 @@ export class UserModel {
     metastasis : <boolean> null,
     relapse: <boolean> null,
     treatments_attributes: <[UserTreatmentAttributes]> null,
-    cancer_treatments_attributes: <UserCancerTreatmentsAttributes> null
+    cancer_treatments_attributes: <[UserCancerTreatmentsAttributes]> null
   }
   current_treatment_profile_attributes = {
     metastasis: <boolean> null,
     relapse : <boolean> null,
     treatments_attributes: <[UserTreatmentAttributes]> null,
-    cancer_treatments_attributes: <UserCancerTreatmentsAttributes> null
+    cancer_treatments_attributes: <[UserCancerTreatmentsAttributes]> null
   }
 }

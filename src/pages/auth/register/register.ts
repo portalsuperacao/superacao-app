@@ -11,26 +11,22 @@ import { AuthService } from '../../../providers/database/auth-service';
 
 
 export class AuthRegisterPage {
-  alert : any
+  alert : any;
+  user : any;
   constructor(
     public navCtrl: NavController,
     public alertCtrl: AlertController,
     public authService: AuthService) {
-
+      this.user = this.authService.user;
   }
 
-  nextPageNormal(params) {
+  nextPageNormal() {
     this.alert = this.alertCtrl.create({
       title: 'Ops! Ocorreu um problema!',
       message: 'Preencha todos os campos para continuar!',
       buttons: ['Ok']
     });
 
-    if(params.trim() == '') {
-      this.alert.present();
-      return;
-    }
-    this.authService.user.participant_profile_attributes.first_name = params;
     this.navCtrl.push(AuthRegisterBasicDatasPage);
 
   }

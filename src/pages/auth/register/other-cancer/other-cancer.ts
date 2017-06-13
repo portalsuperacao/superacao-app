@@ -13,6 +13,7 @@ export class AuthRegisterOtherCancerPage {
   user: any;
   typeUser : any;
   typesCancer :  any;
+  typeCancerSelected: any;
   treatments : any;
 
   constructor(
@@ -62,12 +63,7 @@ export class AuthRegisterOtherCancerPage {
   }
 
   nextPage(params) {
-    if(!this.user.past_treatment_profile_attributes.cancer_treatments_attributes) {
-      this.showMessage();
-      return;
-    }
-
-    this.user.past_treatment_profile_attributes.cancer_treatments_attributes = JSON.parse(this.user.past_treatment_profile_attributes.cancer_treatments_attributes);
+    this.user.past_treatment_profile_attributes.cancer_treatments_attributes = [this.typeCancerSelected];
     this.navCtrl.push(AuthRegisterConclusionPage, params);
   }
 
@@ -79,10 +75,6 @@ export class AuthRegisterOtherCancerPage {
     })
 
     alert.present();
-  }
-
-  jsonStringify(obj) {
-    return JSON.stringify(obj)
   }
 
 }
