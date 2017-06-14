@@ -2,7 +2,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { AuthRegisterStatePage } from '../state/state';
-import { AuthService } from '../../../../providers/database/auth-service';
+import { AuthService } from '../../../../providers/database/auth.service';
 
 @Component({
   selector: 'page-auth-register-type-user',

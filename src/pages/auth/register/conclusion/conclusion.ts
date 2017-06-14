@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController } from 'ionic-angular';
-import { AuthService } from '../../../../providers/database/auth-service';
-import { UserStorageService } from '../../../../providers/database/user-storage-service';
+import { AuthService } from '../../../../providers/database/auth.service';
+import { UserStorageService } from '../../../../providers/database/user-storage.service';
 import { UserModel } from './../../../../model/user';
 
 @Component({

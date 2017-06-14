@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { AuthRegisterTypeCancerPage } from '../type-cancer/type-cancer';
 import { AuthRegisterPastCancerPage } from '../past-cancer/past-cancer';
-import { AuthService } from '../../../../providers/database/auth-service';
+import { AuthService } from '../../../../providers/database/auth.service';
 
 @Component({
   selector: 'page-auth-register-state',

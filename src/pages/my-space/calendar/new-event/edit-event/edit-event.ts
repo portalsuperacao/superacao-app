@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, ViewController, AlertController, ModalController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CalendarStorageService } from '../../../../../providers/database/calendar-storage-service';
-import { UserStorageService } from '../../../../../providers/database/user-storage-service';
+import { UserStorageService } from '../../../../../providers/database/user-storage.service';
 import { CalendarEventQuestionsPage } from './questions/questions';
 import { DateUtil } from '../../../../../providers/util/date-util';
 

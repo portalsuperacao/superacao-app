@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, LoadingController } from 'ionic-angular';
 import { AuthRegisterTypeUserPage } from '../type-user/type-user';
-import { AuthService } from '../../../../providers/database/auth-service';
+import { AuthService } from '../../../../providers/database/auth.service';
 import { Utils } from '../../../../providers/util/utils';
 
 @Component({

@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { NavController, NavParams, Content, LoadingController } from 'ionic-angular';
 import { ChatStorageService} from '../../providers/database/chat-storage-service';
-import { UserStorageService } from '../../providers/database/user-storage-service';
+import { UserStorageService } from '../../providers/database/user-storage.service';
 import { Utils } from '../../providers/util/utils';
 
 @Component({

@@ -3,8 +3,8 @@ import { Platform, MenuController } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
-import { UserStorageService } from '../providers/database/user-storage-service';
-import { AuthService } from '../providers/database/auth-service';
+import { UserStorageService } from '../providers/database/user-storage.service';
+import { AuthService } from '../providers/database/auth.service';
 
 import { TabsPage } from '../pages/tabs/tabs';
 import { AuthPage } from '../pages/auth/auth';

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { UserStorageService } from '../../providers/database/user-storage-service';
+import { UserStorageService } from '../../providers/database/user-storage.service';
 
 import { OvercomerPage } from '../trinity/overcomer/overcomer';
 import { AngelPage } from '../trinity/angel/angel';

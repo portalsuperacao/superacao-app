@@ -24,6 +24,7 @@
     "@ionic-native/core": "^3.6.1",
     "@ionic-native/facebook": "^3.6.1",
     "@ionic-native/geolocation": "^3.6.1",
+    "@ionic-native/keyboard": "^3.12.1",
     "@ionic-native/local-notifications": "^3.6.1",
     "@ionic-native/network": "^3.6.1",
     "@ionic-native/push": "^3.6.1",

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, ModalController, AlertController } from 'ionic-angular';
-import { UserStorageService } from '../../../providers/database/user-storage-service';
+import { UserStorageService } from '../../../providers/database/user-storage.service';
 import { MySpaceStorageService } from '../../../providers/database/my-space-storage-service';
 import { MySpaceMedicinesEventPage } from './event/medicines-event';
 import { LocalNotifications } from '@ionic-native/local-notifications';

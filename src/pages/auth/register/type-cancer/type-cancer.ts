@@ -2,7 +2,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { AuthRegisterTypeTreatmentPage } from '../type-treatment/type-treatment';
-import { AuthService } from '../../../../providers/database/auth-service';
+import { AuthService } from '../../../../providers/database/auth.service';
 
 @Component({
   selector: 'page-auth-register-type-cancer',

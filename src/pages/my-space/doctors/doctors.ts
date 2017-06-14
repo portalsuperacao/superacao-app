@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, ModalController, AlertController } from 'ionic-angular';
 import { MySpaceDoctorsEventPage } from './event/doctors-event';
-import { UserStorageService } from '../../../providers/database/user-storage-service';
+import { UserStorageService } from '../../../providers/database/user-storage.service';
 import { MySpaceStorageService } from '../../../providers/database/my-space-storage-service';
 
 

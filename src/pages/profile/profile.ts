@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, ModalController, ViewController } from 'ionic-angular';
 import { ProfileEditPage } from './edit/edit';
-import { UserStorageService } from '../../providers/database/user-storage-service';
+import { UserStorageService } from '../../providers/database/user-storage.service';
 
 
 @Component({

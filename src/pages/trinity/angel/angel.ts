@@ -1,7 +1,7 @@
 import { Network } from '@ionic-native/network';
 import { Component } from '@angular/core';
 import { NavController, LoadingController } from 'ionic-angular';
-import { UserStorageService } from '../../../providers/database/user-storage-service';
+import { UserStorageService } from '../../../providers/database/user-storage.service';
 import { ChatStorageService } from '../../../providers/database/chat-storage-service';
 import { Utils } from '../../../providers/util/utils';
 

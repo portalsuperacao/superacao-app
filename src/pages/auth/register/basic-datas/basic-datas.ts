@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { AuthRegisterPicturePage } from '../picture/picture';
 import { AuthRegisterTypeUserPage } from '../type-user/type-user';
-import { AuthService } from '../../../../providers/database/auth-service';
+import { AuthService } from '../../../../providers/database/auth.service';
 import { DateUtil } from '../../../../providers/util/date-util';
 
 @Component({

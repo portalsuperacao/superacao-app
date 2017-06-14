@@ -13,6 +13,7 @@ import { DateCustomPipe } from '../pipes/date-custom-pipe';
 import { TruncatePipe } from '../pipes/truncate-pipe';
 
 // NATIVES
+import { Keyboard } from '@ionic-native/keyboard';
 import { Calendar } from '@ionic-native/calendar';
 import { Camera } from '@ionic-native/camera';
 import { Facebook } from '@ionic-native/facebook';
@@ -24,11 +25,11 @@ import { Push } from '@ionic-native/push';
 // PROVIDERS
 import { TextMaskModule } from 'angular2-text-mask';
 import { AngularFireModule } from 'angularfire2';
-import { AuthService } from '../providers/database/auth-service';
+import { AuthService } from '../providers/database/auth.service';
 import { IonicStorageModule } from '@ionic/storage';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
-import { UserStorageService } from '../providers/database/user-storage-service';
+import { UserStorageService } from '../providers/database/user-storage.service';
 import { CalendarStorageService } from '../providers/database/calendar-storage-service';
 import { ChatStorageService } from '../providers/database/chat-storage-service';
 import { MySpaceStorageService } from '../providers/database/my-space-storage-service';
@@ -105,7 +106,9 @@ firebase.initializeApp(firebaseConfig);
     BrowserModule,
     HttpModule,
     JsonpModule,
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp, {
+      backButtonText: 'Voltar',
+    }),
     IonicStorageModule.forRoot(),
     AngularFireModule.initializeApp(firebaseConfig),
     TextMaskModule,
@@ -140,6 +143,7 @@ firebase.initializeApp(firebaseConfig);
   providers: [
     // Natives
     SplashScreen,
+    Keyboard,
     StatusBar,
     Calendar,
     Camera,
