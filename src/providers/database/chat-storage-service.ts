@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
-import { AngularFire, FirebaseListObservable } from 'angularfire2';
+import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 
 export class ChatStorageService {
-  private db : FirebaseListObservable<any>;
 
-  constructor(private af: AngularFire) {
+  constructor(private db: AngularFireDatabase) {
 
   }
 
@@ -25,8 +24,8 @@ export class ChatStorageService {
       });
     }
 
-    this.db = this.af.database.list('/chat/');
-    this.db.push(datas);
+    let database = this.db.list('/chat/');
+    database.push(datas);
 
     return {chatUid: datas.chatUid};
   }
@@ -34,7 +33,7 @@ export class ChatStorageService {
   getChat(userUid1, userUid2) {
      let chatDatas = false;
      return new Promise((resolve) => {
-       this.af.database.list('/chat').subscribe((snapshots) => {
+       this.db.list('/chat').subscribe((snapshots) => {
          snapshots.forEach((snapshot) => {
             if(snapshot.users[0].uid == userUid1 && snapshot.users[1].uid == userUid2) {
               chatDatas = snapshot;
@@ -49,7 +48,7 @@ export class ChatStorageService {
 
   getChatUsers(chatUid) {
     return new Promise((resolve) => {
-      this.af.database.list('/chat').subscribe((snapshots) => {
+      this.db.list('/chat').subscribe((snapshots) => {
         snapshots.forEach((snapshot) => {
           if(snapshot.chatUid === chatUid) {
             resolve(snapshot);
@@ -60,16 +59,16 @@ export class ChatStorageService {
   }
 
   updateChatView(chatKey, user, value) {
-    let db = this.af.database.object(`/chat/${chatKey}/users/${user}`);
-    db.update({view : value});
+    let database = this.db.object(`/chat/${chatKey}/users/${user}`);
+    database.update({view : value});
   }
 
   getChatDatasObs(chatKey, user) : any {
-    return this.af.database.object(`/chat/${chatKey}/users/${user}`);
+    return this.db.object(`/chat/${chatKey}/users/${user}`);
   }
 
   getMessages(chatUid, amount) {
-    return this.af.database.list(`/messages/${chatUid}`, {
+    return this.db.list(`/messages/${chatUid}`, {
       query: {
         orderByChild: 'created_at',
         startAt: Date.now() / 1000,
@@ -80,7 +79,7 @@ export class ChatStorageService {
 
   getLastMessage(chatUid, userUid) {
     return new Observable((observer) => {
-      this.af.database.list(`/messages/${chatUid}`, {
+      this.db.list(`/messages/${chatUid}`, {
         query: {
           orderByChild: 'uid_user',
           equalTo: userUid,
@@ -93,8 +92,8 @@ export class ChatStorageService {
   }
 
   pushMessage(datas, chatUid) {
-      this.db = this.af.database.list(`/messages/${chatUid}`);
-      this.db.push(datas);
+      let database = this.db.list(`/messages/${chatUid}`);
+      database.push(datas);
   }
 
   pushNotification(data) {
@@ -112,8 +111,8 @@ export class ChatStorageService {
       "icon": 'icon'
     }
 
-    this.db = this.af.database.list('/notifications/');
-    this.db.push(notification);
+    let database = this.db.list('/notifications/');
+    database.push(notification);
   }
 
   private _generateChatToken() {

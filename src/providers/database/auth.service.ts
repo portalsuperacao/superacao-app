@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
-import { AuthProviders, AngularFireAuth, AuthMethods, AngularFire } from 'angularfire2';
+import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireAuth } from 'angularfire2/auth'
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
 
@@ -17,8 +18,8 @@ export class AuthService {
   credentials : UserCredentias;
 
   constructor(
-    private auth: AngularFireAuth,
-    private af: AngularFire,
+    private afAuth: AngularFireAuth,
+    private db: AngularFireDatabase,
     private http: Http,
     private platform: Platform,
     private facebook: Facebook) {
@@ -90,10 +91,7 @@ export class AuthService {
 
   authUserEmail() {
     return new Promise((resolve, reject) => {
-      this.af.auth.createUser({
-        email: this.credentials.email,
-        password: this.credentials.password
-      }).then((res : any) => {
+      this.afAuth.auth.signInWithEmailAndPassword(this.credentials.email, this.credentials.password).then((res : any) => {
         console.log(res);
         resolve(res.auth._lat);
       }).catch((error) => {
@@ -104,7 +102,7 @@ export class AuthService {
   }
 
   getAuthentication() {
-    return this.auth;
+    return this.afAuth.authState;
   }
 
   getFacebookDatas() {
@@ -156,6 +154,6 @@ export class AuthService {
 
 
   signOut() {
-    this.auth.logout();
+    this.afAuth.auth.signOut();
   }
 }

@@ -1,5 +1,5 @@
 import { Injectable, EventEmitter } from '@angular/core';
-import { AngularFire } from 'angularfire2';
+import { AngularFireDatabase } from 'angularfire2/database';
 import { Calendar } from '@ionic-native/calendar';
 import { Network } from '@ionic-native/network';
 import { Observable } from 'rxjs/Observable';
@@ -12,7 +12,7 @@ export class CalendarStorageService {
   connection = true
   refreshDatas = new EventEmitter();
   constructor(
-    private af: AngularFire,
+    private db: AngularFireDatabase,
     private calendar: Calendar,
     private network: Network,
     private storage: Storage) {
@@ -31,7 +31,7 @@ export class CalendarStorageService {
     this.calendar.createEvent(datas.title, datas.address, datas.comments, startDate, endDate);
 
 
-    let database = this.af.database.list(`/calendar/${userUid}`);
+    let database = this.db.list(`/calendar/${userUid}`);
     return database.push(datas).then((db) => {
       datas.$key = db.path.o[2];
       this.insertEventsLocal(datas);
@@ -56,7 +56,7 @@ export class CalendarStorageService {
     this.calendar.createEvent(newDatas.title, newDatas.address, newDatas.comments, newStartDate, newEndDate);
     this.updateEventsLocal(newDatas);
 
-    let database = this.af.database.list(`/calendar/${userUid}`);
+    let database = this.db.list(`/calendar/${userUid}`);
     this.refreshDatas.emit(newDatas);
     return database.update(key, newDatas);
 
@@ -68,7 +68,7 @@ export class CalendarStorageService {
 
     this.calendar.deleteEvent(datas.title, datas.address, datas.comments, startDate, endDate);
     this.removeEventsLocal(datas);
-    let database = this.af.database.list(`/calendar/${userUid}`);
+    let database = this.db.list(`/calendar/${userUid}`);
     this.refreshDatas.emit(null);
 
     return database.remove(datas.$key);
@@ -110,7 +110,7 @@ export class CalendarStorageService {
   getEvents(userUid) {
     return new Promise((resolve) => {
       if(this.connection) {
-        this.af.database.list(`/calendar/${userUid}`).subscribe((datas) => {
+        this.db.list(`/calendar/${userUid}`).subscribe((datas) => {
           resolve(datas);
         });
       } else {
@@ -122,7 +122,7 @@ export class CalendarStorageService {
   }
 
   getPublicEvents(userUid) : any {
-    return this.af.database.list(`/calendar/${userUid}`, {
+    return this.db.list(`/calendar/${userUid}`, {
       query: {
         orderByChild: 'share',
         equalTo: true

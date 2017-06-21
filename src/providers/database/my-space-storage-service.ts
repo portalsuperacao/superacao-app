@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFire } from 'angularfire2';
+import { AngularFireDatabase } from 'angularfire2/database';
 import { Storage } from '@ionic/storage';
 import 'rxjs/Observable';
 
@@ -8,7 +8,7 @@ import 'rxjs/Observable';
 
 export class MySpaceStorageService {
   constructor(
-    private af: AngularFire,
+    private AngularFireDatabase: AngularFireDatabase,
     private storage: Storage) {
 
   }

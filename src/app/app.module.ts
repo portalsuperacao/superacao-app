@@ -25,6 +25,8 @@ import { Push } from '@ionic-native/push';
 // PROVIDERS
 import { TextMaskModule } from 'angular2-text-mask';
 import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireDatabase } from 'angularfire2/database';
 import { AuthService } from '../providers/database/auth.service';
 import { IonicStorageModule } from '@ionic/storage';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -63,15 +65,7 @@ import { AngelPage } from '../pages/trinity/angel/angel';
 import { VisitorPage } from '../pages/trinity/visitor/visitor';
 import * as firebase from 'firebase';
 
-export const firebaseConfig = {
-   apiKey: ENV.FIREBASE.apiKey,
-   authDomain: ENV.FIREBASE.authDomain,
-   databaseURL: ENV.FIREBASE.databaseURL,
-   storageBucket: ENV.FIREBASE.storageBucket,
-   messagingSenderId: ENV.FIREBASE.messagingSenderId
-};
-
-firebase.initializeApp(firebaseConfig);
+firebase.initializeApp(ENV.FIREBASE);
 
 @NgModule({
   declarations: [
@@ -110,7 +104,7 @@ firebase.initializeApp(firebaseConfig);
       backButtonText: 'Voltar',
     }),
     IonicStorageModule.forRoot(),
-    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireModule.initializeApp(ENV.FIREBASE),
     TextMaskModule,
     AuthPageModule
   ],
@@ -153,6 +147,8 @@ firebase.initializeApp(firebaseConfig);
     Network,
     Push,
     // Services
+    AngularFireDatabase,
+    AngularFireAuth,
     AuthService,
     UserStorageService,
     CalendarStorageService,

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Platform } from 'ionic-angular';
 import { Camera, CameraOptions  } from '@ionic-native/camera'
 import { Push, PushObject, PushOptions } from '@ionic-native/push';
-import { firebaseConfig } from '../../app/app.module'
+import { ENV } from '../../config/environment.dev'
 import { Observable } from 'rxjs/Observable';
 
 
@@ -66,9 +66,7 @@ export class Utils {
       };
 
       this.camera.getPicture(options).then((imagePath) => {
-        this._toBase64(imagePath).then((imageData) => {
-          resolve(imageData);
-        })
+       resolve(imagePath);
       }).catch((error) => {
         reject("Fail!! " + JSON.stringify(error));
       });
