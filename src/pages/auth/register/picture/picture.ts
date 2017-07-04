@@ -9,6 +9,8 @@ import { Utils } from '../../../../providers/util/utils';
   templateUrl: 'register-picture.html',
 })
 export class AuthRegisterPicturePage {
+  photo: any;
+
   constructor(
     public navCtrl: NavController,
     public loadingCtrl: LoadingController,
@@ -17,13 +19,17 @@ export class AuthRegisterPicturePage {
   ) {
   }
   nextPage() {
+    this.authService.user.participant_profile_attributes.avatar = this.photo;
     this.navCtrl.push(AuthRegisterTypeUserPage)
+  }
+
+  ionViewWillEnter(){
+    this.photo = this.authService.getAuthUserDatas().photoURL;
   }
 
   openGallery() {
     this.utils.openGallery().then((image) => {
-      console.log(image)
-      //this.authService.user.participant_profile_attributes.avatar = image;
+      this.photo = image;
     }).catch((error) => {
       console.log(error);
     })

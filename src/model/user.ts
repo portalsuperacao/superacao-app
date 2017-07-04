@@ -1,10 +1,3 @@
-export class UserCredentias {
-  constructor(
-    public email: string,
-    public password: string
-  ) {}
-}
-
 export class UserTreatmentAttributes {
   status: any
   treatment_type_id: number

@@ -23,11 +23,10 @@ export class MySpaceNotesPage {
   }
 
   ionViewDidLoad() {
-    this.userStorageService.getUser().then((user) => {
+    this.userStorageService.getUser().subscribe((user) => {
       this.user = user
-    }).then(() => {
       this.notes = this.mySpaceStorageService.getNotesEvent(this.user.$key)
-    })
+    });
   }
 
   newEvent() {

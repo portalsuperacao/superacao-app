@@ -23,6 +23,7 @@ import { Network } from '@ionic-native/network';
 import { Push } from '@ionic-native/push';
 
 // PROVIDERS
+import * as firebase from 'firebase/app';
 import { TextMaskModule } from 'angular2-text-mask';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -63,9 +64,7 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { OvercomerPage } from '../pages/trinity/overcomer/overcomer';
 import { AngelPage } from '../pages/trinity/angel/angel';
 import { VisitorPage } from '../pages/trinity/visitor/visitor';
-import * as firebase from 'firebase';
 
-firebase.initializeApp(ENV.FIREBASE);
 
 @NgModule({
   declarations: [

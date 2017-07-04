@@ -23,13 +23,10 @@ export class MySpaceDoctorsPage {
   }
 
   ionViewDidLoad() {
-    this.userStorageService.getUser().then((user) => {
+    this.userStorageService.getUser().subscribe((user) => {
       this.user = user
-    })
-    .then(() => {
       this.doctors = this.mySpaceStorageService.getDoctorsEvent(this.user.$key)
     })
-
   }
 
 

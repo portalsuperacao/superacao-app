@@ -119,7 +119,7 @@ export class CalendarEventEditPage {
   }
 
   private _getUser() {
-    this.userStorageService.getUser().then((user: any) => {
+    this.userStorageService.getUser().subscribe((user: any) => {
       this.user = user;
     });
   }

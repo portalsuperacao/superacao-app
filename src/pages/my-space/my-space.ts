@@ -28,7 +28,7 @@ export class MySpacePage {
   }
 
   ionViewDidLoad() {
-    this.user = this.userStorageService.getUserObs();
+    this.user = this.userStorageService.getUser();
     this._verifyClassOfThumb()
   }
 
@@ -42,6 +42,9 @@ export class MySpacePage {
 
   private _verifyClassOfThumb() {
     this.user.subscribe((datas : any) => {
+      if(!datas) {
+        return;
+      }
       if(datas.type_user == 'Superador') {
         this.thumbClass = 'background-color-overcomer';
       } else if (datas.type_user == 'Anjo') {

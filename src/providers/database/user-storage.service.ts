@@ -1,39 +1,39 @@
+
+
 import { Injectable } from '@angular/core'
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { Observable } from 'rxjs/observable';
+import { Observable } from 'rxjs';
 import 'rxjs/add/operator/toPromise';
+import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
 import { ENV } from '../../config/environment.dev';
 import { Utils } from '../util/utils'
 import { UserModel } from '../../model/user';
 
-
 @Injectable()
 
 export class UserStorageService {
-  user: any;
   headers : Headers;
   options : RequestOptions;
+  authToken: string
 
   constructor(
-    public db: AngularFireDatabase,
-    public afAuth: AngularFireAuth,
-    public http: Http,
-    public utils: Utils) {
-      this.user = new UserModel();
+    private db: AngularFireDatabase,
+    private afAuth: AngularFireAuth,
+    private http: Http,
+    private utils: Utils) {
       this.headers = new Headers();
+      this.headers.append('Content-Type', 'application/json');
+      this.headers.append('Authorization', `Bearer ${this.authToken}`);
+      this.options = new RequestOptions({headers: this.headers});
   }
 
-  registerUser(user: UserModel, token: string) {
+  registerUser(user: UserModel) {
     let send = { participant: null };
     send.participant = user;
-    this.headers.append('Content-Type', 'application/json');
-    this.headers.append('Authorization', `Bearer ${token}`);
-    this.options = new RequestOptions({headers: this.headers});
-    console.log(JSON.stringify(send));
 
     return this.http.post(`${ENV.HOST}/participant.json`, JSON.stringify(send), this.options)
       .map(res => res.json())
@@ -41,29 +41,15 @@ export class UserStorageService {
 }
 
   getUser() {
-    return new Promise((resolve) => {
-      this.afAuth.authState.subscribe((user) => {
-        if(user) {
-          this.db.object(`/users/${user.uid}`).subscribe((data) => {
-            resolve(data)
-          })
+    return this.http.get(`${ENV.HOST}/participant.json`, this.options)
+      .map(res => res.json())
+      .catch((e => {
+        if (e.status === 401) {
+          return Observable.throw(false);
+        } else {
+          return Observable.throw(null);
         }
-      })
-    })
-  }
-
-  getUserObs() {
-    let datas
-    return new Observable((subject) => {
-      this.afAuth.authState.subscribe((user) => {
-        if(user) {
-          this.db.object(`/users/${user.uid}`).subscribe((data) => {
-            subject.next(data)
-            datas = data
-          })
-        }
-      })
-    })
+      }));
   }
 
   updateUser(user, uid) {

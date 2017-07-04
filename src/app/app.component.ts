@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Platform, MenuController } from 'ionic-angular';
+import { Platform, MenuController, AlertController } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
@@ -8,9 +8,9 @@ import { AuthService } from '../providers/database/auth.service';
 
 import { TabsPage } from '../pages/tabs/tabs';
 import { AuthPage } from '../pages/auth/auth';
-
+import { AuthRegisterBasicDatasPage } from '../pages/auth/register/basic-datas/basic-datas';
 import { ProfilePage } from '../pages/profile/profile';
-import { RegisterBasicDatas } from '../pages/register/basic-datas/basic-datas';
+
 
 @Component({
   templateUrl: 'app.html'
@@ -26,28 +26,49 @@ export class MyApp {
     private menuCtrl: MenuController,
     private userStorageService: UserStorageService,
     private authService : AuthService,
-    public splashScreen: SplashScreen,
-    public statusBar: StatusBar
+    private splashScreen: SplashScreen,
+    private statusBar: StatusBar,
+    private alertCtrl: AlertController
   ) {
 
     platform.ready().then(() => {
-      this.authService.getAuthentication().subscribe((state) =>{
-        if(state !== null) {
-          this.menuCtrl.enable(true);
-          this.rootPage = TabsPage;
-        } else {
-          this.menuCtrl.enable(false);
-          this.rootPage = AuthPage;
-        }
-      });
-
+      this.verifyWhichPageOpen();
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
   }
 
-  private _updateLastAccess(user) {
-    this.userStorageService.updateLastAccess(new Date().getTime(), user.$key);
+  verifyWhichPageOpen() {
+    this.authService.getAuthentication().subscribe((state : any) =>{
+      this.rootPage = AuthPage;
+      if(state.firebase === true) {
+        if(state.backend === true) {
+          this.menuCtrl.enable(true);
+          this.rootPage = TabsPage;
+        } else if(state.backend === false) {
+          this.menuCtrl.enable(true);
+          this.rootPage = AuthRegisterBasicDatasPage;
+        } else {
+          this.menuCtrl.enable(false);
+          this.showMessageError();
+          this.rootPage = AuthPage;
+        }
+      } else {
+        this.menuCtrl.enable(false);
+        this.rootPage = AuthPage;
+      }
+
+    });
+  }
+
+  showMessageError() {
+    let alert = this.alertCtrl.create({
+      title: 'Ops! Não conseguimos conectar',
+      subTitle: 'Ocorreu um problema ao tentar conectar com o servidor!',
+      buttons: ['Ok']
+    })
+
+    alert.present();
   }
 
   openPage(page) {

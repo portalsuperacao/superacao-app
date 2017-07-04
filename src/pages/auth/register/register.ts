@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController } from 'ionic-angular';
+import { NavController, AlertController, LoadingController } from 'ionic-angular';
 import { Keyboard } from '@ionic-native/keyboard';
 
-import { AuthRegisterBasicDatasPage } from './basic-datas/basic-datas';
 import { AuthService } from '../../../providers/database/auth.service';
 
 
@@ -14,49 +13,54 @@ import { AuthService } from '../../../providers/database/auth.service';
 
 export class AuthRegisterPage {
   alert : any;
-  user : any;
+  email: string;
+  password: string;
+  loading: any;
+
   constructor(
     public navCtrl: NavController,
     public alertCtrl: AlertController,
+    public loadingCtrl: LoadingController,
     public keyboard: Keyboard,
     public authService: AuthService) {
-      this.user = this.authService.user;
   }
 
-  ionViewWillEnter() {
-    this.keyboard.disableScroll(true);
-  }
-
-  ionViewWillLeave() {
-    this.keyboard.disableScroll(false);
+  ionViewDidLoad(){
+    this.loading = this.loadingCtrl.create({
+      content: 'Aguarde...'
+    });
   }
 
   nextPageNormal() {
-    this.alert = this.alertCtrl.create({
-      title: 'Ops! Ocorreu um problema!',
-      message: 'Preencha todos os campos para continuar!',
-      buttons: ['Ok']
-    });
-
-    this.navCtrl.push(AuthRegisterBasicDatasPage);
-
+    this.loading.present();
+    this.authService.user.participant_profile_attributes.email = this.email;
+    this.authService.createUserWithEmail(this.email, this.password)
+      .then(((datas) => {
+        this.loading.dismiss();
+        this.authService.authUserEmail(this.email, this.password);
+      }))
+      .catch(this.showMessage.bind(this))
   }
 
   nextPageFacebook() {
-    this.authService.getFacebookDatas().then((datas) => {
-      this.navCtrl.push(AuthRegisterBasicDatasPage, { facebookDatas: true });
-    }).catch((error) => {
-      console.log(error);
-      this.alert = this.alertCtrl.create({
-        title: 'Ops! Ocorreu um problema!',
-        message: 'Você não está em um dispositivo movel!',
-        buttons: ['Ok']
-      });
-
-      this.alert.present()
-    })
-
-
+    this.loading.present();
+    this.authService.authUserFacebook()
+      .then(((datas) => {
+        this.loading.dismiss();
+      }))
+      .catch(this.showMessage.bind(this))
   }
+
+  showMessage(error) {
+    this.loading.dismiss();
+    this.alert = this.alertCtrl.create({
+      title: 'Ops! Ocorreu um problema!',
+      message: 'Já existe uma conta com este e-mail!',
+      buttons: ['Ok']
+    });
+
+    this.alert.present();
+  }
+
 
 }

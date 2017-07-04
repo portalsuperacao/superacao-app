@@ -12,17 +12,26 @@
       <p class="speech-bubble">Olá! Eu sou o Samuca e estarei ao seu lado, e serei seu companheiro de SuperAção!</p>
     </ion-col>
   </ion-row>
-  <h3 class="description">Vamos fazer seu cadastro. Como gostaria de ser chamado?</h3>
+  <h3 class="description">Vamos fazer seu cadastro. Digite seu e-mail e senha ou conecte-se pelo Facebook</h3>
   <ion-item>
     <ion-input type="text"
-    placeholder="Escreva aqui"
-    [(ngModel)]="user.participant_profile_attributes.first_name"
+    placeholder="Digite seu e-mail"
+    [(ngModel)]="email"
     required
-    minlength="3"
-    #name="ngModel">
+    email
+    #emailForm="ngModel">
     </ion-input>
   </ion-item>
-  <button class="auth-button" (click)="nextPageNormal(name.value)" [disabled]="name.errors">Continuar</button>
+  <ion-item>
+    <ion-input type="password"
+    placeholder="Digite sua senha"
+    [(ngModel)]="password"
+    required
+    minlength="6"
+    #passwordForm="ngModel">
+    </ion-input>
+  </ion-item>
+  <button class="auth-button" (click)="nextPageNormal()" [disabled]="passwordForm.errors || emailForm.errors">Continuar</button>
   <button class="auth-button facebook" (click)="nextPageFacebook()">
     <ion-icon name="logo-facebook"></ion-icon>
     Conecte-se com o Facebook

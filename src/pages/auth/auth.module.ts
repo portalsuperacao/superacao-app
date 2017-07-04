@@ -49,7 +49,8 @@ import { AuthRegisterConclusionPage } from './register/conclusion/conclusion';
     IonicPageModule.forChild(AuthPage),
   ],
   exports: [
-    AuthPage
+    AuthPage,
+    AuthRegisterBasicDatasPage
   ]
 })
 

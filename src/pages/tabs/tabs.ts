@@ -19,13 +19,17 @@ export class TabsPage {
   }
 
   private _verifyTypeOfUserPage() {
-    this.userStorageService.getUser().then((user : any) => {
+    this.userStorageService.getUser().subscribe((user : any) => {
+      if(!user) {
+        this.trinityPage = VisitorPage;
+        return;
+      }
       if(user.type_user === "Superador") {
         this.trinityPage = OvercomerPage;
       } else if (user.type_user === "Anjo") {
         this.trinityPage = AngelPage;
       } else {
-        this.trinityPage = VisitorPage;
+
       }
     });
   }

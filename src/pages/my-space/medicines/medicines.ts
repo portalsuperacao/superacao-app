@@ -26,49 +26,18 @@ export class MySpaceMedicinesPage {
   }
 
   ionViewDidLoad() {
-    this.userStorageService.getUser().then((user) => {
+    this.userStorageService.getUser().subscribe((user) => {
       this.user = user
-    })
-    .then(() => {
       this.medicines = this.mySpaceStorageService.getMedicinesEvents(this.user.$key)
       this.date = new Date().getTime()
-    })
+    });
   }
 
   newEvent() {
-    let now = new Date().getTime();
-    let _5_sec_from_now = new Date(now + 5 * 1000);
-
     let modal = this.modalCtrl.create(MySpaceMedicinesEventPage);
     modal.present();
 
     modal.onDidDismiss((data) => {
-      console.log(data);
-      if(!data) {
-        return;
-      }
-      let id = 1;
-
-      this.localNotifications.schedule({
-         text: 'Medicamento notificação!',
-         at: _5_sec_from_now,
-         led: 'FF0000',
-         every: 'second',
-         sound: null
-      });
-
-      this.localNotifications.on('trigger',(notification) => {
-        if(notification == id) {
-          this.localNotifications.schedule({
-            text: 'Medicamento notificação!',
-            at: _5_sec_from_now,
-            led: 'FF0000',
-            every: 'hour',
-            sound: null
-          })
-        }
-      })
-
       this.mySpaceStorageService.insertMedicineEvent(this.user.$key, data).then(() => {
         this.medicines = this.mySpaceStorageService.getMedicinesEvents(this.user.$key)
       })

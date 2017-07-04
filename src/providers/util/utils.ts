@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Platform } from 'ionic-angular';
 import { Camera, CameraOptions  } from '@ionic-native/camera'
 import { Push, PushObject, PushOptions } from '@ionic-native/push';
-import { ENV } from '../../config/environment.dev'
 import { Observable } from 'rxjs/Observable';
 
 

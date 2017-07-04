@@ -20,10 +20,7 @@ export class ProfilePage {
     public userStorageService: UserStorageService) {}
 
   ionViewDidLoad() {
-    this.userStorageService.getUserObs().subscribe((user) => {
-      this.user = user;
-      this._verifyClassOfThumb();
-    });
+    this.user = null
   }
 
   openEdit() {

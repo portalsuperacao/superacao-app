@@ -14,32 +14,29 @@
     </ion-col>
   </ion-row>
   <form #basicDatasForm="ngForm">
-    <ion-item *ngIf="!facebookDatas">
-      <ion-input type="email"
-      placeholder="*E-mail"
-      name="email"
-      [(ngModel)]="user.participant_profile_attributes.email"
-      email
-      required>
-      </ion-input>
-    </ion-item>
-    <ion-item *ngIf="!facebookDatas">
-      <ion-input type="password"
-      placeholder="*Senha"
-      name="password"
-      [(ngModel)]="credentias.password"
-      minlength="6"
-      required></ion-input>
-    </ion-item>
-    <ion-item *ngIf="!facebookDatas">
-      <ion-input type="text"
-      placeholder="*Sobrenome"
-      name="last_name"
-      [(ngModel)]="user.participant_profile_attributes.last_name"
-      minlength="3"
-      required></ion-input>
-    </ion-item>
-    <ion-row *ngIf="!facebookDatas">
+    <ion-row>
+      <ion-col col-6>
+        <ion-item>
+          <ion-input type="text"
+          placeholder="*Nome"
+          name="name"
+          [(ngModel)]="user.participant_profile_attributes.first_name"
+          required>
+          </ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col col-6>
+        <ion-item>
+          <ion-input type="text"
+          placeholder="*Sobrenome"
+          name="last_name"
+          [(ngModel)]="user.participant_profile_attributes.last_name"
+          minlength="3"
+          required></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
       <ion-col col-6>
         <ion-item>
           <ion-datetime displayFormat="DD/MM/YYYY"

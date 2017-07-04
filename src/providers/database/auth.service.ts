@@ -1,7 +1,9 @@
+
+import { Observable } from 'rxjs/observable';
 import { Injectable } from '@angular/core';
-import { Http, Headers } from '@angular/http';
-import { AngularFireDatabase } from 'angularfire2/database';
+import { Http } from '@angular/http';
 import { AngularFireAuth } from 'angularfire2/auth'
+import * as firebase from 'firebase/app';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
 
@@ -9,23 +11,30 @@ import { Platform } from 'ionic-angular';
 import { Facebook } from '@ionic-native/facebook';
 
 import { ENV } from '../../config/environment.dev';
-import { UserModel,  UserTreatmentAttributes, UserCancerTreatmentsAttributes, UserCredentias } from '../../model/user';
+import { UserStorageService } from './user-storage.service';
+import { UserModel,  UserTreatmentAttributes, UserCancerTreatmentsAttributes } from '../../model/user';
 
 @Injectable()
+
 export class AuthService {
   private host: string;
   user: UserModel;
-  credentials : UserCredentias;
+  authToken: string;
+  authState: any;
 
   constructor(
     private afAuth: AngularFireAuth,
-    private db: AngularFireDatabase,
     private http: Http,
     private platform: Platform,
-    private facebook: Facebook) {
+    private facebook: Facebook,
+    private userStorageService: UserStorageService
+    ) {
       this.user = new UserModel();
-      this.credentials = new UserCredentias(null, null);
       this.host = ENV.HOST;
+      this.authState = {
+        firebase: null,
+        backend: null
+      }
   }
 
   getAllTreatments() : Promise<any[]> {
@@ -89,69 +98,83 @@ export class AuthService {
     });
   }
 
-  authUserEmail() {
+  getAuthentication() {
+    return new Observable((subject) => {
+      this.afAuth.authState.subscribe((state) => {
+        Promise.resolve(state)
+          .then(verifyIfIsAuth.bind(this))
+          .then(getAuthToken.bind(this))
+          .then(verifyIfUserRegister.bind(this))
+          .then(finishPromise.bind(this))
+          .catch(finishPromise.bind(this))
+      })
+
+      function verifyIfIsAuth(state) {
+        return new Promise((resolve, reject) => {
+          if(state) {
+            this.authState.firebase = true;
+            resolve(true);
+          } else {
+            this.authState.firebase = false;
+            reject(false);
+          }
+        })
+
+      }
+
+      function getAuthToken() {
+        return this.afAuth.auth.currentUser.getToken().then((token) => {
+          this.authToken = token
+          this.userStorageService.authToken = token
+        });
+      }
+
+      function verifyIfUserRegister() {
+        return new Promise((resolve, reject) => {
+          this.userStorageService.getUser().subscribe(
+            (user) => { resolve(true); },
+            (error) => { reject(error); }
+          )
+        });
+      }
+
+      function finishPromise(state) {
+        this.authState.backend = state
+        subject.next(this.authState)
+      }
+
+    })
+  }
+
+  authUserEmail(email, password) {
     return new Promise((resolve, reject) => {
-      this.afAuth.auth.signInWithEmailAndPassword(this.credentials.email, this.credentials.password).then((res : any) => {
+      this.afAuth.auth.signInWithEmailAndPassword(email, password).then((res : any) => {
         console.log(res);
-        resolve(res.auth._lat);
       }).catch((error) => {
         reject(error);
       })
     })
-
   }
 
-  getAuthentication() {
-    return this.afAuth.authState;
+  authUserFacebook() {
+    if(this.platform.is('cordova')) {
+      return this.facebook.login(['email', 'public_profile']).then((res) => {
+        const facebookCredential = firebase.auth.FacebookAuthProvider.credential(res.authResponse.accessToken);
+        return firebase.auth().signInWithCredential(facebookCredential);
+      })
+    } else {
+      return this.afAuth.auth
+        .signInWithPopup(new firebase.auth.FacebookAuthProvider());
+    }
   }
 
-  getFacebookDatas() {
-    return new Promise((resolve, reject) => {
-      this.facebook.login(['email', 'public_profile']).then((res) => {
-        resolve(res);
-      }).catch((error) => {
-        reject(error);
-      });
-    })
+  createUserWithEmail(email, password) {
+    return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
   }
 
-  // signWithFacebook() {
-  //   let user = null;
-  //   if(this.platform.is('cordova')) {
-  //     return this.facebook.login(['email', 'public_profile']).then((res) => {
-  //       const facebookCredentials = firebase.auth.FacebookAuthProvider.credential(res.authResponse.accessToken);
-  //       return firebase.auth().signInWithCredential(facebookCredentials);
-  //     })
-  //     .then(findUser.bind(this))
-  //     .then(verifyIfRegisterUser.bind(this))
-  //   } else {
-  //     return this.auth.login({
-  //       provider: AuthProviders.Facebook,
-  //       method: AuthMethods.Popup
-  //     })
-  //     .then(findUser.bind(this))
-  //     .then(verifyIfRegisterUser.bind(this))
-  //     .then(updateTokenDevice.bind(this));
-  //   }
-
-  //   function findUser(datas) {
-  //     user = datas;
-  //     return this.userStorageService.findUser(user.uid);
-  //   }
-
-  //   function verifyIfRegisterUser(datas) {
-  //     if(datas.$value === null) {
-  //       return this.userStorageService.registerUser(user.auth, '');
-  //     }
-  //     return datas;
-  //   }
-
-  //   function updateTokenDevice() {
-  //     this.userStorageService.updateTokenDevice(user.uid)
-  //   }
-  // }
-
-
+  getAuthUserDatas() {
+    return this.afAuth.auth.currentUser;
+  }
 
   signOut() {
     this.afAuth.auth.signOut();
